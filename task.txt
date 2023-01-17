@@ -1,0 +1,6 @@
+
+
+
+
+Bug:
+upload picture will not change navbar picture

@@ -1,0 +1,59 @@
+require('./bootstrap');
+window.Vue = require('vue').default;
+import Vue from 'vue';
+import { routes } from './routes'
+import VueRouter from 'vue-router'
+import Vuex from 'vuex'
+import StoreData from './store'
+
+
+Vue.use(Vuex);
+Vue.use(VueRouter);
+Vue.component('app-component', require('./components/AppComponent.vue').default);
+
+const store = new Vuex.Store({
+    modules: {
+        StoreData
+      },
+    plugins: [],
+});
+
+const router = new VueRouter({
+    routes,
+    mode: 'history'
+})
+
+// check the token if not expired
+axios.interceptors.response.use(function (response) {
+    return response;
+}, function (error) {
+    // Check your token for validity, and if needed, refresh the token / force re-login etc.
+    if(error.response.status == 401) {
+        store.commit('logout');
+        router.push('/login');
+    }
+
+
+    return Promise.reject(error);
+});
+
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.requiresAuth)) {
+        if(!store.getters.currentUser) {
+          next({
+            name: "Login",
+            query: {redirect: to.fullPath}
+          });
+        } else {
+          next();
+        }
+      } else {
+        next();
+    }
+})
+
+const app = new Vue({
+    el: '#app',
+    router,
+    store,
+});

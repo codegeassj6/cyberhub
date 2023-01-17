@@ -1,0 +1,15 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/js/Home.js": "/js/Home.js",
+    "/js/Login.js": "/js/Login.js",
+    "/js/Register.js": "/js/Register.js",
+    "/js/Game.js": "/js/Game.js",
+    "/js/Store.js": "/js/Store.js",
+    "/js/Gallery.js": "/js/Gallery.js",
+    "/js/Preview.js": "/js/Preview.js",
+    "/js/Account.js": "/js/Account.js",
+    "/js/UpdateAccount.js": "/js/UpdateAccount.js",
+    "/js/NotFound.js": "/js/NotFound.js",
+    "/css/app.css": "/css/app.css",
+    "/js/Cart.js": "/js/Cart.js"
+}

@@ -1,0 +1,14 @@
+.img {
+    width: 100% !important;
+}
+a {
+    text-decoration: none !important;
+}
+
+.space-intro {
+    margin-top: 90px;
+}
+
+[contenteditable]:focus {
+    outline: 0px solid transparent;
+}
