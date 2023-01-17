@@ -26,7 +26,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {return $request->all();
            DB::table('orders')->insert([
                'user_id' => Auth::user()->id,
                'product_id' => $request->input('product_id'),

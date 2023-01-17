@@ -234,12 +234,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -262,7 +256,8 @@ __webpack_require__.r(__webpack_exports__);
         method: 'POST',
         data: {
           product_id: id,
-          quantity: document.getElementById('input_' + id).value
+          quantity: document.getElementById('input_' + id).value,
+          size: ''
         },
         url: "/api/order/store",
         headers: {
@@ -1449,34 +1444,6 @@ var render = function () {
                             "button",
                             { staticClass: "btn btn-sm me-1 btn-outline-info" },
                             [_vm._v(_vm._s(size.value + size.unit))]
-                          ),
-                    ])
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "mt-1" },
-                  _vm._l(data.variant, function (variant, index) {
-                    return _c("span", { key: index }, [
-                      index == 0
-                        ? _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-sm btn-primary me-1",
-                              attrs: { type: "button" },
-                            },
-                            [_vm._v(_vm._s(variant.variation))]
-                          )
-                        : _c(
-                            "button",
-                            {
-                              staticClass:
-                                "btn btn-sm btn-outline-primary me-1",
-                              attrs: { type: "button" },
-                            },
-                            [_vm._v(_vm._s(variant.variation))]
                           ),
                     ])
                   }),
