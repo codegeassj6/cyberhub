@@ -20,16 +20,10 @@
                         <h6>Size:</h6>
                         <div class="mt-2">
                             <span v-for="(size, index) in data.size" :key="index">
-                            <button v-if="index == 0" class="btn btn-sm me-1 btn-info">{{size.value + size.unit}}</button>
-                            <button v-else class="btn btn-sm me-1 btn-outline-info">{{size.value + size.unit}}</button>
+                                <button v-if="index == 0" class="btn btn-sm me-1 btn-info">{{size.value + size.unit}}</button>
+                                <button v-else class="btn btn-sm me-1 btn-outline-info">{{size.value + size.unit}}</button>
                             </span>
-                        </div>
-                        <div class="mt-1">
-                            <span v-for="(variant, index) in data.variant" :key="index">
-                                <button v-if="index == 0" type="button" class="btn btn-sm btn-primary me-1">{{variant.variation}}</button>
-                                <button v-else type="button" class="btn btn-sm btn-outline-primary me-1">{{variant.variation}}</button>
-                            </span>
-
+                            <!-- <input type="hidden"> -->
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-12 col-xl-3 border-sm-start-none border-start">
@@ -85,7 +79,11 @@ export default {
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
             axios({
                 method: 'POST',
-                data: {product_id: id, quantity: document.getElementById('input_'+id).value},
+                data: {
+                    product_id: id,
+                    quantity: document.getElementById('input_'+id).value,
+                    size: '',
+                },
                 url: `/api/order/store`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
