@@ -20,23 +20,41 @@
                         <h6>Size:</h6>
                         <div class="mt-2">
                             <span v-for="(size, index) in data.size" :key="index">
-                                <button v-if="index == 0" class="btn btn-sm me-1 btn-info">{{size.value + size.unit}}</button>
-                                <button v-else class="btn btn-sm me-1 btn-outline-info">{{size.value + size.unit}}</button>
+                                <input
+                                    v-if="index == 0"
+                                    type="hidden"
+                                    :id="`input_size_`+data.id"
+                                    :value="data.default_size"
+                                >
+
+                                <button
+                                    class="btn btn-sm me-1"
+                                    :class="data.default_size == size.value ? 'btn-info' : 'btn-outline-info'"
+                                    @click="changeSize($event, data, size)"
+                                >
+                                    {{size.value + size.unit}}
+                                </button>
                             </span>
-                            <!-- <input type="hidden"> -->
+
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-12 col-xl-3 border-sm-start-none border-start">
                         <div class="d-flex flex-row align-items-center mb-1">
-                            <h4 class="mb-1" :id="`price_`+data.id">₱{{data.default_price}}</h4>
+                            <h4 class="mb-1" :ref="data.id" :id="`price_`+data.id">₱{{data.default_price}}</h4>
                         </div>
                         <div class="d-flex flex-column mt-4">
                             <div class="input-group mb-3 px-4">
-                                <button class="btn btn-primary btn-sm" type="button" @click="decreaseQuantity(data)"><i class="fa fa-minus"></i></button>
+                                <button class="btn btn-primary btn-sm" type="button" @click="decreaseQuantity(data)">
+                                    <i class="fa fa-minus"></i>
+                                </button>
                                 <input type="number" class="form-control text-center" :id="'input_'+data.id" min="1" value="1">
-                                <button class="btn btn-primary btn-sm" type="button" @click="increaseQuantity(data)"><i class="fa fa-plus"></i></button>
+                                <button class="btn btn-primary btn-sm" type="button" @click="increaseQuantity(data)">
+                                    <i class="fa fa-plus"></i>
+                                </button>
                             </div>
-                            <button type="button" @click="addToCart(data.id)" v-if="currentUser" class="btn btn-outline-primary btn-sm mt-2">
+                            <button type="button"
+                                @click="addToCart(data)"
+                                v-if="currentUser" class="btn btn-outline-primary btn-sm mt-2">
                                 Add to cart
                             </button>
 
@@ -72,18 +90,20 @@ export default {
         currentUser() {
             return this.$store.getters.currentUser;
         },
+
+
     },
 
     methods: {
-        addToCart(id) {
+        addToCart(data) {
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
             axios({
                 method: 'POST',
                 data: {
-                    product_id: id,
-                    quantity: document.getElementById('input_'+id).value,
-                    size: '',
-                },
+                    id: data.id,
+                    quantity: document.getElementById('input_'+data.id).value,
+                    product_id: data.product_size_id,
+                },ww
                 url: `/api/order/store`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
@@ -102,6 +122,12 @@ export default {
                 document.getElementById('input_'+data.id).value --;
             }
 
+        },
+
+        changeSize(e, data, size) {
+            data.default_price = size.price;
+            // e.target.classList.remove("btn-outline-info"); e.target.classList.add("btn-info");
+            data.default_size = size.value;
         },
 
     },
