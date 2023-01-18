@@ -21,7 +21,9 @@ class ProductController extends Controller
             $variation = Product::find($value->id);
             $value->size = $variation->getSizes;
             if($variation->getSizes()->first()) {
-                $value->default_price = $variation->getSizes()->first()->value;
+                $value->default_price = $variation->getSizes()->first()->price;
+                $value->default_size = $variation->getSizes()->first()->value;
+                $value->product_size_id = $variation->getSizes()->first()->id;
             }
             return $value;
         });

@@ -34,5 +34,5 @@ Route::group(['prefix' => 'product'], function ($router) {
 });
 
 Route::group(['prefix' => 'order'], function ($router) {
-    Route::post('/store', 'App\Http\Controllers\OrderController@store');
+    Route::post('/store', 'App\Http\Controllers\OrderController@store')->middleware('auth');
 });

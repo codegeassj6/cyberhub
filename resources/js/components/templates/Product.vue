@@ -103,7 +103,7 @@ export default {
                     id: data.id,
                     quantity: document.getElementById('input_'+data.id).value,
                     product_id: data.product_size_id,
-                },ww
+                },
                 url: `/api/order/store`,
                 headers: {Authorization: AuthStr}
             }).then(res => {

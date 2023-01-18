@@ -8,8 +8,8 @@
     "/js/Gallery.js": "/js/Gallery.js",
     "/js/Preview.js": "/js/Preview.js",
     "/js/Account.js": "/js/Account.js",
+    "/js/Cart.js": "/js/Cart.js",
     "/js/UpdateAccount.js": "/js/UpdateAccount.js",
     "/js/NotFound.js": "/js/NotFound.js",
-    "/css/app.css": "/css/app.css",
-    "/js/Cart.js": "/js/Cart.js"
+    "/css/app.css": "/css/app.css"
 }

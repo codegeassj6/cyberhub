@@ -234,6 +234,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -250,14 +268,14 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    addToCart: function addToCart(id) {
+    addToCart: function addToCart(data) {
       var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
       axios({
         method: 'POST',
         data: {
-          product_id: id,
-          quantity: document.getElementById('input_' + id).value,
-          size: ''
+          id: data.id,
+          quantity: document.getElementById('input_' + data.id).value,
+          product_id: data.product_size_id
         },
         url: "/api/order/store",
         headers: {
@@ -274,6 +292,11 @@ __webpack_require__.r(__webpack_exports__);
       if (document.getElementById('input_' + data.id).value > 1) {
         document.getElementById('input_' + data.id).value--;
       }
+    },
+    changeSize: function changeSize(e, data, size) {
+      data.default_price = size.price;
+      // e.target.classList.remove("btn-outline-info"); e.target.classList.add("btn-info");
+      data.default_size = size.value;
     }
   },
   watch: {
@@ -1435,16 +1458,37 @@ var render = function () {
                   _vm._l(data.size, function (size, index) {
                     return _c("span", { key: index }, [
                       index == 0
-                        ? _c(
-                            "button",
-                            { staticClass: "btn btn-sm me-1 btn-info" },
-                            [_vm._v(_vm._s(size.value + size.unit))]
-                          )
-                        : _c(
-                            "button",
-                            { staticClass: "btn btn-sm me-1 btn-outline-info" },
-                            [_vm._v(_vm._s(size.value + size.unit))]
+                        ? _c("input", {
+                            attrs: {
+                              type: "hidden",
+                              id: "input_size_" + data.id,
+                            },
+                            domProps: { value: data.default_size },
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-sm me-1",
+                          class:
+                            data.default_size == size.value
+                              ? "btn-info"
+                              : "btn-outline-info",
+                          on: {
+                            click: function ($event) {
+                              return _vm.changeSize($event, data, size)
+                            },
+                          },
+                        },
+                        [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(size.value + size.unit) +
+                              "\n                            "
                           ),
+                        ]
+                      ),
                     ])
                   }),
                   0
@@ -1465,6 +1509,8 @@ var render = function () {
                       _c(
                         "h4",
                         {
+                          ref: data.id,
+                          refInFor: true,
                           staticClass: "mb-1",
                           attrs: { id: "price_" + data.id },
                         },
@@ -1526,7 +1572,7 @@ var render = function () {
                               attrs: { type: "button" },
                               on: {
                                 click: function ($event) {
-                                  return _vm.addToCart(data.id)
+                                  return _vm.addToCart(data)
                                 },
                               },
                             },
