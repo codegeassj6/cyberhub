@@ -19,6 +19,7 @@ class ProductSizeTable extends Migration
             $table->integer('value');
             $table->string('unit');
             $table->integer('price');
+            $table->integer('stock');
             $table->timestamps();
         });
     }

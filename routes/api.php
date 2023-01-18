@@ -33,6 +33,7 @@ Route::group(['prefix' => 'product'], function ($router) {
     Route::get('/', 'App\Http\Controllers\ProductController@index');
 });
 
-Route::group(['prefix' => 'order'], function ($router) {
-    Route::post('/store', 'App\Http\Controllers\OrderController@store')->middleware('auth');
+Route::group(['prefix' => 'cart'], function ($router) {
+    Route::post('/store', 'App\Http\Controllers\CartController@store')->middleware('auth');
+    Route::get('/', 'App\Http\Controllers\CartController@index')->middleware('auth');
 });

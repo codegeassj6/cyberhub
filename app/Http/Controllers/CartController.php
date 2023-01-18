@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
-use App\Http\Requests\StoreCartRequest;
-use App\Http\Requests\UpdateCartRequest;
+use Illuminate\Http\Request;
+use DB;
+use Auth;
+use Carbon;
+use Validator;
 
 class CartController extends Controller
 {
@@ -15,7 +18,11 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $cart = Cart::where('user_id', Auth::user()->id)->get();
+        return response()->json([
+            'cart_items' => $cart,
+            'cart_count' => $cart->pluck('quantity')->sum(),
+        ], 200);
     }
 
     /**
@@ -34,9 +41,38 @@ class CartController extends Controller
      * @param  \App\Http\Requests\StoreCartRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCartRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:products',
+            'quantity' => 'integer|required',
+            'product_size_id' => 'integer|required',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json(['message' => $validator->messages()->get('*')], 500);
+        }
+
+        $cart = Cart::where('product_id', $request->input('id'))->where('product_size_id', $request->input('product_size_id'))->first();
+
+        if($cart) {
+            $cart->update([
+                'quantity' => $request->input('quantity') + $cart->quantity
+            ]);
+
+            $cart->save();
+            return response()->json(['message' => 'updated'], 200);
+        }
+
+        DB::table('carts')->insert([
+            'user_id' => Auth::user()->id,
+            'product_id' => $request->input('id'),
+            'quantity' => $request->input('quantity'),
+            'product_size_id' => $request->input('product_size_id'),
+            'created_at' => Carbon::now(),
+        ]);
+
+        return $request->all();
     }
 
     /**
@@ -68,7 +104,7 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCartRequest $request, Cart $cart)
+    public function update(Request $request, Cart $cart)
     {
         //
     }

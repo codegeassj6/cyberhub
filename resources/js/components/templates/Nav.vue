@@ -29,8 +29,9 @@
                             <button class="btn btn-primary" type="button">
                                 {{ currentUser.first_name }} {{ currentUser.last_name }}
                             </button>
-                            <router-link to="/cart" class="btn btn-primary mx-1">
+                            <router-link to="/cart" class="btn btn-primary position-relative">
                                 <i class="fa fa-shopping-cart fa-lg"></i>
+                                <span class="badge bg-info" id="cart_count">{{ $store.getters.getCartCount }}</span>
                             </router-link>
                             <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" type="button">
@@ -100,7 +101,16 @@ export default {
     },
 
     mounted() {
+        const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+        axios({
+            method: 'get',
+            url: `/api/cart/`,
+            headers: {Authorization: AuthStr}
+        }).then(res => {
+            this.$store.commit("mutateCartCount", res.data.cart_count);
+        }).catch(err => {
 
+        });
     }
 
 }

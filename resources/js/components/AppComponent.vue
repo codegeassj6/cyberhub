@@ -15,7 +15,7 @@
 
 <script>
 import Nav from './templates/Nav.vue';
-import Footer from './templates/Footer.vue'
+import Footer from './templates/Footer.vue';
 
     export default {
         components: {
@@ -23,6 +23,7 @@ import Footer from './templates/Footer.vue'
             Footer
         },
         mounted() {
+
         }
     }
 </script>

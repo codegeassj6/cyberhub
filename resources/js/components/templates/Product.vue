@@ -3,7 +3,7 @@
         <div class="card shadow-0 border rounded-3 mb-3" v-for="(data, index) in datas.data" :key="index">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-12 col-lg-12 col-xl-3">
+                    <div class="col-md-12 col-lg-12 col-xl-3 mb-2">
                         <div class="bg-image hover-zoom ripple rounded ripple-surface">
                             <img :src="'/img/product/'+data.image"
                             class="w-100 product-img img-thumbnail" />
@@ -39,19 +39,29 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-12 col-xl-3 border-sm-start-none border-start">
-                        <div class="d-flex flex-row align-items-center mb-1">
-                            <h4 class="mb-1" :ref="data.id" :id="`price_`+data.id">₱{{data.default_price}}</h4>
-                        </div>
-                        <div class="d-flex flex-column mt-4">
-                            <div class="input-group mb-3 px-4">
+                        <h4 class="mb-1 text-center" :id="`price_`+data.id">
+                            ₱{{data.default_price}}
+                        </h4>
+                        <div class="text-center mt-2">
+                            <div class="input-group mb-1">
                                 <button class="btn btn-primary btn-sm" type="button" @click="decreaseQuantity(data)">
                                     <i class="fa fa-minus"></i>
                                 </button>
-                                <input type="number" class="form-control text-center" :id="'input_'+data.id" min="1" value="1">
+                                <input
+                                    type="number"
+                                    class="form-control text-center"
+                                    :id="'input_'+data.id" min="1" max value="1"
+                                    @change="changeQuantity(data)"
+                                >
                                 <button class="btn btn-primary btn-sm" type="button" @click="increaseQuantity(data)">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
+
+                            <div class="text-muted">
+                                {{ data.default_stocks }} stocks left
+                            </div>
+
                             <button type="button"
                                 @click="addToCart(data)"
                                 v-if="currentUser" class="btn btn-outline-primary btn-sm mt-2">
@@ -102,26 +112,35 @@ export default {
                 data: {
                     id: data.id,
                     quantity: document.getElementById('input_'+data.id).value,
-                    product_id: data.product_size_id,
+                    product_size_id: data.product_size_id,
                 },
-                url: `/api/order/store`,
+                url: `/api/cart/store`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
-                console.log(res.data);
+                const cart_count = +document.getElementById('input_'+data.id).value + this.$store.getters.getCartCount;
+                this.$store.commit('mutateCartCount', cart_count);
             }).catch(err => {
 
             });
         },
 
         increaseQuantity(data) {
-            document.getElementById('input_'+data.id).value ++;
+            if(+document.getElementById('input_'+data.id).value < data.default_stocks ) {
+                document.getElementById('input_'+data.id).value ++;
+            }
+
         },
 
         decreaseQuantity(data) {
             if(document.getElementById('input_'+data.id).value > 1) {
                 document.getElementById('input_'+data.id).value --;
             }
+        },
 
+        changeQuantity(data) {
+            if(document.getElementById('input_'+data.id).value > 1) {
+                document.getElementById('input_'+data.id).value = data.default_stocks;
+            }
         },
 
         changeSize(e, data, size) {

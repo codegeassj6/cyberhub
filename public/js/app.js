@@ -5489,6 +5489,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 //import name from './
 
@@ -5518,7 +5519,19 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   updated: function updated() {},
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    var _this = this;
+    var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+    axios({
+      method: 'get',
+      url: "/api/cart/",
+      headers: {
+        Authorization: AuthStr
+      }
+    }).then(function (res) {
+      _this.$store.commit("mutateCartCount", res.data.cart_count);
+    })["catch"](function (err) {});
+  }
 });
 
 /***/ }),
@@ -5825,7 +5838,8 @@ var user = (0,_helpers_auth__WEBPACK_IMPORTED_MODULE_0__.getLocalUser)();
     currentUser: user,
     isLoggedIn: !!user,
     loading: false,
-    auth_error: null
+    auth_error: null,
+    cart_count: null
   },
   getters: {
     isLoading: function isLoading(state) {
@@ -5839,6 +5853,9 @@ var user = (0,_helpers_auth__WEBPACK_IMPORTED_MODULE_0__.getLocalUser)();
     },
     authError: function authError(state) {
       return state.auth_error;
+    },
+    getCartCount: function getCartCount(state) {
+      return state.cart_count;
     }
   },
   mutations: {
@@ -5863,6 +5880,9 @@ var user = (0,_helpers_auth__WEBPACK_IMPORTED_MODULE_0__.getLocalUser)();
       localStorage.removeItem("user");
       state.isLoggedIn = false;
       state.currentUser = null;
+    },
+    mutateCartCount: function mutateCartCount(state, payload) {
+      state.cart_count = payload;
     }
   },
   actions: {
@@ -29020,13 +29040,26 @@ var render = function () {
                           _c(
                             "router-link",
                             {
-                              staticClass: "btn btn-primary mx-1",
+                              staticClass: "btn btn-primary position-relative",
                               attrs: { to: "/cart" },
                             },
                             [
                               _c("i", {
                                 staticClass: "fa fa-shopping-cart fa-lg",
                               }),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "badge bg-info",
+                                  attrs: { id: "cart_count" },
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.$store.getters.getCartCount)
+                                  ),
+                                ]
+                              ),
                             ]
                           ),
                           _vm._v(" "),

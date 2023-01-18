@@ -8,6 +8,7 @@ export default {
         isLoggedIn: !!user,
         loading: false,
         auth_error: null,
+        cart_count: null,
     },
     getters: {
         isLoading(state) {
@@ -22,6 +23,9 @@ export default {
         authError(state) {
             return state.auth_error;
         },
+        getCartCount(state) {
+            return state.cart_count;
+        }
 
     },
     mutations: {
@@ -45,7 +49,9 @@ export default {
             state.isLoggedIn = false;
             state.currentUser = null;
         },
-
+        mutateCartCount(state, payload) {
+            state.cart_count = payload;
+        }
     },
     actions: {
         login(context) {

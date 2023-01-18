@@ -252,6 +252,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -269,28 +279,37 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addToCart: function addToCart(data) {
+      var _this = this;
       var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
       axios({
         method: 'POST',
         data: {
           id: data.id,
           quantity: document.getElementById('input_' + data.id).value,
-          product_id: data.product_size_id
+          product_size_id: data.product_size_id
         },
-        url: "/api/order/store",
+        url: "/api/cart/store",
         headers: {
           Authorization: AuthStr
         }
       }).then(function (res) {
-        console.log(res.data);
+        var cart_count = +document.getElementById('input_' + data.id).value + _this.$store.getters.getCartCount;
+        _this.$store.commit('mutateCartCount', cart_count);
       })["catch"](function (err) {});
     },
     increaseQuantity: function increaseQuantity(data) {
-      document.getElementById('input_' + data.id).value++;
+      if (+document.getElementById('input_' + data.id).value < data.default_stocks) {
+        document.getElementById('input_' + data.id).value++;
+      }
     },
     decreaseQuantity: function decreaseQuantity(data) {
       if (document.getElementById('input_' + data.id).value > 1) {
         document.getElementById('input_' + data.id).value--;
+      }
+    },
+    changeQuantity: function changeQuantity(data) {
+      if (document.getElementById('input_' + data.id).value > 1) {
+        document.getElementById('input_' + data.id).value = data.default_stocks;
       }
     },
     changeSize: function changeSize(e, data, size) {
@@ -1416,7 +1435,7 @@ var render = function () {
         [
           _c("div", { staticClass: "card-body" }, [
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-12 col-lg-12 col-xl-3" }, [
+              _c("div", { staticClass: "col-md-12 col-lg-12 col-xl-3 mb-2" }, [
                 _c(
                   "div",
                   {
@@ -1503,27 +1522,25 @@ var render = function () {
                 },
                 [
                   _c(
-                    "div",
-                    { staticClass: "d-flex flex-row align-items-center mb-1" },
+                    "h4",
+                    {
+                      staticClass: "mb-1 text-center",
+                      attrs: { id: "price_" + data.id },
+                    },
                     [
-                      _c(
-                        "h4",
-                        {
-                          ref: data.id,
-                          refInFor: true,
-                          staticClass: "mb-1",
-                          attrs: { id: "price_" + data.id },
-                        },
-                        [_vm._v("₱" + _vm._s(data.default_price))]
+                      _vm._v(
+                        "\n                        ₱" +
+                          _vm._s(data.default_price) +
+                          "\n                    "
                       ),
                     ]
                   ),
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "d-flex flex-column mt-4" },
+                    { staticClass: "text-center mt-2" },
                     [
-                      _c("div", { staticClass: "input-group mb-3 px-4" }, [
+                      _c("div", { staticClass: "input-group mb-1" }, [
                         _c(
                           "button",
                           {
@@ -1544,7 +1561,13 @@ var render = function () {
                             type: "number",
                             id: "input_" + data.id,
                             min: "1",
+                            max: "",
                             value: "1",
+                          },
+                          on: {
+                            change: function ($event) {
+                              return _vm.changeQuantity(data)
+                            },
                           },
                         }),
                         _vm._v(" "),
@@ -1560,6 +1583,14 @@ var render = function () {
                             },
                           },
                           [_c("i", { staticClass: "fa fa-plus" })]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-muted" }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(data.default_stocks) +
+                            " stocks left\n                        "
                         ),
                       ]),
                       _vm._v(" "),
