@@ -47,9 +47,22 @@ router.beforeEach((to, from, next) => {
         } else {
           next();
         }
-      } else {
+    } else {
         next();
     }
+
+    if(to.matched.some(record => record.meta.disableIfLoggedIn)) {
+        if(store.getters.currentUser) {
+            next({
+                name: "Home",
+              });
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
+
 })
 
 const app = new Vue({

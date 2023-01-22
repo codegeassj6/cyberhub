@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Order;
+use App\Models\Cart;
+use Auth;
 
 class OrderController extends Controller
 {
@@ -25,7 +27,20 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        $cart = Cart::where('user_id', Auth::user()->id)->whereIn('id', $request->input('id'))->get();
 
+        $cart->each(function($data, $key) {
+            Order::create([
+                'user_id' => Auth::user()->id,
+                'product_id' => $data->product_id,
+                'quantity' => $data->quantity,
+                'product_size_id' => $data->product_size_id,
+            ]);
+            Cart::find($data->id)->delete();
+        });
+
+
+        return response()->json(['message' => ''], 200);
     }
 
     /**

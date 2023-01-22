@@ -51,7 +51,8 @@ export default {
         },
         mutateCartCount(state, payload) {
             state.cart_count = payload;
-        }
+        },
+
     },
     actions: {
         login(context) {

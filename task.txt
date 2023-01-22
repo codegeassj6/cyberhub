@@ -2,5 +2,6 @@
 
 
 
-Bug:
+issue:
 upload picture will not change navbar picture
+burger button must display @ 767px

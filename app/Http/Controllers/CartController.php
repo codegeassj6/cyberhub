@@ -8,6 +8,8 @@ use DB;
 use Auth;
 use Carbon;
 use Validator;
+use App\Models\Product;
+use App\Models\ProductSize;
 
 class CartController extends Controller
 {
@@ -19,6 +21,12 @@ class CartController extends Controller
     public function index()
     {
         $cart = Cart::where('user_id', Auth::user()->id)->get();
+        $cart->each(function($value) {
+            $value->product_details = Product::find($value->product_id);
+            $value->product_size_details = ProductSize::find($value->product_size_id);
+            return $value;
+        });
+
         return response()->json([
             'cart_items' => $cart,
             'cart_count' => $cart->pluck('quantity')->sum(),
@@ -44,7 +52,7 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id' => 'required|exists:products',
+            'product_id' => 'required',
             'quantity' => 'integer|required',
             'product_size_id' => 'integer|required',
         ]);
@@ -53,26 +61,44 @@ class CartController extends Controller
             return response()->json(['message' => $validator->messages()->get('*')], 500);
         }
 
-        $cart = Cart::where('product_id', $request->input('id'))->where('product_size_id', $request->input('product_size_id'))->first();
+        $cart = Cart::where('product_id', $request->input('product_id'))->where('product_size_id', $request->input('product_size_id'))->first();
+        $product_details = ProductSize::where('id', $request->input('product_size_id'))->first();
 
+        $quantity = $request->input('quantity');
         if($cart) {
-            $cart->update([
-                'quantity' => $request->input('quantity') + $cart->quantity
-            ]);
+            if($request->input('quantity') + $cart->quantity > $product_details->stock) {
+                $quantity = $product_details->stock;
+            } else {
+                $quantity = $request->input('quantity') + $cart->quantity;
+            }
+                $cart->update([
+                    // 'quantity' => $request->input('quantity') + $cart->quantity
+                    'quantity' => $quantity
+                ]);
 
-            $cart->save();
-            return response()->json(['message' => 'updated'], 200);
+                $cart->save();
+
+                // return data query
+                $cart_count = Cart::where('user_id', Auth::id())->get();
+                return response()->json(['quantity' => $cart_count->pluck('quantity')->sum()], 200);
         }
+
+        if($request->input('quantity') > $product_details->stock) {
+            $quantity = $product_details->stock;
+        }
+
 
         DB::table('carts')->insert([
             'user_id' => Auth::user()->id,
-            'product_id' => $request->input('id'),
-            'quantity' => $request->input('quantity'),
+            'product_id' => $request->input('product_id'),
+            'quantity' => $quantity,
             'product_size_id' => $request->input('product_size_id'),
             'created_at' => Carbon::now(),
         ]);
 
-        return $request->all();
+        // return data query
+        $cart_count = Cart::where('user_id', Auth::id())->get();
+        return response()->json(['quantity' => $cart_count->pluck('quantity')->sum()], 200);
     }
 
     /**
@@ -106,7 +132,26 @@ class CartController extends Controller
      */
     public function update(Request $request, Cart $cart)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'id' => 'exists:carts|required',
+            'quantity' => 'integer',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json(['message' => $validator->messages()->get('*')], 500);
+        }
+
+        $cart = $cart::where('id', $request->input('id'))->where('user_id', Auth::id())->first();
+        if($cart) {
+            if($request->input('quantity') >= 1 && $request->input('quantity') <= $cart->getProductSize->stock) {
+                $cart->quantity = $request->input('quantity');
+                $cart->save();
+
+                return response()->json(['updated' => ''], 200);
+            }
+        }
+
+        return response()->json(['message' => 'fail'], 500);
     }
 
     /**
@@ -115,8 +160,11 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cart $cart)
+    public function destroy(Request $request)
     {
-        //
+        $cart = Cart::findOrFail($request->input('id'));
+        if($cart->user_id == Auth::user()->id) {
+            $cart->delete();
+        }
     }
 }

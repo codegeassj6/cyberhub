@@ -12,3 +12,21 @@ a {
 [contenteditable]:focus {
     outline: 0px solid transparent;
 }
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]:focus, input[type="number"]:active {
+    box-shadow: none;
+}
+
+.btn-outline-info:hover, .btn-info {
+    color: white;
+}

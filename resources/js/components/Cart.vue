@@ -2,178 +2,120 @@
     <div>
         <div class="space-intro">
             <div class="container">
-                <section class="h-100 h-custom" style="background-color: #d2c9ff;">
-  <div class="container p-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-12">
-        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
-          <div class="card-body p-0">
-            <div class="row g-0">
-              <div class="col-lg-8">
-                <div class="p-5">
-                  <div class="d-flex justify-content-between align-items-center mb-5">
-                    <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
-                    <h6 class="mb-0 text-muted">3 items</h6>
-                  </div>
-                  <hr class="my-4">
+                <div class="card shadow bg-primary">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="card shadow mb-4">
+                                    <div class="card-body p-4">
+                                        <div class="h5">Shopping Cart</div>
+                                        <hr />
 
-                  <div class="row mb-4 d-flex justify-content-between align-items-center">
-                    <div class="col-md-2 col-lg-2 col-xl-2">
-                      <img
-                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img5.webp"
-                        class="img-fluid rounded-3" alt="Cotton T-shirt">
-                    </div>
-                    <div class="col-md-3 col-lg-3 col-xl-3">
-                      <h6 class="text-muted">Shirt</h6>
-                      <h6 class="text-black mb-0">Cotton T-shirt</h6>
-                    </div>
-                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                      <button class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                        <i class="fas fa-minus"></i>
-                      </button>
+                                        <div class="form-check mb-3">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" @change="selectAll($event)"> Select All
+                                            </label>
+                                        </div>
 
-                      <input id="form1" min="0" name="quantity" value="1" type="number"
-                        class="form-control form-control-sm" />
+                                        <div class="card shadow mb-3" v-for="(item, index) in cart_items" :key="index">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-sm-2 mb-2">
+                                                        <label :for="'label_'+item.id">
+                                                            <img :src="'/img/product/'+item.product_details.image" alt="" class="img mb-1" height="100">
+                                                        </label>
+                                                        <div class="text-center">
+                                                            <input class="form-check-input"
+                                                                @change="selectProduct($event, item)"
+                                                                type="checkbox"
+                                                                v-model="orders"
+                                                                :value="item.id"
+                                                                :id="'label_'+item.id"
+                                                            >
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-7 mb-2">
+                                                        <div class="h5">{{item.product_details.name}}</div>
+                                                        <div>{{item.product_details.description}}</div>
+                                                        <div class="mt-2">
+                                                            <div class="h5">Size: {{item.product_size_details.value + item.product_size_details.unit}}</div>
+                                                        </div>
+                                                        <div>
+                                                            <a href="#!" @click="deleteCartItem(item)" class="text-muted">
+                                                                <i class="fa fa-trash-o fa-lg"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="text-center h4">
+                                                            P {{ item.product_size_details.price }}
+                                                        </div>
 
-                      <button class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                        <i class="fas fa-plus"></i>
-                      </button>
-                    </div>
-                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                      <h6 class="mb-0">€ 44.00</h6>
-                    </div>
-                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                      <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
-                    </div>
-                  </div>
+                                                        <div class="input-group mb-1">
+                                                            <button @click="decreaseQuantity(item)" class="btn btn-primary btn-sm" type="button">
+                                                                <i class="fa fa-minus"></i>
+                                                            </button>
+                                                            <input type="number" @change="changeQuantity(item)" :id="'input_'+item.id" :value="item.quantity" min="1" class="form-control text-center">
+                                                            <button @click="increaseQuantity(item)" class="btn btn-primary btn-sm" type="button">
+                                                                <i class="fa fa-plus"></i>
+                                                            </button>
+                                                        </div>
 
-                  <hr class="my-4">
+                                                        <div class="text-center">
+                                                            {{ item.product_size_details.stock }} stocks left
+                                                        </div>
 
-                  <div class="row mb-4 d-flex justify-content-between align-items-center">
-                    <div class="col-md-2 col-lg-2 col-xl-2">
-                      <img
-                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img6.webp"
-                        class="img-fluid rounded-3" alt="Cotton T-shirt">
-                    </div>
-                    <div class="col-md-3 col-lg-3 col-xl-3">
-                      <h6 class="text-muted">Shirt</h6>
-                      <h6 class="text-black mb-0">Cotton T-shirt</h6>
-                    </div>
-                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                      <button class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                        <i class="fas fa-minus"></i>
-                      </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                      <input id="form1" min="0" name="quantity" value="1" type="number"
-                        class="form-control form-control-sm" />
+                                    </div>
+                                </div>
+                            </div>
 
-                      <button class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                        <i class="fas fa-plus"></i>
-                      </button>
-                    </div>
-                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                      <h6 class="mb-0">€ 44.00</h6>
-                    </div>
-                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                      <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
-                    </div>
-                  </div>
+                            <div class="col-lg-4">
+                                <div class="card shadow">
+                                    <div class="card-body p-4">
+                                        <h3>Summary</h3>
+                                        <hr />
+                                        <div class="mt-4">
+                                            <div class="d-flex">
+                                                <div class="h5">Products</div>
+                                                <div class="ms-auto">
+                                                    <span>P</span>
+                                                    <span ref="subtotal">0</span>
+                                                </div>
+                                            </div>
 
-                  <hr class="my-4">
+                                            <div class="d-flex">
+                                                <div class="h5">Discount</div>
+                                                <div class="ms-auto">0</div>
+                                            </div>
+                                            <hr />
 
-                  <div class="row mb-4 d-flex justify-content-between align-items-center">
-                    <div class="col-md-2 col-lg-2 col-xl-2">
-                      <img
-                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img7.webp"
-                        class="img-fluid rounded-3" alt="Cotton T-shirt">
-                    </div>
-                    <div class="col-md-3 col-lg-3 col-xl-3">
-                      <h6 class="text-muted">Shirt</h6>
-                      <h6 class="text-black mb-0">Cotton T-shirt</h6>
-                    </div>
-                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                      <button class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                        <i class="fas fa-minus"></i>
-                      </button>
+                                            <div class="d-flex mb-4">
+                                                <div class="h5">Total</div>
+                                                <div class="ms-auto">
+                                                    <span>P</span>
+                                                    <span ref="total">0</span>
+                                                </div>
+                                            </div>
 
-                      <input id="form1" min="0" name="quantity" value="1" type="number"
-                        class="form-control form-control-sm" />
+                                            <div class="text-center">
+                                                <button @click="submitOrder" class="btn btn-primary w-100">
+                                                    Place Order
+                                                </button>
+                                            </div>
 
-                      <button class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                        <i class="fas fa-plus"></i>
-                      </button>
-                    </div>
-                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                      <h6 class="mb-0">€ 44.00</h6>
-                    </div>
-                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                      <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
-                    </div>
-                  </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                  <hr class="my-4">
-
-                  <div class="pt-5">
-                    <h6 class="mb-0"><a href="#!" class="text-body"><i
-                          class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
-                  </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="col-lg-4 bg-grey">
-                <div class="p-5">
-                  <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
-                  <hr class="my-4">
-
-                  <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-uppercase">items 3</h5>
-                    <h5>€ 132.00</h5>
-                  </div>
-
-                  <h5 class="text-uppercase mb-3">Shipping</h5>
-
-                  <div class="mb-4 pb-2">
-                    <select class="select">
-                      <option value="1">Standard-Delivery- €5.00</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                      <option value="4">Four</option>
-                    </select>
-                  </div>
-
-                  <h5 class="text-uppercase mb-3">Give code</h5>
-
-                  <div class="mb-5">
-                    <div class="form-outline">
-                      <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
-                      <label class="form-label" for="form3Examplea2">Enter your code</label>
-                    </div>
-                  </div>
-
-                  <hr class="my-4">
-
-                  <div class="d-flex justify-content-between mb-5">
-                    <h5 class="text-uppercase">Total price</h5>
-                    <h5>€ 137.00</h5>
-                  </div>
-
-                  <button type="button" class="btn btn-dark btn-block btn-lg"
-                    data-mdb-ripple-color="dark">Register</button>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
             </div>
         </div>
     </div>
@@ -184,7 +126,8 @@
 export default {
     data() {
         return {
-
+            cart_items: '',
+            orders: [],
         }
     },
     components: {
@@ -198,13 +141,181 @@ export default {
     },
 
     methods: {
+        increaseQuantity(item) {
+            if(document.getElementById('input_'+item.id).value < item.product_size_details.stock ) {
+                document.getElementById('input_'+item.id).value ++;
+
+                if(this.orders.includes(item.id)) {
+                    this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) + item.product_size_details.price;
+                }
+
+                const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+                axios({
+                    method: 'patch',
+                    params: {
+                        id: item.id,
+                        quantity: +document.getElementById('input_'+item.id).value
+                    },
+                    url: `/api/cart/update`,
+                    headers: {Authorization: AuthStr}
+                }).then(res => {
+                    console.log(res.data);
+                }).catch(err => {
+                    console.log(err);
+                });
+            }
+
+
+
+        },
+
+        decreaseQuantity(item) {
+            if(document.getElementById('input_'+item.id).value > 1 ) {
+                document.getElementById('input_'+item.id).value --;
+                if(this.orders.includes(item.id)) {
+                    this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) - item.product_size_details.price;
+                }
+
+                const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+                axios({
+                    method: 'patch',
+                    params: {
+                        id: item.id,
+                        quantity: +document.getElementById('input_'+item.id).value
+                    },
+                    url: `/api/cart/update`,
+                    headers: {Authorization: AuthStr}
+                }).then(res => {
+                    console.log(res.data);
+                }).catch(err => {
+                    console.log(err);
+                });
+            }
+        },
+
+        changeQuantity(item) {
+            if(document.getElementById('input_'+item.id).value == '' || document.getElementById('input_'+item.id).value == 0) {
+                document.getElementById('input_'+item.id).value = item.quantity;
+            }
+
+            if(document.getElementById('input_'+item.id).value > item.product_size_details.stock) {
+                document.getElementById('input_'+item.id).value = item.product_size_details.stock;
+            }
+
+
+
+            return;
+            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+            axios({
+                method: 'patch',
+                params: {
+                    id: item.id,
+                    quantity: +document.getElementById('input_'+item.id).value
+                },
+                url: `/api/cart/update`,
+                headers: {Authorization: AuthStr}
+            }).then(res => {
+                console.log(res.data);
+            }).catch(err => {
+                console.log(err);
+            });
+
+        },
+
+        deleteCartItem(item) {
+
+            // delete the v-for cart item
+            this.cart_items.forEach((elem, index) => {
+                if(elem == item) {
+                    this.cart_items.splice(index, 1);
+                }
+            });
+
+            // remove orders array value
+            if(this.orders) {
+                this.orders.forEach((elem, index) => {
+                    if(elem == item.id) {
+                        this.orders.splice(index, 1);
+                        this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) - item.product_size_details.price * +document.getElementById('input_'+item.id).value;
+                    }
+                });
+
+            }
+
+            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+            axios.delete(`/api/cart/destroy`, {
+                headers: {
+                    Authorization: AuthStr
+                },
+                data: {
+                    id: item.id
+                }
+            }).then(res => {
+
+            }).catch(err => {
+
+            });
+        },
+
+        selectProduct(e, item) {
+            // const index = this.orders.indexOf(item.id);
+
+            // if (index > -1) {
+            //     this.orders.splice(index, 1);
+            //     this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) - item.product_size_details.price * +document.getElementById('input_'+item.id).value;
+
+            //     this.$refs.total.innerText = parseInt(this.$refs.subtotal.innerText);
+
+            // } else {
+            //     this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) + item.product_size_details.price * +document.getElementById('input_'+item.id).value ;
+
+            //     this.$refs.total.innerText = parseInt(this.$refs.subtotal.innerText);
+            // }
+
+            const index = this.orders.indexOf(item.id);
+            if(index > -1) {
+                this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) + item.product_size_details.price * +document.getElementById('input_'+item.id).value ;
+            } else {
+                this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) - item.product_size_details.price * +document.getElementById('input_'+item.id).value;
+
+                this.$refs.total.innerText = parseInt(this.$refs.subtotal.innerText);
+            }
+
+        },
+
+        selectAll(e) {
+            if(e.target.checked) {
+                this.orders = [];
+                this.cart_items.forEach(elem => {
+                    this.orders.push(elem.id);
+                });
+            } else {
+                this.orders = [];
+            }
+
+
+        },
+
+        submitOrder() {
+            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+            axios({
+                method: 'post',
+                data: {id: this.orders},
+                url: `/api/order/store`,
+                headers: {Authorization: AuthStr}
+            }).then(res => {
+
+            }).catch(err => {
+
+            });
+        },
 
     },
 
     watch: {
         $data: {
             handler: function(val, oldVal) {
-                console.log('watcher: ',val);
+                console.log('watcher: ', this.orders);
             },
             deep: true
         }
@@ -215,13 +326,24 @@ export default {
     },
 
     mounted() {
+        const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+        axios({
+            method: 'get',
+            url: `/api/cart/`,
+            headers: {Authorization: AuthStr}
+        }).then(res => {
+            this.cart_items = res.data.cart_items;
+        }).catch(err => {
 
+        });
     },
 }
 </script>
 
 <style scoped>
 
-
+.btn-info {
+    color: white;
+}
 
 </style>

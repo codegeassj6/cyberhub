@@ -23,7 +23,7 @@ class ProductController extends Controller
             if($variation->getSizes()->first()) {
                 $value->default_price = $variation->getSizes()->first()->price;
                 $value->default_size = $variation->getSizes()->first()->value;
-                $value->product_size_id = $variation->getSizes()->first()->id;
+                $value->default_product_size_id = $variation->getSizes()->first()->id;
                 $value->default_stocks = $variation->getSizes()->first()->stock;
             }
             return $value;

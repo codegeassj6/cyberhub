@@ -54,7 +54,19 @@ export default {
               .then((res) => {console.log(res);
                   // commit function is used for running mutation function in storejs
                   this.$store.commit("loginSuccess", res);
-                  this.$router.push('/');
+
+                    const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+                    axios({
+                        method: 'get',
+                        url: `/api/cart/`,
+                        headers: {Authorization: AuthStr}
+                    }).then(res => {
+                        this.$store.commit("mutateCartCount", res.data.cart_count);
+                    }).catch(err => {
+
+                    });
+
+                    this.$router.push('/');
               })
               .catch((error) => {
                   this.$store.commit("loginFailed", {error});

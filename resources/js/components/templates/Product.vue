@@ -110,15 +110,17 @@ export default {
             axios({
                 method: 'POST',
                 data: {
-                    id: data.id,
+                    product_id: data.id,
                     quantity: document.getElementById('input_'+data.id).value,
-                    product_size_id: data.product_size_id,
+                    product_size_id: data.default_product_size_id,
                 },
                 url: `/api/cart/store`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
-                const cart_count = +document.getElementById('input_'+data.id).value + this.$store.getters.getCartCount;
-                this.$store.commit('mutateCartCount', cart_count);
+                // const cart_count = +document.getElementById('input_'+data.id).value + this.$store.getters.getCartCount;
+                // this.$store.commit('mutateCartCount', cart_count);
+
+                this.$store.commit('mutateCartCount', res.data.quantity);
             }).catch(err => {
 
             });
@@ -141,12 +143,17 @@ export default {
             if(document.getElementById('input_'+data.id).value > 1) {
                 document.getElementById('input_'+data.id).value = data.default_stocks;
             }
+
+            if(document.getElementById('input_'+data.id).value == '') {
+                document.getElementById('input_'+data.id).value = data.default_stocks;
+            }
         },
 
         changeSize(e, data, size) {
             data.default_price = size.price;
-            // e.target.classList.remove("btn-outline-info"); e.target.classList.add("btn-info");
-            data.default_size = size.value;
+            data.default_size = size.value; // changing the size and color class
+            data.default_product_size_id = size.id;
+            data.default_stocks = size.stock;
         },
 
     },
@@ -175,23 +182,7 @@ export default {
     height: 190px;
 }
 
-input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
 
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
-input[type="number"]:focus, input[type="number"]:active {
-    box-shadow: none;
-}
-
-.btn-outline-info:hover, .btn-info {
-    color: white;
-}
 
 
 

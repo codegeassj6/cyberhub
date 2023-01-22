@@ -5490,6 +5490,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 //import name from './
 
@@ -5591,6 +5593,19 @@ router.beforeEach(function (to, from, next) {
         query: {
           redirect: to.fullPath
         }
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+  if (to.matched.some(function (record) {
+    return record.meta.disableIfLoggedIn;
+  })) {
+    if (store.getters.currentUser) {
+      next({
+        name: "Home"
       });
     } else {
       next();
@@ -5747,12 +5762,18 @@ var routes = [{
   name: "Login",
   component: function component() {
     return __webpack_require__.e(/*! import() | Login */ "Login").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Login.vue */ "./resources/js/components/Login.vue"));
+  },
+  meta: {
+    disableIfLoggedIn: true
   }
 }, {
   path: '/register',
   name: "Register",
   component: function component() {
     return __webpack_require__.e(/*! import() | Register */ "Register").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Register.vue */ "./resources/js/components/Register.vue"));
+  },
+  meta: {
+    disableIfLoggedIn: true
   }
 }, {
   path: '/games',
@@ -28933,17 +28954,7 @@ var render = function () {
               ]),
             ]),
             _vm._v(" "),
-            _c("button", {
-              staticClass: "navbar-toggler d-lg-none",
-              attrs: {
-                type: "button",
-                "data-bs-toggle": "collapse",
-                "data-bs-target": "#collapsibleNavId",
-                "aria-controls": "collapsibleNavId",
-                "aria-expanded": "false",
-                "aria-label": "Toggle navigation",
-              },
-            }),
+            _vm._m(0),
             _vm._v(" "),
             _c(
               "div",
@@ -29064,7 +29075,7 @@ var render = function () {
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "dropdown" }, [
-                            _vm._m(0),
+                            _vm._m(1),
                             _vm._v(" "),
                             _c(
                               "ul",
@@ -29102,7 +29113,7 @@ var render = function () {
                                   1
                                 ),
                                 _vm._v(" "),
-                                _vm._m(1),
+                                _vm._m(2),
                                 _vm._v(" "),
                                 _c("li", [
                                   _c(
@@ -29159,6 +29170,23 @@ var render = function () {
   ])
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggler",
+        attrs: {
+          type: "button",
+          "data-bs-toggle": "collapse",
+          "data-bs-target": "#collapsibleNavId",
+        },
+      },
+      [_c("span", { staticClass: "navbar-toggler-icon" })]
+    )
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

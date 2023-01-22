@@ -59,6 +59,16 @@ __webpack_require__.r(__webpack_exports__);
         console.log(res);
         // commit function is used for running mutation function in storejs
         _this.$store.commit("loginSuccess", res);
+        var AuthStr = 'Bearer '.concat(_this.$store.getters.currentUser.token);
+        axios({
+          method: 'get',
+          url: "/api/cart/",
+          headers: {
+            Authorization: AuthStr
+          }
+        }).then(function (res) {
+          _this.$store.commit("mutateCartCount", res.data.cart_count);
+        })["catch"](function (err) {});
         _this.$router.push('/');
       })["catch"](function (error) {
         _this.$store.commit("loginFailed", {

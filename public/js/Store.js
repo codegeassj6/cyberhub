@@ -284,17 +284,19 @@ __webpack_require__.r(__webpack_exports__);
       axios({
         method: 'POST',
         data: {
-          id: data.id,
+          product_id: data.id,
           quantity: document.getElementById('input_' + data.id).value,
-          product_size_id: data.product_size_id
+          product_size_id: data.default_product_size_id
         },
         url: "/api/cart/store",
         headers: {
           Authorization: AuthStr
         }
       }).then(function (res) {
-        var cart_count = +document.getElementById('input_' + data.id).value + _this.$store.getters.getCartCount;
-        _this.$store.commit('mutateCartCount', cart_count);
+        // const cart_count = +document.getElementById('input_'+data.id).value + this.$store.getters.getCartCount;
+        // this.$store.commit('mutateCartCount', cart_count);
+
+        _this.$store.commit('mutateCartCount', res.data.quantity);
       })["catch"](function (err) {});
     },
     increaseQuantity: function increaseQuantity(data) {
@@ -311,11 +313,15 @@ __webpack_require__.r(__webpack_exports__);
       if (document.getElementById('input_' + data.id).value > 1) {
         document.getElementById('input_' + data.id).value = data.default_stocks;
       }
+      if (document.getElementById('input_' + data.id).value == '') {
+        document.getElementById('input_' + data.id).value = data.default_stocks;
+      }
     },
     changeSize: function changeSize(e, data, size) {
       data.default_price = size.price;
-      // e.target.classList.remove("btn-outline-info"); e.target.classList.add("btn-info");
-      data.default_size = size.value;
+      data.default_size = size.value; // changing the size and color class
+      data.default_product_size_id = size.id;
+      data.default_stocks = size.stock;
     }
   },
   watch: {
@@ -474,7 +480,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.product-img[data-v-0d00f4be] {\n    height: 190px;\n}\ninput[type='number'][data-v-0d00f4be]::-webkit-inner-spin-button,\ninput[type='number'][data-v-0d00f4be]::-webkit-outer-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\ninput[type=number][data-v-0d00f4be] {\n  -moz-appearance: textfield;\n}\ninput[type=\"number\"][data-v-0d00f4be]:focus, input[type=\"number\"][data-v-0d00f4be]:active {\n    box-shadow: none;\n}\n.btn-outline-info[data-v-0d00f4be]:hover, .btn-info[data-v-0d00f4be] {\n    color: white;\n}\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.product-img[data-v-0d00f4be] {\n    height: 190px;\n}\n\n\n\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

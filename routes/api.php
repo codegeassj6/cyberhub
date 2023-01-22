@@ -36,4 +36,10 @@ Route::group(['prefix' => 'product'], function ($router) {
 Route::group(['prefix' => 'cart'], function ($router) {
     Route::post('/store', 'App\Http\Controllers\CartController@store')->middleware('auth');
     Route::get('/', 'App\Http\Controllers\CartController@index')->middleware('auth');
+    Route::delete('/destroy', 'App\Http\Controllers\CartController@destroy')->middleware('auth');
+    Route::patch('/update', 'App\Http\Controllers\CartController@update')->middleware('auth');
+});
+
+Route::group(['prefix' => 'order'], function ($router) {
+    Route::post('/store', 'App\Http\Controllers\OrderController@store');
 });

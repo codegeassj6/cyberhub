@@ -170,7 +170,7 @@ export default {
         cancelUpload() {
             this.form.file = null;
             this.form.boolUpload = true;
-             document.getElementById('myPhoto').src = this.form.photo;
+            document.getElementById('myPhoto').src = this.form.photo;
         },
 
         uploadImage() {

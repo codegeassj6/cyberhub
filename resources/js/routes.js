@@ -9,12 +9,18 @@ export const routes = [
         path: '/login',
         name: "Login",
         component: () => import(/* webpackChunkName: "Login" */ "./components/Login.vue"),
+        meta: {
+            disableIfLoggedIn: true
+        },
     },
 
     {
         path: '/register',
         name: "Register",
-        component: () => import(/* webpackChunkName: "Register" */ "./components/Register.vue")
+        component: () => import(/* webpackChunkName: "Register" */ "./components/Register.vue"),
+        meta: {
+            disableIfLoggedIn: true
+        },
     },
 
     {
