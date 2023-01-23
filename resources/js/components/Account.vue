@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="d-flex p-4">
                     <div class="space-intro">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp" height="150" class="img-thumbnail" width="150" alt="">
+                        <img :src="profileImage" height="150" class="border border-5 rounded" width="150" alt="">
                     </div>
                     <div class="space-intro p-4 text-white">
                         <h3>Jhon Rey Repuela</h3>
@@ -49,7 +49,7 @@
                 <div><h4>Recent Photos / Videos</h4></div>
                 <div class="ms-auto mt-2">Show all</div>
             </div>
-
+            <hr />
             <div class="row">
                 <div class="col-4">
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp" height="400" class="img-thumbnail" alt="">
@@ -85,7 +85,9 @@ export default {
     props: [],
 
     computed: {
-
+        profileImage() {
+            return this.$store.getters.currentUser.profile_img ? '/storage/user/' + this.$store.getters.currentUser.id + '/img/' + this.$store.getters.currentUser.profile_img : 'https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp';
+        }
     },
 
     methods: {

@@ -51,7 +51,7 @@ export default {
         authenticate() {
           this.$store.dispatch('login');
           login(this.form)
-              .then((res) => {console.log(res);
+              .then((res) => {
                   // commit function is used for running mutation function in storejs
                   this.$store.commit("loginSuccess", res);
 

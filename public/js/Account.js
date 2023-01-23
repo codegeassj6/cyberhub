@@ -91,7 +91,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {},
   props: [],
-  computed: {},
+  computed: {
+    profileImage: function profileImage() {
+      return this.$store.getters.currentUser.profile_img ? '/storage/user/' + this.$store.getters.currentUser.id + '/img/' + this.$store.getters.currentUser.profile_img : 'https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp';
+    }
+  },
   methods: {},
   watch: {
     $data: {
@@ -611,7 +615,25 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
+    _c("div", { staticClass: "bg-profile" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "d-flex p-4" }, [
+          _c("div", { staticClass: "space-intro" }, [
+            _c("img", {
+              staticClass: "border border-5 rounded",
+              attrs: {
+                src: _vm.profileImage,
+                height: "150",
+                width: "150",
+                alt: "",
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+        ]),
+      ]),
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "bg-profile-2" }, [
       _c("div", { staticClass: "container" }, [
@@ -644,28 +666,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "bg-profile" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "d-flex p-4" }, [
-          _c("div", { staticClass: "space-intro" }, [
-            _c("img", {
-              staticClass: "img-thumbnail",
-              attrs: {
-                src: "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp",
-                height: "150",
-                width: "150",
-                alt: "",
-              },
-            }),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "space-intro p-4 text-white" }, [
-            _c("h3", [_vm._v("Jhon Rey Repuela")]),
-            _vm._v(" "),
-            _c("div", [_c("span", [_vm._v("@codegeassj6")])]),
-          ]),
-        ]),
-      ]),
+    return _c("div", { staticClass: "space-intro p-4 text-white" }, [
+      _c("h3", [_vm._v("Jhon Rey Repuela")]),
+      _vm._v(" "),
+      _c("div", [_c("span", [_vm._v("@codegeassj6")])]),
     ])
   },
   function () {
@@ -715,6 +719,8 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "ms-auto mt-2" }, [_vm._v("Show all")]),
       ]),
+      _vm._v(" "),
+      _c("hr"),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-4" }, [

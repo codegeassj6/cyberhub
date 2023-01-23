@@ -140,12 +140,29 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       cart_items: '',
-      orders: []
+      orders: [],
+      subtotal: ''
     };
   },
   components: {},
   props: [],
-  computed: {},
+  computed: {
+    computedSubTotal: function computedSubTotal() {
+      var _this = this;
+      this.subtotal = null;
+      this.orders.forEach(function (elem, index) {
+        _this.cart_items.forEach(function (item) {
+          if (elem == item.id) {
+            _this.subtotal = _this.subtotal += item.product_size_details.price * item.quantity;
+          }
+        });
+      });
+      return this.subtotal;
+    },
+    computedTotal: function computedTotal() {
+      return this.subtotal;
+    }
+  },
   methods: {
     increaseQuantity: function increaseQuantity(item) {
       if (document.getElementById('input_' + item.id).value < item.product_size_details.stock) {
@@ -153,6 +170,7 @@ __webpack_require__.r(__webpack_exports__);
         if (this.orders.includes(item.id)) {
           this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) + item.product_size_details.price;
         }
+        this.$store.commit('mutateCartCount', this.$store.getters.getCartCount + 1);
         var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
         axios({
           method: 'patch',
@@ -172,11 +190,14 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     decreaseQuantity: function decreaseQuantity(item) {
+      item.quantity = 10;
       if (document.getElementById('input_' + item.id).value > 1) {
-        document.getElementById('input_' + item.id).value--;
+        // document.getElementById('input_'+item.id).value --;
+        item;
         if (this.orders.includes(item.id)) {
-          this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) - item.product_size_details.price;
+          // this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) - item.product_size_details.price;
         }
+        this.$store.commit('mutateCartCount', this.$store.getters.getCartCount - 1);
         var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
         axios({
           method: 'patch',
@@ -202,7 +223,14 @@ __webpack_require__.r(__webpack_exports__);
       if (document.getElementById('input_' + item.id).value > item.product_size_details.stock) {
         document.getElementById('input_' + item.id).value = item.product_size_details.stock;
       }
-      return;
+
+      // commit mutation for cart count
+      if (item.quantity > +document.getElementById('input_' + item.id).value) {
+        this.$store.commit('mutateCartCount', this.$store.getters.getCartCount - (item.quantity - +document.getElementById('input_' + item.id).value));
+      } else {
+        this.$store.commit('mutateCartCount', this.$store.getters.getCartCount + +document.getElementById('input_' + item.id).value - item.quantity);
+      }
+      item.quantity = +document.getElementById('input_' + item.id).value;
       var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
       axios({
         method: 'patch',
@@ -221,11 +249,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     deleteCartItem: function deleteCartItem(item) {
-      var _this = this;
+      var _this2 = this;
       // delete the v-for cart item
       this.cart_items.forEach(function (elem, index) {
         if (elem == item) {
-          _this.cart_items.splice(index, 1);
+          _this2.cart_items.splice(index, 1);
         }
       });
 
@@ -233,8 +261,8 @@ __webpack_require__.r(__webpack_exports__);
       if (this.orders) {
         this.orders.forEach(function (elem, index) {
           if (elem == item.id) {
-            _this.orders.splice(index, 1);
-            _this.$refs.subtotal.innerText = parseInt(_this.$refs.subtotal.innerText) - item.product_size_details.price * +document.getElementById('input_' + item.id).value;
+            _this2.orders.splice(index, 1);
+            _this2.$refs.subtotal.innerText = parseInt(_this2.$refs.subtotal.innerText) - item.product_size_details.price * +document.getElementById('input_' + item.id).value;
           }
         });
       }
@@ -249,64 +277,61 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {})["catch"](function (err) {});
     },
     selectProduct: function selectProduct(e, item) {
-      // const index = this.orders.indexOf(item.id);
+      if (this.$refs.selectAll.checked && this.orders.length < this.cart_items.length) {
+        this.$refs.selectAll.checked = false;
+      }
 
-      // if (index > -1) {
-      //     this.orders.splice(index, 1);
+      // const index = this.orders.indexOf(item.id);
+      // if(index > -1) {
+      //     this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) + item.product_size_details.price * +document.getElementById('input_'+item.id).value ;
+      // } else {
       //     this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) - item.product_size_details.price * +document.getElementById('input_'+item.id).value;
 
-      //     this.$refs.total.innerText = parseInt(this.$refs.subtotal.innerText);
-
-      // } else {
-      //     this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) + item.product_size_details.price * +document.getElementById('input_'+item.id).value ;
-
-      //     this.$refs.total.innerText = parseInt(this.$refs.subtotal.innerText);
       // }
-
-      var index = this.orders.indexOf(item.id);
-      if (index > -1) {
-        this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) + item.product_size_details.price * +document.getElementById('input_' + item.id).value;
-      } else {
-        this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) - item.product_size_details.price * +document.getElementById('input_' + item.id).value;
-        this.$refs.total.innerText = parseInt(this.$refs.subtotal.innerText);
-      }
+      // this.$refs.total.innerText = parseInt(this.$refs.subtotal.innerText);
     },
     selectAll: function selectAll(e) {
-      var _this2 = this;
+      var _this3 = this;
       if (e.target.checked) {
         this.orders = [];
         this.cart_items.forEach(function (elem) {
-          _this2.orders.push(elem.id);
+          _this3.orders.push(elem.id);
         });
       } else {
         this.orders = [];
       }
     },
     submitOrder: function submitOrder() {
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-      axios({
-        method: 'post',
-        data: {
-          id: this.orders
-        },
-        url: "/api/order/store",
-        headers: {
-          Authorization: AuthStr
-        }
-      }).then(function (res) {})["catch"](function (err) {});
+      var _this4 = this;
+      if (this.orders.length) {
+        var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+        axios({
+          method: 'post',
+          data: {
+            id: this.orders
+          },
+          url: "/api/order/store",
+          headers: {
+            Authorization: AuthStr
+          }
+        }).then(function (res) {
+          _this4.orders = [];
+          _this4.cart_items = res.data.cart_items;
+        })["catch"](function (err) {});
+      }
     }
   },
   watch: {
     $data: {
       handler: function handler(val, oldVal) {
-        console.log('watcher: ', this.orders);
+        console.log('watcher: ', val);
       },
       deep: true
     }
   },
   updated: function updated() {},
   mounted: function mounted() {
-    var _this3 = this;
+    var _this5 = this;
     var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
     axios({
       method: 'get',
@@ -315,7 +340,7 @@ __webpack_require__.r(__webpack_exports__);
         Authorization: AuthStr
       }
     }).then(function (res) {
-      _this3.cart_items = res.data.cart_items;
+      _this5.cart_items = res.data.cart_items;
     })["catch"](function (err) {});
   }
 });
@@ -843,22 +868,25 @@ var render = function () {
                       _vm._v(" "),
                       _c("hr"),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-check mb-3" }, [
-                        _c("label", { staticClass: "form-check-label" }, [
-                          _c("input", {
-                            staticClass: "form-check-input",
-                            attrs: { type: "checkbox" },
-                            on: {
-                              change: function ($event) {
-                                return _vm.selectAll($event)
-                              },
-                            },
-                          }),
-                          _vm._v(
-                            " Select All\n                                        "
-                          ),
-                        ]),
-                      ]),
+                      _vm.cart_items.length
+                        ? _c("div", { staticClass: "form-check mb-3" }, [
+                            _c("label", { staticClass: "form-check-label" }, [
+                              _c("input", {
+                                ref: "selectAll",
+                                staticClass: "form-check-input",
+                                attrs: { type: "checkbox" },
+                                on: {
+                                  change: function ($event) {
+                                    return _vm.selectAll($event)
+                                  },
+                                },
+                              }),
+                              _vm._v(
+                                " Select All\n                                        "
+                              ),
+                            ]),
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
                       _vm._l(_vm.cart_items, function (item, index) {
                         return _c(
@@ -1085,7 +1113,7 @@ var render = function () {
                         _c("div", { staticClass: "ms-auto" }, [
                           _c("span", [_vm._v("P")]),
                           _vm._v(" "),
-                          _c("span", { ref: "subtotal" }, [_vm._v("0")]),
+                          _c("span", [_vm._v(_vm._s(_vm.computedSubTotal))]),
                         ]),
                       ]),
                       _vm._v(" "),
@@ -1099,7 +1127,7 @@ var render = function () {
                         _c("div", { staticClass: "ms-auto" }, [
                           _c("span", [_vm._v("P")]),
                           _vm._v(" "),
-                          _c("span", { ref: "total" }, [_vm._v("0")]),
+                          _c("span", [_vm._v(_vm._s(_vm.computedTotal))]),
                         ]),
                       ]),
                       _vm._v(" "),

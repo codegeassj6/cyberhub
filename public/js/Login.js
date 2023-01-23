@@ -56,7 +56,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       this.$store.dispatch('login');
       (0,_helpers_auth__WEBPACK_IMPORTED_MODULE_0__.login)(this.form).then(function (res) {
-        console.log(res);
         // commit function is used for running mutation function in storejs
         _this.$store.commit("loginSuccess", res);
         var AuthStr = 'Bearer '.concat(_this.$store.getters.currentUser.token);

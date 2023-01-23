@@ -11,9 +11,9 @@
                                         <div class="h5">Shopping Cart</div>
                                         <hr />
 
-                                        <div class="form-check mb-3">
+                                        <div class="form-check mb-3" v-if="cart_items.length">
                                             <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" @change="selectAll($event)"> Select All
+                                                <input class="form-check-input" ref="selectAll" type="checkbox" @change="selectAll($event)"> Select All
                                             </label>
                                         </div>
 
@@ -84,7 +84,7 @@
                                                 <div class="h5">Products</div>
                                                 <div class="ms-auto">
                                                     <span>P</span>
-                                                    <span ref="subtotal">0</span>
+                                                    <span>{{computedSubTotal}}</span>
                                                 </div>
                                             </div>
 
@@ -98,7 +98,7 @@
                                                 <div class="h5">Total</div>
                                                 <div class="ms-auto">
                                                     <span>P</span>
-                                                    <span ref="total">0</span>
+                                                    <span>{{computedTotal}}</span>
                                                 </div>
                                             </div>
 
@@ -128,6 +128,7 @@ export default {
         return {
             cart_items: '',
             orders: [],
+            subtotal: '',
         }
     },
     components: {
@@ -137,10 +138,25 @@ export default {
     props: [],
 
     computed: {
+        computedSubTotal() {
+            this.subtotal = null;
+            this.orders.forEach((elem, index) => {
+               this.cart_items.forEach(item => {
+                    if(elem == item.id) {
+                        this.subtotal = this.subtotal += (item.product_size_details.price * item.quantity);
+                    }
+               });
+            });
+            return this.subtotal;
+        },
 
+        computedTotal() {
+            return this.subtotal;
+        },
     },
 
     methods: {
+
         increaseQuantity(item) {
             if(document.getElementById('input_'+item.id).value < item.product_size_details.stock ) {
                 document.getElementById('input_'+item.id).value ++;
@@ -148,6 +164,8 @@ export default {
                 if(this.orders.includes(item.id)) {
                     this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) + item.product_size_details.price;
                 }
+
+                this.$store.commit('mutateCartCount', this.$store.getters.getCartCount + 1);
 
                 const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
                 axios({
@@ -169,12 +187,14 @@ export default {
 
         },
 
-        decreaseQuantity(item) {
+        decreaseQuantity(item) {item.quantity = 10;
             if(document.getElementById('input_'+item.id).value > 1 ) {
-                document.getElementById('input_'+item.id).value --;
+                // document.getElementById('input_'+item.id).value --;
+                item
                 if(this.orders.includes(item.id)) {
-                    this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) - item.product_size_details.price;
+                    // this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) - item.product_size_details.price;
                 }
+                this.$store.commit('mutateCartCount', this.$store.getters.getCartCount - 1);
 
                 const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
                 axios({
@@ -202,9 +222,15 @@ export default {
                 document.getElementById('input_'+item.id).value = item.product_size_details.stock;
             }
 
+            // commit mutation for cart count
+            if(item.quantity > +document.getElementById('input_'+item.id).value) {
+                this.$store.commit('mutateCartCount', this.$store.getters.getCartCount - (item.quantity - +document.getElementById('input_'+item.id).value));
+            } else {
+                this.$store.commit('mutateCartCount', this.$store.getters.getCartCount + +document.getElementById('input_'+item.id).value - item.quantity);
+            }
 
+            item.quantity = +document.getElementById('input_'+item.id).value;
 
-            return;
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
             axios({
                 method: 'patch',
@@ -258,28 +284,20 @@ export default {
         },
 
         selectProduct(e, item) {
-            // const index = this.orders.indexOf(item.id);
+            if(this.$refs.selectAll.checked && this.orders.length < this.cart_items.length) {
+                this.$refs.selectAll.checked = false;
+            }
 
-            // if (index > -1) {
-            //     this.orders.splice(index, 1);
+            // const index = this.orders.indexOf(item.id);
+            // if(index > -1) {
+            //     this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) + item.product_size_details.price * +document.getElementById('input_'+item.id).value ;
+            // } else {
             //     this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) - item.product_size_details.price * +document.getElementById('input_'+item.id).value;
 
-            //     this.$refs.total.innerText = parseInt(this.$refs.subtotal.innerText);
 
-            // } else {
-            //     this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) + item.product_size_details.price * +document.getElementById('input_'+item.id).value ;
-
-            //     this.$refs.total.innerText = parseInt(this.$refs.subtotal.innerText);
             // }
+            // this.$refs.total.innerText = parseInt(this.$refs.subtotal.innerText);
 
-            const index = this.orders.indexOf(item.id);
-            if(index > -1) {
-                this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) + item.product_size_details.price * +document.getElementById('input_'+item.id).value ;
-            } else {
-                this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) - item.product_size_details.price * +document.getElementById('input_'+item.id).value;
-
-                this.$refs.total.innerText = parseInt(this.$refs.subtotal.innerText);
-            }
 
         },
 
@@ -297,17 +315,20 @@ export default {
         },
 
         submitOrder() {
-            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-            axios({
-                method: 'post',
-                data: {id: this.orders},
-                url: `/api/order/store`,
-                headers: {Authorization: AuthStr}
-            }).then(res => {
+            if(this.orders.length) {
+                const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+                axios({
+                    method: 'post',
+                    data: {id: this.orders},
+                    url: `/api/order/store`,
+                    headers: {Authorization: AuthStr}
+                }).then(res => {
+                    this.orders = [];
+                    this.cart_items = res.data.cart_items;
+                }).catch(err => {
 
-            }).catch(err => {
-
-            });
+                });
+            }
         },
 
     },
@@ -315,7 +336,7 @@ export default {
     watch: {
         $data: {
             handler: function(val, oldVal) {
-                console.log('watcher: ', this.orders);
+                console.log('watcher: ', val);
             },
             deep: true
         }

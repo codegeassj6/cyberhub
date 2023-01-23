@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Cart;
 use Auth;
+use App\Http\Controllers\CartController;
 
 class OrderController extends Controller
 {
@@ -25,7 +26,7 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, )
     {
         $cart = Cart::where('user_id', Auth::user()->id)->whereIn('id', $request->input('id'))->get();
 
@@ -38,9 +39,9 @@ class OrderController extends Controller
             ]);
             Cart::find($data->id)->delete();
         });
+        $cart = new CartController;
 
-
-        return response()->json(['message' => ''], 200);
+        return $cart->index();
     }
 
     /**

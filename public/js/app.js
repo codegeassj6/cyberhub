@@ -5523,16 +5523,18 @@ __webpack_require__.r(__webpack_exports__);
   updated: function updated() {},
   mounted: function mounted() {
     var _this = this;
-    var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-    axios({
-      method: 'get',
-      url: "/api/cart/",
-      headers: {
-        Authorization: AuthStr
-      }
-    }).then(function (res) {
-      _this.$store.commit("mutateCartCount", res.data.cart_count);
-    })["catch"](function (err) {});
+    if (this.currentUser) {
+      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      axios({
+        method: 'get',
+        url: "/api/cart/",
+        headers: {
+          Authorization: AuthStr
+        }
+      }).then(function (res) {
+        _this.$store.commit("mutateCartCount", res.data.cart_count);
+      })["catch"](function (err) {});
+    }
   }
 });
 

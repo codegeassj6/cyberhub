@@ -103,16 +103,18 @@ export default {
     },
 
     mounted() {
-        const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-        axios({
-            method: 'get',
-            url: `/api/cart/`,
-            headers: {Authorization: AuthStr}
-        }).then(res => {
-            this.$store.commit("mutateCartCount", res.data.cart_count);
-        }).catch(err => {
+        if(this.currentUser) {
+            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+            axios({
+                method: 'get',
+                url: `/api/cart/`,
+                headers: {Authorization: AuthStr}
+            }).then(res => {
+                this.$store.commit("mutateCartCount", res.data.cart_count);
+            }).catch(err => {
 
-        });
+            });
+        }
     }
 
 }
