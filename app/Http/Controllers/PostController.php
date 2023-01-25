@@ -18,7 +18,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = DB::table('posts')->orderBy('updated_at', 'desc')->paginate(2);
+        // $post = DB::table('posts')->orderBy('updated_at', 'desc')->paginate(2);
+        $post = Post::orderBy('created_at', 'desc')->paginate(5);
+        $post->getCollection()->transform(function($value) {
+            $value->user = $value->user;
+            return $value;
+        });
+
         return $post;
     }
 

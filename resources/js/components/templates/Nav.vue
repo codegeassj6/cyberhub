@@ -8,7 +8,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="collapsibleNavId">
-                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                    <ul class="navbar-nav me-auto mt-lg-0">
                         <li class="nav-item">
                             <router-link to="/games" class="nav-link btn btn-primary">
                                Games
@@ -28,7 +28,7 @@
 
                     <div class="d-flex my-2 my-lg-0">
                         <template v-if="$store.getters.currentUser">
-                            <button class="btn btn-primary" type="button">
+                            <button class="btn btn-primary hide-sm" type="button">
                                 {{ currentUser.first_name }} {{ currentUser.last_name }}
                             </button>
                             <router-link to="/cart" class="btn btn-primary position-relative">
@@ -42,6 +42,7 @@
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li><router-link to="/account" class="dropdown-item">Account Details</router-link></li>
                                     <li><router-link to="/setting" class="dropdown-item" href="#">Setting</router-link></li>
+                                    <li><router-link to="/save" class="dropdown-item" href="#">My Saves</router-link></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         <a class="dropdown-item" href="#" @click.prevent="logout">Logout</a>
@@ -122,4 +123,8 @@ export default {
 
 <style scoped>
 
+
+.btn-primary:hover {
+    color: white;
+}
 </style>

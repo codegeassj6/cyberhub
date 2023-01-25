@@ -331,11 +331,7 @@
 
                             </div>
                         </div>
-
-
                             <Post :datas="datas" />
-
-
                     </div>
 
                     <div class="col-md-4">
@@ -379,7 +375,7 @@ export default {
 
     methods: {
         updateMessage(e) {
-            this.message = e.target.innerHTML;
+            this.message = e.target.innerText;
         },
 
         postMessage() {

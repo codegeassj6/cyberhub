@@ -72,6 +72,12 @@ export const routes = [
         component: () => import(/* webpackChunkName: "UpdateAccount" */ "./components/UpdateAccount.vue"),
     },
 
+    {
+        path: "/save",
+        name: "Save",
+        component: () => import(/* webpackChunkName: "Save" */ "./components/Save.vue"),
+    },
+
 
     {
         path: "*",

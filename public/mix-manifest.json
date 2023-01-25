@@ -10,6 +10,7 @@
     "/js/Account.js": "/js/Account.js",
     "/js/Cart.js": "/js/Cart.js",
     "/js/UpdateAccount.js": "/js/UpdateAccount.js",
+    "/js/Save.js": "/js/Save.js",
     "/js/NotFound.js": "/js/NotFound.js",
     "/css/app.css": "/css/app.css"
 }

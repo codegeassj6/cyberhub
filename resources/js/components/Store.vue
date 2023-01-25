@@ -47,11 +47,11 @@ export default {
 
     methods: {
         getProducts() {
-            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+            // const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
             axios({
                 method: 'get',
                 url: `/api/product`,
-                headers: {Authorization: AuthStr}
+                // headers: {Authorization: AuthStr}
             }).then(res => {
                 this.products = res.data;
             }).catch(err => {

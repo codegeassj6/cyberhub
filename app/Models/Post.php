@@ -16,8 +16,8 @@ class Post extends Model
         'message',
     ];
 
-    public function postOwner() {
-        return $this->belongsTo(User::class, 'id', 'user_id');
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

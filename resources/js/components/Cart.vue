@@ -159,10 +159,10 @@ export default {
 
         increaseQuantity(item) {
             if(document.getElementById('input_'+item.id).value < item.product_size_details.stock ) {
-                document.getElementById('input_'+item.id).value ++;
-
+                // document.getElementById('input_'+item.id).value ++;
+                item.quantity ++;
                 if(this.orders.includes(item.id)) {
-                    this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) + item.product_size_details.price;
+                    // this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) + item.product_size_details.price;
                 }
 
                 this.$store.commit('mutateCartCount', this.$store.getters.getCartCount + 1);
@@ -187,10 +187,10 @@ export default {
 
         },
 
-        decreaseQuantity(item) {item.quantity = 10;
+        decreaseQuantity(item) {
             if(document.getElementById('input_'+item.id).value > 1 ) {
                 // document.getElementById('input_'+item.id).value --;
-                item
+                item.quantity --;
                 if(this.orders.includes(item.id)) {
                     // this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) - item.product_size_details.price;
                 }
@@ -286,6 +286,10 @@ export default {
         selectProduct(e, item) {
             if(this.$refs.selectAll.checked && this.orders.length < this.cart_items.length) {
                 this.$refs.selectAll.checked = false;
+            }
+
+            if(this.orders.length == this.cart_items.length) {
+                this.$refs.selectAll.checked = true;
             }
 
             // const index = this.orders.indexOf(item.id);

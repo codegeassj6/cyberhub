@@ -19,18 +19,18 @@
         <div class="bg-profile-2">
             <div class="container">
                 <div class="d-flex p-4">
-                    <div>
+                    <div class="mt-4">
                         <router-link to="/account/update" class="btn btn-outline-secondary mt-2 ms-3">Update Profile</router-link>
                     </div>
                     <div class="ms-auto">
                         <div class="d-flex">
-                            <div class="p-2">
+                            <div>
                                 <button class="btn btn-primary"><i class="fa fa-facebook"></i> Facebook</button>
                             </div>
-                            <div class="p-2">
+                            <div class="mx-1">
                                 <button class="btn btn-info text-white"><i class="fa fa-twitter"></i> Twitter</button>
                             </div>
-                            <div class="p-2">
+                            <div>
                                 <button class="btn btn-danger"><i class="fa fa-google"></i> Google</button>
                             </div>
                         </div>
@@ -122,11 +122,15 @@ export default {
 
 .bg-profile-2 {
   background-color: #f2f2f2;
-  height: 100px;
+  height: 150px;
 }
 
 .space-intro {
     margin-top: 150px;
+}
+
+.space-intro {
+    margin-top: 175px;
 }
 
 
