@@ -32,8 +32,6 @@ axios.interceptors.response.use(function (response) {
         store.commit('logout');
         router.push('/login');
     }
-
-
     return Promise.reject(error);
 });
 

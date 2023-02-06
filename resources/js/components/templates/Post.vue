@@ -34,7 +34,6 @@
                 <hr>
                 <div class="comments">
                     <Comment />
-
                 </div>
             </div>
         </div>

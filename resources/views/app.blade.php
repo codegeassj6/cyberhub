@@ -10,9 +10,11 @@
         {{-- <link rel="stylesheet" href="{{ asset('font-awesome-4.7.0/css/font-awesome.css') }}"> --}}
     </head>
     <body>
+
         <div id="app">
             <app-component></app-component>
         </div>
+        {{-- @dd(Auth::id()) --}}
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

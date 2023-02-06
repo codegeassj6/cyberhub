@@ -76,6 +76,7 @@ export const routes = [
         path: "/save",
         name: "Save",
         component: () => import(/* webpackChunkName: "Save" */ "./components/Save.vue"),
+        meta: { requiresAuth: true }
     },
 
 

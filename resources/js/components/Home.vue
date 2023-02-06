@@ -287,48 +287,62 @@
             <div class="container space-intro">
                 <div class="row d-flex">
                     <div class="col-md-8">
-
                         <div class="card mb-4">
                             <div class="card-body">
-                                <!-- <div class="d-flex">
-                                    <div class="p-2">
-                                        <img src="https://i.imgur.com/UXdKE3o.jpg" width="50" height="50" class="rounded-circle" alt="">
-                                    </div>
-                                    <div class="p-2 my-auto">
-                                        <div class="name">Jhon Rey Repuela</div>
-                                    </div>
-                                </div> -->
-
-                                <div class="d-flex flex-wrap mb-2 border-post">
-                                    <div class="p-2 flex-fill" id="editable" @keyup="updateMessage" contenteditable="true">
-
-                                    </div>
-                                </div>
-
-                                <div class="d-flex">
-                                    <div class="p-2">
-                                        <a href="#!" class="text-dark">
-                                            <i class="fa fa-smile-o fa-lg"></i>
-                                        </a>
+                                <div class="d-flex flex-column mb-2 rounded border-post">
+                                    <div class="flex-fill p-2"
+                                        id="editable"
+                                        @keyup="updateMessage"
+                                        contenteditable="true">
                                     </div>
 
-                                    <div class="p-2">
-                                        <a href="#!" class="text-dark">
-                                            <i class="fa fa-file-photo-o fa-lg"></i>
-                                        </a>
-                                    </div>
+                                    <div class="m-2 d-flex">
+                                        <div>
+                                            <a href="#!" class="text-dark">
+                                                <i class="fa fa-smile-o fa-lg"></i>
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <label for="input_img" class="pointer mx-2">
+                                                <i class="fa fa-file-image-o fa-lg"></i>
+                                                <input type="file" class="d-none" @change="attachImage" id="input_img">
+                                            </label>
+                                        </div>
 
-                                    <div class="p-2">
-                                        <a href="#!" class="text-dark">
-                                            <i class="fa fa-file-video-o fa-lg"></i>
-                                        </a>
-                                    </div>
+                                        <div>
+                                            <label for="input_video" class="pointer">
+                                                <i class="fa fa-file-video-o fa-lg"></i>
+                                                <input type="file" class="d-none" id="input_video">
+                                            </label>
+                                        </div>
 
-                                    <div class="p-2 ms-auto">
-                                        <button class="btn btn-primary px-4" @click="postMessage">Post</button>
+                                        <div class="ms-auto">
+                                            <div class="">
+                                                <button class="btn btn-primary btn-sm px-5 shadow" @click="postMessage">Post</button>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
 
+                                <div class="d-flex mb-3">
+                                    <div class="flex-fill">
+                                        <div class="d-flex">
+                                            <div class="card w-25 dropbox-img me-2">
+                                                <img src="https://i.imgur.com/xhzhaGA.jpg" class="img" alt="">
+                                            </div>
+                                            <div class="card w-25 dropbox-img me-2">
+                                                <img src="https://i.imgur.com/xhzhaGA.jpg" class="img" alt="">
+                                            </div>
+                                            <div class="card w-25 dropbox-img me-2">
+                                                <img src="https://i.imgur.com/xhzhaGA.jpg" class="img" alt="">
+                                            </div>
+                                            <div class="card w-25 dropbox-img me-2">
+                                                <img src="https://i.imgur.com/xhzhaGA.jpg" class="img" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                             <Post :datas="datas" />
@@ -337,10 +351,7 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-body">
-                                <div class="card-title">
-                                    Ads
-                                </div>
-                                <div class="card-text">s</div>
+
                             </div>
                         </div>
                     </div>
@@ -358,6 +369,7 @@ export default {
         return {
             message: '',
             datas: null,
+            image: [],
         }
     },
 
@@ -385,6 +397,7 @@ export default {
                     method: 'POST',
                     params: {
                         message: this.message,
+                        image: this.image,
                     },
                     url: `/api/post/store`,
                     headers: {Authorization: AuthStr}
@@ -413,7 +426,19 @@ export default {
 
                 });
             }
-        }
+        },
+
+        attachImage(e) {
+            this.image = e.target.files || e.dataTransfer.files;
+            if(this.form.file) {
+                this.form.boolUpload = false;
+                this.previewImage(this.form.file);
+            }
+        },
+
+        previewImage(file) {
+            document.getElementById('attach_image').src = URL.createObjectURL(file);
+        },
 
     },
 
@@ -427,6 +452,10 @@ export default {
     },
 
     updated() {
+
+    },
+
+    beforeMount() {
 
     },
 
@@ -459,6 +488,14 @@ export default {
 
 #editable {
     min-height: 100px;
+}
+
+.dropbox-img {
+    height: 150px;
+}
+
+.dropbox-img img {
+    height: 100%;
 }
 
 </style>

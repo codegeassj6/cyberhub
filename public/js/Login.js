@@ -37,6 +37,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -74,6 +130,14 @@ __webpack_require__.r(__webpack_exports__);
           error: error
         });
       });
+    },
+    OAuthLogin: function OAuthLogin(provider) {
+      axios({
+        method: 'get',
+        url: "/api/oauth/login/redirect/".concat(provider)
+      }).then(function (res) {
+        console.log(res.data);
+      })["catch"](function (err) {});
     }
   },
   watch: {
@@ -106,7 +170,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-6bdc8b8e] {\n    margin-top: 100px;\n    max-width: 900px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .container {\n    margin-top: 100px;\n    max-width: 900px;\n} */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -241,90 +305,137 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-body" }, [
-          _c(
-            "form",
-            {
-              on: {
-                submit: function ($event) {
-                  $event.preventDefault()
-                  return _vm.authenticate.apply(null, arguments)
-                },
-              },
-            },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "mb-3" }, [
+    _c("section", { staticClass: "space-intro" }, [
+      _c("div", { staticClass: "container py-5 h-100" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "row d-flex align-items-center justify-content-center h-100",
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-7 col-lg-5 col-xl-5 offset-xl-1" },
+              [
                 _c(
-                  "label",
-                  { staticClass: "form-label", attrs: { for: "email" } },
-                  [_vm._v("Email:")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.email,
-                      expression: "form.email",
-                    },
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "email", placeholder: "Enter email" },
-                  domProps: { value: _vm.form.email },
-                  on: {
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "email", $event.target.value)
+                  "form",
+                  {
+                    on: {
+                      submit: function ($event) {
+                        $event.preventDefault()
+                        return _vm.authenticate.apply(null, arguments)
+                      },
                     },
                   },
-                }),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "mb-3" }, [
-                _c(
-                  "label",
-                  { staticClass: "form-label", attrs: { for: "pwd" } },
-                  [_vm._v("Password:")]
+                  [
+                    _c("div", { staticClass: "form-outline mb-4" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.email,
+                            expression: "form.email",
+                          },
+                        ],
+                        staticClass: "form-control form-control-lg",
+                        attrs: { type: "email", id: "form1Example13" },
+                        domProps: { value: _vm.form.email },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "email", $event.target.value)
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-label",
+                          attrs: { for: "form1Example13" },
+                        },
+                        [_vm._v("Email address")]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-outline mb-4" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.password,
+                            expression: "form.password",
+                          },
+                        ],
+                        staticClass: "form-control form-control-lg",
+                        attrs: { type: "password", id: "form1Example23" },
+                        domProps: { value: _vm.form.password },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "password", $event.target.value)
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-label",
+                          attrs: { for: "form1Example23" },
+                        },
+                        [_vm._v("Password")]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary btn-lg btn-block",
+                        attrs: { type: "submit" },
+                      },
+                      [_vm._v("Sign in")]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-primary btn-lg btn-block mb-2",
+                        attrs: { role: "button" },
+                        on: {
+                          click: function ($event) {
+                            return _vm.OAuthLogin("facebook")
+                          },
+                        },
+                      },
+                      [
+                        _c("i", { staticClass: "fa fa-facebook-f me-2" }),
+                        _vm._v(
+                          "Continue with Facebook\n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(3),
+                  ]
                 ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.password,
-                      expression: "form.password",
-                    },
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "password", placeholder: "Enter password" },
-                  domProps: { value: _vm.form.password },
-                  on: {
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "password", $event.target.value)
-                    },
-                  },
-                }),
-              ]),
-              _vm._v(" "),
-              _c(
-                "button",
-                { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-                [_vm._v("Submit")]
-              ),
-            ]
-          ),
-        ]),
+              ]
+            ),
+          ]
+        ),
       ]),
     ]),
   ])
@@ -334,9 +445,55 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-center" }, [
-      _c("h3", [_vm._v("Login")]),
+    return _c("div", { staticClass: "col-md-8 col-lg-7 col-xl-6" }, [
+      _c("img", {
+        staticClass: "img-fluid",
+        attrs: {
+          src: "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg",
+          alt: "Phone image",
+        },
+      }),
     ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "d-flex justify-content-around align-items-center mb-4" },
+      [_c("a", { attrs: { href: "#!" } }, [_vm._v("Forgot password?")])]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "divider d-flex align-items-center my-4" },
+      [
+        _c("p", { staticClass: "text-center fw-bold mx-3 mb-0 text-muted" }, [
+          _vm._v("OR"),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "btn btn-danger btn-lg mb-2 btn-block",
+        attrs: { href: "#!", role: "button" },
+      },
+      [
+        _c("i", { staticClass: "fa fa-google me-2" }),
+        _vm._v("Continue with Google\n                        "),
+      ]
+    )
   },
 ]
 render._withStripped = true

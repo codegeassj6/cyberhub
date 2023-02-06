@@ -5838,6 +5838,9 @@ var routes = [{
   name: "Save",
   component: function component() {
     return __webpack_require__.e(/*! import() | Save */ "Save").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Save.vue */ "./resources/js/components/Save.vue"));
+  },
+  meta: {
+    requiresAuth: true
   }
 }, {
   path: "*",

@@ -364,13 +364,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       message: '',
-      datas: null
+      datas: null,
+      image: []
     };
   },
   components: {
@@ -393,7 +405,8 @@ __webpack_require__.r(__webpack_exports__);
         axios({
           method: 'POST',
           params: {
-            message: this.message
+            message: this.message,
+            image: this.image
           },
           url: "/api/post/store",
           headers: {
@@ -420,6 +433,16 @@ __webpack_require__.r(__webpack_exports__);
           _this2.datas = res.data.data;
         })["catch"](function (err) {});
       }
+    },
+    attachImage: function attachImage(e) {
+      this.image = e.target.files || e.dataTransfer.files;
+      if (this.form.file) {
+        this.form.boolUpload = false;
+        this.previewImage(this.form.file);
+      }
+    },
+    previewImage: function previewImage(file) {
+      document.getElementById('attach_image').src = URL.createObjectURL(file);
     }
   },
   watch: {
@@ -431,6 +454,7 @@ __webpack_require__.r(__webpack_exports__);
     // }
   },
   updated: function updated() {},
+  beforeMount: function beforeMount() {},
   mounted: function mounted() {
     this.getPost();
   }
@@ -563,7 +587,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -606,7 +629,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#carouselintro img[data-v-f2b6376c]  {\n    height: 600px;\n}\n#carouselintro[data-v-f2b6376c] {\n    margin-top: 26px;\n}\n.name[data-v-f2b6376c] {\n    font-size: 20px;\n}\n.btn-status[data-v-f2b6376c] {\n    padding: 0 !important;\n}\n.border-post[data-v-f2b6376c] {\n    border: 1px solid #e1e1e1;\n}\n#editable[data-v-f2b6376c] {\n    min-height: 100px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#carouselintro img[data-v-f2b6376c]  {\n    height: 600px;\n}\n#carouselintro[data-v-f2b6376c] {\n    margin-top: 26px;\n}\n.name[data-v-f2b6376c] {\n    font-size: 20px;\n}\n.btn-status[data-v-f2b6376c] {\n    padding: 0 !important;\n}\n.border-post[data-v-f2b6376c] {\n    border: 1px solid #e1e1e1;\n}\n#editable[data-v-f2b6376c] {\n    min-height: 100px;\n}\n.dropbox-img[data-v-f2b6376c] {\n    height: 150px;\n}\n.dropbox-img img[data-v-f2b6376c] {\n    height: 100%;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -968,37 +991,64 @@ var render = function () {
                       _c("div", { staticClass: "card-body" }, [
                         _c(
                           "div",
-                          { staticClass: "d-flex flex-wrap mb-2 border-post" },
+                          {
+                            staticClass:
+                              "d-flex flex-column mb-2 rounded border-post",
+                          },
                           [
                             _c("div", {
-                              staticClass: "p-2 flex-fill",
+                              staticClass: "flex-fill p-2",
                               attrs: {
                                 id: "editable",
                                 contenteditable: "true",
                               },
                               on: { keyup: _vm.updateMessage },
                             }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "m-2 d-flex" }, [
+                              _vm._m(4),
+                              _vm._v(" "),
+                              _c("div", [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "pointer mx-2",
+                                    attrs: { for: "input_img" },
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-file-image-o fa-lg",
+                                    }),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      staticClass: "d-none",
+                                      attrs: { type: "file", id: "input_img" },
+                                      on: { change: _vm.attachImage },
+                                    }),
+                                  ]
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(5),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "ms-auto" }, [
+                                _c("div", {}, [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-primary btn-sm px-5 shadow",
+                                      on: { click: _vm.postMessage },
+                                    },
+                                    [_vm._v("Post")]
+                                  ),
+                                ]),
+                              ]),
+                            ]),
                           ]
                         ),
                         _vm._v(" "),
-                        _c("div", { staticClass: "d-flex" }, [
-                          _vm._m(4),
-                          _vm._v(" "),
-                          _vm._m(5),
-                          _vm._v(" "),
-                          _vm._m(6),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "p-2 ms-auto" }, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-primary px-4",
-                                on: { click: _vm.postMessage },
-                              },
-                              [_vm._v("Post")]
-                            ),
-                          ]),
-                        ]),
+                        _vm._m(6),
                       ]),
                     ]),
                     _vm._v(" "),
@@ -1587,7 +1637,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-2" }, [
+    return _c("div", [
       _c("a", { staticClass: "text-dark", attrs: { href: "#!" } }, [
         _c("i", { staticClass: "fa fa-smile-o fa-lg" }),
       ]),
@@ -1597,9 +1647,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-2" }, [
-      _c("a", { staticClass: "text-dark", attrs: { href: "#!" } }, [
-        _c("i", { staticClass: "fa fa-file-photo-o fa-lg" }),
+    return _c("div", [
+      _c("label", { staticClass: "pointer", attrs: { for: "input_video" } }, [
+        _c("i", { staticClass: "fa fa-file-video-o fa-lg" }),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "d-none",
+          attrs: { type: "file", id: "input_video" },
+        }),
       ]),
     ])
   },
@@ -1607,9 +1662,37 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-2" }, [
-      _c("a", { staticClass: "text-dark", attrs: { href: "#!" } }, [
-        _c("i", { staticClass: "fa fa-file-video-o fa-lg" }),
+    return _c("div", { staticClass: "d-flex mb-3" }, [
+      _c("div", { staticClass: "flex-fill" }, [
+        _c("div", { staticClass: "d-flex" }, [
+          _c("div", { staticClass: "card w-25 dropbox-img me-2" }, [
+            _c("img", {
+              staticClass: "img",
+              attrs: { src: "https://i.imgur.com/xhzhaGA.jpg", alt: "" },
+            }),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card w-25 dropbox-img me-2" }, [
+            _c("img", {
+              staticClass: "img",
+              attrs: { src: "https://i.imgur.com/xhzhaGA.jpg", alt: "" },
+            }),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card w-25 dropbox-img me-2" }, [
+            _c("img", {
+              staticClass: "img",
+              attrs: { src: "https://i.imgur.com/xhzhaGA.jpg", alt: "" },
+            }),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card w-25 dropbox-img me-2" }, [
+            _c("img", {
+              staticClass: "img",
+              attrs: { src: "https://i.imgur.com/xhzhaGA.jpg", alt: "" },
+            }),
+          ]),
+        ]),
       ]),
     ])
   },
@@ -1619,15 +1702,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-4" }, [
       _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "card-title" }, [
-            _vm._v(
-              "\n                                Ads\n                            "
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-text" }, [_vm._v("s")]),
-        ]),
+        _c("div", { staticClass: "card-body" }),
       ]),
     ])
   },
