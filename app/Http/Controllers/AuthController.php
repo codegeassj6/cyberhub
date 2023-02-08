@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Validator;
 use App\Models\User;
 use Hash;
+use Validation;
 
 class AuthController extends Controller
 {
@@ -27,12 +28,14 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login($token = null)
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        if($credentials) {
+            if (! $token = auth()->attempt($credentials)) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
         }
 
         if(Auth::check()) {

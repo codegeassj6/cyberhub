@@ -53,7 +53,5 @@ Route::group(['prefix' => 'save'], function ($router) {
 
 Route::group(['prefix' => 'oauth'], function ($router) {
     Route::get('/login/redirect/{provider}', 'App\Http\Controllers\OAuthController@redirectToProvider');
-    Route::get('/login/{provider}/callback', 'App\Http\Controllers\OAuthController@handleProviderCallback');
-    // Route::get('/login/google', 'App\Http\Controllers\OAuthController@store')->name('login.google');
-    // Route::get('/login/google/callback', 'App\Http\Controllers\OAuthController@store');
+    Route::get('/login/callback/{provider}', 'App\Http\Controllers\OAuthController@handleProviderCallback');
 });

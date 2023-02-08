@@ -14,12 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::group(['prefix' => 'oauth'], function ($router) {
-//     Route::get('/login/facebook', 'App\Http\Controllers\OAuthController@redirectToFacebook')->name('login.facebook');
-//     Route::get('/login/facebook/callback', 'App\Http\Controllers\OAuthController@handleFacebookCallback');
-//     Route::get('/login/google', 'App\Http\Controllers\OAuthController@store')->name('login.google');
-//     Route::get('/login/google/callback', 'App\Http\Controllers\OAuthController@store');
-// });
+Route::group(['prefix' => 'web'], function ($router) {
+    Route::get('/oauth/login/redirect/{provider}', 'App\Http\Controllers\OAuthController@redirectToProvider');
+    Route::get('/oauth/login/callback/{provider}', 'App\Http\Controllers\OAuthController@handleProviderCallback');
+});
 
 Route::get('{any}', function () {
     return view('app');

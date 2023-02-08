@@ -2,6 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/js/Home.js": "/js/Home.js",
     "/js/Login.js": "/js/Login.js",
+    "/js/Oauth.js": "/js/Oauth.js",
     "/js/Register.js": "/js/Register.js",
     "/js/Game.js": "/js/Game.js",
     "/js/Store.js": "/js/Store.js",

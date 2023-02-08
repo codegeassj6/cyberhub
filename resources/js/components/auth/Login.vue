@@ -61,7 +61,7 @@
                                 <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                             </div>
 
-                            <!-- <a class="btn btn-primary btn-lg btn-block mb-2" href="/oauth/login/facebook" role="button">
+                            <!-- <a class="btn btn-primary btn-lg btn-block mb-2" href="/web/oauth/login/redirect/facebook" role="button">
                                 <i class="fa fa-facebook-f me-2"></i>Continue with Facebook
                             </a> -->
                             <a class="btn btn-primary btn-lg btn-block mb-2" @click="OAuthLogin('facebook')" role="button">
@@ -80,7 +80,7 @@
     </div>
 </template>
 <script>
-import {login} from '../helpers/auth';
+import {login} from '../../helpers/auth';
 
 export default {
     data() {
@@ -88,9 +88,7 @@ export default {
             form: {
                 email: '',
                 password: '',
-            }
-
-
+            },
         }
     },
     components: {
@@ -108,7 +106,8 @@ export default {
             this.$store.dispatch('login');
             login(this.form)
                 .then((res) => {
-                  // commit function is used for running mutation function in storejs
+
+                    // commit function is used for running mutation function in storejs
                     this.$store.commit("loginSuccess", res);
 
                     const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
@@ -121,7 +120,6 @@ export default {
                     }).catch(err => {
 
                     });
-
                     this.$router.push('/');
                 })
                 .catch((error) => {
@@ -130,14 +128,28 @@ export default {
         },
 
         OAuthLogin(provider) {
-            axios({
-                method: 'get',
-                url: `/api/oauth/login/redirect/${provider}`,
-            }).then(res => {
-                console.log(res.data);
-            }).catch(err => {
+            new Promise((resolve, reject) => {
+                axios({
+                    method: 'get',
+                    url: `/api/oauth/login/redirect/${provider}`,
+                }).then(res => {
+                    window.location.href = res.data.url;
+                    // this.$router.push({
+                    //     name: 'Callback_provider',
+                    //     params: {
+                    //         provider: provider,
+                    //     },
+                    //     query: {
+                    //         code: 'xyz',
+                    //     }
+                    // });
+                }).catch(err => {
 
+                });
             });
+
+
+
         }
     },
 

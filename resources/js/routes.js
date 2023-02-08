@@ -8,7 +8,16 @@ export const routes = [
     {
         path: '/login',
         name: "Login",
-        component: () => import(/* webpackChunkName: "Login" */ "./components/Login.vue"),
+        component: () => import(/* webpackChunkName: "Login" */ "./components/auth/Login.vue"),
+        meta: {
+            disableIfLoggedIn: true
+        },
+    },
+
+    {
+        path: '/api/oauth/login/callback/:provider',
+        name: "Callback_provider",
+        component: () => import(/* webpackChunkName: "Oauth" */ "./components/auth/Oauth.vue"),
         meta: {
             disableIfLoggedIn: true
         },
@@ -17,7 +26,7 @@ export const routes = [
     {
         path: '/register',
         name: "Register",
-        component: () => import(/* webpackChunkName: "Register" */ "./components/Register.vue"),
+        component: () => import(/* webpackChunkName: "Register" */ "./components/auth/Register.vue"),
         meta: {
             disableIfLoggedIn: true
         },
@@ -83,7 +92,7 @@ export const routes = [
     {
         path: "*",
         name: "PageNotFound",
-        component: () => import(/* webpackChunkName: "NotFound" */ "./components/PageNotFound.vue"),
+        component: () => import(/* webpackChunkName: "NotFound" */ "./components/templates/PageNotFound.vue"),
     },
 
 ]

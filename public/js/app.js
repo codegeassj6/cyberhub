@@ -5764,7 +5764,16 @@ var routes = [{
   path: '/login',
   name: "Login",
   component: function component() {
-    return __webpack_require__.e(/*! import() | Login */ "Login").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Login.vue */ "./resources/js/components/Login.vue"));
+    return __webpack_require__.e(/*! import() | Login */ "Login").then(__webpack_require__.bind(__webpack_require__, /*! ./components/auth/Login.vue */ "./resources/js/components/auth/Login.vue"));
+  },
+  meta: {
+    disableIfLoggedIn: true
+  }
+}, {
+  path: '/api/oauth/login/callback/:provider',
+  name: "Callback_provider",
+  component: function component() {
+    return __webpack_require__.e(/*! import() | Oauth */ "Oauth").then(__webpack_require__.bind(__webpack_require__, /*! ./components/auth/Oauth.vue */ "./resources/js/components/auth/Oauth.vue"));
   },
   meta: {
     disableIfLoggedIn: true
@@ -5773,7 +5782,7 @@ var routes = [{
   path: '/register',
   name: "Register",
   component: function component() {
-    return __webpack_require__.e(/*! import() | Register */ "Register").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Register.vue */ "./resources/js/components/Register.vue"));
+    return __webpack_require__.e(/*! import() | Register */ "Register").then(__webpack_require__.bind(__webpack_require__, /*! ./components/auth/Register.vue */ "./resources/js/components/auth/Register.vue"));
   },
   meta: {
     disableIfLoggedIn: true
@@ -5846,7 +5855,7 @@ var routes = [{
   path: "*",
   name: "PageNotFound",
   component: function component() {
-    return __webpack_require__.e(/*! import() | NotFound */ "NotFound").then(__webpack_require__.bind(__webpack_require__, /*! ./components/PageNotFound.vue */ "./resources/js/components/PageNotFound.vue"));
+    return __webpack_require__.e(/*! import() | NotFound */ "NotFound").then(__webpack_require__.bind(__webpack_require__, /*! ./components/templates/PageNotFound.vue */ "./resources/js/components/templates/PageNotFound.vue"));
   }
 }];
 
@@ -29273,9 +29282,10 @@ var render = function () {
       {
         staticClass: "bg-primary mt-4 text-white",
         class:
-          _vm.$route.path == "/login" ||
-          _vm.$route.path == "/register" ||
-          _vm.$route.path == "/games"
+          _vm.$route.name == "Login" ||
+          _vm.$route.name == "Register" ||
+          _vm.$route.path == "/games" ||
+          _vm.$route.name == "Callback_provider"
             ? "fixed-bottom"
             : null,
       },
@@ -46282,7 +46292,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
 /******/ 			if (chunkId === "Home") return "js/Home.js";
-/******/ 			if ({"Login":1,"Register":1,"Store":1,"Gallery":1,"Preview":1,"Account":1,"UpdateAccount":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"Login":1,"Oauth":1,"Register":1,"Store":1,"Gallery":1,"Preview":1,"Account":1,"UpdateAccount":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			if (chunkId === "Game") return "js/Game.js";
 /******/ 			if (chunkId === "Cart") return "js/Cart.js";
 /******/ 			if (chunkId === "Save") return "js/Save.js";
