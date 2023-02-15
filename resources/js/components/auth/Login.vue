@@ -1,34 +1,5 @@
 <template>
     <div>
-        <!-- <div class="container">
-            <div class="card">
-                <div class="card-body">
-                    <form @submit.prevent="authenticate">
-                        <div class="text-center">
-                            <h3>Login</h3>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email:</label>
-                            <input type="email" class="form-control" v-model="form.email" placeholder="Enter email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="pwd" class="form-label">Password:</label>
-                            <input type="password" class="form-control" v-model="form.password" placeholder="Enter password">
-                        </div>
-
-                        <div class="btn-group w-100 mb-3">
-                            <button type="button" class="btn btn-primary"><i class="fa fa-facebook"></i> Facebook</button>
-                            <button type="button" class="btn btn-info"><i class="fa fa-twitter"></i> Twitter</button>
-                            <button type="button" class="btn btn-danger"><i class="fa fa-google"></i> Google</button>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div> -->
-
         <section class="space-intro">
             <div class="container py-5 h-100">
                 <div class="row d-flex align-items-center justify-content-center h-100">
@@ -132,8 +103,8 @@ export default {
                 axios({
                     method: 'get',
                     url: `/api/oauth/login/redirect/${provider}`,
-                }).then(res => {
-                    window.location.href = res.data.url;
+                }).then(res => {console.log(res.data);
+                    // window.location.href = res.data.url;
                     // this.$router.push({
                     //     name: 'Callback_provider',
                     //     params: {

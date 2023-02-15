@@ -6,6 +6,11 @@ import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import StoreData from './store'
 
+// ADS
+import Adsense from 'vue-google-adsense/dist/Adsense.min.js'
+import vueScript2 from 'vue-script2';
+Vue.use(Adsense);
+Vue.use(vueScript2);
 
 Vue.use(Vuex);
 Vue.use(VueRouter);
@@ -20,7 +25,14 @@ const store = new Vuex.Store({
 
 const router = new VueRouter({
     routes,
-    mode: 'history'
+    mode: 'history',
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+          return savedPosition
+        } else {
+          return { top: 0 }
+        }
+    },
 })
 
 // check the token if not expired

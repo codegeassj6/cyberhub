@@ -167,7 +167,8 @@ __webpack_require__.r(__webpack_exports__);
       this.form.file = e.target.files[0] || e.dataTransfer.files[0];
       if (this.form.file) {
         this.form.boolUpload = false;
-        this.previewImage(this.form.file);
+        // this.previewImage(this.form.file);
+        document.getElementById('myPhoto').src = URL.createObjectURL(this.form.file);
       }
     },
     cancelUpload: function cancelUpload() {
@@ -187,9 +188,6 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         _this.form.boolUpload = true;
       })["catch"](function (error) {});
-    },
-    previewImage: function previewImage(file) {
-      document.getElementById('myPhoto').src = URL.createObjectURL(file);
     },
     getAuthUserDetails: function getAuthUserDetails() {
       var _this2 = this;

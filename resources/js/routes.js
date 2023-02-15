@@ -1,3 +1,5 @@
+
+
 export const routes = [
     {
         path: '/',
@@ -86,6 +88,21 @@ export const routes = [
         name: "Save",
         component: () => import(/* webpackChunkName: "Save" */ "./components/Save.vue"),
         meta: { requiresAuth: true }
+    },
+
+    {
+        path: "/post/:id",
+        name: "PostPage",
+        component: () => import(/* webpackChunkName: "PostPage" */ "./components/PostPage.vue"),
+        meta: { requiresAuth: true },
+        props: true,
+    },
+
+    {
+        path: "/post/edit/:id",
+        name: "EditPost",
+        component: () => import(/* webpackChunkName: "EditPost" */ "./components/EditPost.vue"),
+        meta: { requiresAuth: true },
     },
 
 

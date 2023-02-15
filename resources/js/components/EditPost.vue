@@ -1,11 +1,16 @@
 <template>
     <div>
-        <div class="container space-intro">
-            <div class="row">
-                <div class="col-2">
-                    <router-link to="/gallery/preview">
-                        <img src="https://i.imgur.com/UXdKE3o.jpg" class="img mb-2 img-thumbnail" height="200" alt="">
-                    </router-link>
+        <div class="space-intro">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+
+                    </div>
+
+                    <div class="col-md-4">
+                        s
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -17,7 +22,7 @@
 export default {
     data() {
         return {
-
+            message: '',
         }
     },
     components: {
@@ -31,7 +36,9 @@ export default {
     },
 
     methods: {
-
+        updateMessage(e) {
+            this.message = e.target.innerText;
+        }
     },
 
     watch: {

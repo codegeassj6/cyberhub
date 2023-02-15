@@ -8,54 +8,73 @@ use DB;
 use Auth;
 use Str;
 use Validator;
+use App\Models\PostImage;
+use Storage;
+use Carbon;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         // $post = DB::table('posts')->orderBy('updated_at', 'desc')->paginate(2);
         $post = Post::orderBy('created_at', 'desc')->paginate(5);
         $post->getCollection()->transform(function($value) {
-            $value->user = $value->user;
+            $value->getUser;
+            $value->created_time = Carbon::create($value->created_at)->toDayDateTimeString();
+            $value->getAttachImages;
+            $value->getPostLikes;
             return $value;
         });
 
         return $post;
     }
 
+    public function show($id)
+    {
+        $post = Post::where('id', $id)->first();
+        $post->getUser;
+        $post->created_time = Carbon::create($post->created_at)->toDayDateTimeString();
+        $post->getAttachImages;
+        $post->getPostLikes;
+
+        return $post;
+    }
+
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
-            'message' => 'required|string'
+            'message' => 'string|max:1000',
+            'image.*' => 'mimes:jpg,jpeg,png,bmp',
+            [
+                'image.*.mimes' => 'Only jpeg, png and bmp images are allowed',
+                'image.*.max' => 'Sorry! Maximum allowed size for an image is 20MB',
+            ]
         ]);
 
         if($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput()->with('danger', 'Something Went Wrong! Please Check the Field...');
+            return response()->json(['message' => $validator->messages()->get('*')], 500);
         }
 
-        Post::create([
+        $post = Post::create([
             'user_id' => Auth::user()->id,
             'message' => $request->input('message')
         ]);
 
+        if($request->file('image')) {
+            for ($i=0; $i < count($request->file('image')); $i++) {
+                Storage::disk('local')->putFileAs('/public/post/img', $request->file('image')[$i], $request->file('image')[$i]->hashName());
+                PostImage::create([
+                   'post_id' =>  $post->id,
+                   'image_link' => $request->file('image')[$i]->hashName(),
+                ]);
+            }
+        }
+
         return $this->index();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function edit($id) {
+
     }
 
     /**
@@ -78,6 +97,32 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::whereId($id)->firstOrFail();
+        if($post->user_id != Auth::id()) {
+            return response()->json(['message' => 'Invalid action'], 500);
+        }
+
+        if($post->getPostLikes) {
+            foreach($post->getPostLikes as $like) {
+                $like->delete();
+            }
+        }
+
+        if($post->getComments) {
+            foreach($post->getComments as $comment) {
+                $comment->delete();
+            }
+        }
+
+        if($post->getAttachImages) {
+            foreach($post->getAttachImages as $image) {
+                Storage::disk('local')->delete('public/post/img/'.$image->image_link);
+                $image->delete();
+            }
+        }
+
+
+        $post->delete();
+        return response()->json(['message' => ''], 200);
     }
 }

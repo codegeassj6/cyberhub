@@ -6,7 +6,7 @@ a {
 }
 
 .space-intro {
-    margin-top: 90px;
+    margin-top: 80px;
 }
 
 [contenteditable]:focus {
@@ -43,4 +43,16 @@ pre {
 
 .pointer {
     cursor: pointer;
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1650px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .container {
+        max-width: 100%;
+    }
 }

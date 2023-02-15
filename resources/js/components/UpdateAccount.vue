@@ -163,7 +163,8 @@ export default {
             this.form.file = e.target.files[0] || e.dataTransfer.files[0];
             if(this.form.file) {
                 this.form.boolUpload = false;
-                this.previewImage(this.form.file);
+                // this.previewImage(this.form.file);
+                document.getElementById('myPhoto').src = URL.createObjectURL(this.form.file);
             }
         },
 
@@ -189,10 +190,6 @@ export default {
 
         },
 
-        previewImage(file) {
-            document.getElementById('myPhoto').src = URL.createObjectURL(file);
-        },
-
         getAuthUserDetails() {
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
             axios({
@@ -207,7 +204,8 @@ export default {
                 this.form.address = res.data.address;
                 this.form.contact = res.data.contact;
                 this.form.birthday = res.data.birthday;
-                this.form.photo = (res.data.profile_img) ? this.getProfilePicture : 'http://bootdey.com/img/Content/avatar/avatar1.png';
+                this.form.photo = res.data.profile_img ? this.getProfilePicture : 'http://bootdey.com/img/Content/avatar/avatar1.png';
+
             }).catch(err => {
 
             });

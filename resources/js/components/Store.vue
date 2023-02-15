@@ -4,10 +4,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
-                            <Product :datas="products"/>
-                            <div class="float-end mt-2">
-                                <PaginateButton :paginate_data="products"/>
-                            </div>
+                        <Product :datas="products"/>
+                        <div class="float-end mt-2">
+                            <PaginateButton :paginate_data="products"/>
+                        </div>
                     </div>
 
                     <div class="col-md-4">
@@ -15,7 +15,6 @@
                             s
                         </div>
                     </div>
-
 
                 </div>
             </div>
@@ -105,6 +104,10 @@ export default {
 
     updated() {
 
+    },
+
+    deactivated() {
+        this.$destroy();
     },
 
     mounted() {

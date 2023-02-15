@@ -288,81 +288,138 @@
                 <div class="row d-flex">
                     <div class="col-md-8">
                         <div class="card mb-4">
+                            <div class="card-header">
+                                <div class="h6">What's up</div>
+                            </div>
                             <div class="card-body">
-                                <div class="d-flex flex-column mb-2 rounded border-post">
+                                <div class="d-flex flex-column mb-2 rounded border">
                                     <div class="flex-fill p-2"
                                         id="editable"
                                         @keyup="updateMessage"
                                         contenteditable="true">
                                     </div>
+                                </div>
 
-                                    <div class="m-2 d-flex">
-                                        <div>
-                                            <a href="#!" class="text-dark">
-                                                <i class="fa fa-smile-o fa-lg"></i>
-                                            </a>
-                                        </div>
-                                        <div>
-                                            <label for="input_img" class="pointer mx-2">
-                                                <i class="fa fa-file-image-o fa-lg"></i>
-                                                <input type="file" class="d-none" @change="attachImage" id="input_img">
-                                            </label>
-                                        </div>
-
-                                        <div>
-                                            <label for="input_video" class="pointer">
-                                                <i class="fa fa-file-video-o fa-lg"></i>
-                                                <input type="file" class="d-none" id="input_video">
-                                            </label>
-                                        </div>
-
-                                        <div class="ms-auto">
-                                            <div class="">
-                                                <button class="btn btn-primary btn-sm px-5 shadow" @click="postMessage">Post</button>
+                                <div :class="attach_exist ? 'd-flex' : 'd-none'">
+                                    <div class="flex-fill">
+                                        <div class="d-flex">
+                                            <div
+                                                class="card w-25 position-relative dropbox-img me-2"
+                                                ref="attach_div"
+                                                v-for="(img, index) in attach_images" :key="index"
+                                            >
+                                                <img :src="img" class="img" alt="">
+                                                <div class="position-absolute img_attach_remove">
+                                                    <button class="btn btn-close border bg-primary" @click="removeAttachImage(img)"></button>
+                                                </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
 
-                                <div class="d-flex mb-3">
-                                    <div class="flex-fill">
-                                        <div class="d-flex">
-                                            <div class="card w-25 dropbox-img me-2">
-                                                <img src="https://i.imgur.com/xhzhaGA.jpg" class="img" alt="">
-                                            </div>
-                                            <div class="card w-25 dropbox-img me-2">
-                                                <img src="https://i.imgur.com/xhzhaGA.jpg" class="img" alt="">
-                                            </div>
-                                            <div class="card w-25 dropbox-img me-2">
-                                                <img src="https://i.imgur.com/xhzhaGA.jpg" class="img" alt="">
-                                            </div>
-                                            <div class="card w-25 dropbox-img me-2">
-                                                <img src="https://i.imgur.com/xhzhaGA.jpg" class="img" alt="">
-                                            </div>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <div class="d-flex">
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-light px-2 btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                                            <i class="fa fa-smile-o fa-lg"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Link 1</a></li>
+                                            <li><a class="dropdown-item" href="#">Link 2</a></li>
+                                            <li><a class="dropdown-item" href="#">Link 3</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <div class="">
+                                            <button class="btn btn-light px-4 btn-sm" type="button" @click="uploadTriggerInput">
+                                                <i class="fa fa-file-image-o fa-lg"></i>
+                                            </button>
+                                            <input type="file" class="d-none" ref="input_upload" accept="image/png, image/jpg, image/jpeg" multiple @change="attachImage">
+                                        </div>
+                                    </div>
+
+                                    <div class="ms-auto">
+                                        <div class="">
+                                            <button class="btn btn-primary btn-sm px-5 shadow" @click="postMessage">Post</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                            <Post :datas="datas" />
+
+
+                        <div v-for="(data, index) in datas" :key="index">
+                            <Post :data="data" :index="index" @clicked="emitFromChild" />
+                        </div>
                     </div>
 
                     <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
 
+                    </div>
+                </div>
+            </div>
+
+            <!-- <Adsense
+                data-ad-client="ca-pub-5828491790124517"
+                data-ad-slot="7486431136">
+            </Adsense> -->
+
+            <div class="modal" id="editModal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal Heading</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="card-body">
+                            <div class="d-flex flex-column mb-2 rounded border">
+                                <div class="flex-fill p-2"
+                                    id="editable"
+                                    @keyup="updateMessage"
+                                    contenteditable="true">
+                                    {{ edit_data.message }}
+                                </div>
                             </div>
+
+                            <div
+                                class="card d-inline-flex w-25 position-relative dropbox-img"
+                                ref="attach_div"
+                                v-for="(img, index) in edit_data.get_attach_images" :key="index"
+                            >
+                                <img :src="'/storage/post/img/'+img.image_link" class="img" alt="">
+                                <div class="position-absolute img_attach_remove">
+                                    <button class="btn btn-close border bg-primary"></button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                    </div>
                 </div>
             </div>
+
         </template>
+
+
+
     </div>
+
 </template>
 <script>
-import Post from './templates/Post.vue'
+import Post from './templates/Post.vue';
 
 export default {
     data() {
@@ -370,14 +427,20 @@ export default {
             message: '',
             datas: null,
             image: [],
+            attach_exist: false,
+            attach_images: [],
+            form_data: '',
+            edit_data: '',
         }
     },
 
     components: {
-        Post
+        Post,
     },
 
-    props: [],
+    props: {
+
+    },
 
     computed: {
         currentUser() {
@@ -390,27 +453,64 @@ export default {
             this.message = e.target.innerText;
         },
 
+        uploadTriggerInput() {
+            var elem = this.$refs.input_upload;
+            if(elem && document.createEvent) {
+                var evt = document.createEvent("MouseEvents");
+                evt.initEvent("click", true, false);
+                elem.dispatchEvent(evt);
+            }
+        },
+
         postMessage() {
-            if(this.message) {
+            if(this.message || this.form_data) {
                 const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
                 axios({
                     method: 'POST',
                     params: {
                         message: this.message,
-                        image: this.image,
+                        image: this.form_data,
                     },
+                    data: this.form_data,
                     url: `/api/post/store`,
-                    headers: {Authorization: AuthStr}
-                }).then(res => {
+                    headers: {
+                        Authorization: AuthStr,
+                        'Content-Type': 'multipart/form-data',
+                    }
+                }).then(res => {console.log(res.data);
+                    this.attach_exist = false;
+                    this.form_data = '';
                     document.getElementById('editable').innerHTML = '';
                     this.message = '';
                     this.getPost();
                 }).catch(err => {
-
+                    console.log(err.data);
                 });
             }
 
         },
+
+        attachImage(e) {
+            this.attach_exist = true;
+            if(this.$refs.input_upload.files.length) {
+                this.attach_images = [];
+                let formData = new FormData;
+                for (let index = 0; index < this.$refs.input_upload.files.length; index++) {
+                    this.attach_images.push(URL.createObjectURL(this.$refs.input_upload.files[index]));
+                    formData.append('image[]', this.$refs.input_upload.files[index]);
+                }
+                this.form_data = formData;
+            }
+
+        },
+
+        removeAttachImage(img) {
+            var index = this.attach_images.indexOf(img);
+            if (index > -1) {
+                this.attach_images.splice(index, 1);
+            }
+        },
+
 
         getPost() {
             if(this.currentUser) {
@@ -428,18 +528,9 @@ export default {
             }
         },
 
-        attachImage(e) {
-            this.image = e.target.files || e.dataTransfer.files;
-            if(this.form.file) {
-                this.form.boolUpload = false;
-                this.previewImage(this.form.file);
-            }
-        },
-
-        previewImage(file) {
-            document.getElementById('attach_image').src = URL.createObjectURL(file);
-        },
-
+        emitFromChild(data) {
+            this.edit_data = data;
+        }
     },
 
     watch: {
@@ -458,6 +549,21 @@ export default {
     beforeMount() {
 
     },
+
+    // create prev route data (this.prevRoute)
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.prevRoute = from;
+        });
+    },
+
+    // activated() {
+    //     console.log('activate');
+    // },
+
+    // deactivated() {
+    //     console.log('deactivate');
+    // },
 
     mounted() {
         this.getPost();
@@ -482,10 +588,6 @@ export default {
     padding: 0 !important;
 }
 
-.border-post {
-    border: 1px solid #e1e1e1;
-}
-
 #editable {
     min-height: 100px;
 }
@@ -497,5 +599,13 @@ export default {
 .dropbox-img img {
     height: 100%;
 }
+
+.img_attach_remove {
+    right: 0%;
+    top: 0%;
+    color: #ffffff;
+}
+
+
 
 </style>

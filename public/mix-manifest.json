@@ -12,6 +12,8 @@
     "/js/Cart.js": "/js/Cart.js",
     "/js/UpdateAccount.js": "/js/UpdateAccount.js",
     "/js/Save.js": "/js/Save.js",
+    "/js/PostPage.js": "/js/PostPage.js",
     "/js/NotFound.js": "/js/NotFound.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/EditPost.js": "/js/EditPost.js"
 }

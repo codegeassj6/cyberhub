@@ -12,12 +12,23 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('logout', 'App\Http\Controllers\AuthController@logout');
     Route::post('register', 'App\Http\Controllers\AuthController@register');
     Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
-    Route::post('me', 'App\Http\Controllers\AuthController@me');
+    Route::get('me', 'App\Http\Controllers\AuthController@me');
 });
 
 Route::group(['prefix' => 'post'], function ($router) {
     Route::get('/', 'App\Http\Controllers\PostController@index')->middleware('auth');
     Route::post('/store', 'App\Http\Controllers\PostController@store')->middleware('auth');
+    Route::get('/show/{id}', 'App\Http\Controllers\PostController@show')->middleware('auth');
+    Route::get('/edit/{id}', 'App\Http\Controllers\PostController@edit')->middleware('auth');
+    Route::delete('/destroy/{id}', 'App\Http\Controllers\PostController@destroy')->middleware('auth');
+
+    // like section
+    Route::post('/like/store', 'App\Http\Controllers\PostLikeController@store')->middleware('auth');
+});
+
+Route::group(['prefix' => 'comment'], function ($router) {
+    Route::get('/', 'App\Http\Controllers\CommentController@index')->middleware('auth');
+    Route::post('/store', 'App\Http\Controllers\CommentController@store')->middleware('auth');
 });
 
 Route::group(['prefix' => 'games'], function ($router) {

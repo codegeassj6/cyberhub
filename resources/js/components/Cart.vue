@@ -371,4 +371,7 @@ export default {
     color: white;
 }
 
+label {
+    display: block !important;
+}
 </style>

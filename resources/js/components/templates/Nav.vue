@@ -106,6 +106,7 @@ export default {
     mounted() {
         if(this.currentUser) {
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+
             axios({
                 method: 'get',
                 url: `/api/cart/`,
@@ -115,6 +116,7 @@ export default {
             }).catch(err => {
 
             });
+
         }
     }
 

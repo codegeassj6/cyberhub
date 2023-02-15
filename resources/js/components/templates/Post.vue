@@ -1,43 +1,131 @@
 <template>
-    <div>
-        <div class="card mb-3 shadow" v-for="(data, index) in datas" :key="index">
-            <div class="d-flex justify-content-between p-2 px-3">
-                <div class="d-flex flex-row align-items-center">
-                    <img :src="'/storage/user/' + data.user.id + '/img/' + data.user.profile_img" height="50" width="50">
-                    <div class="d-flex flex-column ms-2">
-                        <span class="font-weight-bold">{{ data.user.first_name }} {{ data.user.last_name }} </span>
-                        <small class="text-mute">20 mins</small>
-                    </div>
+    <div class="card mb-3" v-if="data">
+        <div class="d-flex p-2 px-3">
+            <div class="d-flex flex-row align-items-center">
+                <img :src="'/storage/user/' + data.get_user.id + '/img/' + data.get_user.profile_img" height="50" width="50">
+                <div class="d-flex flex-column ms-2">
+                    <span class="font-weight-bold">{{ data.get_user.first_name }} {{ data.get_user.last_name }} </span>
+                    <small class="text-mute">{{ data.created_time }}</small>
                 </div>
-                <div class="d-flex flex-row mt-1 ellipsis">
-                    <i class="fa fa-ellipsis-h"></i>
+            </div>
+            <div class="ms-auto mt-1 dropdown dropdown-menu-end" v-if="$store.getters.currentUser.id == data.user_id">
+                <a role="button" class="p-2 text-secondary" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a role="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal" @click="emitData">Edit</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li>
+                        <a class="dropdown-item" role="button" @click="deletePost(data)">Delete</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="px-3">
+            <pre class="text-justify">{{data.message}}</pre>
+        </div>
+
+
+        <div v-if="$route.path == '/'">
+            <div v-if="data.get_attach_images.length == 1">
+                <div class="w-100" v-for="(image, index) in data.get_attach_images" :key="index">
+                    <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
+                        <img :src="computedPostImage(image.image_link)" class="img attach_image">
+                    </router-link>
+                </div>
+
+            </div>
+
+            <div v-if="data.get_attach_images.length == 2">
+                <div class="w-50 d-inline-block" v-for="(image, index) in data.get_attach_images" :key="index">
+                    <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
+                        <img :src="computedPostImage(image.image_link)" class="img attach_image">
+                    </router-link>
                 </div>
             </div>
 
-            <img src="https://i.imgur.com/xhzhaGA.jpg" class="img" height="300">
+            <div v-if="data.get_attach_images.length == 3">
+                <span v-for="(image, index) in data.get_attach_images" :key="index">
+                    <div class="d-inline-block w-50" v-if="index != 2">
+                        <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
+                            <img :src="computedPostImage(image.image_link)" class="img attach_image">
+                        </router-link>
+                    </div>
+                    <div class="w-100 d-block" v-else>
+                        <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
+                            <img :src="computedPostImage(image.image_link)" class="img attach_image">
+                        </router-link>
+                    </div>
+                </span>
+            </div>
 
-            <div class="p-2">
-                <pre class="text-justify">{{data.message}}</pre>
-                <hr>
+            <div v-if="data.get_attach_images.length == 4">
+                <span v-for="(image, index) in data.get_attach_images" :key="index">
+                    <div class="d-inline-block w-50">
+                        <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
+                            <img :src="computedPostImage(image.image_link)" :data-index="index" class="img attach_image">
+                        </router-link>
+                    </div>
+                </span>
+            </div>
 
-                <div class="btn-group d-flex mb-2" role="group">
-                    <a href="" class="btn btn-outline-primary w-100"><i class="fa fa-thumbs-up"></i> Like</a>
-                    <a href="" class="btn btn-outline-primary w-100"><i class="fa fa-commenting-o"></i> 2 Comments</a>
-                    <a href="" class="btn btn-outline-primary w-100"><i class="fa fa-share"></i> Share</a>
+            <div v-if="data.get_attach_images.length >= 5">
+                <span v-for="(image, index) in data.get_attach_images" :key="index">
+                    <div class="d-inline-block position-relative w-50" v-if="index <= 3">
+                        <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
+                            <img :src="computedPostImage(image.image_link)" :class="index == 3 ? 'opacity-50' : ''" class="img attach_image">
+                            <div class="position-absolute" v-if="index == 3">
+                                <i class="fa fa-plus-square text-light fa-lg"></i>
+                            </div>
+                        </router-link>
+
+                    </div>
+
+                </span>
+            </div>
+        </div>
+
+
+
+
+        <div class="px-2">
+            <hr />
+            <div class="btn-group d-flex mb-2" role="group">
+                <a href="#!" class="btn btn-outline-secondary w-100" :class="data.get_post_likes.length ? 'text-primary' : ''" @click="likePost($event, data)">
+                    <i class="fa fa-thumbs-up"></i>
+                    <span>Like</span>
+                </a>
+                <a href="#!" class="btn btn-outline-secondary w-100">
+                    <i class="fa fa-commenting-o"></i>
+                    <span>{{ data.get_comments }} Comments</span>
+                </a>
+                <a href="#!" class="btn btn-outline-secondary w-100"><i class="fa fa-share"></i> Share</a>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center px-2">
+                <div class="d-flex flex-row icons d-flex align-items-center">
+                    <i class="fa fa-thumbs-up"></i>
                 </div>
-
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex flex-row icons d-flex align-items-center"> <i class="fa fa-heart"></i> <i class="fa fa-smile-o ms-2"></i> </div>
-                    <div class="d-flex flex-row muted-color"> <span>2 comments</span> <span class="ms-2">Share</span> </div>
+                <div class="d-flex flex-row muted-color">
+                    <div class="dropdown dropdown-menu-end">
+                        <a href="" class="dropdown-toggle" data-bs-toggle="dropdown">Top Comments</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Latest Comments</a></li>
+                            <li><a class="dropdown-item" href="#">Old Comments</a></li>
+                        </ul>
+                    </div>
                 </div>
+            </div>
 
-                <hr>
-                <div class="comments">
-                    <Comment />
-                </div>
+            <hr>
+            <div class="comments">
+                <Comment :post_id="data.id" />
             </div>
         </div>
     </div>
+
 </template>
 <script>
 import Comment from './Comment.vue';
@@ -53,7 +141,8 @@ export default {
     },
 
     props: [
-        'datas'
+        'data',
+        'index'
     ],
 
     computed: {
@@ -61,7 +150,48 @@ export default {
     },
 
     methods: {
+        computedPostImage(image_link) {
+            return `/storage/post/img/${image_link}`;
+        },
 
+        likePost(e, data) {
+            if(e.target.classList.contains('text-primary')) {
+                e.target.classList.remove('text-primary');
+            } else {
+                e.target.classList.add('text-primary');
+            }
+
+            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+            axios({
+                method: 'post',
+                params: {
+                    id: data.id,
+                },
+                url: `/api/post/like/store`,
+                headers: {Authorization: AuthStr}
+            }).then(res => {
+                console.log(res.data);
+            }).catch(err => {
+
+            });
+        },
+
+        deletePost(data) {
+            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+            axios({
+                method: 'delete',
+                url: `/api/post/destroy/${data.id}`,
+                headers: {Authorization: AuthStr}
+            }).then(res => {
+
+            }).catch(err => {
+
+            });
+        },
+
+        emitData() {
+            this.$emit('clicked', this.data);
+        }
     },
 
     watch: {
@@ -78,13 +208,30 @@ export default {
     },
 
     mounted() {
-
+        console.log(this.data);
     },
 }
 </script>
 
 <style scoped>
+
 .border-post {
     border: 1px solid #e1e1e1;
 }
+
+.attach_image {
+    height: 350px;
+}
+
+.position-absolute {
+    top: 50%;
+    left: 50%;
+    right: 0;
+}
+
+.btn-outline-secondary:hover {
+    background: #ffffff;
+    color: #0d6efd !important;
+}
+
 </style>

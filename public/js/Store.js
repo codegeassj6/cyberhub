@@ -36,7 +36,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -105,6 +104,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   updated: function updated() {},
+  deactivated: function deactivated() {
+    this.$destroy();
+  },
   mounted: function mounted() {
     this.getProducts();
   }

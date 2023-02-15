@@ -1,7 +1,15 @@
+Task:
+Resume: edit post
+
+COMMENT
+Edit Comment
+Delete Comment
 
 
+keep alive function
 
+Note:
+Delete also comment likes in post
 
 issue:
-upload picture will not change navbar picture
-burger button must display @ 767px
+socialite login fb
