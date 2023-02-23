@@ -293,9 +293,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="d-flex flex-column mb-2 rounded border">
-                                    <div class="flex-fill p-2"
+                                    <div class="flex-fill p-2 min-100"
                                         id="editable"
-                                        @keyup="updateMessage"
                                         contenteditable="true">
                                     </div>
                                 </div>
@@ -305,12 +304,11 @@
                                         <div class="d-flex">
                                             <div
                                                 class="card w-25 position-relative dropbox-img me-2"
-                                                ref="attach_div"
                                                 v-for="(img, index) in attach_images" :key="index"
                                             >
                                                 <img :src="img" class="img" alt="">
                                                 <div class="position-absolute img_attach_remove">
-                                                    <button class="btn btn-close border bg-primary" @click="removeAttachImage(img)"></button>
+                                                    <button class="btn btn-close border bg-primary" @click="removeAttachInPost(img)"></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -349,9 +347,10 @@
                         </div>
 
 
-                        <div v-for="(data, index) in datas" :key="index">
+                        <!-- <div v-for="(data, index) in datas" :key="index">
                             <Post :data="data" :index="index" @clicked="emitFromChild" />
-                        </div>
+                        </div> -->
+                        <Post @clicked="emitFromChild" :key="updateComponent.post" />
                     </div>
 
                     <div class="col-md-4">
@@ -379,42 +378,37 @@
                     <div class="modal-body">
                         <div class="card-body">
                             <div class="d-flex flex-column mb-2 rounded border">
-                                <div class="flex-fill p-2"
-                                    id="editable"
-                                    @keyup="updateMessage"
-                                    contenteditable="true">
-                                    {{ edit_data.message }}
-                                </div>
+                                <div class="flex-fill p-2 min-100 div-like-pre"
+                                    contenteditable="true"
+                                    ref="edit_message"
+                                >{{ edit_data.message }}</div>
                             </div>
 
                             <div
                                 class="card d-inline-flex w-25 position-relative dropbox-img"
-                                ref="attach_div"
                                 v-for="(img, index) in edit_data.get_attach_images" :key="index"
+                                ref="display_attachment"
                             >
                                 <img :src="'/storage/post/img/'+img.image_link" class="img" alt="">
                                 <div class="position-absolute img_attach_remove">
-                                    <button class="btn btn-close border bg-primary"></button>
+                                    <button class="btn btn-close border bg-primary" @click="removeAttachInEdit($event, img)"></button>
                                 </div>
                             </div>
+
 
                         </div>
                     </div>
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click.prevent="editPost(edit_data)">Save</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                     </div>
 
                     </div>
                 </div>
             </div>
-
         </template>
-
-
-
     </div>
 
 </template>
@@ -424,13 +418,20 @@ import Post from './templates/Post.vue';
 export default {
     data() {
         return {
-            message: '',
+            // message: '',
             datas: null,
             image: [],
             attach_exist: false,
             attach_images: [],
             form_data: '',
+
             edit_data: '',
+            edit: {
+                attachment: [],
+            },
+            updateComponent: {
+                post: 1,
+            },
         }
     },
 
@@ -449,10 +450,6 @@ export default {
     },
 
     methods: {
-        updateMessage(e) {
-            this.message = e.target.innerText;
-        },
-
         uploadTriggerInput() {
             var elem = this.$refs.input_upload;
             if(elem && document.createEvent) {
@@ -463,26 +460,26 @@ export default {
         },
 
         postMessage() {
-            if(this.message || this.form_data) {
+            if(document.getElementById('editable').innerText.length || this.form_data) {
                 const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
                 axios({
                     method: 'POST',
                     params: {
-                        message: this.message,
+                        message: document.getElementById('editable').innerText,
                         image: this.form_data,
                     },
                     data: this.form_data,
                     url: `/api/post/store`,
                     headers: {
                         Authorization: AuthStr,
-                        'Content-Type': 'multipart/form-data',
                     }
                 }).then(res => {console.log(res.data);
                     this.attach_exist = false;
                     this.form_data = '';
                     document.getElementById('editable').innerHTML = '';
                     this.message = '';
-                    this.getPost();
+                    this.updateComponent.post ++;
+                    // this.getPost();
                 }).catch(err => {
                     console.log(err.data);
                 });
@@ -504,32 +501,43 @@ export default {
 
         },
 
-        removeAttachImage(img) {
+        removeAttachInPost(img) {
             var index = this.attach_images.indexOf(img);
             if (index > -1) {
                 this.attach_images.splice(index, 1);
             }
         },
 
+        removeAttachInEdit(e, img) {
+            this.edit.attachment.push(img.id);
 
-        getPost() {
-            if(this.currentUser) {
-                const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-
-                axios({
-                    method: 'get',
-                    url: `/api/post`,
-                    headers: {Authorization: AuthStr}
-                }).then(res => {
-                    this.datas = res.data.data;
-                }).catch(err => {
-
-                });
+            var index = this.edit_data.get_attach_images.indexOf(img);
+            if (index > -1) {
+                this.edit_data.get_attach_images.splice(index, 1);
             }
         },
 
         emitFromChild(data) {
             this.edit_data = data;
+            this.edit.attachment = [];
+        },
+
+        editPost(data) {
+            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+            axios({
+                method: 'patch',
+                params: {
+                    message: this.$refs.edit_message.innerText,
+                    id: data.id,
+                    image: this.edit.attachment,
+                },
+                url: `/api/post/update`,
+                headers: {Authorization: AuthStr}
+            }).then(res => {
+                document.getElementById(`post_message_${data.id}`).innerText = this.$refs.edit_message.innerText;
+            }).catch(err => {
+
+            });
         }
     },
 
@@ -566,7 +574,7 @@ export default {
     // },
 
     mounted() {
-        this.getPost();
+
     },
 }
 </script>
@@ -588,7 +596,7 @@ export default {
     padding: 0 !important;
 }
 
-#editable {
+.min-100 {
     min-height: 100px;
 }
 

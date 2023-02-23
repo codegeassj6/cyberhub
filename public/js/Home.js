@@ -426,24 +426,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      message: '',
+      // message: '',
       datas: null,
       image: [],
       attach_exist: false,
       attach_images: [],
       form_data: '',
-      edit_data: ''
+      edit_data: '',
+      edit: {
+        attachment: []
+      },
+      updateComponent: {
+        post: 1
+      }
     };
   },
   components: {
@@ -456,9 +456,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    updateMessage: function updateMessage(e) {
-      this.message = e.target.innerText;
-    },
     uploadTriggerInput: function uploadTriggerInput() {
       var elem = this.$refs.input_upload;
       if (elem && document.createEvent) {
@@ -469,19 +466,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     postMessage: function postMessage() {
       var _this = this;
-      if (this.message || this.form_data) {
+      if (document.getElementById('editable').innerText.length || this.form_data) {
         var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
         axios({
           method: 'POST',
           params: {
-            message: this.message,
+            message: document.getElementById('editable').innerText,
             image: this.form_data
           },
           data: this.form_data,
           url: "/api/post/store",
           headers: {
-            Authorization: AuthStr,
-            'Content-Type': 'multipart/form-data'
+            Authorization: AuthStr
           }
         }).then(function (res) {
           console.log(res.data);
@@ -489,7 +485,8 @@ __webpack_require__.r(__webpack_exports__);
           _this.form_data = '';
           document.getElementById('editable').innerHTML = '';
           _this.message = '';
-          _this.getPost();
+          _this.updateComponent.post++;
+          // this.getPost();
         })["catch"](function (err) {
           console.log(err.data);
         });
@@ -507,29 +504,40 @@ __webpack_require__.r(__webpack_exports__);
         this.form_data = formData;
       }
     },
-    removeAttachImage: function removeAttachImage(img) {
+    removeAttachInPost: function removeAttachInPost(img) {
       var index = this.attach_images.indexOf(img);
       if (index > -1) {
         this.attach_images.splice(index, 1);
       }
     },
-    getPost: function getPost() {
-      var _this2 = this;
-      if (this.currentUser) {
-        var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-        axios({
-          method: 'get',
-          url: "/api/post",
-          headers: {
-            Authorization: AuthStr
-          }
-        }).then(function (res) {
-          _this2.datas = res.data.data;
-        })["catch"](function (err) {});
+    removeAttachInEdit: function removeAttachInEdit(e, img) {
+      this.edit.attachment.push(img.id);
+      var index = this.edit_data.get_attach_images.indexOf(img);
+      if (index > -1) {
+        this.edit_data.get_attach_images.splice(index, 1);
       }
     },
     emitFromChild: function emitFromChild(data) {
       this.edit_data = data;
+      this.edit.attachment = [];
+    },
+    editPost: function editPost(data) {
+      var _this2 = this;
+      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      axios({
+        method: 'patch',
+        params: {
+          message: this.$refs.edit_message.innerText,
+          id: data.id,
+          image: this.edit.attachment
+        },
+        url: "/api/post/update",
+        headers: {
+          Authorization: AuthStr
+        }
+      }).then(function (res) {
+        document.getElementById("post_message_".concat(data.id)).innerText = _this2.$refs.edit_message.innerText;
+      })["catch"](function (err) {});
     }
   },
   watch: {
@@ -554,9 +562,7 @@ __webpack_require__.r(__webpack_exports__);
   // deactivated() {
   //     console.log('deactivate');
   // },
-  mounted: function mounted() {
-    this.getPost();
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -607,6 +613,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 //import name from './
 
@@ -614,8 +644,12 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       comments: ''
+      // form: {
+      //     comment_message: '',
+      // }
     };
   },
+
   components: {},
   props: ['post_id'],
   computed: {
@@ -641,15 +675,32 @@ __webpack_require__.r(__webpack_exports__);
         document.getElementById("content_".concat(post_id)).innerText = '';
         _this.comments.push(res.data);
       })["catch"](function (err) {});
-    }
+    },
+    likeComment: function likeComment(data) {
+      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      axios({
+        method: 'post',
+        params: {
+          id: data.id
+        },
+        url: "/api/comment/like/store",
+        headers: {
+          Authorization: AuthStr
+        }
+      }).then(function (res) {
+        console.log(res.data);
+      })["catch"](function (err) {});
+    } // keyMessage(e) {
+    //     this.form.comment_message = e.target.innerText;
+    // }
   },
   watch: {
-    // $data: {
-    //     handler: function(val, oldVal) {
-    //         console.log('watcher: ',val);
-    //     },
-    //     deep: true
-    // }
+    $data: {
+      handler: function handler(val, oldVal) {
+        console.log('watcher: ', val);
+      },
+      deep: true
+    }
   },
   updated: function updated() {},
   mounted: function mounted() {
@@ -665,7 +716,7 @@ __webpack_require__.r(__webpack_exports__);
         Authorization: AuthStr
       }
     }).then(function (res) {
-      _this2.comments = res.data.comments;
+      _this2.comments = res.data;
     })["catch"](function (err) {});
   }
 });
@@ -810,18 +861,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {};
+    return {
+      datas: ''
+    };
   },
   components: {
     Comment: _Comment_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['data', 'index'],
+  props: [],
   computed: {},
   methods: {
     computedPostImage: function computedPostImage(image_link) {
@@ -848,6 +899,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {});
     },
     deletePost: function deletePost(data) {
+      var _this = this;
       var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
       axios({
         method: 'delete',
@@ -855,11 +907,27 @@ __webpack_require__.r(__webpack_exports__);
         headers: {
           Authorization: AuthStr
         }
-      }).then(function (res) {})["catch"](function (err) {});
+      }).then(function (res) {
+        _this.datas.forEach(function (elem) {
+          if (elem.id == data.id) {
+            _this.datas.splice(elem, 1);
+          }
+        });
+      })["catch"](function (err) {});
     },
-    emitData: function emitData() {
-      this.$emit('clicked', this.data);
-    }
+    emitData: function emitData(data) {
+      this.$emit('clicked', data);
+    } // getPost() {
+    //     const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+    //     axios({
+    //         method: 'get',
+    //         url: `/api/post`,
+    //         headers: {Authorization: AuthStr}
+    //     }).then(res => {
+    //         this.datas = res.data.data;console.log(this.datas);
+    //     }).catch(err => {
+    //     });
+    // },
   },
   watch: {
     $data: {
@@ -871,7 +939,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   updated: function updated() {},
   mounted: function mounted() {
-    console.log(this.data);
+    var _this2 = this;
+    var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+    axios({
+      method: 'get',
+      url: "/api/post",
+      headers: {
+        Authorization: AuthStr
+      }
+    }).then(function (res) {
+      _this2.datas = res.data.data;
+    })["catch"](function (err) {});
   }
 });
 
@@ -893,7 +971,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#carouselintro img[data-v-f2b6376c]  {\n    height: 600px;\n}\n#carouselintro[data-v-f2b6376c] {\n    margin-top: 26px;\n}\n.name[data-v-f2b6376c] {\n    font-size: 20px;\n}\n.btn-status[data-v-f2b6376c] {\n    padding: 0 !important;\n}\n#editable[data-v-f2b6376c] {\n    min-height: 100px;\n}\n.dropbox-img[data-v-f2b6376c] {\n    height: 150px;\n}\n.dropbox-img img[data-v-f2b6376c] {\n    height: 100%;\n}\n.img_attach_remove[data-v-f2b6376c] {\n    right: 0%;\n    top: 0%;\n    color: #ffffff;\n}\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#carouselintro img[data-v-f2b6376c]  {\n    height: 600px;\n}\n#carouselintro[data-v-f2b6376c] {\n    margin-top: 26px;\n}\n.name[data-v-f2b6376c] {\n    font-size: 20px;\n}\n.btn-status[data-v-f2b6376c] {\n    padding: 0 !important;\n}\n.min-100[data-v-f2b6376c] {\n    min-height: 100px;\n}\n.dropbox-img[data-v-f2b6376c] {\n    height: 150px;\n}\n.dropbox-img img[data-v-f2b6376c] {\n    height: 100%;\n}\n.img_attach_remove[data-v-f2b6376c] {\n    right: 0%;\n    top: 0%;\n    color: #ffffff;\n}\n\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1255,23 +1333,7 @@ var render = function () {
                       _vm._m(4),
                       _vm._v(" "),
                       _c("div", { staticClass: "card-body" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "d-flex flex-column mb-2 rounded border",
-                          },
-                          [
-                            _c("div", {
-                              staticClass: "flex-fill p-2",
-                              attrs: {
-                                id: "editable",
-                                contenteditable: "true",
-                              },
-                              on: { keyup: _vm.updateMessage },
-                            }),
-                          ]
-                        ),
+                        _vm._m(5),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -1288,8 +1350,6 @@ var render = function () {
                                       "div",
                                       {
                                         key: index,
-                                        ref: "attach_div",
-                                        refInFor: true,
                                         staticClass:
                                           "card w-25 position-relative dropbox-img me-2",
                                       },
@@ -1311,7 +1371,7 @@ var render = function () {
                                                 "btn btn-close border bg-primary",
                                               on: {
                                                 click: function ($event) {
-                                                  return _vm.removeAttachImage(
+                                                  return _vm.removeAttachInPost(
                                                     img
                                                   )
                                                 },
@@ -1332,7 +1392,7 @@ var render = function () {
                       _vm._v(" "),
                       _c("div", { staticClass: "card-footer text-muted" }, [
                         _c("div", { staticClass: "d-flex" }, [
-                          _vm._m(5),
+                          _vm._m(6),
                           _vm._v(" "),
                           _c("div", [
                             _c("div", {}, [
@@ -1380,21 +1440,12 @@ var render = function () {
                       ]),
                     ]),
                     _vm._v(" "),
-                    _vm._l(_vm.datas, function (data, index) {
-                      return _c(
-                        "div",
-                        { key: index },
-                        [
-                          _c("Post", {
-                            attrs: { data: data, index: index },
-                            on: { clicked: _vm.emitFromChild },
-                          }),
-                        ],
-                        1
-                      )
+                    _c("Post", {
+                      key: _vm.updateComponent.post,
+                      on: { clicked: _vm.emitFromChild },
                     }),
                   ],
-                  2
+                  1
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-4" }),
@@ -1404,7 +1455,7 @@ var render = function () {
             _c("div", { staticClass: "modal", attrs: { id: "editModal" } }, [
               _c("div", { staticClass: "modal-dialog modal-lg" }, [
                 _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(6),
+                  _vm._m(7),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
                     _c(
@@ -1421,20 +1472,12 @@ var render = function () {
                             _c(
                               "div",
                               {
-                                staticClass: "flex-fill p-2",
-                                attrs: {
-                                  id: "editable",
-                                  contenteditable: "true",
-                                },
-                                on: { keyup: _vm.updateMessage },
+                                ref: "edit_message",
+                                staticClass:
+                                  "flex-fill p-2 min-100 div-like-pre",
+                                attrs: { contenteditable: "true" },
                               },
-                              [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(_vm.edit_data.message) +
-                                    "\n                            "
-                                ),
-                              ]
+                              [_vm._v(_vm._s(_vm.edit_data.message))]
                             ),
                           ]
                         ),
@@ -1446,7 +1489,7 @@ var render = function () {
                               "div",
                               {
                                 key: index,
-                                ref: "attach_div",
+                                ref: "display_attachment",
                                 refInFor: true,
                                 staticClass:
                                   "card d-inline-flex w-25 position-relative dropbox-img",
@@ -1460,7 +1503,27 @@ var render = function () {
                                   },
                                 }),
                                 _vm._v(" "),
-                                _vm._m(7, true),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "position-absolute img_attach_remove",
+                                  },
+                                  [
+                                    _c("button", {
+                                      staticClass:
+                                        "btn btn-close border bg-primary",
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.removeAttachInEdit(
+                                            $event,
+                                            img
+                                          )
+                                        },
+                                      },
+                                    }),
+                                  ]
+                                ),
                               ]
                             )
                           }
@@ -1470,7 +1533,31 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _vm._m(8),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button", "data-bs-dismiss": "modal" },
+                        on: {
+                          click: function ($event) {
+                            $event.preventDefault()
+                            return _vm.editPost(_vm.edit_data)
+                          },
+                        },
+                      },
+                      [_vm._v("Save")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        attrs: { type: "button", "data-bs-dismiss": "modal" },
+                      },
+                      [_vm._v("Cancel")]
+                    ),
+                  ]),
                 ]),
               ]),
             ]),
@@ -2059,6 +2146,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "d-flex flex-column mb-2 rounded border" },
+      [
+        _c("div", {
+          staticClass: "flex-fill p-2 min-100",
+          attrs: { id: "editable", contenteditable: "true" },
+        }),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "dropdown" }, [
       _c(
         "button",
@@ -2103,38 +2205,6 @@ var staticRenderFns = [
       }),
     ])
   },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "position-absolute img_attach_remove" }, [
-      _c("button", { staticClass: "btn btn-close border bg-primary" }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          attrs: { type: "button", "data-bs-dismiss": "modal" },
-        },
-        [_vm._v("Save")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger",
-          attrs: { type: "button", "data-bs-dismiss": "modal" },
-        },
-        [_vm._v("Close")]
-      ),
-    ])
-  },
 ]
 render._withStripped = true
 
@@ -2175,23 +2245,60 @@ var render = function () {
             },
           }),
           _vm._v(" "),
-          _c("div", { staticClass: "d-flex flex-column ms-3" }, [
-            _c("span", { staticClass: "name" }, [
-              _vm._v(
-                _vm._s(
-                  comment.user_details.first_name +
-                    " " +
-                    comment.user_details.last_name
-                )
-              ),
+          _c("div", { staticClass: "d-flex" }, [
+            _c("div", { staticClass: "d-flex flex-column ms-3" }, [
+              _c("span", { staticClass: "name" }, [
+                _vm._v(
+                  _vm._s(
+                    comment.user_details.first_name +
+                      " " +
+                      comment.user_details.last_name
+                  )
+                ),
+              ]),
+              _vm._v(" "),
+              _c("pre", { staticClass: "comment-text" }, [
+                _vm._v(_vm._s(comment.message)),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "d-flex flex-row align-items-center" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "me-2",
+                    class:
+                      comment.authLikes == true
+                        ? "text-primary"
+                        : "text-secondary",
+                    attrs: { role: "button" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.likeComment(comment)
+                      },
+                    },
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Like\n                    "
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "me-2 text-secondary",
+                    attrs: { role: "button" },
+                  },
+                  [_vm._v("Reply")]
+                ),
+                _vm._v(" "),
+                _c("small", [_vm._v("18 mins")]),
+              ]),
             ]),
-            _vm._v(" "),
-            _c("small", { staticClass: "comment-text" }, [
-              _vm._v(_vm._s(comment.message)),
-            ]),
-            _vm._v(" "),
-            _vm._m(0, true),
           ]),
+          _vm._v(" "),
+          _vm._m(0, true),
         ])
       }),
       _vm._v(" "),
@@ -2252,12 +2359,42 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "d-flex flex-row align-items-center" }, [
-      _c("small", [_vm._v("Like")]),
-      _vm._v(" "),
-      _c("small", [_vm._v("Reply")]),
-      _vm._v(" "),
-      _c("small", [_vm._v("18 mins")]),
+    return _c("div", { staticClass: "ms-auto" }, [
+      _c("div", { staticClass: "dropdown dropdown-menu-end" }, [
+        _c(
+          "a",
+          {
+            staticClass: "p-2",
+            attrs: {
+              role: "button",
+              id: "triggerId",
+              "data-bs-toggle": "dropdown",
+              "aria-haspopup": "true",
+              "aria-expanded": "false",
+            },
+          },
+          [_c("i", { staticClass: "fa fa-ellipsis-h" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "dropdown-menu",
+            attrs: { "aria-labelledby": "triggerId" },
+          },
+          [
+            _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+              _vm._v("Edit"),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "dropdown-divider" }),
+            _vm._v(" "),
+            _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+              _vm._v("Delete"),
+            ]),
+          ]
+        ),
+      ]),
     ])
   },
 ]
@@ -2282,170 +2419,259 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.data
-    ? _c("div", { staticClass: "card mb-3" }, [
-        _c("div", { staticClass: "d-flex p-2 px-3" }, [
-          _c("div", { staticClass: "d-flex flex-row align-items-center" }, [
-            _c("img", {
-              attrs: {
-                src:
-                  "/storage/user/" +
-                  _vm.data.get_user.id +
-                  "/img/" +
-                  _vm.data.get_user.profile_img,
-                height: "50",
-                width: "50",
-              },
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-flex flex-column ms-2" }, [
-              _c("span", { staticClass: "font-weight-bold" }, [
-                _vm._v(
-                  _vm._s(_vm.data.get_user.first_name) +
-                    " " +
-                    _vm._s(_vm.data.get_user.last_name) +
-                    " "
-                ),
-              ]),
-              _vm._v(" "),
-              _c("small", { staticClass: "text-mute" }, [
-                _vm._v(_vm._s(_vm.data.created_time)),
-              ]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _vm.$store.getters.currentUser.id == _vm.data.user_id
-            ? _c(
-                "div",
-                { staticClass: "ms-auto mt-1 dropdown dropdown-menu-end" },
-                [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c("ul", { staticClass: "dropdown-menu" }, [
-                    _c("li", [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "dropdown-item",
-                          attrs: {
-                            role: "button",
-                            "data-bs-toggle": "modal",
-                            "data-bs-target": "#editModal",
-                          },
-                          on: { click: _vm.emitData },
-                        },
-                        [_vm._v("Edit")]
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "dropdown-divider" }),
-                    _vm._v(" "),
-                    _c("li", [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "dropdown-item",
-                          attrs: { role: "button" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.deletePost(_vm.data)
-                            },
-                          },
-                        },
-                        [_vm._v("Delete")]
-                      ),
-                    ]),
+  return _vm.datas
+    ? _c(
+        "div",
+        _vm._l(_vm.datas, function (data, index) {
+          return _c("div", { key: index, staticClass: "card mb-3" }, [
+            _c("div", { staticClass: "d-flex p-2 px-3" }, [
+              _c("div", { staticClass: "d-flex flex-row align-items-center" }, [
+                _c("img", {
+                  attrs: {
+                    src:
+                      "/storage/user/" +
+                      data.get_user.id +
+                      "/img/" +
+                      data.get_user.profile_img,
+                    height: "50",
+                    width: "50",
+                  },
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-flex flex-column ms-2" }, [
+                  _c("span", { staticClass: "font-weight-bold" }, [
+                    _vm._v(
+                      _vm._s(data.get_user.first_name) +
+                        " " +
+                        _vm._s(data.get_user.last_name) +
+                        " "
+                    ),
                   ]),
-                ]
-              )
-            : _vm._e(),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "px-3" }, [
-          _c("pre", { staticClass: "text-justify" }, [
-            _vm._v(_vm._s(_vm.data.message)),
-          ]),
-        ]),
-        _vm._v(" "),
-        _vm.$route.path == "/"
-          ? _c("div", [
-              _vm.data.get_attach_images.length == 1
+                  _vm._v(" "),
+                  _c("small", { staticClass: "text-mute" }, [
+                    _vm._v(_vm._s(data.created_time)),
+                  ]),
+                ]),
+              ]),
+              _vm._v(" "),
+              _vm.$store.getters.currentUser.id == data.user_id
                 ? _c(
                     "div",
-                    _vm._l(_vm.data.get_attach_images, function (image, index) {
-                      return _c(
-                        "div",
-                        { key: index, staticClass: "w-100" },
-                        [
+                    { staticClass: "ms-auto mt-1 dropdown dropdown-menu-end" },
+                    [
+                      _vm._m(0, true),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "dropdown-menu" }, [
+                        _c("li", [
                           _c(
-                            "router-link",
+                            "a",
                             {
+                              staticClass: "dropdown-item",
                               attrs: {
-                                to: {
-                                  name: "PostPage",
-                                  params: { id: _vm.data.id, page: index },
+                                role: "button",
+                                "data-bs-toggle": "modal",
+                                "data-bs-target": "#editModal",
+                              },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.emitData(data)
                                 },
                               },
                             },
-                            [
-                              _c("img", {
-                                staticClass: "img attach_image",
-                                attrs: {
-                                  src: _vm.computedPostImage(image.image_link),
-                                },
-                              }),
-                            ]
+                            [_vm._v("Edit")]
                           ),
-                        ],
-                        1
-                      )
-                    }),
-                    0
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.data.get_attach_images.length == 2
-                ? _c(
-                    "div",
-                    _vm._l(_vm.data.get_attach_images, function (image, index) {
-                      return _c(
-                        "div",
-                        { key: index, staticClass: "w-50 d-inline-block" },
-                        [
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "dropdown-divider" }),
+                        _vm._v(" "),
+                        _c("li", [
                           _c(
-                            "router-link",
+                            "a",
                             {
-                              attrs: {
-                                to: {
-                                  name: "PostPage",
-                                  params: { id: _vm.data.id, page: index },
+                              staticClass: "dropdown-item",
+                              attrs: { role: "button" },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.deletePost(data)
                                 },
                               },
                             },
-                            [
-                              _c("img", {
-                                staticClass: "img attach_image",
-                                attrs: {
-                                  src: _vm.computedPostImage(image.image_link),
-                                },
-                              }),
-                            ]
+                            [_vm._v("Delete")]
                           ),
-                        ],
-                        1
-                      )
-                    }),
-                    0
+                        ]),
+                      ]),
+                    ]
                   )
                 : _vm._e(),
-              _vm._v(" "),
-              _vm.data.get_attach_images.length == 3
-                ? _c(
-                    "div",
-                    _vm._l(_vm.data.get_attach_images, function (image, index) {
-                      return _c("span", { key: index }, [
-                        index != 2
-                          ? _c(
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "px-3" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "text-justify div-like-pre",
+                  attrs: { id: "post_message_" + data.id },
+                },
+                [_vm._v(_vm._s(data.message))]
+              ),
+            ]),
+            _vm._v(" "),
+            _vm.$route.path == "/"
+              ? _c("div", [
+                  data.get_attach_images.length == 1
+                    ? _c(
+                        "div",
+                        _vm._l(data.get_attach_images, function (image, index) {
+                          return _c(
+                            "div",
+                            { key: index, staticClass: "w-100" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  attrs: {
+                                    to: {
+                                      name: "PostPage",
+                                      params: { id: data.id, page: index },
+                                    },
+                                  },
+                                },
+                                [
+                                  _c("img", {
+                                    staticClass: "img attach_image",
+                                    attrs: {
+                                      src: _vm.computedPostImage(
+                                        image.image_link
+                                      ),
+                                    },
+                                  }),
+                                ]
+                              ),
+                            ],
+                            1
+                          )
+                        }),
+                        0
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  data.get_attach_images.length == 2
+                    ? _c(
+                        "div",
+                        _vm._l(data.get_attach_images, function (image, index) {
+                          return _c(
+                            "div",
+                            { key: index, staticClass: "w-50 d-inline-block" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  attrs: {
+                                    to: {
+                                      name: "PostPage",
+                                      params: { id: data.id, page: index },
+                                    },
+                                  },
+                                },
+                                [
+                                  _c("img", {
+                                    staticClass: "img attach_image",
+                                    attrs: {
+                                      src: _vm.computedPostImage(
+                                        image.image_link
+                                      ),
+                                    },
+                                  }),
+                                ]
+                              ),
+                            ],
+                            1
+                          )
+                        }),
+                        0
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  data.get_attach_images.length == 3
+                    ? _c(
+                        "div",
+                        _vm._l(data.get_attach_images, function (image, index) {
+                          return _c("span", { key: index }, [
+                            index != 2
+                              ? _c(
+                                  "div",
+                                  { staticClass: "d-inline-block w-50" },
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        attrs: {
+                                          to: {
+                                            name: "PostPage",
+                                            params: {
+                                              id: data.id,
+                                              page: index,
+                                            },
+                                          },
+                                        },
+                                      },
+                                      [
+                                        _c("img", {
+                                          staticClass: "img attach_image",
+                                          attrs: {
+                                            src: _vm.computedPostImage(
+                                              image.image_link
+                                            ),
+                                          },
+                                        }),
+                                      ]
+                                    ),
+                                  ],
+                                  1
+                                )
+                              : _c(
+                                  "div",
+                                  { staticClass: "w-100 d-block" },
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        attrs: {
+                                          to: {
+                                            name: "PostPage",
+                                            params: {
+                                              id: data.id,
+                                              page: index,
+                                            },
+                                          },
+                                        },
+                                      },
+                                      [
+                                        _c("img", {
+                                          staticClass: "img attach_image",
+                                          attrs: {
+                                            src: _vm.computedPostImage(
+                                              image.image_link
+                                            ),
+                                          },
+                                        }),
+                                      ]
+                                    ),
+                                  ],
+                                  1
+                                ),
+                          ])
+                        }),
+                        0
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  data.get_attach_images.length == 4
+                    ? _c(
+                        "div",
+                        _vm._l(data.get_attach_images, function (image, index) {
+                          return _c("span", { key: index }, [
+                            _c(
                               "div",
                               { staticClass: "d-inline-block w-50" },
                               [
@@ -2455,10 +2681,7 @@ var render = function () {
                                     attrs: {
                                       to: {
                                         name: "PostPage",
-                                        params: {
-                                          id: _vm.data.id,
-                                          page: index,
-                                        },
+                                        params: { id: data.id, page: index },
                                       },
                                     },
                                   },
@@ -2469,37 +2692,7 @@ var render = function () {
                                         src: _vm.computedPostImage(
                                           image.image_link
                                         ),
-                                      },
-                                    }),
-                                  ]
-                                ),
-                              ],
-                              1
-                            )
-                          : _c(
-                              "div",
-                              { staticClass: "w-100 d-block" },
-                              [
-                                _c(
-                                  "router-link",
-                                  {
-                                    attrs: {
-                                      to: {
-                                        name: "PostPage",
-                                        params: {
-                                          id: _vm.data.id,
-                                          page: index,
-                                        },
-                                      },
-                                    },
-                                  },
-                                  [
-                                    _c("img", {
-                                      staticClass: "img attach_image",
-                                      attrs: {
-                                        src: _vm.computedPostImage(
-                                          image.image_link
-                                        ),
+                                        "data-index": index,
                                       },
                                     }),
                                   ]
@@ -2507,172 +2700,141 @@ var render = function () {
                               ],
                               1
                             ),
-                      ])
-                    }),
-                    0
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.data.get_attach_images.length == 4
-                ? _c(
-                    "div",
-                    _vm._l(_vm.data.get_attach_images, function (image, index) {
-                      return _c("span", { key: index }, [
-                        _c(
-                          "div",
-                          { staticClass: "d-inline-block w-50" },
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                attrs: {
-                                  to: {
-                                    name: "PostPage",
-                                    params: { id: _vm.data.id, page: index },
+                          ])
+                        }),
+                        0
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  data.get_attach_images.length >= 5
+                    ? _c(
+                        "div",
+                        _vm._l(data.get_attach_images, function (image, index) {
+                          return _c("span", { key: index }, [
+                            index <= 3
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "d-inline-block position-relative w-50",
                                   },
-                                },
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "img attach_image",
-                                  attrs: {
-                                    src: _vm.computedPostImage(
-                                      image.image_link
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        attrs: {
+                                          to: {
+                                            name: "PostPage",
+                                            params: {
+                                              id: data.id,
+                                              page: index,
+                                            },
+                                          },
+                                        },
+                                      },
+                                      [
+                                        _c("img", {
+                                          staticClass: "img attach_image",
+                                          class: index == 3 ? "opacity-50" : "",
+                                          attrs: {
+                                            src: _vm.computedPostImage(
+                                              image.image_link
+                                            ),
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        index == 3
+                                          ? _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "position-absolute",
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "fa fa-plus-square text-light fa-lg",
+                                                }),
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                      ]
                                     ),
-                                    "data-index": index,
-                                  },
-                                }),
-                              ]
-                            ),
-                          ],
-                          1
-                        ),
-                      ])
-                    }),
-                    0
-                  )
-                : _vm._e(),
+                                  ],
+                                  1
+                                )
+                              : _vm._e(),
+                          ])
+                        }),
+                        0
+                      )
+                    : _vm._e(),
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "px-2" }, [
+              _c("hr"),
               _vm._v(" "),
-              _vm.data.get_attach_images.length >= 5
-                ? _c(
-                    "div",
-                    _vm._l(_vm.data.get_attach_images, function (image, index) {
-                      return _c("span", { key: index }, [
-                        index <= 3
-                          ? _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "d-inline-block position-relative w-50",
-                              },
-                              [
-                                _c(
-                                  "router-link",
-                                  {
-                                    attrs: {
-                                      to: {
-                                        name: "PostPage",
-                                        params: {
-                                          id: _vm.data.id,
-                                          page: index,
-                                        },
-                                      },
-                                    },
-                                  },
-                                  [
-                                    _c("img", {
-                                      staticClass: "img attach_image",
-                                      class: index == 3 ? "opacity-50" : "",
-                                      attrs: {
-                                        src: _vm.computedPostImage(
-                                          image.image_link
-                                        ),
-                                      },
-                                    }),
-                                    _vm._v(" "),
-                                    index == 3
-                                      ? _c(
-                                          "div",
-                                          { staticClass: "position-absolute" },
-                                          [
-                                            _c("i", {
-                                              staticClass:
-                                                "fa fa-plus-square text-light fa-lg",
-                                            }),
-                                          ]
-                                        )
-                                      : _vm._e(),
-                                  ]
-                                ),
-                              ],
-                              1
-                            )
-                          : _vm._e(),
-                      ])
-                    }),
-                    0
-                  )
-                : _vm._e(),
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("div", { staticClass: "px-2" }, [
-          _c("hr"),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "btn-group d-flex mb-2", attrs: { role: "group" } },
-            [
               _c(
-                "a",
+                "div",
                 {
-                  staticClass: "btn btn-outline-secondary w-100",
-                  class: _vm.data.get_post_likes.length ? "text-primary" : "",
-                  attrs: { href: "#!" },
-                  on: {
-                    click: function ($event) {
-                      return _vm.likePost($event, _vm.data)
+                  staticClass: "btn-group d-flex mb-2",
+                  attrs: { role: "group" },
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-outline-secondary w-100",
+                      class: data.get_post_likes.length ? "text-primary" : "",
+                      attrs: { href: "#!" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.likePost($event, data)
+                        },
+                      },
                     },
-                  },
-                },
-                [
-                  _c("i", { staticClass: "fa fa-thumbs-up" }),
+                    [
+                      _c("i", { staticClass: "fa fa-thumbs-up" }),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Like")]),
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("span", [_vm._v("Like")]),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-outline-secondary w-100",
+                      attrs: { href: "#!" },
+                    },
+                    [
+                      _c("i", { staticClass: "fa fa-commenting-o" }),
+                      _vm._v(" "),
+                      _c("span", [
+                        _vm._v(_vm._s(data.get_comments) + " Comments"),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(1, true),
                 ]
               ),
+              _vm._v(" "),
+              _vm._m(2, true),
+              _vm._v(" "),
+              _c("hr"),
               _vm._v(" "),
               _c(
-                "a",
-                {
-                  staticClass: "btn btn-outline-secondary w-100",
-                  attrs: { href: "#!" },
-                },
-                [
-                  _c("i", { staticClass: "fa fa-commenting-o" }),
-                  _vm._v(" "),
-                  _c("span", [
-                    _vm._v(_vm._s(_vm.data.get_comments) + " Comments"),
-                  ]),
-                ]
+                "div",
+                { staticClass: "comments" },
+                [_c("Comment", { attrs: { post_id: data.id } })],
+                1
               ),
-              _vm._v(" "),
-              _vm._m(1),
-            ]
-          ),
-          _vm._v(" "),
-          _vm._m(2),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "comments" },
-            [_c("Comment", { attrs: { post_id: _vm.data.id } })],
-            1
-          ),
-        ]),
-      ])
+            ]),
+          ])
+        }),
+        0
+      )
     : _vm._e()
 }
 var staticRenderFns = [

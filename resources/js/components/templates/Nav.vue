@@ -15,11 +15,6 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link to="/gallery" class="nav-link btn btn-primary">
-                                Gallery
-                            </router-link>
-                        </li>
-                        <li class="nav-item">
                             <router-link to="/store" class="nav-link btn btn-primary">
                                 Store
                             </router-link>

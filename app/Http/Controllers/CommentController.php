@@ -22,10 +22,17 @@ class CommentController extends Controller
         $comments = $post->getComments;
         $comments->transform(function($value) {
             $value->user_details = User::where('id', $value->user_id)->first();
+            $value->getCommentLikes;
+            if($value->getCommentLikes) {
+                $value->authLikes = $value->getCommentLikes->where('user_id', Auth::id())->first() ? true : false;
+            } else {
+                $value->authLikes = false;
+            }
+
             return $value;
         });
 
-        return response()->json(['comments' => $comments], 200);
+        return $comments;
     }
 
     /**
@@ -55,9 +62,9 @@ class CommentController extends Controller
             return response()->json(['message' => $validator->messages()->get('*')], 500);
         }
 
-        $comment = Comment::create([
+        Comment::create([
            'post_id' => $request->input('post_id'),
-           'user_id' => Auth::id() ,
+           'user_id' => Auth::id(),
            'message' => $request->input('comment')
         ]);
 
@@ -108,6 +115,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        return response()->json(['message' => 'deleted'], 200);
     }
 }

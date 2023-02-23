@@ -2,14 +2,38 @@
     <div>
         <div class="d-flex flex-row mb-2" v-for="(comment, index) in comments" :key="index">
             <img :src="'/storage/user/' + comment.user_details.id + '/img/' + comment.user_details.profile_img" width="50" height="50" class="rounded-image">
-            <div class="d-flex flex-column ms-3">
-                <span class="name">{{ comment.user_details.first_name + ' ' + comment.user_details.last_name }}</span>
-                <small class="comment-text">{{ comment.message }}</small>
 
-                <div class="d-flex flex-row align-items-center">
-                    <small>Like</small>
-                    <small>Reply</small>
-                    <small>18 mins</small>
+            <div class="d-flex">
+                <div class="d-flex flex-column ms-3">
+                    <span class="name">{{ comment.user_details.first_name + ' ' + comment.user_details.last_name }}</span>
+                    <pre class="comment-text">{{ comment.message }}</pre>
+
+                    <div class="d-flex flex-row align-items-center">
+                        <a role="button"
+                            class="me-2"
+                            :class="comment.authLikes == true ? 'text-primary' : 'text-secondary'"
+                            @click="likeComment(comment)">
+                            Like
+                        </a>
+
+
+                        <a role="button" class="me-2 text-secondary">Reply</a>
+                        <small>18 mins</small>
+                    </div>
+                </div>
+            </div>
+            <!-- :className="comment.get_comment_likes.user_id == $store.getters.currentUser.id ? 'text-primary' : 'text-secondary'" -->
+
+            <div class="ms-auto">
+                <div class="dropdown dropdown-menu-end">
+                    <a role="button" id="triggerId" class="p-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="triggerId">
+                        <a class="dropdown-item" href="#">Edit</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Delete</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,6 +65,9 @@ export default {
     data() {
         return {
             comments: '',
+            // form: {
+            //     comment_message: '',
+            // }
         }
     },
     components: {
@@ -75,15 +102,33 @@ export default {
 
             });
         },
+
+        likeComment(data) {
+            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+            axios({
+                method: 'post',
+                params: {id: data.id},
+                url: `/api/comment/like/store`,
+                headers: {Authorization: AuthStr}
+            }).then(res => {
+                console.log(res.data);
+            }).catch(err => {
+
+            });
+        },
+
+        // keyMessage(e) {
+        //     this.form.comment_message = e.target.innerText;
+        // }
     },
 
     watch: {
-        // $data: {
-        //     handler: function(val, oldVal) {
-        //         console.log('watcher: ',val);
-        //     },
-        //     deep: true
-        // }
+        $data: {
+            handler: function(val, oldVal) {
+                console.log('watcher: ',val);
+            },
+            deep: true
+        }
     },
 
     updated() {
@@ -98,7 +143,7 @@ export default {
             url: `/api/comment/`,
             headers: {Authorization: AuthStr}
         }).then(res => {
-            this.comments = res.data.comments;
+            this.comments = res.data;
         }).catch(err => {
 
         });

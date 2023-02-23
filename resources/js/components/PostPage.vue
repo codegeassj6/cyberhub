@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="bg-dark vh-100" @click="goBack($event)" id="go_back">
+        <div class="bg-dark vh-100" @click="goBack($event)" id="go_back" @keydown="goBack($event)">
             <div class="container">
                 <div class="padding-intro">
                     <div class="card">
@@ -43,35 +43,6 @@
                                     </div>
 
                                     <div class="col-lg-4 pe-2 ps-0">
-                                        <!-- <div class="border-start px-2 border-info border-2 h-100">
-                                            <div class="d-flex mb-2">
-                                                <div>
-                                                    <img :src="`/storage/user/${currentUser.id}/img/${currentUser.profile_img}`" alt="" height="50" width="50" class="rounded-circle me-2">
-                                                </div>
-
-                                                <div class="h5 mt-1">
-                                                    <div>{{ user.first_name + ' ' + user.last_name }}</div>
-                                                    <div>{{ post.created_time }}</div>
-                                                </div>
-
-                                                <div class="ms-auto dropdown dropdown-menu-end">
-                                                    <a role="button" data-bs-toggle="dropdown">
-                                                        <i class="fa fa-ellipsis-v fa-lg px-2"></i>
-                                                    </a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                        <li><hr class="dropdown-divider" /></li>
-                                                        <li><a class="dropdown-item" href="#">Delete</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                {{ post.message }}
-                                            </div>
-
-                                        </div> -->
-
                                         <Post :data="post" :index="0"  />
                                     </div>
                                 </div>
@@ -123,7 +94,7 @@ export default {
         },
 
         goBack(e) {
-            if(e.target.id == 'go_back') {
+            if(e.target.id == 'go_back' || e.keyCode == 27) {
                 this.$router.back();
             }
         }
@@ -159,10 +130,8 @@ export default {
             url: `/api/post/show/${this.$route.params.id}`,
             headers: {Authorization: AuthStr}
         }).then(res => {
-            // this.user = res.data.post_owner;
-            // this.images = res.data.post_images;
-            // this.comments = res.data.post_comments;
             this.post = res.data;
+            document.getElementById(this.post.id).focus();
         }).catch(err => {
 
         });

@@ -5497,11 +5497,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 //import name from './
 
@@ -5583,6 +5578,13 @@ vue__WEBPACK_IMPORTED_MODULE_4__["default"].use((vue_script2__WEBPACK_IMPORTED_M
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_5__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_6__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('app-component', (__webpack_require__(/*! ./components/AppComponent.vue */ "./resources/js/components/AppComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].mixin({
+  methods: {
+    capitalizeFirstLetter: function capitalizeFirstLetter(val) {
+      return val.charAt(0).toUpperCase() + val.slice(1);
+    }
+  }
+});
 var store = new vuex__WEBPACK_IMPORTED_MODULE_5__["default"].Store({
   modules: {
     StoreData: _store__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -5827,22 +5829,6 @@ var routes = [{
   component: function component() {
     return __webpack_require__.e(/*! import() | Store */ "Store").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Store.vue */ "./resources/js/components/Store.vue"));
   }
-}, {
-  path: '/gallery',
-  name: "Gallery",
-  component: function component() {
-    return __webpack_require__.e(/*! import() | Gallery */ "Gallery").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Gallery.vue */ "./resources/js/components/Gallery.vue"));
-  },
-  children: [{
-    name: "Preview",
-    component: function component() {
-      return __webpack_require__.e(/*! import() | Preview */ "Preview").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Preview.vue */ "./resources/js/components/Preview.vue"));
-    },
-    path: "/gallery/preview/:id",
-    meta: {
-      requiresAuth: true
-    }
-  }]
 }, {
   path: "/account",
   name: "Account",
@@ -29498,26 +29484,6 @@ var render = function () {
                         "router-link",
                         {
                           staticClass: "nav-link btn btn-primary",
-                          attrs: { to: "/gallery" },
-                        },
-                        [
-                          _vm._v(
-                            "\n                            Gallery\n                        "
-                          ),
-                        ]
-                      ),
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    { staticClass: "nav-item" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link btn btn-primary",
                           attrs: { to: "/store" },
                         },
                         [
@@ -46534,7 +46500,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
 /******/ 			if (chunkId === "Home") return "js/Home.js";
-/******/ 			if ({"Login":1,"Oauth":1,"Register":1,"Store":1,"Gallery":1,"Preview":1,"Account":1,"UpdateAccount":1,"PostPage":1,"EditPost":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"Login":1,"Oauth":1,"Register":1,"Store":1,"Account":1,"UpdateAccount":1,"PostPage":1,"EditPost":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			if (chunkId === "Game") return "js/Game.js";
 /******/ 			if (chunkId === "Cart") return "js/Cart.js";
 /******/ 			if (chunkId === "Save") return "js/Save.js";

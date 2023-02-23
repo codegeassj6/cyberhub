@@ -19,16 +19,24 @@ Route::group(['prefix' => 'post'], function ($router) {
     Route::get('/', 'App\Http\Controllers\PostController@index')->middleware('auth');
     Route::post('/store', 'App\Http\Controllers\PostController@store')->middleware('auth');
     Route::get('/show/{id}', 'App\Http\Controllers\PostController@show')->middleware('auth');
-    Route::get('/edit/{id}', 'App\Http\Controllers\PostController@edit')->middleware('auth');
+    // Route::get('/edit/{id}', 'App\Http\Controllers\PostController@edit')->middleware('auth');
+    Route::patch('/update', 'App\Http\Controllers\PostController@update')->middleware('auth');
     Route::delete('/destroy/{id}', 'App\Http\Controllers\PostController@destroy')->middleware('auth');
 
-    // like section
+    // PostLike section
     Route::post('/like/store', 'App\Http\Controllers\PostLikeController@store')->middleware('auth');
 });
+
+// Route::group(['prefix' => 'image'], function ($router) {
+//     Route::post('/destroy', 'App\Http\Controllers\ImageController@store')->middleware('auth');
+// });
 
 Route::group(['prefix' => 'comment'], function ($router) {
     Route::get('/', 'App\Http\Controllers\CommentController@index')->middleware('auth');
     Route::post('/store', 'App\Http\Controllers\CommentController@store')->middleware('auth');
+
+    // CommentLike section
+    Route::post('/like/store', 'App\Http\Controllers\CommentLikeController@store')->middleware('auth');
 });
 
 Route::group(['prefix' => 'games'], function ($router) {

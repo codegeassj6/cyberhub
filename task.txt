@@ -1,15 +1,11 @@
 Task:
-Resume: edit post
+edited post message in different
 
-COMMENT
-Edit Comment
-Delete Comment
-
-
-keep alive function
-
-Note:
+COMMENT:
+comment like
 Delete also comment likes in post
-
-issue:
+delete comment
+Edit Comment
+sort comment
+keep alive function
 socialite login fb

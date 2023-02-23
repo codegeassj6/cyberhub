@@ -33,7 +33,14 @@ input[type="number"]:focus, input[type="number"]:active {
 
 pre {
     font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 2px;
+    white-space: pre-line;
 }
+
+.div-like-pre {
+    white-space: pre;
+}
+
 
 @media (max-width: 768px) {
     .hide-sm {

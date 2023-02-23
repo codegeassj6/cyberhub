@@ -46,21 +46,6 @@ export const routes = [
         component: () => import(/* webpackChunkName: "Store" */ "./components/Store.vue")
     },
 
-    {
-        path: '/gallery',
-        name: "Gallery",
-        component: () => import(/* webpackChunkName: "Gallery" */ "./components/Gallery.vue"),
-        children: [
-            {
-                name: "Preview",
-                component: () =>
-                import(/* webpackChunkName: "Preview" */ "./components/Preview.vue"),
-                path: "/gallery/preview/:id",
-                meta: { requiresAuth: true },
-            },
-        ]
-    },
-
 
     {
         path: "/account",

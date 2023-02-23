@@ -16,6 +16,15 @@ Vue.use(Vuex);
 Vue.use(VueRouter);
 Vue.component('app-component', require('./components/AppComponent.vue').default);
 
+Vue.mixin({
+    methods: {
+        capitalizeFirstLetter(val) {
+            return val.charAt(0).toUpperCase() + val.slice(1);
+        },
+
+    }
+});
+
 const store = new Vuex.Store({
     modules: {
         StoreData

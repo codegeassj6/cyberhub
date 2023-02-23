@@ -57,7 +57,7 @@ class PostController extends Controller
 
         $post = Post::create([
             'user_id' => Auth::user()->id,
-            'message' => $request->input('message')
+            'message' => trim($request->input('message')),
         ]);
 
         if($request->file('image')) {
@@ -73,10 +73,6 @@ class PostController extends Controller
         return $this->index();
     }
 
-    public function edit($id) {
-
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -84,9 +80,36 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'message' => 'string',
+            'image.*' => 'integer|exists:post_images,id',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json(['message' => $validator->messages()->get('*')], 500);
+        }
+
+        $post = Post::where([
+            'id' => $request->input('id'),
+            'user_id' => Auth::id(),
+            ])->firstOrFail();
+
+        if($request->input('image')) {
+            $attachments = $post->getAttachImages->whereIn('id', $request->input('image'));
+            foreach ($attachments as $attachment) {
+                Storage::disk('local')->delete('public/post/img/'.$attachment->image_link);
+                $attachment->delete();
+            }
+        }
+
+        $post->update([
+           'message' => trim($request->input('message'))
+        ]);
+
+        return response()->json(['message' => $request->input('message')], 200);
     }
 
     /**
@@ -120,7 +143,6 @@ class PostController extends Controller
                 $image->delete();
             }
         }
-
 
         $post->delete();
         return response()->json(['message' => ''], 200);
