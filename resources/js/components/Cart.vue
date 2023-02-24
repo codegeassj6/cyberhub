@@ -269,7 +269,7 @@ export default {
             }
 
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-            axios.delete(`/api/cart/destroy`, {
+            axios.delete(`/api/cart/`, {
                 headers: {
                     Authorization: AuthStr
                 },

@@ -177,7 +177,7 @@ export default {
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
             axios({
                 method: 'delete',
-                url: `/api/post/destroy/${data.id}`,
+                url: `/api/post/${data.id}`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
                 this.datas.forEach(elem => {

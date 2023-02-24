@@ -59,7 +59,7 @@ export default {
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
             axios({
                 method: 'delete',
-                url: `/api/save/destroy/`+data.id,
+                url: `/api/save/`+data.id,
                 headers: {Authorization: AuthStr}
             }).then(res => {
 

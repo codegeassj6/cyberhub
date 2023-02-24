@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use App\Models\PostImage;
+use App\Models\PostAttachment;
 use Carbon;
 use Auth;
 use App\Models\PostLike;
@@ -31,7 +31,7 @@ class Post extends Model
     }
 
     public function getAttachImages() {
-        return $this->hasMany(PostImage::class, 'post_id')->orderBy('created_at', 'desc');
+        return $this->hasMany(PostAttachment::class, 'post_id')->orderBy('created_at', 'desc');
     }
 
     public function getComments() {

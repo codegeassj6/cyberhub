@@ -8,7 +8,7 @@ use DB;
 use Auth;
 use Str;
 use Validator;
-use App\Models\PostImage;
+use App\Models\PostAttachment;
 use Storage;
 use Carbon;
 
@@ -16,7 +16,6 @@ class PostController extends Controller
 {
     public function index()
     {
-        // $post = DB::table('posts')->orderBy('updated_at', 'desc')->paginate(2);
         $post = Post::orderBy('created_at', 'desc')->paginate(5);
         $post->getCollection()->transform(function($value) {
             $value->getUser;
@@ -63,7 +62,7 @@ class PostController extends Controller
         if($request->file('image')) {
             for ($i=0; $i < count($request->file('image')); $i++) {
                 Storage::disk('local')->putFileAs('/public/post/img', $request->file('image')[$i], $request->file('image')[$i]->hashName());
-                PostImage::create([
+                PostAttachment::create([
                    'post_id' =>  $post->id,
                    'image_link' => $request->file('image')[$i]->hashName(),
                 ]);

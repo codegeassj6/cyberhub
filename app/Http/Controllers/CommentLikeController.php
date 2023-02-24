@@ -46,25 +46,23 @@ class CommentLikeController extends Controller
             return response()->json(['message' => $validator->messages()->get('*')], 500);
         }
 
-        $comment = Comment::whereId($request->input('id'))->first();
+        $comment = Comment::whereId($request->input('id'))->firstOrFail();
 
         $comment_like = CommentLike::where([
             'comment_id' => $comment->id,
             'user_id' => Auth::id(),
         ])->first();
 
-
         if($comment_like) {
-            return $this->destroy($comment_like);
+            $this->destroy($comment_like);
+        } else {
+            CommentLike::create([
+                'user_id' => Auth::id(),
+                'comment_id' => $comment->id,
+            ]);
         }
 
-        CommentLike::create([
-             'user_id' => Auth::id(),
-             'comment_id' => $comment->id,
-        ]);
-
-        return response()->json(['message' => ''], 200);
-
+        return $comment;
     }
 
     /**
@@ -110,6 +108,5 @@ class CommentLikeController extends Controller
     public function destroy(CommentLike $comment_like)
     {
         $comment_like->delete();
-        return response()->json(['message' => 'destroy'], 200);
     }
 }

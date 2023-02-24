@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Post;
 
-class PostImage extends Model
+class PostAttachment extends Model
 {
     use HasFactory;
 
@@ -15,7 +15,7 @@ class PostImage extends Model
         'image_link',
     ];
 
-    protected $table = 'post_images';
+    protected $table = 'post_attachments';
 
     public function belongsToPost() {
         return $this->belongsTo(Post::class, 'post_id', 'id');
