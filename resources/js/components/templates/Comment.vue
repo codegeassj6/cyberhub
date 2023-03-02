@@ -1,6 +1,7 @@
 <template>
     <div>
-            <div class="d-flex flex-row mb-2" v-for="(comment, index) in comments" :key="index">
+        <div v-for="(comment, index) in comments" :key="index">
+            <div class="d-flex flex-row mb-2">
                 <img :src="'/storage/user/' + comment.user_details.id + '/img/' + comment.user_details.profile_img" width="50" height="50" class="rounded-image">
 
                 <div class="d-flex">
@@ -11,11 +12,10 @@
                         <div class="d-flex flex-row align-items-center">
                             <a role="button"
                                 class="me-2"
-                                :class="comment.authLikes == true ? 'text-primary' : 'text-secondary'"
+                                :class="comment.authLikes ? 'text-primary' : 'text-secondary'"
                                 @click="likeComment($event, comment)">
                                 Like
                             </a>
-
 
                             <a role="button" class="me-2 text-secondary">Reply</a>
                             <small>18 mins</small>
@@ -29,7 +29,7 @@
                             <i class="fa fa-ellipsis-h"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="triggerId">
-                            <a class="dropdown-item" role="button" @click="editComment(comment, post_id)">Edit</a>
+                            <a class="dropdown-item" role="button" @click="initEditComment(comment, post_id)">Edit</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" role="button" @click="deleteComment(comment)">Delete</a>
                         </div>
@@ -37,24 +37,47 @@
                 </div>
             </div>
 
-            <div class="card-footer border-0 px-3 py-3 bg-comment">
+            <!-- <div class="card-footer border-0 px-3 py-3 bg-comment">
                 <div class="d-flex flex-start w-100">
                     <img class="rounded-circle shadow-1-strong me-3"
                         :src="profileImage" alt="avatar" width="40"
                         height="40" />
                     <div class="form-outline w-100">
                         <div class="d-flex flex-wrap border-post">
-                            <div class="p-2 flex-fill bg-white" contenteditable="true" :id="`content_${post_id}`">
-
-                            </div>
+                            <div class="p-2 flex-fill bg-white" contenteditable="true" :id="`content_${post_id}`"></div>
                         </div>
                     </div>
                 </div>
+
                 <div class="float-end mb-3 mt-4">
-                    <button type="button" @click="postComment(post_id)" class="btn btn-primary btn-sm">Post comment</button>
-                    <button type="button" class="btn btn-danger btn-sm">Cancel</button>
+                    <button v-if="!comment.edit_mode" type="button" @click="postComment(post_id)" class="btn btn-primary btn-sm">Post comment</button>
+                    <button v-else type="button" @click="editComment(comment, post_id)" class="btn btn-primary btn-sm">Edit comment</button>
+                    <button v-if="comment.edit_mode" @click="cancelEditComment(comment, post_id)" type="button" class="btn btn-danger btn-sm">Cancel</button>
+                </div>
+            </div> -->
+
+        </div>
+
+        <div class="card-footer border-0 px-3 py-3 bg-comment">
+            <div class="d-flex flex-start w-100">
+                <img class="rounded-circle shadow-1-strong me-3"
+                    :src="profileImage" alt="avatar" width="40"
+                    height="40" />
+                <div class="form-outline w-100">
+                    <div class="d-flex flex-wrap border-post">
+                        <div class="p-2 flex-fill bg-white" contenteditable="true" :id="`content_${post_id}`"></div>
+                    </div>
                 </div>
             </div>
+
+            <div class="float-end mb-3 mt-4">
+                <button v-if="!edit.comment" type="button" @click="postComment(post_id)" class="btn btn-primary btn-sm">Post comment</button>
+
+                <button v-if="edit.comment" type="button" @click="editComment(post_id)" class="btn btn-primary btn-sm">Edit comment</button>
+                <button v-if="edit.comment" @click="cancelEditComment(post_id)" type="button" class="btn btn-danger btn-sm">Cancel</button>
+            </div>
+        </div>
+
     </div>
 </template>
 <script>
@@ -64,6 +87,9 @@ export default {
     data() {
         return {
             comments: '',
+            edit: {
+                comment: '',
+            }
         }
     },
     components: {
@@ -89,7 +115,7 @@ export default {
                     post_id: this.post_id,
                     comment: document.getElementById(`content_${post_id}`).innerText,
                 },
-                url: `/api/comment/store`,
+                url: `/api/comment`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
                 document.getElementById(`content_${post_id}`).innerText = '';
@@ -104,7 +130,7 @@ export default {
             axios({
                 method: 'post',
                 params: {id: data.id},
-                url: `/api/comment/like/store`,
+                url: `/api/comment/like`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
                if(e.target.classList.contains('text-secondary')) {
@@ -136,14 +162,41 @@ export default {
             });
         },
 
-        editComment(comment, post_id) {
+        editComment(post_id) {
+            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+            axios({
+                method: 'patch',
+                params: {
+                  message: document.getElementById(`content_${post_id}`).innerText
+                },
+                url: `/api/comment/${this.edit.comment.id}`,
+                headers: {Authorization: AuthStr}
+            }).then(res => {
+                // comment.message = document.getElementById(`content_${post_id}`).innerText;
+                // comment.edit_mode = 0;
+                this.comments.forEach((elem, index) => {
+                   if(elem == this.edit.comment) {
+                       this.comments[index].message = document.getElementById(`content_${post_id}`).innerText;
+                   }
+                });
+                this.edit.comment = '';
+                document.getElementById(`content_${post_id}`).innerText = '';
+            }).catch(err => {
+
+            });
+        },
+
+        initEditComment(comment, post_id) {
+            this.edit.comment = comment;
             comment.edit_mode = 1;
             document.getElementById(`content_${post_id}`).innerText = comment.message;
         },
 
-        // keyMessage(e) {
-        //     this.form.comment_message = e.target.innerText;
-        // }
+        cancelEditComment(post_id) {
+            document.getElementById(`content_${post_id}`).innerText = '';
+            // comment.edit_mode = 0;
+            this.edit.comment = '';
+        }
     },
 
     watch: {
@@ -159,7 +212,7 @@ export default {
 
     },
 
-    mounted() {
+    beforeMount() {
         const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
         axios({
             method: 'get',
@@ -171,6 +224,10 @@ export default {
         }).catch(err => {
 
         });
+    },
+
+    mounted() {
+
     },
 }
 </script>

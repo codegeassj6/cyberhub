@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             PostSeeder::class,
             GameSeeder::class,
             ProductSeeder::class,
-            ProductVariationSeeder::class,
+            ProductSizeSeeder::class,
         ]);
     }
 }

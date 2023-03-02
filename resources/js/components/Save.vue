@@ -76,7 +76,7 @@ export default {
             formData.append('file', this.input_file);
 
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-            axios.post(`/api/save/store`, formData, {
+            axios.post(`/api/save`, formData, {
                 headers: {
                     Authorization: AuthStr,
                 },

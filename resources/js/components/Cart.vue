@@ -156,25 +156,18 @@ export default {
     },
 
     methods: {
-
         increaseQuantity(item) {
-            if(document.getElementById('input_'+item.id).value < item.product_size_details.stock ) {
-                // document.getElementById('input_'+item.id).value ++;
+            if(item.quantity < item.product_size_details.stock ) {
                 item.quantity ++;
-                if(this.orders.includes(item.id)) {
-                    // this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) + item.product_size_details.price;
-                }
-
                 this.$store.commit('mutateCartCount', this.$store.getters.getCartCount + 1);
 
                 const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
                 axios({
                     method: 'patch',
                     params: {
-                        id: item.id,
-                        quantity: +document.getElementById('input_'+item.id).value
+                        quantity: item.quantity
                     },
-                    url: `/api/cart/update`,
+                    url: `/api/cart/${item.id}`,
                     headers: {Authorization: AuthStr}
                 }).then(res => {
                     console.log(res.data);
@@ -188,22 +181,17 @@ export default {
         },
 
         decreaseQuantity(item) {
-            if(document.getElementById('input_'+item.id).value > 1 ) {
-                // document.getElementById('input_'+item.id).value --;
+            if(item.quantity > 1 ) {
                 item.quantity --;
-                if(this.orders.includes(item.id)) {
-                    // this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) - item.product_size_details.price;
-                }
                 this.$store.commit('mutateCartCount', this.$store.getters.getCartCount - 1);
 
                 const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
                 axios({
                     method: 'patch',
                     params: {
-                        id: item.id,
-                        quantity: +document.getElementById('input_'+item.id).value
+                        quantity: item.quantity
                     },
-                    url: `/api/cart/update`,
+                    url: `/api/cart/${item.id}`,
                     headers: {Authorization: AuthStr}
                 }).then(res => {
                     console.log(res.data);
@@ -235,10 +223,9 @@ export default {
             axios({
                 method: 'patch',
                 params: {
-                    id: item.id,
-                    quantity: +document.getElementById('input_'+item.id).value
+                    quantity: item.quantity
                 },
-                url: `/api/cart/update`,
+                url: `/api/cart/${item.id}`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
                 console.log(res.data);
@@ -269,13 +256,10 @@ export default {
             }
 
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-            axios.delete(`/api/cart/`, {
+            axios.delete(`/api/cart/${item.id}`, {
                 headers: {
                     Authorization: AuthStr
                 },
-                data: {
-                    id: item.id
-                }
             }).then(res => {
 
             }).catch(err => {
@@ -324,7 +308,7 @@ export default {
                 axios({
                     method: 'post',
                     data: {id: this.orders},
-                    url: `/api/order/store`,
+                    url: `/api/order`,
                     headers: {Authorization: AuthStr}
                 }).then(res => {
                     this.orders = [];

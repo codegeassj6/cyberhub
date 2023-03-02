@@ -32,9 +32,6 @@
                                 <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                             </div>
 
-                            <!-- <a class="btn btn-primary btn-lg btn-block mb-2" href="/web/oauth/login/redirect/facebook" role="button">
-                                <i class="fa fa-facebook-f me-2"></i>Continue with Facebook
-                            </a> -->
                             <a class="btn btn-primary btn-lg btn-block mb-2" @click="OAuthLogin('facebook')" role="button">
                                 <i class="fa fa-facebook-f me-2"></i>Continue with Facebook
                             </a>
@@ -99,28 +96,25 @@ export default {
         },
 
         OAuthLogin(provider) {
-            new Promise((resolve, reject) => {
-                axios({
-                    method: 'get',
-                    url: `/api/oauth/login/redirect/${provider}`,
-                }).then(res => {console.log(res.data);
-                    // window.location.href = res.data.url;
-                    // this.$router.push({
-                    //     name: 'Callback_provider',
-                    //     params: {
-                    //         provider: provider,
-                    //     },
-                    //     query: {
-                    //         code: 'xyz',
-                    //     }
-                    // });
-                }).catch(err => {
+            // new Promise((resolve, reject) => {
+            //     axios({
+            //         method: 'get',
+            //         url: `/api/oauth/login/redirect/${provider}`,
+            //     }).then(res => {console.log(res.data);
+            //         window.location.href = res.data.url;
+            //         this.$router.push({
+            //             name: 'Callback_provider',
+            //             params: {
+            //                 provider: provider,
+            //             },
+            //             query: {
+            //                 code: 'xyz',
+            //             }
+            //         });
+            //     }).catch(err => {
 
-                });
-            });
-
-
-
+            //     });
+            // });
         }
     },
 

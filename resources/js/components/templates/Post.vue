@@ -164,7 +164,7 @@ export default {
                 params: {
                     id: data.id,
                 },
-                url: `/api/post/like/store`,
+                url: `/api/post/like`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
                 console.log(res.data);
@@ -173,16 +173,16 @@ export default {
             });
         },
 
-        deletePost(data) {
+        deletePost(data) {console.log(data.message);
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
             axios({
                 method: 'delete',
                 url: `/api/post/${data.id}`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
-                this.datas.forEach(elem => {
+                this.datas.forEach((elem, index) => {
                 if(elem.id == data.id) {
-                    this.datas.splice(elem, 1);
+                    this.datas.splice(index, 1);
                 }
             });
             }).catch(err => {
@@ -193,19 +193,6 @@ export default {
         emitData(data) {
             this.$emit('clicked', data);
         },
-
-        // getPost() {
-        //     const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-        //     axios({
-        //         method: 'get',
-        //         url: `/api/post`,
-        //         headers: {Authorization: AuthStr}
-        //     }).then(res => {
-        //         this.datas = res.data.data;console.log(this.datas);
-        //     }).catch(err => {
-
-        //     });
-        // },
     },
 
     watch: {

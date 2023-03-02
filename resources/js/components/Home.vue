@@ -346,10 +346,6 @@
                             </div>
                         </div>
 
-
-                        <!-- <div v-for="(data, index) in datas" :key="index">
-                            <Post :data="data" :index="index" @clicked="emitFromChild" />
-                        </div> -->
                         <Post @clicked="emitFromChild" :key="updateComponent.post" />
                     </div>
 
@@ -418,8 +414,6 @@ import Post from './templates/Post.vue';
 export default {
     data() {
         return {
-            // message: '',
-            datas: null,
             image: [],
             attach_exist: false,
             attach_images: [],
@@ -469,7 +463,7 @@ export default {
                         image: this.form_data,
                     },
                     data: this.form_data,
-                    url: `/api/post/store`,
+                    url: `/api/post`,
                     headers: {
                         Authorization: AuthStr,
                     }
@@ -528,10 +522,9 @@ export default {
                 method: 'patch',
                 params: {
                     message: this.$refs.edit_message.innerText,
-                    id: data.id,
                     image: this.edit.attachment,
                 },
-                url: `/api/post/update`,
+                url: `/api/post/${data.id}`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
                 document.getElementById(`post_message_${data.id}`).innerText = this.$refs.edit_message.innerText;

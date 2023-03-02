@@ -130,10 +130,9 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cart $cart)
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'id' => 'exists:carts|required',
             'quantity' => 'integer',
         ]);
 
@@ -141,7 +140,8 @@ class CartController extends Controller
             return response()->json(['message' => $validator->messages()->get('*')], 500);
         }
 
-        $cart = $cart::where('id', $request->input('id'))->where('user_id', Auth::id())->first();
+        $cart = Cart::whereId($id)->where('user_id', Auth::id())->firstOrFail();
+
         if($cart) {
             if($request->input('quantity') >= 1 && $request->input('quantity') <= $cart->getProductSize->stock) {
                 $cart->quantity = $request->input('quantity');
@@ -160,9 +160,9 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $cart = Cart::findOrFail($request->input('id'));
+        $cart = Cart::findOrFail($id);
         if($cart->user_id == Auth::user()->id) {
             $cart->delete();
         }

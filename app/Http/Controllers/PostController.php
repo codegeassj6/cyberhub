@@ -79,10 +79,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'id' => 'required',
+            // 'id' => 'required',
             'message' => 'string',
             'image.*' => 'integer|exists:post_images,id',
         ]);
@@ -92,7 +92,7 @@ class PostController extends Controller
         }
 
         $post = Post::where([
-            'id' => $request->input('id'),
+            'id' => $id,
             'user_id' => Auth::id(),
             ])->firstOrFail();
 

@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
             'stock' => rand(1,12),
             'name' => 'Piatos',
             'description' => Str::random(10),
-            'variation' => '',
+
             'rating' => 5,
             'image' => 'piatos.jpg',
         ]);
@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
             'stock' => rand(1,12),
             'name' => 'Sting',
             'description' => Str::random(10),
-            'variation' => '',
+
             'rating' => 5,
             'image' => 'sting.jpg',
         ]);
@@ -37,7 +37,7 @@ class ProductSeeder extends Seeder
             'stock' => rand(1,12),
             'name' => 'Cracklings',
             'description' => Str::random(10),
-            'variation' => '',
+
             'rating' => 5,
             'image' => 'cracklings.png',
         ]);
@@ -46,7 +46,7 @@ class ProductSeeder extends Seeder
             'stock' => rand(1,12),
             'name' => 'Extreme',
             'description' => Str::random(10),
-            'variation' => '',
+
             'rating' => 5,
             'image' => 'extreme.jpg',
         ]);
@@ -55,7 +55,7 @@ class ProductSeeder extends Seeder
             'stock' => rand(1,12),
             'name' => 'Coke',
             'description' => Str::random(10),
-            'variation' => '',
+
             'rating' => 5,
             'image' => 'coke12oz.jpg',
         ]);
@@ -64,7 +64,7 @@ class ProductSeeder extends Seeder
             'stock' => rand(1,12),
             'name' => 'Nature Spring Bottle Water',
             'description' => Str::random(10),
-            'variation' => '',
+
             'rating' => 5,
             'image' => 'naturespring500ml.jpg',
         ]);

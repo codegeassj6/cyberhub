@@ -3,10 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('login', 'App\Http\Controllers\AuthController@login');
     Route::post('logout', 'App\Http\Controllers\AuthController@logout');
@@ -17,22 +13,25 @@ Route::group(['prefix' => 'auth'], function ($router) {
 
 Route::group(['prefix' => 'post'], function ($router) {
     Route::get('/', 'App\Http\Controllers\PostController@index')->middleware('auth');
-    Route::post('/store', 'App\Http\Controllers\PostController@store')->middleware('auth');
+    Route::post('/', 'App\Http\Controllers\PostController@store')->middleware('auth');
     Route::get('/show/{id}', 'App\Http\Controllers\PostController@show')->middleware('auth');
     // Route::get('/edit/{id}', 'App\Http\Controllers\PostController@edit')->middleware('auth');
-    Route::patch('/update', 'App\Http\Controllers\PostController@update')->middleware('auth');
+    Route::patch('/{id}', 'App\Http\Controllers\PostController@update')->middleware('auth');
     Route::delete('/{id}', 'App\Http\Controllers\PostController@destroy')->middleware('auth');
 
     // PostLike section
-    Route::post('/like/store', 'App\Http\Controllers\PostLikeController@store')->middleware('auth');
+    Route::post('/like', 'App\Http\Controllers\PostLikeController@store')->middleware('auth');
 });
 
 Route::group(['prefix' => 'comment'], function ($router) {
     Route::get('/', 'App\Http\Controllers\CommentController@index')->middleware('auth');
-    Route::post('/store', 'App\Http\Controllers\CommentController@store')->middleware('auth');
+    Route::post('/', 'App\Http\Controllers\CommentController@store')->middleware('auth');
+    Route::patch('/{id}', 'App\Http\Controllers\CommentController@update')->middleware('auth');
     Route::delete('/{id}', 'App\Http\Controllers\CommentController@destroy')->middleware('auth');
+
+
     // CommentLike section
-    Route::post('/like/store', 'App\Http\Controllers\CommentLikeController@store')->middleware('auth');
+    Route::post('/like', 'App\Http\Controllers\CommentLikeController@store')->middleware('auth');
 });
 
 Route::group(['prefix' => 'games'], function ($router) {
@@ -49,19 +48,19 @@ Route::group(['prefix' => 'product'], function ($router) {
 });
 
 Route::group(['prefix' => 'cart'], function ($router) {
-    Route::post('/store', 'App\Http\Controllers\CartController@store')->middleware('auth');
     Route::get('/', 'App\Http\Controllers\CartController@index')->middleware('auth');
-    Route::delete('/', 'App\Http\Controllers\CartController@destroy')->middleware('auth');
-    Route::patch('/update', 'App\Http\Controllers\CartController@update')->middleware('auth');
+    Route::post('/', 'App\Http\Controllers\CartController@store')->middleware('auth');
+    Route::delete('/{id}', 'App\Http\Controllers\CartController@destroy')->middleware('auth');
+    Route::patch('/{id}', 'App\Http\Controllers\CartController@update')->middleware('auth');
 });
 
 Route::group(['prefix' => 'order'], function ($router) {
-    Route::post('/store', 'App\Http\Controllers\OrderController@store');
+    Route::post('/', 'App\Http\Controllers\OrderController@store');
 });
 
 Route::group(['prefix' => 'save'], function ($router) {
     Route::get('/', 'App\Http\Controllers\SaveController@index')->middleware('auth');
-    Route::post('/store', 'App\Http\Controllers\SaveController@store')->middleware('auth');
+    Route::post('/', 'App\Http\Controllers\SaveController@store')->middleware('auth');
     Route::get('/{id}', 'App\Http\Controllers\SaveController@show')->middleware('auth');
     Route::delete('/{id}', 'App\Http\Controllers\SaveController@destroy')->middleware('auth');
 });

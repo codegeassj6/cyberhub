@@ -114,12 +114,9 @@ export default {
                     quantity: document.getElementById('input_'+data.id).value,
                     product_size_id: data.default_product_size_id,
                 },
-                url: `/api/cart/store`,
+                url: `/api/cart`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
-                // const cart_count = +document.getElementById('input_'+data.id).value + this.$store.getters.getCartCount;
-                // this.$store.commit('mutateCartCount', cart_count);
-
                 this.$store.commit('mutateCartCount', res.data.quantity);
             }).catch(err => {
 

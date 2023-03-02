@@ -70,6 +70,7 @@ class CommentController extends Controller
 
         $comment->user_details = Auth::user();
         $comment->authLikes = 0;
+        $comment->edit_mode = 0;
         return $comment;
     }
 
@@ -102,9 +103,22 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCommentRequest $request, Comment $comment)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'message' => 'required|string'
+        ]);
+
+        if($validator->fails()) {
+            return response()->json(['message' => $validator->messages()->get('*')], 500);
+        }
+
+        $comment = Comment::whereId($id)->where('user_id', Auth::id())->firstOrFail();
+        $comment->update([
+            'message' => $request->input('message')
+        ]);
+
+        return $comment;
     }
 
     /**
@@ -116,6 +130,7 @@ class CommentController extends Controller
     public function destroy($id)
     {
         $comment = Comment::whereId($id)->firstOrFail();
+        $comment->getCommentLikes()->delete();
         $comment->delete();
         return response()->json(['message' => 'deleted'], 200);
     }

@@ -165,21 +165,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     increaseQuantity: function increaseQuantity(item) {
-      if (document.getElementById('input_' + item.id).value < item.product_size_details.stock) {
-        // document.getElementById('input_'+item.id).value ++;
+      if (item.quantity < item.product_size_details.stock) {
         item.quantity++;
-        if (this.orders.includes(item.id)) {
-          // this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) + item.product_size_details.price;
-        }
         this.$store.commit('mutateCartCount', this.$store.getters.getCartCount + 1);
         var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
         axios({
           method: 'patch',
           params: {
-            id: item.id,
-            quantity: +document.getElementById('input_' + item.id).value
+            quantity: item.quantity
           },
-          url: "/api/cart/update",
+          url: "/api/cart/".concat(item.id),
           headers: {
             Authorization: AuthStr
           }
@@ -191,21 +186,16 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     decreaseQuantity: function decreaseQuantity(item) {
-      if (document.getElementById('input_' + item.id).value > 1) {
-        // document.getElementById('input_'+item.id).value --;
+      if (item.quantity > 1) {
         item.quantity--;
-        if (this.orders.includes(item.id)) {
-          // this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) - item.product_size_details.price;
-        }
         this.$store.commit('mutateCartCount', this.$store.getters.getCartCount - 1);
         var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
         axios({
           method: 'patch',
           params: {
-            id: item.id,
-            quantity: +document.getElementById('input_' + item.id).value
+            quantity: item.quantity
           },
-          url: "/api/cart/update",
+          url: "/api/cart/".concat(item.id),
           headers: {
             Authorization: AuthStr
           }
@@ -235,10 +225,9 @@ __webpack_require__.r(__webpack_exports__);
       axios({
         method: 'patch',
         params: {
-          id: item.id,
-          quantity: +document.getElementById('input_' + item.id).value
+          quantity: item.quantity
         },
-        url: "/api/cart/update",
+        url: "/api/cart/".concat(item.id),
         headers: {
           Authorization: AuthStr
         }
@@ -267,12 +256,9 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
       var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-      axios["delete"]("/api/cart/destroy", {
+      axios["delete"]("/api/cart/".concat(item.id), {
         headers: {
           Authorization: AuthStr
-        },
-        data: {
-          id: item.id
         }
       }).then(function (res) {})["catch"](function (err) {});
     },
@@ -313,7 +299,7 @@ __webpack_require__.r(__webpack_exports__);
           data: {
             id: this.orders
           },
-          url: "/api/order/store",
+          url: "/api/order",
           headers: {
             Authorization: AuthStr
           }

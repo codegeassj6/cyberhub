@@ -83,7 +83,7 @@ __webpack_require__.r(__webpack_exports__);
       var formData = new FormData();
       formData.append('file', this.input_file);
       var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-      axios.post("/api/save/store", formData, {
+      axios.post("/api/save", formData, {
         headers: {
           Authorization: AuthStr
         }
@@ -181,7 +181,7 @@ __webpack_require__.r(__webpack_exports__);
       var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
       axios({
         method: 'delete',
-        url: "/api/save/destroy/" + data.id,
+        url: "/api/save/" + data.id,
         headers: {
           Authorization: AuthStr
         }
