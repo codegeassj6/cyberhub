@@ -94,13 +94,15 @@
                                             </div>
                                             <hr />
 
-                                            <div class="d-flex mb-4">
+                                            <div class="d-flex mb-2">
                                                 <div class="h5">Total</div>
                                                 <div class="ms-auto">
                                                     <span>P</span>
                                                     <span>{{computedTotal}}</span>
                                                 </div>
                                             </div>
+
+                                            <BillingCard class="mb-2" />
 
                                             <div class="text-center">
                                                 <button @click="submitOrder" class="btn btn-primary w-100">
@@ -121,7 +123,7 @@
     </div>
 </template>
 <script>
-//import name from './
+import BillingCard from './BillingCard.vue'
 
 export default {
     data() {
@@ -132,7 +134,7 @@ export default {
         }
     },
     components: {
-
+        BillingCard,
     },
 
     props: [],

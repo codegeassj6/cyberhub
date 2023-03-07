@@ -2,10 +2,7 @@ Task:
 edited post message in different
 
 COMMENT:
-comment like
-Delete also comment likes in post
-delete comment
-Edit Comment
 sort comment
 keep alive function
 socialite login fb
+payment stripe

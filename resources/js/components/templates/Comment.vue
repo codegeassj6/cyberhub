@@ -172,8 +172,6 @@ export default {
                 url: `/api/comment/${this.edit.comment.id}`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
-                // comment.message = document.getElementById(`content_${post_id}`).innerText;
-                // comment.edit_mode = 0;
                 this.comments.forEach((elem, index) => {
                    if(elem == this.edit.comment) {
                        this.comments[index].message = document.getElementById(`content_${post_id}`).innerText;
@@ -202,7 +200,7 @@ export default {
     watch: {
         $data: {
             handler: function(val, oldVal) {
-                console.log('watcher: ',val);
+                console.log('Watch Comment: ',val);
             },
             deep: true
         }

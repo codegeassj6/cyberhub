@@ -69,3 +69,7 @@ Route::group(['prefix' => 'oauth'], function ($router) {
     Route::get('/login/redirect/{provider}', 'App\Http\Controllers\OAuthController@redirectToProvider');
     Route::get('/login/callback/{provider}', 'App\Http\Controllers\OAuthController@handleProviderCallback');
 });
+
+Route::group(['prefix' => 'payment'], function ($router) {
+    Route::get('/', 'App\Http\Controllers\PaymentController@index');
+});

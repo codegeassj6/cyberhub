@@ -32,9 +32,10 @@
                                 <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                             </div>
 
-                            <a class="btn btn-primary btn-lg btn-block mb-2" @click="OAuthLogin('facebook')" role="button">
+                            <!-- <a class="btn btn-primary btn-lg btn-block mb-2" @click="OAuthLogin('facebook')" role="button">
                                 <i class="fa fa-facebook-f me-2"></i>Continue with Facebook
-                            </a>
+                            </a> -->
+                            <v-facebook-login app-id="966242223397117"></v-facebook-login>
 
                             <a class="btn btn-danger btn-lg mb-2 btn-block" href="#!" role="button">
                                 <i class="fa fa-google me-2"></i>Continue with Google
@@ -49,6 +50,7 @@
 </template>
 <script>
 import {login} from '../../helpers/auth';
+import VFacebookLogin from 'vue-facebook-login-component'
 
 export default {
     data() {
@@ -60,7 +62,7 @@ export default {
         }
     },
     components: {
-
+        VFacebookLogin,
     },
 
     props: [],

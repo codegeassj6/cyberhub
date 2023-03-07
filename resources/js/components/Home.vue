@@ -346,7 +346,7 @@
                             </div>
                         </div>
 
-                        <Post @clicked="emitFromChild" :key="updateComponent.post" />
+                        <Post :datas="posts" @clicked="emitFromChild" />
                     </div>
 
                     <div class="col-md-4">
@@ -374,10 +374,11 @@
                     <div class="modal-body">
                         <div class="card-body">
                             <div class="d-flex flex-column mb-2 rounded border">
-                                <div class="flex-fill p-2 min-100 div-like-pre"
+                                <div class="div-like-pre flex-fill p-2 min-100"
                                     contenteditable="true"
-                                    ref="edit_message"
-                                >{{ edit_data.message }}</div>
+                                    ref="edit_modal_contenteditable"
+                                    :id="`editable_modal`"
+                                >{{edit_data.message}}</div>
                             </div>
 
                             <div
@@ -418,14 +419,12 @@ export default {
             attach_exist: false,
             attach_images: [],
             form_data: '',
-
+            posts: '',
             edit_data: '',
             edit: {
                 attachment: [],
             },
-            updateComponent: {
-                post: 1,
-            },
+
         }
     },
 
@@ -453,7 +452,7 @@ export default {
             }
         },
 
-        postMessage() {
+        postMessage() {console.log(document.getElementById('editable').innerText);
             if(document.getElementById('editable').innerText.length || this.form_data) {
                 const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
                 axios({
@@ -467,13 +466,12 @@ export default {
                     headers: {
                         Authorization: AuthStr,
                     }
-                }).then(res => {console.log(res.data);
+                }).then(res => {
                     this.attach_exist = false;
                     this.form_data = '';
                     document.getElementById('editable').innerHTML = '';
                     this.message = '';
-                    this.updateComponent.post ++;
-                    // this.getPost();
+                    this.posts = res.data;
                 }).catch(err => {
                     console.log(err.data);
                 });
@@ -514,20 +512,22 @@ export default {
         emitFromChild(data) {
             this.edit_data = data;
             this.edit.attachment = [];
+            // document.getElementById('editable_modal').innerText = this.edit_data.message;
+            // this.$refs.edit_modal_contenteditable.innerText = this.edit_data.message;
         },
 
-        editPost(data) {
+        editPost(data) {console.log(document.getElementById('editable_modal').innerText); return
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
             axios({
                 method: 'patch',
                 params: {
-                    message: this.$refs.edit_message.innerText,
+                    message: this.$refs.edit_modal_contenteditable.innerText,
                     image: this.edit.attachment,
                 },
                 url: `/api/post/${data.id}`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
-                document.getElementById(`post_message_${data.id}`).innerText = this.$refs.edit_message.innerText;
+
             }).catch(err => {
 
             });
@@ -535,12 +535,12 @@ export default {
     },
 
     watch: {
-        // $data: {
-        //     handler: function(val, oldVal) {
-        //         console.log('watcher: ',val);
-        //     },
-        //     deep: true
-        // }
+        $data: {
+            handler: function(val, oldVal) {
+                console.log('Watch Home: ',val);
+            },
+            deep: true
+        }
     },
 
     updated() {
@@ -567,7 +567,19 @@ export default {
     // },
 
     mounted() {
+        if(this.$store.getters.currentUser.token) {
+            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+            axios({
+                method: 'get',
+                params: {id: 1},
+                url: `/api/post`,
+                headers: {Authorization: AuthStr}
+            }).then(res => {
+                this.posts = res.data;
+            }).catch(err => {
 
+            });
+        }
     },
 }
 </script>

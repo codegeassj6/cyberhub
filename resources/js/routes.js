@@ -83,12 +83,12 @@ export const routes = [
         props: true,
     },
 
-    {
-        path: "/post/edit/:id",
-        name: "EditPost",
-        component: () => import(/* webpackChunkName: "EditPost" */ "./components/EditPost.vue"),
-        meta: { requiresAuth: true },
-    },
+    // {
+    //     path: "/post/edit/:id",
+    //     name: "EditPost",
+    //     component: () => import(/* webpackChunkName: "EditPost" */ "./components/EditPost.vue"),
+    //     meta: { requiresAuth: true },
+    // },
 
 
     {

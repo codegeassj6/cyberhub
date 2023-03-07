@@ -1,6 +1,6 @@
 <template>
-    <div v-if="datas">
-        <div class="card mb-3" v-for="(data, index) in datas" :key="index">
+    <div>
+        <div class="card mb-3" v-for="(data, index) in datas.data" :key="index">
             <div class="d-flex p-2 px-3">
                 <div class="d-flex flex-row align-items-center">
                     <img :src="'/storage/user/' + data.get_user.id + '/img/' + data.get_user.profile_img" height="50" width="50">
@@ -9,11 +9,11 @@
                         <small class="text-mute">{{ data.created_time }}</small>
                     </div>
                 </div>
-                <div class="ms-auto mt-1 dropdown dropdown-menu-end" v-if="$store.getters.currentUser.id == data.user_id">
+                <div class="ms-auto mt-1 dropdown dropdown-menu-end" v-if="$store.getters.currentUser.id == data.user_id && $route.name == 'Home'">
                     <a role="button" class="p-2 text-secondary" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a role="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal" @click="emitData(data)">Edit</a>
+                            <a role="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal" @click="emitDataByClick(data)">Edit</a>
                         </li>
                         <li class="dropdown-divider"></li>
                         <li>
@@ -91,7 +91,12 @@
             <div class="px-2">
                 <hr />
                 <div class="btn-group d-flex mb-2" role="group">
-                    <a href="#!" class="btn btn-outline-secondary w-100" :class="data.get_post_likes.length ? 'text-primary' : ''" @click="likePost($event, data)">
+                    <a
+                        role="button"
+                        class="btn btn-outline-secondary w-100"
+                        :class="data.authLikes ? 'text-primary' : '' "
+                        @click="likePost($event, data)"
+                    >
                         <i class="fa fa-thumbs-up"></i>
                         <span>Like</span>
                     </a>
@@ -124,6 +129,7 @@
             </div>
         </div>
     </div>
+
 </template>
 <script>
 import Comment from './Comment.vue';
@@ -131,7 +137,7 @@ import Comment from './Comment.vue';
 export default {
     data() {
         return {
-            datas: '',
+            // datas: '',
         }
     },
     components: {
@@ -139,7 +145,7 @@ export default {
     },
 
     props: [
-
+        'datas'
     ],
 
     computed: {
@@ -152,11 +158,13 @@ export default {
         },
 
         likePost(e, data) {
-            if(e.target.classList.contains('text-primary')) {
-                e.target.classList.remove('text-primary');
-            } else {
-                e.target.classList.add('text-primary');
-            }
+            // if(e.target.classList.contains('text-primary')) {
+            //     e.target.classList.remove('text-primary');
+            // } else {
+            //     e.target.classList.add('text-primary');
+            // }
+
+            data.authLikes = !data.authLikes;
 
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
             axios({
@@ -167,30 +175,36 @@ export default {
                 url: `/api/post/like`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
-                console.log(res.data);
+
             }).catch(err => {
 
             });
         },
 
-        deletePost(data) {console.log(data.message);
+        deletePost(data) {
+
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
             axios({
                 method: 'delete',
                 url: `/api/post/${data.id}`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
-                this.datas.forEach((elem, index) => {
-                if(elem.id == data.id) {
-                    this.datas.splice(index, 1);
-                }
-            });
+                // this.datas.forEach((elem, index) => {console.log(elem);
+                //     if(elem.id == data.id) {
+                //         this.datas.splice(index, 1);
+                //     }
+                // });
+                this.datas.data.forEach((elem, index) => {
+                    if(elem.id == data.id) {
+                        this.datas.data.splice(index, 1);
+                    }
+                });
             }).catch(err => {
 
             });
         },
 
-        emitData(data) {
+        emitDataByClick(data) {
             this.$emit('clicked', data);
         },
     },
@@ -198,7 +212,7 @@ export default {
     watch: {
         $data: {
             handler: function(val, oldVal) {
-                console.log('watcher: ',val);
+                console.log('Watch Post: ',val);
             },
             deep: true
         }
@@ -209,16 +223,7 @@ export default {
     },
 
     mounted() {
-        const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-        axios({
-            method: 'get',
-            url: `/api/post`,
-            headers: {Authorization: AuthStr}
-        }).then(res => {
-            this.datas = res.data.data;
-        }).catch(err => {
 
-        });
     },
 }
 </script>

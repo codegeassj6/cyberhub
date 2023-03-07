@@ -22,6 +22,13 @@ class PostController extends Controller
             $value->created_time = Carbon::create($value->created_at)->toDayDateTimeString();
             $value->getAttachImages;
             $value->getPostLikes;
+
+            if($value->getPostLikes) {
+                $value->authLikes = $value->getPostLikes->where('user_id', Auth::id())->first() ? 1 : 0;
+            } else {
+                $value->authLikes = 0;
+            }
+
             return $value;
         });
 
@@ -30,11 +37,19 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = Post::where('id', $id)->first();
-        $post->getUser;
-        $post->created_time = Carbon::create($post->created_at)->toDayDateTimeString();
-        $post->getAttachImages;
-        $post->getPostLikes;
+        $post = Post::whereId($id)->paginate(1);
+        // $post->getUser;
+        // $post->created_time = Carbon::create($post->created_at)->toDayDateTimeString();
+        // $post->getAttachImages;
+        // $post->getPostLikes;
+        $post->getCollection()->transform(function($value) {
+            $value->getUser;
+            $value->created_time = Carbon::create($value->created_at)->toDayDateTimeString();
+            $value->getAttachImages;
+            $value->getPostLikes;
+            return $value;
+        });
+
 
         return $post;
     }

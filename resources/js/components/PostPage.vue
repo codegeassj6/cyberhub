@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="bg-dark vh-100" @click="goBack($event)" id="go_back" @keydown="goBack($event)">
-            <div class="container">
+            <div class="container" v-for="(data, index) in post.data" :key="index">
                 <div class="padding-intro">
                     <div class="card">
                         <div class="card-body">
@@ -18,17 +18,17 @@
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <div class="card">
-                                            <div class="position-relative" v-for="(image, index) in post.get_attach_images" :key="index">
+                                            <div class="position-relative" v-for="(image, index) in data.get_attach_images" :key="index">
                                                 <div v-if="currentImage == index">
                                                     <img :src="`/storage/post/img/${image.image_link}`" alt="" class="img-height img">
-                                                    <div class="position-absolute mx-0 absolute-center-left">
+                                                    <div class="position-absolute mx-0 absolute-center-left" v-if="currentImage == 1">
                                                         <a role="button" @click="prevImage" class="text-secondary">
                                                             <i class="fa fa-arrow-left fa-2x"></i>
                                                         </a>
                                                     </div>
 
-                                                    <div class="position-absolute mx-0 absolute-center-right">
-                                                        <a role="button" @click="nextImage" class="text-secondary">
+                                                    <div class="position-absolute mx-0 absolute-center-right" v-if="currentImage+1 != data.get_attach_images.length">
+                                                        <a role="button" @click="nextImage(data)" class="text-secondary">
                                                             <i class="fa fa-arrow-right fa-2x"></i>
                                                         </a>
                                                     </div>
@@ -36,14 +36,14 @@
                                             </div>
                                         </div>
 
-                                        <div class="text-center mt-1 h5" v-if="post.get_attach_images">
-                                            {{ currentImage + 1 }} / {{ post.get_attach_images.length }}
+                                        <div class="text-center mt-1 h5" v-if="data.get_attach_images">
+                                            {{ currentImage + 1 }} / {{ data.get_attach_images.length }}
                                         </div>
 
                                     </div>
 
                                     <div class="col-lg-4 pe-2 ps-0">
-                                        <Post :data="post" :index="0"  />
+                                        <Post :datas="post" />
                                     </div>
                                 </div>
 
@@ -81,14 +81,14 @@ export default {
     },
 
     methods: {
-        prevImage() {
+        prevImage(data) {
             if(this.currentImage != 0) {
                 this.currentImage --;
             }
         },
 
-        nextImage() {
-            if(this.post.get_attach_images.length - 1 > this.currentImage) {
+        nextImage(data) {
+            if(data.get_attach_images.length - 1 > this.currentImage) {
                 this.currentImage ++;
             }
         },
@@ -103,7 +103,7 @@ export default {
     watch: {
         $data: {
             handler: function(val, oldVal) {
-                console.log('watcher: ',val);
+                console.log('Watch PostPage: ',val);
             },
             deep: true
         }
@@ -131,7 +131,7 @@ export default {
             headers: {Authorization: AuthStr}
         }).then(res => {
             this.post = res.data;
-            document.getElementById(this.post.id).focus();
+            console.log(this.post);
         }).catch(err => {
 
         });

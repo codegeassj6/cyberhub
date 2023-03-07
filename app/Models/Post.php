@@ -39,8 +39,7 @@ class Post extends Model
     }
 
     public function getPostLikes() {
-        return $this->hasMany(PostLike::class, 'post_id')->where('user_id', Auth::id());
+        return $this->hasMany(PostLike::class, 'post_id');
     }
-
 
 }
