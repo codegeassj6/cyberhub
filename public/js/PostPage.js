@@ -331,7 +331,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   updated: function updated() {},
-  beforeMount: function beforeMount() {
+  beforeMount: function beforeMount() {},
+  mounted: function mounted() {
     var _this4 = this;
     var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
     axios({
@@ -346,8 +347,7 @@ __webpack_require__.r(__webpack_exports__);
     }).then(function (res) {
       _this4.comments = res.data;
     })["catch"](function (err) {});
-  },
-  mounted: function mounted() {}
+  }
 });
 
 /***/ }),
@@ -363,6 +363,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Comment_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Comment.vue */ "./resources/js/components/templates/Comment.vue");
+//
 //
 //
 //
@@ -514,12 +515,6 @@ __webpack_require__.r(__webpack_exports__);
       return "/storage/post/img/".concat(image_link);
     },
     likePost: function likePost(e, data) {
-      // if(e.target.classList.contains('text-primary')) {
-      //     e.target.classList.remove('text-primary');
-      // } else {
-      //     e.target.classList.add('text-primary');
-      // }
-
       data.authLikes = !data.authLikes;
       var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
       axios({
@@ -543,11 +538,6 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: AuthStr
         }
       }).then(function (res) {
-        // this.datas.forEach((elem, index) => {console.log(elem);
-        //     if(elem.id == data.id) {
-        //         this.datas.splice(index, 1);
-        //     }
-        // });
         _this.datas.data.forEach(function (elem, index) {
           if (elem.id == data.id) {
             _this.datas.data.splice(index, 1);
@@ -1868,23 +1858,7 @@ var staticRenderFns = [
               [_vm._v("Top Comments")]
             ),
             _vm._v(" "),
-            _c("ul", { staticClass: "dropdown-menu" }, [
-              _c("li", [
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item", attrs: { href: "#" } },
-                  [_vm._v("Latest Comments")]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item", attrs: { href: "#" } },
-                  [_vm._v("Old Comments")]
-                ),
-              ]),
-            ]),
+            _c("ul", { staticClass: "dropdown-menu" }),
           ]),
         ]),
       ]

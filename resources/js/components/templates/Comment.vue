@@ -193,6 +193,10 @@ export default {
     },
 
     beforeMount() {
+
+    },
+
+    mounted() {
         const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
         axios({
             method: 'get',
@@ -204,10 +208,6 @@ export default {
         }).catch(err => {
 
         });
-    },
-
-    mounted() {
-
     },
 }
 </script>

@@ -14,15 +14,15 @@ use Carbon;
 
 class PostController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        if($request->input('sort')) {
-            $post = Post::orderBy('created_at', $request->input('sort'))->paginate(5);
-        } else {
-            $post = Post::orderBy('created_at', 'desc')->paginate(5);
-        }
+        // if($request->input('sort')) {
+        //     $post = Post::orderBy('created_at', $request->input('sort'))->paginate(5);
+        // } else {
+        //     $post = Post::orderBy('created_at', 'desc')->paginate(5);
+        // }
 
-
+        $post = Post::orderBy('created_at', 'desc')->paginate(5);
         $post->getCollection()->transform(function($value) {
             $value->getUser;
             $value->created_time = Carbon::create($value->created_at)->toDayDateTimeString();

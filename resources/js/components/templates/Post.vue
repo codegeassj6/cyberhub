@@ -115,8 +115,9 @@
                         <div class="dropdown dropdown-menu-end">
                             <a href="" class="dropdown-toggle" data-bs-toggle="dropdown">Top Comments</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Latest Comments</a></li>
-                                <li><a class="dropdown-item" href="#">Old Comments</a></li>
+                                <!-- <li><a class="dropdown-item" role="button" disabled>Top Comments</a></li
+                                <li><a class="dropdown-item" role="button">Latest Comments</a></li>
+                                <li><a class="dropdown-item" role="button">Old Comments</a></li> -->
                             </ul>
                         </div>
                     </div>
@@ -158,12 +159,6 @@ export default {
         },
 
         likePost(e, data) {
-            // if(e.target.classList.contains('text-primary')) {
-            //     e.target.classList.remove('text-primary');
-            // } else {
-            //     e.target.classList.add('text-primary');
-            // }
-
             data.authLikes = !data.authLikes;
 
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
@@ -182,18 +177,12 @@ export default {
         },
 
         deletePost(data) {
-
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
             axios({
                 method: 'delete',
                 url: `/api/post/${data.id}`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
-                // this.datas.forEach((elem, index) => {console.log(elem);
-                //     if(elem.id == data.id) {
-                //         this.datas.splice(index, 1);
-                //     }
-                // });
                 this.datas.data.forEach((elem, index) => {
                     if(elem.id == data.id) {
                         this.datas.data.splice(index, 1);

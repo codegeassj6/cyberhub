@@ -452,7 +452,7 @@ export default {
             }
         },
 
-        postMessage() {console.log(document.getElementById('editable').innerText);
+        postMessage() {
             if(document.getElementById('editable').innerText.length || this.form_data) {
                 const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
                 axios({
@@ -470,10 +470,10 @@ export default {
                     this.attach_exist = false;
                     this.form_data = '';
                     document.getElementById('editable').innerHTML = '';
-                    this.message = '';
+                    // this.message = '';
                     this.posts = res.data;
                 }).catch(err => {
-                    console.log(err.data);
+
                 });
             }
 
