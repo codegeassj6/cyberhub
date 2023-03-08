@@ -210,25 +210,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 //import name from './
 
@@ -242,7 +223,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   components: {},
-  props: ['post_id'],
+  props: ['post_id'
+  // 'comments'
+  ],
+
   computed: {
     profileImage: function profileImage() {
       return this.$store.getters.currentUser.profile_img ? '/storage/user/' + this.$store.getters.currentUser.id + '/img/' + this.$store.getters.currentUser.profile_img : 'https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp';
@@ -1268,50 +1252,52 @@ var render = function () {
               ]),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "ms-auto" }, [
-              _c("div", { staticClass: "dropdown dropdown-menu-end" }, [
-                _vm._m(0, true),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "dropdown-menu",
-                    attrs: { "aria-labelledby": "triggerId" },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "dropdown-item",
-                        attrs: { role: "button" },
-                        on: {
-                          click: function ($event) {
-                            return _vm.initEditComment(comment, _vm.post_id)
-                          },
-                        },
-                      },
-                      [_vm._v("Edit")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "dropdown-divider" }),
+            comment.user_id == _vm.$store.getters.currentUser.id
+              ? _c("div", { staticClass: "ms-auto" }, [
+                  _c("div", { staticClass: "dropdown dropdown-menu-end" }, [
+                    _vm._m(0, true),
                     _vm._v(" "),
                     _c(
-                      "a",
+                      "div",
                       {
-                        staticClass: "dropdown-item",
-                        attrs: { role: "button" },
-                        on: {
-                          click: function ($event) {
-                            return _vm.deleteComment(comment)
-                          },
-                        },
+                        staticClass: "dropdown-menu",
+                        attrs: { "aria-labelledby": "triggerId" },
                       },
-                      [_vm._v("Delete")]
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { role: "button" },
+                            on: {
+                              click: function ($event) {
+                                return _vm.initEditComment(comment, _vm.post_id)
+                              },
+                            },
+                          },
+                          [_vm._v("Edit")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "dropdown-divider" }),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { role: "button" },
+                            on: {
+                              click: function ($event) {
+                                return _vm.deleteComment(comment)
+                              },
+                            },
+                          },
+                          [_vm._v("Delete")]
+                        ),
+                      ]
                     ),
-                  ]
-                ),
-              ]),
-            ]),
+                  ]),
+                ])
+              : _vm._e(),
           ]),
         ])
       }),

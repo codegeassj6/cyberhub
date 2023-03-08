@@ -512,11 +512,11 @@ export default {
         emitFromChild(data) {
             this.edit_data = data;
             this.edit.attachment = [];
-            // document.getElementById('editable_modal').innerText = this.edit_data.message;
-            // this.$refs.edit_modal_contenteditable.innerText = this.edit_data.message;
+            document.getElementById('editable_modal').innerText = this.edit_data.message;
+            this.$refs.edit_modal_contenteditable.innerText = this.edit_data.message;
         },
 
-        editPost(data) {console.log(document.getElementById('editable_modal').innerText); return
+        editPost(data) {
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
             axios({
                 method: 'patch',

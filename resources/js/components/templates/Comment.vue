@@ -23,7 +23,7 @@
                     </div>
                 </div>
 
-                <div class="ms-auto">
+                <div class="ms-auto" v-if="comment.user_id == $store.getters.currentUser.id">
                     <div class="dropdown dropdown-menu-end">
                         <a role="button" id="triggerId" class="p-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-ellipsis-h"></i>
@@ -36,25 +36,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- <div class="card-footer border-0 px-3 py-3 bg-comment">
-                <div class="d-flex flex-start w-100">
-                    <img class="rounded-circle shadow-1-strong me-3"
-                        :src="profileImage" alt="avatar" width="40"
-                        height="40" />
-                    <div class="form-outline w-100">
-                        <div class="d-flex flex-wrap border-post">
-                            <div class="p-2 flex-fill bg-white" contenteditable="true" :id="`content_${post_id}`"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="float-end mb-3 mt-4">
-                    <button v-if="!comment.edit_mode" type="button" @click="postComment(post_id)" class="btn btn-primary btn-sm">Post comment</button>
-                    <button v-else type="button" @click="editComment(comment, post_id)" class="btn btn-primary btn-sm">Edit comment</button>
-                    <button v-if="comment.edit_mode" @click="cancelEditComment(comment, post_id)" type="button" class="btn btn-danger btn-sm">Cancel</button>
-                </div>
-            </div> -->
 
         </div>
 
@@ -98,6 +79,7 @@ export default {
 
     props: [
         'post_id',
+        // 'comments'
     ],
 
     computed: {
