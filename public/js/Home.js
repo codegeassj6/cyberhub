@@ -378,51 +378,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -497,33 +452,6 @@ __webpack_require__.r(__webpack_exports__);
       if (index > -1) {
         this.attach_images.splice(index, 1);
       }
-    },
-    removeAttachInEdit: function removeAttachInEdit(e, img) {
-      this.edit.attachment.push(img.id);
-      var index = this.edit_data.get_attach_images.indexOf(img);
-      if (index > -1) {
-        this.edit_data.get_attach_images.splice(index, 1);
-      }
-    },
-    emitFromChild: function emitFromChild(data) {
-      this.edit_data = data;
-      this.edit.attachment = [];
-      document.getElementById('editable_modal').innerText = this.edit_data.message;
-      this.$refs.edit_modal_contenteditable.innerText = this.edit_data.message;
-    },
-    editPost: function editPost(data) {
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-      axios({
-        method: 'patch',
-        params: {
-          message: this.$refs.edit_modal_contenteditable.innerText,
-          image: this.edit.attachment
-        },
-        url: "/api/post/".concat(data.id),
-        headers: {
-          Authorization: AuthStr
-        }
-      }).then(function (res) {})["catch"](function (err) {});
     }
   },
   watch: {
@@ -974,8 +902,20 @@ __webpack_require__.r(__webpack_exports__);
         });
       })["catch"](function (err) {});
     },
-    emitDataByClick: function emitDataByClick(data) {
-      this.$emit('clicked', data);
+    latestComments: function latestComments(data) {
+      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      axios({
+        method: 'get',
+        params: {
+          post_id: data.id
+        },
+        url: "/api/comment",
+        headers: {
+          Authorization: AuthStr
+        }
+      }).then(function (res) {
+        console.log(res.data);
+      })["catch"](function (err) {});
     }
   },
   watch: {
@@ -1543,128 +1483,12 @@ var render = function () {
                       ]),
                     ]),
                     _vm._v(" "),
-                    _c("Post", {
-                      attrs: { datas: _vm.posts },
-                      on: { clicked: _vm.emitFromChild },
-                    }),
+                    _c("Post", { attrs: { datas: _vm.posts } }),
                   ],
                   1
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-4" }),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal", attrs: { id: "editModal" } }, [
-              _c("div", { staticClass: "modal-dialog modal-lg" }, [
-                _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(7),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "modal-body" }, [
-                    _c(
-                      "div",
-                      { staticClass: "card-body" },
-                      [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "d-flex flex-column mb-2 rounded border",
-                          },
-                          [
-                            _c(
-                              "div",
-                              {
-                                ref: "edit_modal_contenteditable",
-                                staticClass:
-                                  "div-like-pre flex-fill p-2 min-100",
-                                attrs: {
-                                  contenteditable: "true",
-                                  id: "editable_modal",
-                                },
-                              },
-                              [_vm._v(_vm._s(_vm.edit_data.message))]
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm._l(
-                          _vm.edit_data.get_attach_images,
-                          function (img, index) {
-                            return _c(
-                              "div",
-                              {
-                                key: index,
-                                ref: "display_attachment",
-                                refInFor: true,
-                                staticClass:
-                                  "card d-inline-flex w-25 position-relative dropbox-img",
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "img",
-                                  attrs: {
-                                    src: "/storage/post/img/" + img.image_link,
-                                    alt: "",
-                                  },
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "position-absolute img_attach_remove",
-                                  },
-                                  [
-                                    _c("button", {
-                                      staticClass:
-                                        "btn btn-close border bg-primary",
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.removeAttachInEdit(
-                                            $event,
-                                            img
-                                          )
-                                        },
-                                      },
-                                    }),
-                                  ]
-                                ),
-                              ]
-                            )
-                          }
-                        ),
-                      ],
-                      2
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "modal-footer" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "button", "data-bs-dismiss": "modal" },
-                        on: {
-                          click: function ($event) {
-                            $event.preventDefault()
-                            return _vm.editPost(_vm.edit_data)
-                          },
-                        },
-                      },
-                      [_vm._v("Save")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger",
-                        attrs: { type: "button", "data-bs-dismiss": "modal" },
-                      },
-                      [_vm._v("Cancel")]
-                    ),
-                  ]),
-                ]),
               ]),
             ]),
           ],
@@ -2298,19 +2122,6 @@ var staticRenderFns = [
       ]),
     ])
   },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h4", { staticClass: "modal-title" }, [_vm._v("Modal Heading")]),
-      _vm._v(" "),
-      _c("button", {
-        staticClass: "btn-close",
-        attrs: { type: "button", "data-bs-dismiss": "modal" },
-      }),
-    ])
-  },
 ]
 render._withStripped = true
 
@@ -2622,25 +2433,23 @@ var render = function () {
                   _vm._m(0, true),
                   _vm._v(" "),
                   _c("ul", { staticClass: "dropdown-menu" }, [
-                    _c("li", [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "dropdown-item",
-                          attrs: {
-                            role: "button",
-                            "data-bs-toggle": "modal",
-                            "data-bs-target": "#editModal",
-                          },
-                          on: {
-                            click: function ($event) {
-                              return _vm.emitDataByClick(data)
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: {
+                              to: "post/" + data.id + "/edit/",
+                              role: "button",
                             },
                           },
-                        },
-                        [_vm._v("Edit")]
-                      ),
-                    ]),
+                          [_vm._v("Edit")]
+                        ),
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c("li", { staticClass: "dropdown-divider" }),
                     _vm._v(" "),
@@ -2959,7 +2768,51 @@ var render = function () {
             ]
           ),
           _vm._v(" "),
-          _vm._m(2, true),
+          _c(
+            "div",
+            {
+              staticClass:
+                "d-flex justify-content-between align-items-center px-2",
+            },
+            [
+              _vm._m(2, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "d-flex flex-row muted-color" }, [
+                _c("div", { staticClass: "dropdown dropdown-menu-end" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "dropdown-toggle",
+                      attrs: { href: "", "data-bs-toggle": "dropdown" },
+                    },
+                    [_vm._v("Top Comments")]
+                  ),
+                  _vm._v(" "),
+                  _c("ul", { staticClass: "dropdown-menu" }, [
+                    _vm._m(3, true),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          attrs: { role: "button" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.latestComments(data)
+                            },
+                          },
+                        },
+                        [_vm._v("Latest Comments")]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(4, true),
+                  ]),
+                ]),
+              ]),
+            ]
+          ),
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
@@ -3005,30 +2858,29 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "d-flex justify-content-between align-items-center px-2" },
-      [
-        _c(
-          "div",
-          { staticClass: "d-flex flex-row icons d-flex align-items-center" },
-          [_c("i", { staticClass: "fa fa-thumbs-up" })]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "d-flex flex-row muted-color" }, [
-          _c("div", { staticClass: "dropdown dropdown-menu-end" }, [
-            _c(
-              "a",
-              {
-                staticClass: "dropdown-toggle",
-                attrs: { href: "", "data-bs-toggle": "dropdown" },
-              },
-              [_vm._v("Top Comments")]
-            ),
-            _vm._v(" "),
-            _c("ul", { staticClass: "dropdown-menu" }),
-          ]),
-        ]),
-      ]
+      { staticClass: "d-flex flex-row icons d-flex align-items-center" },
+      [_c("i", { staticClass: "fa fa-thumbs-up" })]
     )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { staticClass: "dropdown-item", attrs: { role: "button" } }, [
+        _vm._v("Top Comments"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { staticClass: "dropdown-item", attrs: { role: "button" } }, [
+        _vm._v("Old Comments"),
+      ]),
+    ])
   },
 ]
 render._withStripped = true

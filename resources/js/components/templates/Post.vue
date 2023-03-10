@@ -13,7 +13,7 @@
                     <a role="button" class="p-2 text-secondary" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a role="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal" @click="emitDataByClick(data)">Edit</a>
+                            <router-link :to="`post/${data.id}/edit/`" role="button" class="dropdown-item">Edit</router-link>
                         </li>
                         <li class="dropdown-divider"></li>
                         <li>
@@ -115,9 +115,9 @@
                         <div class="dropdown dropdown-menu-end">
                             <a href="" class="dropdown-toggle" data-bs-toggle="dropdown">Top Comments</a>
                             <ul class="dropdown-menu">
-                                <!-- <li><a class="dropdown-item" role="button" disabled>Top Comments</a></li
-                                <li><a class="dropdown-item" role="button">Latest Comments</a></li>
-                                <li><a class="dropdown-item" role="button">Old Comments</a></li> -->
+                                <li><a class="dropdown-item" role="button">Top Comments</a></li>
+                                <li><a class="dropdown-item" @click="latestComments(data)" role="button">Latest Comments</a></li>
+                                <li><a class="dropdown-item" role="button">Old Comments</a></li>
                             </ul>
                         </div>
                     </div>
@@ -193,9 +193,20 @@ export default {
             });
         },
 
-        emitDataByClick(data) {
-            this.$emit('clicked', data);
-        },
+        latestComments(data) {
+            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+            axios({
+                method: 'get',
+                params: {post_id: data.id},
+                url: `/api/comment`,
+                headers: {Authorization: AuthStr}
+            }).then(res => {
+                console.log(res.data);
+            }).catch(err => {
+
+            });
+        }
+
     },
 
     watch: {

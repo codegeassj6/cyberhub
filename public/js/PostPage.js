@@ -541,8 +541,20 @@ __webpack_require__.r(__webpack_exports__);
         });
       })["catch"](function (err) {});
     },
-    emitDataByClick: function emitDataByClick(data) {
-      this.$emit('clicked', data);
+    latestComments: function latestComments(data) {
+      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      axios({
+        method: 'get',
+        params: {
+          post_id: data.id
+        },
+        url: "/api/comment",
+        headers: {
+          Authorization: AuthStr
+        }
+      }).then(function (res) {
+        console.log(res.data);
+      })["catch"](function (err) {});
     }
   },
   watch: {
@@ -1452,25 +1464,23 @@ var render = function () {
                   _vm._m(0, true),
                   _vm._v(" "),
                   _c("ul", { staticClass: "dropdown-menu" }, [
-                    _c("li", [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "dropdown-item",
-                          attrs: {
-                            role: "button",
-                            "data-bs-toggle": "modal",
-                            "data-bs-target": "#editModal",
-                          },
-                          on: {
-                            click: function ($event) {
-                              return _vm.emitDataByClick(data)
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: {
+                              to: "post/" + data.id + "/edit/",
+                              role: "button",
                             },
                           },
-                        },
-                        [_vm._v("Edit")]
-                      ),
-                    ]),
+                          [_vm._v("Edit")]
+                        ),
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c("li", { staticClass: "dropdown-divider" }),
                     _vm._v(" "),
@@ -1789,7 +1799,51 @@ var render = function () {
             ]
           ),
           _vm._v(" "),
-          _vm._m(2, true),
+          _c(
+            "div",
+            {
+              staticClass:
+                "d-flex justify-content-between align-items-center px-2",
+            },
+            [
+              _vm._m(2, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "d-flex flex-row muted-color" }, [
+                _c("div", { staticClass: "dropdown dropdown-menu-end" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "dropdown-toggle",
+                      attrs: { href: "", "data-bs-toggle": "dropdown" },
+                    },
+                    [_vm._v("Top Comments")]
+                  ),
+                  _vm._v(" "),
+                  _c("ul", { staticClass: "dropdown-menu" }, [
+                    _vm._m(3, true),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          attrs: { role: "button" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.latestComments(data)
+                            },
+                          },
+                        },
+                        [_vm._v("Latest Comments")]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(4, true),
+                  ]),
+                ]),
+              ]),
+            ]
+          ),
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
@@ -1835,30 +1889,29 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "d-flex justify-content-between align-items-center px-2" },
-      [
-        _c(
-          "div",
-          { staticClass: "d-flex flex-row icons d-flex align-items-center" },
-          [_c("i", { staticClass: "fa fa-thumbs-up" })]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "d-flex flex-row muted-color" }, [
-          _c("div", { staticClass: "dropdown dropdown-menu-end" }, [
-            _c(
-              "a",
-              {
-                staticClass: "dropdown-toggle",
-                attrs: { href: "", "data-bs-toggle": "dropdown" },
-              },
-              [_vm._v("Top Comments")]
-            ),
-            _vm._v(" "),
-            _c("ul", { staticClass: "dropdown-menu" }),
-          ]),
-        ]),
-      ]
+      { staticClass: "d-flex flex-row icons d-flex align-items-center" },
+      [_c("i", { staticClass: "fa fa-thumbs-up" })]
     )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { staticClass: "dropdown-item", attrs: { role: "button" } }, [
+        _vm._v("Top Comments"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { staticClass: "dropdown-item", attrs: { role: "button" } }, [
+        _vm._v("Old Comments"),
+      ]),
+    ])
   },
 ]
 render._withStripped = true

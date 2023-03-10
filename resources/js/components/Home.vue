@@ -346,7 +346,7 @@
                             </div>
                         </div>
 
-                        <Post :datas="posts" @clicked="emitFromChild" />
+                        <Post :datas="posts" />
                     </div>
 
                     <div class="col-md-4">
@@ -360,51 +360,6 @@
                 data-ad-slot="7486431136">
             </Adsense> -->
 
-            <div class="modal" id="editModal">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Modal Heading</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <div class="card-body">
-                            <div class="d-flex flex-column mb-2 rounded border">
-                                <div class="div-like-pre flex-fill p-2 min-100"
-                                    contenteditable="true"
-                                    ref="edit_modal_contenteditable"
-                                    :id="`editable_modal`"
-                                >{{edit_data.message}}</div>
-                            </div>
-
-                            <div
-                                class="card d-inline-flex w-25 position-relative dropbox-img"
-                                v-for="(img, index) in edit_data.get_attach_images" :key="index"
-                                ref="display_attachment"
-                            >
-                                <img :src="'/storage/post/img/'+img.image_link" class="img" alt="">
-                                <div class="position-absolute img_attach_remove">
-                                    <button class="btn btn-close border bg-primary" @click="removeAttachInEdit($event, img)"></button>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click.prevent="editPost(edit_data)">Save</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                    </div>
-
-                    </div>
-                </div>
-            </div>
         </template>
     </div>
 
@@ -498,39 +453,6 @@ export default {
                 this.attach_images.splice(index, 1);
             }
         },
-
-        removeAttachInEdit(e, img) {
-            this.edit.attachment.push(img.id);
-
-            var index = this.edit_data.get_attach_images.indexOf(img);
-            if (index > -1) {
-                this.edit_data.get_attach_images.splice(index, 1);
-            }
-        },
-
-        emitFromChild(data) {
-            this.edit_data = data;
-            this.edit.attachment = [];
-            document.getElementById('editable_modal').innerText = this.edit_data.message;
-            this.$refs.edit_modal_contenteditable.innerText = this.edit_data.message;
-        },
-
-        editPost(data) {
-            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-            axios({
-                method: 'patch',
-                params: {
-                    message: this.$refs.edit_modal_contenteditable.innerText,
-                    image: this.edit.attachment,
-                },
-                url: `/api/post/${data.id}`,
-                headers: {Authorization: AuthStr}
-            }).then(res => {
-
-            }).catch(err => {
-
-            });
-        }
     },
 
     watch: {

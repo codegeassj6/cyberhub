@@ -5875,15 +5875,16 @@ var routes = [{
     requiresAuth: true
   },
   props: true
-},
-// {
-//     path: "/post/edit/:id",
-//     name: "EditPost",
-//     component: () => import(/* webpackChunkName: "EditPost" */ "./components/EditPost.vue"),
-//     meta: { requiresAuth: true },
-// },
-
-{
+}, {
+  path: "/post/:id/edit",
+  name: "EditPost",
+  component: function component() {
+    return __webpack_require__.e(/*! import() | EditPost */ "EditPost").then(__webpack_require__.bind(__webpack_require__, /*! ./components/EditPost.vue */ "./resources/js/components/EditPost.vue"));
+  },
+  meta: {
+    requiresAuth: true
+  }
+}, {
   path: "*",
   name: "PageNotFound",
   component: function component() {
@@ -46499,7 +46500,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
 /******/ 			if (chunkId === "Home") return "js/Home.js";
-/******/ 			if ({"Login":1,"Oauth":1,"Register":1,"Store":1,"Account":1,"UpdateAccount":1,"PostPage":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"Login":1,"Oauth":1,"Register":1,"Store":1,"Account":1,"UpdateAccount":1,"PostPage":1,"EditPost":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			if (chunkId === "Game") return "js/Game.js";
 /******/ 			if (chunkId === "Cart") return "js/Cart.js";
 /******/ 			if (chunkId === "Save") return "js/Save.js";

@@ -87,6 +87,10 @@ class PostController extends Controller
         return $this->index();
     }
 
+    public function edit(Request $request) {
+
+    }
+
     /**
      * Update the specified resource in storage.
      *
