@@ -339,7 +339,7 @@
 
                                     <div class="ms-auto">
                                         <div class="">
-                                            <button class="btn btn-primary btn-sm px-5 shadow" @click="postMessage">Post</button>
+                                            <button class="btn btn-primary btn-sm px-5 shadow" @click="createPost">Post</button>
                                         </div>
                                     </div>
                                 </div>
@@ -452,7 +452,7 @@ export default {
             }
         },
 
-        postMessage() {
+        createPost() {
             if(document.getElementById('editable').innerText.length || this.form_data) {
                 const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
                 axios({
@@ -470,7 +470,6 @@ export default {
                     this.attach_exist = false;
                     this.form_data = '';
                     document.getElementById('editable').innerHTML = '';
-                    // this.message = '';
                     this.posts = res.data;
                 }).catch(err => {
 
@@ -567,7 +566,7 @@ export default {
     // },
 
     mounted() {
-        if(this.$store.getters.currentUser.token) {
+        if(this.$store.getters.currentUser) {
             const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
             axios({
                 method: 'get',

@@ -223,10 +223,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   components: {},
-  props: ['post_id'
-  // 'comments'
-  ],
-
+  props: ['post_id'],
   computed: {
     profileImage: function profileImage() {
       return this.$store.getters.currentUser.profile_img ? '/storage/user/' + this.$store.getters.currentUser.id + '/img/' + this.$store.getters.currentUser.profile_img : 'https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp';
@@ -248,7 +245,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (res) {
         document.getElementById("content_".concat(post_id)).innerText = '';
-        _this.comments.push(res.data);
+        _this.comments.data.push(res.data);
       })["catch"](function (err) {});
     },
     likeComment: function likeComment(e, data) {
@@ -282,9 +279,9 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: AuthStr
         }
       }).then(function (res) {
-        _this2.comments.forEach(function (elem, index) {
+        _this2.comments.data.forEach(function (elem, index) {
           if (elem.id == comment.id) {
-            _this2.comments.splice(index, 1);
+            _this2.comments.data.splice(index, 1);
           }
         });
       })["catch"](function (err) {});
@@ -302,9 +299,9 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: AuthStr
         }
       }).then(function (res) {
-        _this3.comments.forEach(function (elem, index) {
+        _this3.comments.data.forEach(function (elem, index) {
           if (elem == _this3.edit.comment) {
-            _this3.comments[index].message = document.getElementById("content_".concat(post_id)).innerText;
+            _this3.comments.data[index].message = document.getElementById("content_".concat(post_id)).innerText;
           }
         });
         _this3.edit.comment = '';
@@ -331,7 +328,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   updated: function updated() {},
-  beforeMount: function beforeMount() {},
   mounted: function mounted() {
     var _this4 = this;
     var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
@@ -1170,7 +1166,7 @@ var render = function () {
   return _c(
     "div",
     [
-      _vm._l(_vm.comments, function (comment, index) {
+      _vm._l(_vm.comments.data, function (comment, index) {
         return _c("div", { key: index }, [
           _c("div", { staticClass: "d-flex flex-row mb-2" }, [
             _c("img", {
@@ -1800,7 +1796,7 @@ var render = function () {
           _c(
             "div",
             { staticClass: "comments" },
-            [_c("Comment", { attrs: { post_id: data.id } })],
+            [_c("Comment", { key: data.id, attrs: { post_id: data.id } })],
             1
           ),
         ]),

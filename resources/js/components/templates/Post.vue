@@ -125,7 +125,7 @@
 
                 <hr>
                 <div class="comments">
-                    <Comment :post_id="data.id" />
+                    <Comment :post_id="data.id" :key="data.id" />
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="(comment, index) in comments" :key="index">
+        <div v-for="(comment, index) in comments.data" :key="index">
             <div class="d-flex flex-row mb-2">
                 <img :src="'/storage/user/' + comment.user_details.id + '/img/' + comment.user_details.profile_img" width="50" height="50" class="rounded-image">
 
@@ -78,8 +78,7 @@ export default {
     },
 
     props: [
-        'post_id',
-        // 'comments'
+        'post_id'
     ],
 
     computed: {
@@ -101,7 +100,7 @@ export default {
                 headers: {Authorization: AuthStr}
             }).then(res => {
                 document.getElementById(`content_${post_id}`).innerText = '';
-                this.comments.push(res.data);
+                this.comments.data.push(res.data);
             }).catch(err => {
 
             });
@@ -134,9 +133,9 @@ export default {
                 url: `/api/comment/${comment.id}`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
-                this.comments.forEach((elem, index) => {
+                this.comments.data.forEach((elem, index) => {
                     if(elem.id == comment.id) {
-                        this.comments.splice(index, 1);
+                        this.comments.data.splice(index, 1);
                     }
                 });
             }).catch(err => {
@@ -154,9 +153,9 @@ export default {
                 url: `/api/comment/${this.edit.comment.id}`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
-                this.comments.forEach((elem, index) => {
+                this.comments.data.forEach((elem, index) => {
                    if(elem == this.edit.comment) {
-                       this.comments[index].message = document.getElementById(`content_${post_id}`).innerText;
+                       this.comments.data[index].message = document.getElementById(`content_${post_id}`).innerText;
                    }
                 });
                 this.edit.comment = '';
@@ -189,10 +188,6 @@ export default {
     },
 
     updated() {
-
-    },
-
-    beforeMount() {
 
     },
 
