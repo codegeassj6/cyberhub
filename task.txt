@@ -2,7 +2,6 @@ Task:
 edited post message in different
 
 COMMENT:
-sort comment
 keep alive function
 socialite login fb
 payment stripe

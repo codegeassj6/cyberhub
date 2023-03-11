@@ -77,9 +77,17 @@ export default {
 
     },
 
-    props: [
-        'post_id'
-    ],
+    props: {
+        post_id: {
+            type: Number,
+        },
+        sort: {
+            type: String,
+        },
+        sort_id: {
+            type: Number,
+        }
+    },
 
     computed: {
         profileImage() {
@@ -173,18 +181,30 @@ export default {
 
         cancelEditComment(post_id) {
             document.getElementById(`content_${post_id}`).innerText = '';
-            // comment.edit_mode = 0;
             this.edit.comment = '';
-        }
+        },
+
+        getComments() {
+            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+            axios({
+                method: 'get',
+                params: {
+                    post_id: this.post_id,
+                    sort: this.sort,
+                },
+                url: `/api/comment/`,
+                headers: {Authorization: AuthStr}
+            }).then(res => {
+                this.comments = res.data;
+            }).catch(err => {
+
+            });
+        },
+
     },
 
     watch: {
-        $data: {
-            handler: function(val, oldVal) {
-                console.log('Watch Comment: ',val);
-            },
-            deep: true
-        }
+
     },
 
     updated() {
@@ -192,17 +212,7 @@ export default {
     },
 
     mounted() {
-        const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-        axios({
-            method: 'get',
-            params: {post_id: this.post_id},
-            url: `/api/comment/`,
-            headers: {Authorization: AuthStr}
-        }).then(res => {
-            this.comments = res.data;
-        }).catch(err => {
-
-        });
+        this.getComments(this.sort);
     },
 }
 </script>

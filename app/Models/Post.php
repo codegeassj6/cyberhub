@@ -35,7 +35,7 @@ class Post extends Model
     }
 
     public function getComments() {
-        return $this->hasMany(Comment::class, 'post_id')->orderBy('created_at', 'desc');
+        return $this->hasMany(Comment::class, 'post_id');
     }
 
     public function getPostLikes() {

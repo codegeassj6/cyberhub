@@ -26,12 +26,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 //import name from './
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {};
+    return {
+      post: ''
+    };
   },
   components: {},
   props: [],
@@ -40,14 +56,28 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     $data: {
       handler: function handler(val, oldVal) {
-        console.log('watcher: ', val);
+        console.log('Edit Post Watcher: ', val);
       },
       deep: true
     }
   },
   updated: function updated() {},
   beforeMounted: function beforeMounted() {},
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    var _this = this;
+    if (this.$store.getters.currentUser) {
+      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      axios({
+        method: 'get',
+        url: "/api/post/show/".concat(this.$route.params.id),
+        headers: {
+          Authorization: AuthStr
+        }
+      }).then(function (res) {
+        _this.post = res.data;
+      })["catch"](function (err) {});
+    }
+  }
 });
 
 /***/ }),
@@ -213,9 +243,25 @@ var staticRenderFns = [
       _c("div", { staticClass: "bg-dark bg-gradient" }, [
         _c("div", { staticClass: "space-intro" }, [
           _c("div", { staticClass: "container" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-body" }, [
-                _vm._v("\n                        s\n                    "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-9" }, [
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card-body" }, [
+                    _vm._v(
+                      "\n                                s\n                            "
+                    ),
+                  ]),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-3" }, [
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card-body" }, [
+                    _vm._v(
+                      "\n                                s\n                            "
+                    ),
+                  ]),
+                ]),
               ]),
             ]),
           ]),

@@ -19,7 +19,14 @@ class CommentController extends Controller
     public function index(Request $request)
     {
         $post = Post::where('id', $request->input('post_id'))->firstOrFail();
-        $comments = $post->getComments()->paginate(3);
+        if($request->input('sort') == 'latest') {
+            $comments = $post->getComments()->orderBy('created_at', 'desc')->paginate(4);
+        } elseif($request->input('sort') == 'oldest') {
+            $comments = $post->getComments()->paginate(4);
+        } else {
+            $comments = $post->getComments()->orderBy('created_at', 'desc')->paginate(4);
+        }
+
         $comments->transform(function($value) {
             $value->user_details = User::where('id', $value->user_id)->first();
             $value->getCommentLikes;

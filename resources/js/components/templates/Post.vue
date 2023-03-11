@@ -113,11 +113,10 @@
                     </div>
                     <div class="d-flex flex-row muted-color">
                         <div class="dropdown dropdown-menu-end">
-                            <a href="" class="dropdown-toggle" data-bs-toggle="dropdown">Top Comments</a>
+                            <a href="" class="dropdown-toggle" data-bs-toggle="dropdown">Latest Comments</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" role="button">Top Comments</a></li>
                                 <li><a class="dropdown-item" @click="latestComments(data)" role="button">Latest Comments</a></li>
-                                <li><a class="dropdown-item" role="button">Old Comments</a></li>
+                                <li><a class="dropdown-item" @click="oldComments(data)" role="button">Old Comments</a></li>
                             </ul>
                         </div>
                     </div>
@@ -125,7 +124,7 @@
 
                 <hr>
                 <div class="comments">
-                    <Comment :post_id="data.id" :key="data.id" />
+                    <Comment :post_id="data.id" :key="data.id " />
                 </div>
             </div>
         </div>
@@ -139,6 +138,9 @@ export default {
     data() {
         return {
             // datas: '',
+            data_pass: {
+                sort: '',
+            },
         }
     },
     components: {
@@ -194,18 +196,12 @@ export default {
         },
 
         latestComments(data) {
-            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-            axios({
-                method: 'get',
-                params: {post_id: data.id},
-                url: `/api/comment`,
-                headers: {Authorization: AuthStr}
-            }).then(res => {
-                console.log(res.data);
-            }).catch(err => {
 
-            });
-        }
+        },
+
+        oldComments(data) {
+
+        },
 
     },
 
@@ -217,6 +213,8 @@ export default {
             deep: true
         }
     },
+
+
 
     updated() {
 

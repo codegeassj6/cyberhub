@@ -3,11 +3,25 @@
     <div class="bg-dark bg-gradient">
         <div class="space-intro">
             <div class="container">
-                <div class="card">
-                    <div class="card-body">
-                        s
+                <div class="row">
+                    <div class="col-9">
+                        <div class="card">
+                            <div class="card-body">
+                                s
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body">
+                                s
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
         </div>
     </div>
@@ -19,7 +33,7 @@
 export default {
     data() {
         return {
-
+            post: '',
         }
     },
     components: {
@@ -39,7 +53,7 @@ export default {
     watch: {
         $data: {
             handler: function(val, oldVal) {
-                console.log('watcher: ',val);
+                console.log('Edit Post Watcher: ',val);
             },
             deep: true
         }
@@ -54,7 +68,18 @@ export default {
     },
 
     mounted() {
+        if(this.$store.getters.currentUser) {
+            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+            axios({
+                method: 'get',
+                url: `/api/post/show/${this.$route.params.id}`,
+                headers: {Authorization: AuthStr}
+            }).then(res => {
+                this.post = res.data;
+            }).catch(err => {
 
+            });
+        }
     },
 }
 </script>

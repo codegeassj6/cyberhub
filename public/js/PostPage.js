@@ -223,7 +223,17 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   components: {},
-  props: ['post_id'],
+  props: {
+    post_id: {
+      type: Number
+    },
+    sort: {
+      type: String
+    },
+    sort_id: {
+      type: Number
+    }
+  },
   computed: {
     profileImage: function profileImage() {
       return this.$store.getters.currentUser.profile_img ? '/storage/user/' + this.$store.getters.currentUser.id + '/img/' + this.$store.getters.currentUser.profile_img : 'https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp';
@@ -315,34 +325,30 @@ __webpack_require__.r(__webpack_exports__);
     },
     cancelEditComment: function cancelEditComment(post_id) {
       document.getElementById("content_".concat(post_id)).innerText = '';
-      // comment.edit_mode = 0;
       this.edit.comment = '';
+    },
+    getComments: function getComments() {
+      var _this4 = this;
+      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      axios({
+        method: 'get',
+        params: {
+          post_id: this.post_id,
+          sort: this.sort
+        },
+        url: "/api/comment/",
+        headers: {
+          Authorization: AuthStr
+        }
+      }).then(function (res) {
+        _this4.comments = res.data;
+      })["catch"](function (err) {});
     }
   },
-  watch: {
-    $data: {
-      handler: function handler(val, oldVal) {
-        console.log('Watch Comment: ', val);
-      },
-      deep: true
-    }
-  },
+  watch: {},
   updated: function updated() {},
   mounted: function mounted() {
-    var _this4 = this;
-    var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-    axios({
-      method: 'get',
-      params: {
-        post_id: this.post_id
-      },
-      url: "/api/comment/",
-      headers: {
-        Authorization: AuthStr
-      }
-    }).then(function (res) {
-      _this4.comments = res.data;
-    })["catch"](function (err) {});
+    this.getComments(this.sort);
   }
 });
 
@@ -492,13 +498,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       // datas: '',
+      data_pass: {
+        sort: ''
+      }
     };
   },
   components: {
@@ -541,21 +549,8 @@ __webpack_require__.r(__webpack_exports__);
         });
       })["catch"](function (err) {});
     },
-    latestComments: function latestComments(data) {
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-      axios({
-        method: 'get',
-        params: {
-          post_id: data.id
-        },
-        url: "/api/comment",
-        headers: {
-          Authorization: AuthStr
-        }
-      }).then(function (res) {
-        console.log(res.data);
-      })["catch"](function (err) {});
-    }
+    latestComments: function latestComments(data) {},
+    oldComments: function oldComments(data) {}
   },
   watch: {
     $data: {
@@ -1816,12 +1811,10 @@ var render = function () {
                       staticClass: "dropdown-toggle",
                       attrs: { href: "", "data-bs-toggle": "dropdown" },
                     },
-                    [_vm._v("Top Comments")]
+                    [_vm._v("Latest Comments")]
                   ),
                   _vm._v(" "),
                   _c("ul", { staticClass: "dropdown-menu" }, [
-                    _vm._m(3, true),
-                    _vm._v(" "),
                     _c("li", [
                       _c(
                         "a",
@@ -1838,7 +1831,21 @@ var render = function () {
                       ),
                     ]),
                     _vm._v(" "),
-                    _vm._m(4, true),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          attrs: { role: "button" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.oldComments(data)
+                            },
+                          },
+                        },
+                        [_vm._v("Old Comments")]
+                      ),
+                    ]),
                   ]),
                 ]),
               ]),
@@ -1892,26 +1899,6 @@ var staticRenderFns = [
       { staticClass: "d-flex flex-row icons d-flex align-items-center" },
       [_c("i", { staticClass: "fa fa-thumbs-up" })]
     )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { staticClass: "dropdown-item", attrs: { role: "button" } }, [
-        _vm._v("Top Comments"),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { staticClass: "dropdown-item", attrs: { role: "button" } }, [
-        _vm._v("Old Comments"),
-      ]),
-    ])
   },
 ]
 render._withStripped = true
