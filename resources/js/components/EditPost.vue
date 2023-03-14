@@ -4,15 +4,7 @@
         <div class="space-intro">
             <div class="container">
                 <div class="row">
-                    <div class="col-9">
-                        <div class="card">
-                            <div class="card-body">
-                                s
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-3">
+                    <div class="col-md-6 offset-md-3">
                         <div class="card">
                             <div class="card-body">
                                 s

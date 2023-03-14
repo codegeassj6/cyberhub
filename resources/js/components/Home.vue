@@ -292,7 +292,7 @@
                                 <div class="h6">What's up</div>
                             </div>
                             <div class="card-body">
-                                <div class="d-flex flex-column mb-2 rounded border">
+                                <div class="d-flex flex-column mb-2 rounded">
                                     <div class="flex-fill p-2 min-100"
                                         id="editable"
                                         contenteditable="true">
@@ -350,15 +350,57 @@
                     </div>
 
                     <div class="col-md-4">
-
+                         <!-- <Adsense
+                            data-ad-client="ca-pub-5828491790124517"
+                            data-ad-slot="7486431136">
+                        </Adsense> -->
                     </div>
                 </div>
             </div>
 
-            <!-- <Adsense
-                data-ad-client="ca-pub-5828491790124517"
-                data-ad-slot="7486431136">
-            </Adsense> -->
+            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Post</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column mb-2 rounded border">
+                                        <div class="flex-fill div-like-pre p-2 min-100" contenteditable="true" ref="trial" @keyup="updateEditPostMessage">{{ edit_post.data.message }}</div>
+                                    </div>
+
+                                    <div :class="edit_post.data.get_attach_images ? 'd-flex' : 'd-none'">
+                                        <div class="flex-fill">
+                                            <div class="d-flex">
+                                                <div
+                                                    class="card w-25 position-relative dropbox-img me-2"
+                                                    v-for="(img) in edit_post.data.get_attach_images" :key="img.id"
+                                                >
+                                                    <img :src="`/storage/post/img/${img.image_link}`" class="img" alt="">
+                                                    <div class="position-absolute img_attach_remove">
+                                                        <button class="btn btn-close border bg-primary" @click="removeAttachInEditPost(img)"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="updatePost">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
         </template>
     </div>
@@ -375,13 +417,16 @@ export default {
             attach_images: [],
             form_data: '',
             posts: '',
-            edit_data: '',
-            edit: {
-                attachment: [],
+            edit_post: {
+                attachment_remove: [],
+                data: '',
+                message: '',
             },
 
         }
     },
+
+    name: 'HomeComponent',
 
     components: {
         Post,
@@ -453,6 +498,36 @@ export default {
                 this.attach_images.splice(index, 1);
             }
         },
+
+        updatePost() {
+            const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+            axios({
+                method: 'patch',
+                params: {
+                    message: this.edit_post.message,
+                    image: this.edit_post.attachment_remove,
+                },
+                url: `/api/post/${this.edit_post.data.id}`,
+                headers: {Authorization: AuthStr}
+            }).then(res => {
+                document.getElementById(`post_message_${this.edit_post.data.id}`).innerText = this.edit_post.message;
+            }).catch(err => {
+
+            });
+        },
+
+        updateEditPostMessage(e) {
+            this.edit_post.message = e.target.innerText;
+        },
+
+        removeAttachInEditPost(img)  {
+            this.edit_post.attachment_remove.push(img.id);
+            this.edit_post.data.get_attach_images.forEach((elem, index) => {
+                if(elem.id == img.id) {
+                    this.edit_post.data.get_attach_images.splice(index, 1);
+                }
+            });
+        }
     },
 
     watch: {
@@ -478,14 +553,6 @@ export default {
             vm.prevRoute = from;
         });
     },
-
-    // activated() {
-    //     console.log('activate');
-    // },
-
-    // deactivated() {
-    //     console.log('deactivate');
-    // },
 
     mounted() {
         if(this.$store.getters.currentUser) {

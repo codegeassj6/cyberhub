@@ -48,11 +48,10 @@ class PostLikeController extends Controller
                 'user_id' => Auth::id(),
                 'post_id' => $post->id,
             ]);
+            return $likes;
         } else {
            return $this->destroy($exist);
         }
-
-        return response()->json(['message' => 'created'], 200);
     }
 
     /**

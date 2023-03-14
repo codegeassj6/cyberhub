@@ -201,10 +201,21 @@ export default {
             });
         },
 
+        forceUpdateComponent() {
+            this.$forceUpdate();
+        }
+
     },
 
     watch: {
-
+        $props: {
+            handler: function(val, oldVal) {
+                if(this.sort_id == this.post_id) {
+                    this.getComments(this.sort);
+                }
+            },
+            deep: true
+        },
     },
 
     updated() {
@@ -222,3 +233,4 @@ export default {
     background: #f1f1f1;
 }
 </style>
+

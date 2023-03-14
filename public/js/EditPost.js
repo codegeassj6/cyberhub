@@ -32,14 +32,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 //import name from './
 
@@ -244,17 +236,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "space-intro" }, [
           _c("div", { staticClass: "container" }, [
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-9" }, [
-                _c("div", { staticClass: "card" }, [
-                  _c("div", { staticClass: "card-body" }, [
-                    _vm._v(
-                      "\n                                s\n                            "
-                    ),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-3" }, [
+              _c("div", { staticClass: "col-md-6 offset-md-3" }, [
                 _c("div", { staticClass: "card" }, [
                   _c("div", { staticClass: "card-body" }, [
                     _vm._v(

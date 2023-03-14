@@ -378,6 +378,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -388,12 +430,14 @@ __webpack_require__.r(__webpack_exports__);
       attach_images: [],
       form_data: '',
       posts: '',
-      edit_data: '',
-      edit: {
-        attachment: []
+      edit_post: {
+        attachment_remove: [],
+        data: '',
+        message: ''
       }
     };
   },
+  name: 'Home',
   components: {
     Post: _templates_Post_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -452,6 +496,35 @@ __webpack_require__.r(__webpack_exports__);
       if (index > -1) {
         this.attach_images.splice(index, 1);
       }
+    },
+    updatePost: function updatePost() {
+      var _this2 = this;
+      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      axios({
+        method: 'patch',
+        params: {
+          message: this.edit_post.message,
+          image: this.edit_post.attachment_remove
+        },
+        url: "/api/post/".concat(this.edit_post.data.id),
+        headers: {
+          Authorization: AuthStr
+        }
+      }).then(function (res) {
+        document.getElementById("post_message_".concat(_this2.edit_post.data.id)).innerText = _this2.edit_post.message;
+      })["catch"](function (err) {});
+    },
+    updateEditPostMessage: function updateEditPostMessage(e) {
+      this.edit_post.message = e.target.innerText;
+    },
+    removeAttachInEditPost: function removeAttachInEditPost(img) {
+      var _this3 = this;
+      this.edit_post.attachment_remove.push(img.id);
+      this.edit_post.data.get_attach_images.forEach(function (elem, index) {
+        if (elem.id == img.id) {
+          _this3.edit_post.data.get_attach_images.splice(index, 1);
+        }
+      });
     }
   },
   watch: {
@@ -470,14 +543,14 @@ __webpack_require__.r(__webpack_exports__);
       vm.prevRoute = from;
     });
   },
-  // activated() {
-  //     console.log('activate');
-  // },
-  // deactivated() {
-  //     console.log('deactivate');
-  // },
+  activated: function activated() {
+    console.log('activate');
+  },
+  deactivated: function deactivated() {
+    console.log('deactivate');
+  },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this4 = this;
     if (this.$store.getters.currentUser) {
       var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
       axios({
@@ -490,7 +563,7 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: AuthStr
         }
       }).then(function (res) {
-        _this2.posts = res.data;
+        _this4.posts = res.data;
       })["catch"](function (err) {});
     }
   }
@@ -704,9 +777,21 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         _this4.comments = res.data;
       })["catch"](function (err) {});
+    },
+    forceUpdateComponent: function forceUpdateComponent() {
+      this.$forceUpdate();
     }
   },
-  watch: {},
+  watch: {
+    $props: {
+      handler: function handler(val, oldVal) {
+        if (this.sort_id == this.post_id) {
+          this.getComments(this.sort);
+        }
+      },
+      deep: true
+    }
+  },
   updated: function updated() {},
   mounted: function mounted() {
     this.getComments(this.sort);
@@ -859,6 +944,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -866,7 +952,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       // datas: '',
       data_pass: {
-        sort: ''
+        sort: '',
+        sort_id: null
       }
     };
   },
@@ -910,8 +997,19 @@ __webpack_require__.r(__webpack_exports__);
         });
       })["catch"](function (err) {});
     },
-    latestComments: function latestComments(data) {},
-    oldComments: function oldComments(data) {}
+    latestComments: function latestComments(data) {
+      this.data_pass.sort = 'latest';
+      this.data_pass.sort_id = data.id;
+    },
+    oldComments: function oldComments(data) {
+      this.data_pass.sort = 'oldest';
+      this.data_pass.sort_id = data.id;
+    },
+    updateParentEditPost: function updateParentEditPost(data) {
+      this.$parent.edit_post.data = data;
+      this.$parent.edit_post.message = data.message;
+      this.$parent.edit_post.attachment_remove = [];
+    }
   },
   watch: {
     $data: {
@@ -1486,6 +1584,137 @@ var render = function () {
                 _c("div", { staticClass: "col-md-4" }),
               ]),
             ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "modal fade",
+                attrs: {
+                  id: "editModal",
+                  tabindex: "-1",
+                  "aria-labelledby": "exampleModalLabel",
+                  "aria-hidden": "true",
+                },
+              },
+              [
+                _c("div", { staticClass: "modal-dialog modal-lg" }, [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("div", { staticClass: "card mb-4" }, [
+                        _c("div", { staticClass: "card-body" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex flex-column mb-2 rounded border",
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  ref: "trial",
+                                  staticClass:
+                                    "flex-fill div-like-pre p-2 min-100",
+                                  attrs: { contenteditable: "true" },
+                                  on: { keyup: _vm.updateEditPostMessage },
+                                },
+                                [_vm._v(_vm._s(_vm.edit_post.data.message))]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              class: _vm.edit_post.data.get_attach_images
+                                ? "d-flex"
+                                : "d-none",
+                            },
+                            [
+                              _c("div", { staticClass: "flex-fill" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "d-flex" },
+                                  _vm._l(
+                                    _vm.edit_post.data.get_attach_images,
+                                    function (img) {
+                                      return _c(
+                                        "div",
+                                        {
+                                          key: img.id,
+                                          staticClass:
+                                            "card w-25 position-relative dropbox-img me-2",
+                                        },
+                                        [
+                                          _c("img", {
+                                            staticClass: "img",
+                                            attrs: {
+                                              src:
+                                                "/storage/post/img/" +
+                                                img.image_link,
+                                              alt: "",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "position-absolute img_attach_remove",
+                                            },
+                                            [
+                                              _c("button", {
+                                                staticClass:
+                                                  "btn btn-close border bg-primary",
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.removeAttachInEditPost(
+                                                      img
+                                                    )
+                                                  },
+                                                },
+                                              }),
+                                            ]
+                                          ),
+                                        ]
+                                      )
+                                    }
+                                  ),
+                                  0
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-footer" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary",
+                          attrs: { type: "button", "data-bs-dismiss": "modal" },
+                        },
+                        [_vm._v("Cancel")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "button", "data-bs-dismiss": "modal" },
+                          on: { click: _vm.updatePost },
+                        },
+                        [_vm._v("Save changes")]
+                      ),
+                    ]),
+                  ]),
+                ]),
+              ]
+            ),
           ],
     ],
     2
@@ -2117,6 +2346,27 @@ var staticRenderFns = [
       ]),
     ])
   },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h1",
+        { staticClass: "modal-title fs-5", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Edit Post")]
+      ),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "btn-close",
+        attrs: {
+          type: "button",
+          "data-bs-dismiss": "modal",
+          "aria-label": "Close",
+        },
+      }),
+    ])
+  },
 ]
 render._withStripped = true
 
@@ -2428,23 +2678,25 @@ var render = function () {
                   _vm._m(0, true),
                   _vm._v(" "),
                   _c("ul", { staticClass: "dropdown-menu" }, [
-                    _c(
-                      "li",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: {
-                              to: "post/" + data.id + "/edit/",
-                              role: "button",
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          attrs: {
+                            role: "button",
+                            "data-bs-toggle": "modal",
+                            "data-bs-target": "#editModal",
+                          },
+                          on: {
+                            click: function ($event) {
+                              return _vm.updateParentEditPost(data)
                             },
                           },
-                          [_vm._v("Edit")]
-                        ),
-                      ],
-                      1
-                    ),
+                        },
+                        [_vm._v("Edit")]
+                      ),
+                    ]),
                     _vm._v(" "),
                     _c("li", { staticClass: "dropdown-divider" }),
                     _vm._v(" "),
@@ -2826,7 +3078,16 @@ var render = function () {
           _c(
             "div",
             { staticClass: "comments" },
-            [_c("Comment", { key: data.id, attrs: { post_id: data.id } })],
+            [
+              _c("Comment", {
+                key: data.id,
+                attrs: {
+                  post_id: data.id,
+                  sort: _vm.data_pass.sort,
+                  sort_id: _vm.data_pass.sort_id,
+                },
+              }),
+            ],
             1
           ),
         ]),

@@ -1,7 +1,6 @@
 Task:
-edited post message in different
 
-COMMENT:
-keep alive function
-socialite login fb
-payment stripe
+
+Home:
+Allow upload Video
+Rename image name into file
