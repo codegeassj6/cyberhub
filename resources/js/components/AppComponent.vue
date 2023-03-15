@@ -3,19 +3,9 @@
         <Nav />
 
         <div>
-            <!-- <router-view :key="$router.path" /> -->
-
             <keep-alive include="HomeComponent">
                 <router-view :key="$route.fullPath"></router-view>
             </keep-alive>
-
-            <!-- <router-view v-slot="{ component }">
-                <keep-alive include="Home">
-                    <component :is="component" />
-                </keep-alive>
-            </router-view> -->
-
-
         </div>
         <template v-if="!$store.getters.currentUser">
             <Footer />

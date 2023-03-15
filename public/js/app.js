@@ -5333,16 +5333,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -5779,7 +5769,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5787,7 +5776,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       image: [],
       attach_exist: false,
-      attach_images: [],
+      attach_files: [],
+      // attach: {
+      //     files: [],
+      //     type: [],
+      // },
       form_data: '',
       posts: '',
       edit_post: {
@@ -5824,7 +5817,7 @@ __webpack_require__.r(__webpack_exports__);
           method: 'POST',
           params: {
             message: document.getElementById('editable').innerText,
-            image: this.form_data
+            files: this.form_data
           },
           data: this.form_data,
           url: "/api/post",
@@ -5832,6 +5825,7 @@ __webpack_require__.r(__webpack_exports__);
             Authorization: AuthStr
           }
         }).then(function (res) {
+          console.log(res.data);
           _this.attach_exist = false;
           _this.form_data = '';
           document.getElementById('editable').innerHTML = '';
@@ -5839,22 +5833,22 @@ __webpack_require__.r(__webpack_exports__);
         })["catch"](function (err) {});
       }
     },
-    attachImage: function attachImage(e) {
+    attachFile: function attachFile(e) {
       this.attach_exist = true;
       if (this.$refs.input_upload.files.length) {
-        this.attach_images = [];
+        this.attach_files = [];
         var formData = new FormData();
         for (var index = 0; index < this.$refs.input_upload.files.length; index++) {
-          this.attach_images.push(URL.createObjectURL(this.$refs.input_upload.files[index]));
-          formData.append('image[]', this.$refs.input_upload.files[index]);
+          this.attach_files.push(URL.createObjectURL(this.$refs.input_upload.files[index]));
+          formData.append('files[]', this.$refs.input_upload.files[index]);
         }
         this.form_data = formData;
       }
     },
-    removeAttachInPost: function removeAttachInPost(img) {
-      var index = this.attach_images.indexOf(img);
+    removeAttachInPost: function removeAttachInPost(file) {
+      var index = this.attach_files.indexOf(file);
       if (index > -1) {
-        this.attach_images.splice(index, 1);
+        this.attach_files.splice(index, 1);
       }
     },
     updatePost: function updatePost() {
@@ -5877,12 +5871,12 @@ __webpack_require__.r(__webpack_exports__);
     updateEditPostMessage: function updateEditPostMessage(e) {
       this.edit_post.message = e.target.innerText;
     },
-    removeAttachInEditPost: function removeAttachInEditPost(img) {
+    removeAttachInEditPost: function removeAttachInEditPost(file) {
       var _this3 = this;
-      this.edit_post.attachment_remove.push(img.id);
-      this.edit_post.data.get_attach_images.forEach(function (elem, index) {
-        if (elem.id == img.id) {
-          _this3.edit_post.data.get_attach_images.splice(index, 1);
+      this.edit_post.attachment_remove.push(file.id);
+      this.edit_post.data.get_attach_files.forEach(function (elem, index) {
+        if (elem.id == file.id) {
+          _this3.edit_post.data.get_attach_files.splice(index, 1);
         }
       });
     }
@@ -6532,10 +6526,11 @@ __webpack_require__.r(__webpack_exports__);
   props: ['datas'],
   computed: {},
   methods: {
-    computedPostImage: function computedPostImage(image_link) {
-      return "/storage/post/img/".concat(image_link);
+    computedPostImage: function computedPostImage(file_link) {
+      return "/storage/post/file/".concat(file_link);
     },
     likePost: function likePost(e, data) {
+      var _this = this;
       data.authLikes = !data.authLikes;
       var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
       axios({
@@ -6547,10 +6542,20 @@ __webpack_require__.r(__webpack_exports__);
         headers: {
           Authorization: AuthStr
         }
-      }).then(function (res) {})["catch"](function (err) {});
+      }).then(function (res) {
+        if (!res.data.message) {
+          data.get_post_likes.push(res.data);
+        } else {
+          data.get_post_likes.forEach(function (elem, index) {
+            if (elem.user_id == _this.$store.getters.currentUser.id) {
+              data.get_post_likes.splice(index, 1);
+            }
+          });
+        }
+      })["catch"](function (err) {});
     },
     deletePost: function deletePost(data) {
-      var _this = this;
+      var _this2 = this;
       var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
       axios({
         method: 'delete',
@@ -6559,9 +6564,9 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: AuthStr
         }
       }).then(function (res) {
-        _this.datas.data.forEach(function (elem, index) {
+        _this2.datas.data.forEach(function (elem, index) {
           if (elem.id == data.id) {
-            _this.datas.data.splice(index, 1);
+            _this2.datas.data.splice(index, 1);
           }
         });
       })["catch"](function (err) {});
@@ -6624,8 +6629,6 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 
 
 
-
-// ADS
 
 
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].use((vue_google_adsense_dist_Adsense_min_js__WEBPACK_IMPORTED_MODULE_2___default()));
@@ -30846,8 +30849,8 @@ var render = function () {
                                 "div",
                                 { staticClass: "d-flex" },
                                 _vm._l(
-                                  _vm.attach_images,
-                                  function (img, index) {
+                                  _vm.attach_files,
+                                  function (file, index) {
                                     return _c(
                                       "div",
                                       {
@@ -30858,7 +30861,7 @@ var render = function () {
                                       [
                                         _c("img", {
                                           staticClass: "img",
-                                          attrs: { src: img, alt: "" },
+                                          attrs: { src: file, alt: "" },
                                         }),
                                         _vm._v(" "),
                                         _c(
@@ -30874,7 +30877,7 @@ var render = function () {
                                               on: {
                                                 click: function ($event) {
                                                   return _vm.removeAttachInPost(
-                                                    img
+                                                    file
                                                   )
                                                 },
                                               },
@@ -30917,10 +30920,11 @@ var render = function () {
                                 staticClass: "d-none",
                                 attrs: {
                                   type: "file",
-                                  accept: "image/png, image/jpg, image/jpeg",
+                                  accept:
+                                    "image/png, image/jpg, image/jpeg, video/mp4",
                                   multiple: "",
                                 },
-                                on: { change: _vm.attachImage },
+                                on: { change: _vm.attachFile },
                               }),
                             ]),
                           ]),
@@ -30994,7 +30998,7 @@ var render = function () {
                           _c(
                             "div",
                             {
-                              class: _vm.edit_post.data.get_attach_images
+                              class: _vm.edit_post.data.get_attach_files
                                 ? "d-flex"
                                 : "d-none",
                             },
@@ -31004,12 +31008,12 @@ var render = function () {
                                   "div",
                                   { staticClass: "d-flex" },
                                   _vm._l(
-                                    _vm.edit_post.data.get_attach_images,
-                                    function (img) {
+                                    _vm.edit_post.data.get_attach_files,
+                                    function (file) {
                                       return _c(
                                         "div",
                                         {
-                                          key: img.id,
+                                          key: file.id,
                                           staticClass:
                                             "card w-25 position-relative dropbox-img me-2",
                                         },
@@ -31019,7 +31023,7 @@ var render = function () {
                                             attrs: {
                                               src:
                                                 "/storage/post/img/" +
-                                                img.image_link,
+                                                file.image_link,
                                               alt: "",
                                             },
                                           }),
@@ -31037,7 +31041,7 @@ var render = function () {
                                                 on: {
                                                   click: function ($event) {
                                                     return _vm.removeAttachInEditPost(
-                                                      img
+                                                      file
                                                     )
                                                   },
                                                 },
@@ -32492,10 +32496,10 @@ var render = function () {
         _vm._v(" "),
         _vm.$route.path == "/"
           ? _c("div", [
-              data.get_attach_images.length == 1
+              data.get_attach_files.length == 1
                 ? _c(
                     "div",
-                    _vm._l(data.get_attach_images, function (image, index) {
+                    _vm._l(data.get_attach_files, function (file, index) {
                       return _c(
                         "div",
                         { key: index, staticClass: "w-100" },
@@ -32514,7 +32518,7 @@ var render = function () {
                               _c("img", {
                                 staticClass: "img attach_image",
                                 attrs: {
-                                  src: _vm.computedPostImage(image.image_link),
+                                  src: _vm.computedPostImage(file.file_link),
                                 },
                               }),
                             ]
@@ -32527,10 +32531,10 @@ var render = function () {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              data.get_attach_images.length == 2
+              data.get_attach_files.length == 2
                 ? _c(
                     "div",
-                    _vm._l(data.get_attach_images, function (image, index) {
+                    _vm._l(data.get_attach_files, function (file, index) {
                       return _c(
                         "div",
                         { key: index, staticClass: "w-50 d-inline-block" },
@@ -32549,7 +32553,7 @@ var render = function () {
                               _c("img", {
                                 staticClass: "img attach_image",
                                 attrs: {
-                                  src: _vm.computedPostImage(image.image_link),
+                                  src: _vm.computedPostImage(file.file_link),
                                 },
                               }),
                             ]
@@ -32562,10 +32566,10 @@ var render = function () {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              data.get_attach_images.length == 3
+              data.get_attach_files.length == 3
                 ? _c(
                     "div",
-                    _vm._l(data.get_attach_images, function (image, index) {
+                    _vm._l(data.get_attach_files, function (file, index) {
                       return _c("span", { key: index }, [
                         index != 2
                           ? _c(
@@ -32587,7 +32591,7 @@ var render = function () {
                                       staticClass: "img attach_image",
                                       attrs: {
                                         src: _vm.computedPostImage(
-                                          image.image_link
+                                          file.file_link
                                         ),
                                       },
                                     }),
@@ -32615,7 +32619,7 @@ var render = function () {
                                       staticClass: "img attach_image",
                                       attrs: {
                                         src: _vm.computedPostImage(
-                                          image.image_link
+                                          file.file_link
                                         ),
                                       },
                                     }),
@@ -32630,10 +32634,10 @@ var render = function () {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              data.get_attach_images.length == 4
+              data.get_attach_files.length == 4
                 ? _c(
                     "div",
-                    _vm._l(data.get_attach_images, function (image, index) {
+                    _vm._l(data.get_attach_files, function (file, index) {
                       return _c("span", { key: index }, [
                         _c(
                           "div",
@@ -32653,9 +32657,7 @@ var render = function () {
                                 _c("img", {
                                   staticClass: "img attach_image",
                                   attrs: {
-                                    src: _vm.computedPostImage(
-                                      image.image_link
-                                    ),
+                                    src: _vm.computedPostImage(file.file_link),
                                     "data-index": index,
                                   },
                                 }),
@@ -32670,10 +32672,10 @@ var render = function () {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              data.get_attach_images.length >= 5
+              data.get_attach_files.length >= 5
                 ? _c(
                     "div",
-                    _vm._l(data.get_attach_images, function (image, index) {
+                    _vm._l(data.get_attach_files, function (file, index) {
                       return _c("span", { key: index }, [
                         index <= 3
                           ? _c(
@@ -32699,7 +32701,7 @@ var render = function () {
                                       class: index == 3 ? "opacity-50" : "",
                                       attrs: {
                                         src: _vm.computedPostImage(
-                                          image.image_link
+                                          file.file_link
                                         ),
                                       },
                                     }),

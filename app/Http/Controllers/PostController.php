@@ -20,7 +20,7 @@ class PostController extends Controller
         $post->getCollection()->transform(function($value) {
             $value->getUser;
             $value->created_time = Carbon::create($value->created_at)->toDayDateTimeString();
-            $value->getAttachImages;
+            $value->getAttachFiles;
             $value->getPostLikes;
 
             if($value->getPostLikes) {
@@ -40,14 +40,14 @@ class PostController extends Controller
         // $post = Post::whereId($id)->first();
         // $post->getUser;
         // $post->created_time = Carbon::create($post->created_at)->toDayDateTimeString();
-        // $post->getAttachImages;
+        // $post->getAttachFiles;
         // $post->getPostLikes;
 
         $post = Post::whereId($id)->paginate(1);
         $post->getCollection()->transform(function($value) {
             $value->getUser;
             $value->created_time = Carbon::create($value->created_at)->toDayDateTimeString();
-            $value->getAttachImages;
+            $value->getAttachFiles;
             $value->getPostLikes;
 
             if($value->getPostLikes) {
@@ -66,10 +66,10 @@ class PostController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'message' => 'string|max:1000',
-            'image.*' => 'mimes:jpg,jpeg,png,bmp',
+            'files.*' => 'mimes:jpg,jpeg,png,bmp',
             [
-                'image.*.mimes' => 'Only jpeg, png and bmp images are allowed',
-                'image.*.max' => 'Sorry! Maximum allowed size for an image is 20MB',
+                'files.*.mimes' => 'Only jpeg, png and bmp images are allowed',
+                'files.*.max' => 'Sorry! Maximum allowed size for an image is 20MB',
             ]
         ]);
 
@@ -82,12 +82,12 @@ class PostController extends Controller
             'message' => trim($request->input('message')),
         ]);
 
-        if($request->file('image')) {
-            for ($i=0; $i < count($request->file('image')); $i++) {
-                Storage::disk('local')->putFileAs('/public/post/img', $request->file('image')[$i], $request->file('image')[$i]->hashName());
+        if($request->file('files')) {
+            for ($i=0; $i < count($request->file('files')); $i++) {
+                Storage::disk('local')->putFileAs('/public/post/file', $request->file('files')[$i], $request->file('files')[$i]->hashName());
                 PostAttachment::create([
                    'post_id' =>  $post->id,
-                   'image_link' => $request->file('image')[$i]->hashName(),
+                   'file_link' => $request->file('files')[$i]->hashName(),
                 ]);
             }
         }
@@ -109,9 +109,8 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            // 'id' => 'required',
             'message' => 'string',
-            'image.*' => 'exists:post_images,id',
+            // 'files.*' => 'exists:post_images,id',
         ]);
 
         if($validator->fails()) {
@@ -123,10 +122,10 @@ class PostController extends Controller
             'user_id' => Auth::id(),
             ])->firstOrFail();
 
-        if($request->input('image')) {
-            $attachments = $post->getAttachImages->whereIn('id', $request->input('image'));
+        if($request->input('files')) {
+            $attachments = $post->getAttachFiles->whereIn('id', $request->input('files'));
             foreach ($attachments as $attachment) {
-                Storage::disk('local')->delete('public/post/img/'.$attachment->image_link);
+                Storage::disk('local')->delete('public/post/file/'.$attachment->file_link);
                 $attachment->delete();
             }
         }
@@ -163,10 +162,10 @@ class PostController extends Controller
             }
         }
 
-        if($post->getAttachImages) {
-            foreach($post->getAttachImages as $image) {
-                Storage::disk('local')->delete('public/post/img/'.$image->image_link);
-                $image->delete();
+        if($post->getAttachFiles) {
+            foreach($post->getAttachFiles as $file) {
+                Storage::disk('local')->delete('public/post/file/'.$file->file_link);
+                $file->delete();
             }
         }
 

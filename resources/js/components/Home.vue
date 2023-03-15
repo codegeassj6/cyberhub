@@ -304,11 +304,12 @@
                                         <div class="d-flex">
                                             <div
                                                 class="card w-25 position-relative dropbox-img me-2"
-                                                v-for="(img, index) in attach_images" :key="index"
+                                                v-for="(file, index) in attach_files" :key="index"
                                             >
-                                                <img :src="img" class="img" alt="">
+                                                <img :src="file" class="img" alt="">
+
                                                 <div class="position-absolute img_attach_remove">
-                                                    <button class="btn btn-close border bg-primary" @click="removeAttachInPost(img)"></button>
+                                                    <button class="btn btn-close border bg-primary" @click="removeAttachInPost(file)"></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -333,7 +334,7 @@
                                             <button class="btn btn-light px-4 btn-sm" type="button" @click="uploadTriggerInput">
                                                 <i class="fa fa-file-image-o fa-lg"></i>
                                             </button>
-                                            <input type="file" class="d-none" ref="input_upload" accept="image/png, image/jpg, image/jpeg" multiple @change="attachImage">
+                                            <input type="file" class="d-none" ref="input_upload" accept="image/png, image/jpg, image/jpeg, video/mp4" multiple @change="attachFile">
                                         </div>
                                     </div>
 
@@ -372,16 +373,16 @@
                                         <div class="flex-fill div-like-pre p-2 min-100" contenteditable="true" ref="trial" @keyup="updateEditPostMessage">{{ edit_post.data.message }}</div>
                                     </div>
 
-                                    <div :class="edit_post.data.get_attach_images ? 'd-flex' : 'd-none'">
+                                    <div :class="edit_post.data.get_attach_files ? 'd-flex' : 'd-none'">
                                         <div class="flex-fill">
                                             <div class="d-flex">
                                                 <div
                                                     class="card w-25 position-relative dropbox-img me-2"
-                                                    v-for="(img) in edit_post.data.get_attach_images" :key="img.id"
+                                                    v-for="(file) in edit_post.data.get_attach_files" :key="file.id"
                                                 >
-                                                    <img :src="`/storage/post/img/${img.image_link}`" class="img" alt="">
+                                                    <img :src="`/storage/post/img/${file.image_link}`" class="img" alt="">
                                                     <div class="position-absolute img_attach_remove">
-                                                        <button class="btn btn-close border bg-primary" @click="removeAttachInEditPost(img)"></button>
+                                                        <button class="btn btn-close border bg-primary" @click="removeAttachInEditPost(file)"></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -400,8 +401,6 @@
                 </div>
             </div>
 
-
-
         </template>
     </div>
 
@@ -414,7 +413,11 @@ export default {
         return {
             image: [],
             attach_exist: false,
-            attach_images: [],
+            attach_files: [],
+            // attach: {
+            //     files: [],
+            //     type: [],
+            // },
             form_data: '',
             posts: '',
             edit_post: {
@@ -459,14 +462,14 @@ export default {
                     method: 'POST',
                     params: {
                         message: document.getElementById('editable').innerText,
-                        image: this.form_data,
+                        files: this.form_data,
                     },
                     data: this.form_data,
                     url: `/api/post`,
                     headers: {
                         Authorization: AuthStr,
                     }
-                }).then(res => {
+                }).then(res => {console.log(res.data);
                     this.attach_exist = false;
                     this.form_data = '';
                     document.getElementById('editable').innerHTML = '';
@@ -478,24 +481,23 @@ export default {
 
         },
 
-        attachImage(e) {
+        attachFile(e) {
             this.attach_exist = true;
             if(this.$refs.input_upload.files.length) {
-                this.attach_images = [];
+                this.attach_files = [];
                 let formData = new FormData;
                 for (let index = 0; index < this.$refs.input_upload.files.length; index++) {
-                    this.attach_images.push(URL.createObjectURL(this.$refs.input_upload.files[index]));
-                    formData.append('image[]', this.$refs.input_upload.files[index]);
+                    this.attach_files.push(URL.createObjectURL(this.$refs.input_upload.files[index]));
+                    formData.append('files[]', this.$refs.input_upload.files[index]);
                 }
                 this.form_data = formData;
             }
-
         },
 
-        removeAttachInPost(img) {
-            var index = this.attach_images.indexOf(img);
+        removeAttachInPost(file) {
+            var index = this.attach_files.indexOf(file);
             if (index > -1) {
-                this.attach_images.splice(index, 1);
+                this.attach_files.splice(index, 1);
             }
         },
 
@@ -520,11 +522,11 @@ export default {
             this.edit_post.message = e.target.innerText;
         },
 
-        removeAttachInEditPost(img)  {
-            this.edit_post.attachment_remove.push(img.id);
-            this.edit_post.data.get_attach_images.forEach((elem, index) => {
-                if(elem.id == img.id) {
-                    this.edit_post.data.get_attach_images.splice(index, 1);
+        removeAttachInEditPost(file)  {
+            this.edit_post.attachment_remove.push(file.id);
+            this.edit_post.data.get_attach_files.forEach((elem, index) => {
+                if(elem.id == file.id) {
+                    this.edit_post.data.get_attach_files.splice(index, 1);
                 }
             });
         }

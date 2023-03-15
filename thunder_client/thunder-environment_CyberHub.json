@@ -1,0 +1,24 @@
+{
+    "client": "Thunder Client",
+    "environmentName": "CyberHub",
+    "dateExported": "2023-03-15T17:07:56.726Z",
+    "version": "1.0",
+    "variables": [
+        {
+            "name": "token",
+            "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vY3liZXJodWIudGVzdC9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTY3ODUwNzczNywiZXhwIjoxNjc5MTA3Njc3LCJuYmYiOjE2Nzg1MDc3MzcsImp0aSI6ImNRUXoxbG1rMEFVUXBFVlkiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.iXxxg7LRG1PaFwP15wcjWyvRLHCKae3LNLr4GmR5gOY"
+        },
+        {
+            "name": "url",
+            "value": "http://localhost:3000/api"
+        },
+        {
+            "name": "email",
+            "value": "j6cafe2018@gmail.com"
+        },
+        {
+            "name": "pass",
+            "value": "jhonreyj6"
+        }
+    ]
+}

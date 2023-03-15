@@ -30,7 +30,7 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function getAttachImages() {
+    public function getAttachFiles() {
         return $this->hasMany(PostAttachment::class, 'post_id')->orderBy('created_at', 'desc');
     }
 

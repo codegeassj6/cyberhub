@@ -75,7 +75,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      currentImage: '',
+      currentFile: '',
       post: ''
     };
   },
@@ -90,13 +90,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     prevImage: function prevImage(data) {
-      if (this.currentImage != 0) {
-        this.currentImage--;
+      if (this.currentFile != 0) {
+        this.currentFile--;
       }
     },
     nextImage: function nextImage(data) {
-      if (data.get_attach_images.length - 1 > this.currentImage) {
-        this.currentImage++;
+      if (data.get_attach_files.length - 1 > this.currentFile) {
+        this.currentFile++;
       }
     },
     goBack: function goBack(e) {
@@ -120,7 +120,7 @@ __webpack_require__.r(__webpack_exports__);
   // },
   mounted: function mounted() {
     var _this = this;
-    this.page ? this.currentImage = this.page : 0;
+    this.page ? this.currentFile = this.page : 0;
     var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
     axios({
       method: 'get',
@@ -338,24 +338,24 @@ var render = function () {
                       _c(
                         "div",
                         { staticClass: "card" },
-                        _vm._l(data.get_attach_images, function (image, index) {
+                        _vm._l(data.get_attach_files, function (file, index) {
                           return _c(
                             "div",
                             { key: index, staticClass: "position-relative" },
                             [
-                              _vm.currentImage == index
+                              _vm.currentFile == index
                                 ? _c("div", [
                                     _c("img", {
                                       staticClass: "img-height img",
                                       attrs: {
                                         src:
-                                          "/storage/post/img/" +
-                                          image.image_link,
+                                          "/storage/post/file/" +
+                                          file.file_link,
                                         alt: "",
                                       },
                                     }),
                                     _vm._v(" "),
-                                    _vm.currentImage == 1
+                                    _vm.currentFile == 1
                                       ? _c(
                                           "div",
                                           {
@@ -381,8 +381,8 @@ var render = function () {
                                         )
                                       : _vm._e(),
                                     _vm._v(" "),
-                                    _vm.currentImage + 1 !=
-                                    data.get_attach_images.length
+                                    _vm.currentFile + 1 !=
+                                    data.get_attach_files.length
                                       ? _c(
                                           "div",
                                           {
@@ -419,13 +419,13 @@ var render = function () {
                         0
                       ),
                       _vm._v(" "),
-                      data.get_attach_images
+                      data.get_attach_files
                         ? _c("div", { staticClass: "text-center mt-1 h5" }, [
                             _vm._v(
                               "\n                                        " +
-                                _vm._s(_vm.currentImage + 1) +
+                                _vm._s(_vm.currentFile + 1) +
                                 " / " +
-                                _vm._s(data.get_attach_images.length) +
+                                _vm._s(data.get_attach_files.length) +
                                 "\n                                    "
                             ),
                           ])

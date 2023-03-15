@@ -31,53 +31,53 @@
 
 
             <div v-if="$route.path == '/'">
-                <div v-if="data.get_attach_images.length == 1">
-                    <div class="w-100" v-for="(image, index) in data.get_attach_images" :key="index">
+                <div v-if="data.get_attach_files.length == 1">
+                    <div class="w-100" v-for="(file, index) in data.get_attach_files" :key="index">
                         <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
-                            <img :src="computedPostImage(image.image_link)" class="img attach_image">
+                            <img :src="computedPostImage(file.file_link)" class="img attach_image">
                         </router-link>
                     </div>
 
                 </div>
 
-                <div v-if="data.get_attach_images.length == 2">
-                    <div class="w-50 d-inline-block" v-for="(image, index) in data.get_attach_images" :key="index">
+                <div v-if="data.get_attach_files.length == 2">
+                    <div class="w-50 d-inline-block" v-for="(file, index) in data.get_attach_files" :key="index">
                         <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
-                            <img :src="computedPostImage(image.image_link)" class="img attach_image">
+                            <img :src="computedPostImage(file.file_link)" class="img attach_image">
                         </router-link>
                     </div>
                 </div>
 
-                <div v-if="data.get_attach_images.length == 3">
-                    <span v-for="(image, index) in data.get_attach_images" :key="index">
+                <div v-if="data.get_attach_files.length == 3">
+                    <span v-for="(file, index) in data.get_attach_files" :key="index">
                         <div class="d-inline-block w-50" v-if="index != 2">
                             <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
-                                <img :src="computedPostImage(image.image_link)" class="img attach_image">
+                                <img :src="computedPostImage(file.file_link)" class="img attach_image">
                             </router-link>
                         </div>
                         <div class="w-100 d-block" v-else>
                             <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
-                                <img :src="computedPostImage(image.image_link)" class="img attach_image">
+                                <img :src="computedPostImage(file.file_link)" class="img attach_image">
                             </router-link>
                         </div>
                     </span>
                 </div>
 
-                <div v-if="data.get_attach_images.length == 4">
-                    <span v-for="(image, index) in data.get_attach_images" :key="index">
+                <div v-if="data.get_attach_files.length == 4">
+                    <span v-for="(file, index) in data.get_attach_files" :key="index">
                         <div class="d-inline-block w-50">
                             <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
-                                <img :src="computedPostImage(image.image_link)" :data-index="index" class="img attach_image">
+                                <img :src="computedPostImage(file.file_link)" :data-index="index" class="img attach_image">
                             </router-link>
                         </div>
                     </span>
                 </div>
 
-                <div v-if="data.get_attach_images.length >= 5">
-                    <span v-for="(image, index) in data.get_attach_images" :key="index">
+                <div v-if="data.get_attach_files.length >= 5">
+                    <span v-for="(file, index) in data.get_attach_files" :key="index">
                         <div class="d-inline-block position-relative w-50" v-if="index <= 3">
                             <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
-                                <img :src="computedPostImage(image.image_link)" :class="index == 3 ? 'opacity-50' : ''" class="img attach_image">
+                                <img :src="computedPostImage(file.file_link)" :class="index == 3 ? 'opacity-50' : ''" class="img attach_image">
                                 <div class="position-absolute" v-if="index == 3">
                                     <i class="fa fa-plus-square text-light fa-lg"></i>
                                 </div>
@@ -178,8 +178,8 @@ export default {
     },
 
     methods: {
-        computedPostImage(image_link) {
-            return `/storage/post/img/${image_link}`;
+        computedPostImage(file_link) {
+            return `/storage/post/file/${file_link}`;
         },
 
         likePost(e, data) {
@@ -194,6 +194,15 @@ export default {
                 url: `/api/post/like`,
                 headers: {Authorization: AuthStr}
             }).then(res => {
+                if(!res.data.message) {
+                    data.get_post_likes.push(res.data);
+                } else {
+                    data.get_post_likes.forEach((elem, index) => {
+                       if(elem.user_id == this.$store.getters.currentUser.id) {
+                           data.get_post_likes.splice(index, 1)
+                       }
+                    });
+                }
 
             }).catch(err => {
 
