@@ -81,13 +81,6 @@ export const routes = [
         props: true,
     },
 
-    {
-        path: "/post/:id/edit",
-        name: "EditPost",
-        component: () => import(/* webpackChunkName: "EditPost" */ "./components/EditPost.vue"),
-        meta: { requiresAuth: true },
-    },
-
 
     {
         path: "*",

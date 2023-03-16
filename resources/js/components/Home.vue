@@ -300,21 +300,26 @@
                                 </div>
 
                                 <div :class="attach_exist ? 'd-flex' : 'd-none'">
-                                    <div class="flex-fill">
-                                        <div class="d-flex">
-                                            <div
-                                                class="card w-25 position-relative dropbox-img me-2"
-                                                v-for="(file, index) in attach_files" :key="index"
-                                            >
-                                                <img :src="file" class="img" alt="">
+                                    <div
+                                        class="card w-25 position-relative me-1 dropbox rounded-0"
+                                        v-for="(file, index) in attach.files" :key="index"
+                                    >
+                                        <div v-if="attach.file_type[index] == 'video/mp4'">
+                                            <video class="w-100 attach_video" controls>
+                                                <source :src="file" type="video/mp4">
+                                            </video>
+                                        </div>
 
-                                                <div class="position-absolute img_attach_remove">
-                                                    <button class="btn btn-close border bg-primary" @click="removeAttachInPost(file)"></button>
-                                                </div>
-                                            </div>
+                                        <div v-else>
+                                            <img :src="file" class="w-100" height="150" />
+                                        </div>
+
+                                        <div class="position-absolute img_attach_remove">
+                                            <button class="btn btn-close border bg-primary text-white" @click="removeAttachInPost(file)"></button>
                                         </div>
                                     </div>
                                 </div>
+
 
                             </div>
                             <div class="card-footer text-muted">
@@ -377,10 +382,20 @@
                                         <div class="flex-fill">
                                             <div class="d-flex">
                                                 <div
-                                                    class="card w-25 position-relative dropbox-img me-2"
+                                                    class="card w-25 position-relative dropbox me-2"
                                                     v-for="(file) in edit_post.data.get_attach_files" :key="file.id"
                                                 >
-                                                    <img :src="`/storage/post/img/${file.image_link}`" class="img" alt="">
+                                                    <img
+                                                        :src="computedPostFile(file.file_link)"
+                                                        class="w-100"
+                                                        v-if="getFileFormat(file.file_link) == 'jpg' || getFileFormat(file.file_link) == 'jpeg' || getFileFormat(file.file_link) == 'png'"
+                                                        height="150"
+                                                    >
+                                                    <video class="w-100" v-else controls height="170">
+                                                        <source :src="computedPostFile(file.file_link)" type="video/mp4">
+                                                    </video>
+
+
                                                     <div class="position-absolute img_attach_remove">
                                                         <button class="btn btn-close border bg-primary" @click="removeAttachInEditPost(file)"></button>
                                                     </div>
@@ -413,11 +428,10 @@ export default {
         return {
             image: [],
             attach_exist: false,
-            attach_files: [],
-            // attach: {
-            //     files: [],
-            //     type: [],
-            // },
+            attach: {
+                files: [],
+                file_type: [],
+            },
             form_data: '',
             posts: '',
             edit_post: {
@@ -446,6 +460,12 @@ export default {
     },
 
     methods: {
+        getFileFormat(fileName) {
+            var re = /(?:\.([^.]+))?$/;
+            var ext = re.exec(fileName)[1];
+            return ext.trim();
+        },
+
         uploadTriggerInput() {
             var elem = this.$refs.input_upload;
             if(elem && document.createEvent) {
@@ -484,20 +504,24 @@ export default {
         attachFile(e) {
             this.attach_exist = true;
             if(this.$refs.input_upload.files.length) {
-                this.attach_files = [];
+                this.attach.files = [];
+                this.attach.file_type = [];
                 let formData = new FormData;
                 for (let index = 0; index < this.$refs.input_upload.files.length; index++) {
-                    this.attach_files.push(URL.createObjectURL(this.$refs.input_upload.files[index]));
+                    this.attach.files.push(URL.createObjectURL(this.$refs.input_upload.files[index]));
+                    this.attach.file_type.push(this.$refs.input_upload.files[index].type);
                     formData.append('files[]', this.$refs.input_upload.files[index]);
+
                 }
                 this.form_data = formData;
             }
         },
 
         removeAttachInPost(file) {
-            var index = this.attach_files.indexOf(file);
-            if (index > -1) {
-                this.attach_files.splice(index, 1);
+            var exist = this.attach.files.indexOf(file);
+            if (exist > -1) {
+                this.attach.files.splice(exist, 1);
+                this.attach.file_type.splice(exist, 1);
             }
         },
 
@@ -529,7 +553,11 @@ export default {
                     this.edit_post.data.get_attach_files.splice(index, 1);
                 }
             });
-        }
+        },
+
+        computedPostFile(file_link) {
+            return `/storage/post/file/${file_link}`;
+        },
     },
 
     watch: {
@@ -595,12 +623,8 @@ export default {
     min-height: 100px;
 }
 
-.dropbox-img {
+.dropbox {
     height: 150px;
-}
-
-.dropbox-img img {
-    height: 100%;
 }
 
 .img_attach_remove {
@@ -609,6 +633,8 @@ export default {
     color: #ffffff;
 }
 
-
+.attach_video {
+    height: 150px;
+}
 
 </style>

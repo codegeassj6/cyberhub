@@ -20,7 +20,18 @@
                                         <div class="card">
                                             <div class="position-relative" v-for="(file, index) in data.get_attach_files" :key="index">
                                                 <div v-if="currentFile == index">
-                                                    <img :src="`/storage/post/file/${file.file_link}`" alt="" class="img-height img">
+
+                                                    <img
+                                                        v-if="getFileFormat(file.file_link) == 'jpg' || getFileFormat(file.file_link) == 'jpeg' || getFileFormat(file.file_link) == 'png'"
+                                                        :src="`/storage/post/file/${file.file_link}`"
+                                                        alt=""
+                                                        class="img-height w-100"
+                                                    />
+
+                                                    <video class="w-100 img-height bg-dark" v-else controls>
+                                                        <source :src="`/storage/post/file/${file.file_link}`" type="video/mp4">
+                                                    </video>
+
                                                     <div class="position-absolute mx-0 absolute-center-left" v-if="currentFile == 1">
                                                         <a role="button" @click="prevImage" class="text-secondary">
                                                             <i class="fa fa-arrow-left fa-2x"></i>
@@ -97,7 +108,13 @@ export default {
             if(e.target.id == 'go_back' || e.keyCode == 27) {
                 this.$router.back();
             }
-        }
+        },
+
+        getFileFormat(fileName) {
+            var re = /(?:\.([^.]+))?$/;
+            var ext = re.exec(fileName)[1];
+            return ext.trim();
+        },
     },
 
     watch: {

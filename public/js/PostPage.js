@@ -70,6 +70,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -103,6 +114,11 @@ __webpack_require__.r(__webpack_exports__);
       if (e.target.id == 'go_back' || e.keyCode == 27) {
         this.$router.back();
       }
+    },
+    getFileFormat: function getFileFormat(fileName) {
+      var re = /(?:\.([^.]+))?$/;
+      var ext = re.exec(fileName)[1];
+      return ext.trim();
     }
   },
   watch: {
@@ -345,15 +361,38 @@ var render = function () {
                             [
                               _vm.currentFile == index
                                 ? _c("div", [
-                                    _c("img", {
-                                      staticClass: "img-height img",
-                                      attrs: {
-                                        src:
-                                          "/storage/post/file/" +
-                                          file.file_link,
-                                        alt: "",
-                                      },
-                                    }),
+                                    _vm.getFileFormat(file.file_link) ==
+                                      "jpg" ||
+                                    _vm.getFileFormat(file.file_link) ==
+                                      "jpeg" ||
+                                    _vm.getFileFormat(file.file_link) == "png"
+                                      ? _c("img", {
+                                          staticClass: "img-height w-100",
+                                          attrs: {
+                                            src:
+                                              "/storage/post/file/" +
+                                              file.file_link,
+                                            alt: "",
+                                          },
+                                        })
+                                      : _c(
+                                          "video",
+                                          {
+                                            staticClass:
+                                              "w-100 img-height bg-dark",
+                                            attrs: { controls: "" },
+                                          },
+                                          [
+                                            _c("source", {
+                                              attrs: {
+                                                src:
+                                                  "/storage/post/file/" +
+                                                  file.file_link,
+                                                type: "video/mp4",
+                                              },
+                                            }),
+                                          ]
+                                        ),
                                     _vm._v(" "),
                                     _vm.currentFile == 1
                                       ? _c(

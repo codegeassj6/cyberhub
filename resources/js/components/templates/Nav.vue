@@ -35,7 +35,6 @@
                                     <i class="fa fa-cog fa-lg"></i>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><router-link to="/account" class="dropdown-item">Account Details</router-link></li>
                                     <li><router-link to="/setting" class="dropdown-item" href="#">Setting</router-link></li>
                                     <li><router-link to="/save" class="dropdown-item" href="#">My Saves</router-link></li>
                                     <li><hr class="dropdown-divider"></li>

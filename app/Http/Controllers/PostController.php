@@ -66,7 +66,7 @@ class PostController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'message' => 'string|max:1000',
-            'files.*' => 'mimes:jpg,jpeg,png,bmp',
+            'files.*' => 'mimes:jpg,jpeg,png,bmp,mp4',
             [
                 'files.*.mimes' => 'Only jpeg, png and bmp images are allowed',
                 'files.*.max' => 'Sorry! Maximum allowed size for an image is 20MB',

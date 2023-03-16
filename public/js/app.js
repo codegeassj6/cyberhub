@@ -5343,9 +5343,7 @@ __webpack_require__.r(__webpack_exports__);
     Footer: _templates_Footer_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Home: _Home_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  mounted: function mounted() {
-    console.log(this.$router);
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -5769,6 +5767,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5776,11 +5789,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       image: [],
       attach_exist: false,
-      attach_files: [],
-      // attach: {
-      //     files: [],
-      //     type: [],
-      // },
+      attach: {
+        files: [],
+        file_type: []
+      },
       form_data: '',
       posts: '',
       edit_post: {
@@ -5801,6 +5813,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    getFileFormat: function getFileFormat(fileName) {
+      var re = /(?:\.([^.]+))?$/;
+      var ext = re.exec(fileName)[1];
+      return ext.trim();
+    },
     uploadTriggerInput: function uploadTriggerInput() {
       var elem = this.$refs.input_upload;
       if (elem && document.createEvent) {
@@ -5836,19 +5853,22 @@ __webpack_require__.r(__webpack_exports__);
     attachFile: function attachFile(e) {
       this.attach_exist = true;
       if (this.$refs.input_upload.files.length) {
-        this.attach_files = [];
+        this.attach.files = [];
+        this.attach.file_type = [];
         var formData = new FormData();
         for (var index = 0; index < this.$refs.input_upload.files.length; index++) {
-          this.attach_files.push(URL.createObjectURL(this.$refs.input_upload.files[index]));
+          this.attach.files.push(URL.createObjectURL(this.$refs.input_upload.files[index]));
+          this.attach.file_type.push(this.$refs.input_upload.files[index].type);
           formData.append('files[]', this.$refs.input_upload.files[index]);
         }
         this.form_data = formData;
       }
     },
     removeAttachInPost: function removeAttachInPost(file) {
-      var index = this.attach_files.indexOf(file);
-      if (index > -1) {
-        this.attach_files.splice(index, 1);
+      var exist = this.attach.files.indexOf(file);
+      if (exist > -1) {
+        this.attach.files.splice(exist, 1);
+        this.attach.file_type.splice(exist, 1);
       }
     },
     updatePost: function updatePost() {
@@ -5879,6 +5899,9 @@ __webpack_require__.r(__webpack_exports__);
           _this3.edit_post.data.get_attach_files.splice(index, 1);
         }
       });
+    },
+    computedPostFile: function computedPostFile(file_link) {
+      return "/storage/post/file/".concat(file_link);
     }
   },
   watch: {
@@ -6293,7 +6316,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 //import name from './
 
@@ -6508,6 +6530,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6526,7 +6591,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['datas'],
   computed: {},
   methods: {
-    computedPostImage: function computedPostImage(file_link) {
+    computedPostFile: function computedPostFile(file_link) {
       return "/storage/post/file/".concat(file_link);
     },
     likePost: function likePost(e, data) {
@@ -6583,6 +6648,11 @@ __webpack_require__.r(__webpack_exports__);
       this.$parent.edit_post.data = data;
       this.$parent.edit_post.message = data.message;
       this.$parent.edit_post.attachment_remove = [];
+    },
+    getFileFormat: function getFileFormat(fileName) {
+      var re = /(?:\.([^.]+))?$/;
+      var ext = re.exec(fileName)[1];
+      return ext.trim();
     }
   },
   watch: {
@@ -6933,15 +7003,6 @@ var routes = [{
     requiresAuth: true
   },
   props: true
-}, {
-  path: "/post/:id/edit",
-  name: "EditPost",
-  component: function component() {
-    return __webpack_require__.e(/*! import() | EditPost */ "EditPost").then(__webpack_require__.bind(__webpack_require__, /*! ./components/EditPost.vue */ "./resources/js/components/EditPost.vue"));
-  },
-  meta: {
-    requiresAuth: true
-  }
 }, {
   path: "*",
   name: "PageNotFound",
@@ -12274,7 +12335,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#carouselintro img[data-v-f2b6376c]  {\n    height: 600px;\n}\n#carouselintro[data-v-f2b6376c] {\n    margin-top: 26px;\n}\n.name[data-v-f2b6376c] {\n    font-size: 20px;\n}\n.btn-status[data-v-f2b6376c] {\n    padding: 0 !important;\n}\n.min-100[data-v-f2b6376c] {\n    min-height: 100px;\n}\n.dropbox-img[data-v-f2b6376c] {\n    height: 150px;\n}\n.dropbox-img img[data-v-f2b6376c] {\n    height: 100%;\n}\n.img_attach_remove[data-v-f2b6376c] {\n    right: 0%;\n    top: 0%;\n    color: #ffffff;\n}\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#carouselintro img[data-v-f2b6376c]  {\n    height: 600px;\n}\n#carouselintro[data-v-f2b6376c] {\n    margin-top: 26px;\n}\n.name[data-v-f2b6376c] {\n    font-size: 20px;\n}\n.btn-status[data-v-f2b6376c] {\n    padding: 0 !important;\n}\n.min-100[data-v-f2b6376c] {\n    min-height: 100px;\n}\n.dropbox[data-v-f2b6376c] {\n    height: 150px;\n}\n.img_attach_remove[data-v-f2b6376c] {\n    right: 0%;\n    top: 0%;\n    color: #ffffff;\n}\n.attach_video[data-v-f2b6376c] {\n    height: 150px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12346,7 +12407,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.border-post[data-v-038d89e1] {\n    border: 1px solid #e1e1e1;\n}\n.attach_image[data-v-038d89e1] {\n    height: 350px;\n}\n.position-absolute[data-v-038d89e1] {\n    top: 50%;\n    left: 50%;\n    right: 0;\n}\n.btn-outline-secondary[data-v-038d89e1]:hover {\n    background: #ffffff;\n    color: #0d6efd !important;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.border-post[data-v-038d89e1] {\n    border: 1px solid #e1e1e1;\n}\n.attach_image[data-v-038d89e1] {\n    height: 500px;\n}\n.position-absolute[data-v-038d89e1] {\n    top: 50%;\n    left: 50%;\n    right: 0;\n}\n.btn-outline-secondary[data-v-038d89e1]:hover {\n    background: #ffffff;\n    color: #0d6efd !important;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -30843,55 +30904,62 @@ var render = function () {
                         _c(
                           "div",
                           { class: _vm.attach_exist ? "d-flex" : "d-none" },
-                          [
-                            _c("div", { staticClass: "flex-fill" }, [
-                              _c(
-                                "div",
-                                { staticClass: "d-flex" },
-                                _vm._l(
-                                  _vm.attach_files,
-                                  function (file, index) {
-                                    return _c(
-                                      "div",
-                                      {
-                                        key: index,
-                                        staticClass:
-                                          "card w-25 position-relative dropbox-img me-2",
+                          _vm._l(_vm.attach.files, function (file, index) {
+                            return _c(
+                              "div",
+                              {
+                                key: index,
+                                staticClass:
+                                  "card w-25 position-relative me-1 dropbox rounded-0",
+                              },
+                              [
+                                _vm.attach.file_type[index] == "video/mp4"
+                                  ? _c("div", [
+                                      _c(
+                                        "video",
+                                        {
+                                          staticClass: "w-100 attach_video",
+                                          attrs: { controls: "" },
+                                        },
+                                        [
+                                          _c("source", {
+                                            attrs: {
+                                              src: file,
+                                              type: "video/mp4",
+                                            },
+                                          }),
+                                        ]
+                                      ),
+                                    ])
+                                  : _c("div", [
+                                      _c("img", {
+                                        staticClass: "w-100",
+                                        attrs: { src: file, height: "150" },
+                                      }),
+                                    ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "position-absolute img_attach_remove",
+                                  },
+                                  [
+                                    _c("button", {
+                                      staticClass:
+                                        "btn btn-close border bg-primary text-white",
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.removeAttachInPost(file)
+                                        },
                                       },
-                                      [
-                                        _c("img", {
-                                          staticClass: "img",
-                                          attrs: { src: file, alt: "" },
-                                        }),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "position-absolute img_attach_remove",
-                                          },
-                                          [
-                                            _c("button", {
-                                              staticClass:
-                                                "btn btn-close border bg-primary",
-                                              on: {
-                                                click: function ($event) {
-                                                  return _vm.removeAttachInPost(
-                                                    file
-                                                  )
-                                                },
-                                              },
-                                            }),
-                                          ]
-                                        ),
-                                      ]
-                                    )
-                                  }
+                                    }),
+                                  ]
                                 ),
-                                0
-                              ),
-                            ]),
-                          ]
+                              ]
+                            )
+                          }),
+                          0
                         ),
                       ]),
                       _vm._v(" "),
@@ -31015,18 +31083,44 @@ var render = function () {
                                         {
                                           key: file.id,
                                           staticClass:
-                                            "card w-25 position-relative dropbox-img me-2",
+                                            "card w-25 position-relative dropbox me-2",
                                         },
                                         [
-                                          _c("img", {
-                                            staticClass: "img",
-                                            attrs: {
-                                              src:
-                                                "/storage/post/img/" +
-                                                file.image_link,
-                                              alt: "",
-                                            },
-                                          }),
+                                          _vm.getFileFormat(file.file_link) ==
+                                            "jpg" ||
+                                          _vm.getFileFormat(file.file_link) ==
+                                            "jpeg" ||
+                                          _vm.getFileFormat(file.file_link) ==
+                                            "png"
+                                            ? _c("img", {
+                                                staticClass: "w-100",
+                                                attrs: {
+                                                  src: _vm.computedPostFile(
+                                                    file.file_link
+                                                  ),
+                                                  height: "150",
+                                                },
+                                              })
+                                            : _c(
+                                                "video",
+                                                {
+                                                  staticClass: "w-100",
+                                                  attrs: {
+                                                    controls: "",
+                                                    height: "170",
+                                                  },
+                                                },
+                                                [
+                                                  _c("source", {
+                                                    attrs: {
+                                                      src: _vm.computedPostFile(
+                                                        file.file_link
+                                                      ),
+                                                      type: "video/mp4",
+                                                    },
+                                                  }),
+                                                ]
+                                              ),
                                           _vm._v(" "),
                                           _c(
                                             "div",
@@ -32243,21 +32337,6 @@ var render = function () {
                                       "router-link",
                                       {
                                         staticClass: "dropdown-item",
-                                        attrs: { to: "/account" },
-                                      },
-                                      [_vm._v("Account Details")]
-                                    ),
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "li",
-                                  [
-                                    _c(
-                                      "router-link",
-                                      {
-                                        staticClass: "dropdown-item",
                                         attrs: { to: "/setting", href: "#" },
                                       },
                                       [_vm._v("Setting")]
@@ -32515,12 +32594,32 @@ var render = function () {
                               },
                             },
                             [
-                              _c("img", {
-                                staticClass: "img attach_image",
-                                attrs: {
-                                  src: _vm.computedPostImage(file.file_link),
-                                },
-                              }),
+                              _vm.getFileFormat(file.file_link) == "jpg" ||
+                              _vm.getFileFormat(file.file_link) == "jpeg" ||
+                              _vm.getFileFormat(file.file_link) == "png"
+                                ? _c("img", {
+                                    staticClass: "w-100 attach_image",
+                                    attrs: {
+                                      src: _vm.computedPostFile(file.file_link),
+                                    },
+                                  })
+                                : _c(
+                                    "video",
+                                    {
+                                      staticClass: "w-100 h-100",
+                                      attrs: { controls: "" },
+                                    },
+                                    [
+                                      _c("source", {
+                                        attrs: {
+                                          src: _vm.computedPostFile(
+                                            file.file_link
+                                          ),
+                                          type: "video/mp4",
+                                        },
+                                      }),
+                                    ]
+                                  ),
                             ]
                           ),
                         ],
@@ -32537,7 +32636,10 @@ var render = function () {
                     _vm._l(data.get_attach_files, function (file, index) {
                       return _c(
                         "div",
-                        { key: index, staticClass: "w-50 d-inline-block" },
+                        {
+                          key: index,
+                          staticClass: "w-50 d-inline-block position-relative",
+                        },
                         [
                           _c(
                             "router-link",
@@ -32550,12 +32652,32 @@ var render = function () {
                               },
                             },
                             [
-                              _c("img", {
-                                staticClass: "img attach_image",
-                                attrs: {
-                                  src: _vm.computedPostImage(file.file_link),
-                                },
-                              }),
+                              _vm.getFileFormat(file.file_link) == "jpg" ||
+                              _vm.getFileFormat(file.file_link) == "jpeg" ||
+                              _vm.getFileFormat(file.file_link) == "png"
+                                ? _c("img", {
+                                    staticClass: "w-100 attach_image",
+                                    attrs: {
+                                      src: _vm.computedPostFile(file.file_link),
+                                    },
+                                  })
+                                : _c(
+                                    "video",
+                                    {
+                                      staticClass: "w-100 h-100",
+                                      attrs: { controls: "" },
+                                    },
+                                    [
+                                      _c("source", {
+                                        attrs: {
+                                          src: _vm.computedPostFile(
+                                            file.file_link
+                                          ),
+                                          type: "video/mp4",
+                                        },
+                                      }),
+                                    ]
+                                  ),
                             ]
                           ),
                         ],
@@ -32587,14 +32709,36 @@ var render = function () {
                                     },
                                   },
                                   [
-                                    _c("img", {
-                                      staticClass: "img attach_image",
-                                      attrs: {
-                                        src: _vm.computedPostImage(
-                                          file.file_link
+                                    _vm.getFileFormat(file.file_link) ==
+                                      "jpg" ||
+                                    _vm.getFileFormat(file.file_link) ==
+                                      "jpeg" ||
+                                    _vm.getFileFormat(file.file_link) == "png"
+                                      ? _c("img", {
+                                          staticClass: "w-100 attach_image",
+                                          attrs: {
+                                            src: _vm.computedPostFile(
+                                              file.file_link
+                                            ),
+                                          },
+                                        })
+                                      : _c(
+                                          "video",
+                                          {
+                                            staticClass: "w-100 h-100",
+                                            attrs: { controls: "" },
+                                          },
+                                          [
+                                            _c("source", {
+                                              attrs: {
+                                                src: _vm.computedPostFile(
+                                                  file.file_link
+                                                ),
+                                                type: "video/mp4",
+                                              },
+                                            }),
+                                          ]
                                         ),
-                                      },
-                                    }),
                                   ]
                                 ),
                               ],
@@ -32615,14 +32759,36 @@ var render = function () {
                                     },
                                   },
                                   [
-                                    _c("img", {
-                                      staticClass: "img attach_image",
-                                      attrs: {
-                                        src: _vm.computedPostImage(
-                                          file.file_link
+                                    _vm.getFileFormat(file.file_link) ==
+                                      "jpg" ||
+                                    _vm.getFileFormat(file.file_link) ==
+                                      "jpeg" ||
+                                    _vm.getFileFormat(file.file_link) == "png"
+                                      ? _c("img", {
+                                          staticClass: "w-100 attach_image",
+                                          attrs: {
+                                            src: _vm.computedPostFile(
+                                              file.file_link
+                                            ),
+                                          },
+                                        })
+                                      : _c(
+                                          "video",
+                                          {
+                                            staticClass: "w-100 h-100",
+                                            attrs: { controls: "" },
+                                          },
+                                          [
+                                            _c("source", {
+                                              attrs: {
+                                                src: _vm.computedPostFile(
+                                                  file.file_link
+                                                ),
+                                                type: "video/mp4",
+                                              },
+                                            }),
+                                          ]
                                         ),
-                                      },
-                                    }),
                                   ]
                                 ),
                               ],
@@ -32654,13 +32820,34 @@ var render = function () {
                                 },
                               },
                               [
-                                _c("img", {
-                                  staticClass: "img attach_image",
-                                  attrs: {
-                                    src: _vm.computedPostImage(file.file_link),
-                                    "data-index": index,
-                                  },
-                                }),
+                                _vm.getFileFormat(file.file_link) == "jpg" ||
+                                _vm.getFileFormat(file.file_link) == "jpeg" ||
+                                _vm.getFileFormat(file.file_link) == "png"
+                                  ? _c("img", {
+                                      staticClass: "w-100 attach_image",
+                                      attrs: {
+                                        src: _vm.computedPostFile(
+                                          file.file_link
+                                        ),
+                                      },
+                                    })
+                                  : _c(
+                                      "video",
+                                      {
+                                        staticClass: "w-100 h-100",
+                                        attrs: { controls: "" },
+                                      },
+                                      [
+                                        _c("source", {
+                                          attrs: {
+                                            src: _vm.computedPostFile(
+                                              file.file_link
+                                            ),
+                                            type: "video/mp4",
+                                          },
+                                        }),
+                                      ]
+                                    ),
                               ]
                             ),
                           ],
@@ -32696,28 +32883,36 @@ var render = function () {
                                     },
                                   },
                                   [
-                                    _c("img", {
-                                      staticClass: "img attach_image",
-                                      class: index == 3 ? "opacity-50" : "",
-                                      attrs: {
-                                        src: _vm.computedPostImage(
-                                          file.file_link
-                                        ),
-                                      },
-                                    }),
-                                    _vm._v(" "),
-                                    index == 3
-                                      ? _c(
-                                          "div",
-                                          { staticClass: "position-absolute" },
+                                    _vm.getFileFormat(file.file_link) ==
+                                      "jpg" ||
+                                    _vm.getFileFormat(file.file_link) ==
+                                      "jpeg" ||
+                                    _vm.getFileFormat(file.file_link) == "png"
+                                      ? _c("img", {
+                                          staticClass: "w-100 attach_image",
+                                          attrs: {
+                                            src: _vm.computedPostFile(
+                                              file.file_link
+                                            ),
+                                          },
+                                        })
+                                      : _c(
+                                          "video",
+                                          {
+                                            staticClass: "w-100 h-100",
+                                            attrs: { controls: "" },
+                                          },
                                           [
-                                            _c("i", {
-                                              staticClass:
-                                                "fa fa-plus-square text-light fa-lg",
+                                            _c("source", {
+                                              attrs: {
+                                                src: _vm.computedPostFile(
+                                                  file.file_link
+                                                ),
+                                                type: "video/mp4",
+                                              },
                                             }),
                                           ]
-                                        )
-                                      : _vm._e(),
+                                        ),
                                   ]
                                 ),
                               ],
@@ -49694,7 +49889,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"Login":1,"Oauth":1,"Register":1,"Store":1,"Account":1,"UpdateAccount":1,"PostPage":1,"EditPost":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"Login":1,"Oauth":1,"Register":1,"Store":1,"Account":1,"UpdateAccount":1,"PostPage":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			if (chunkId === "Game") return "js/Game.js";
 /******/ 			if (chunkId === "Cart") return "js/Cart.js";
 /******/ 			if (chunkId === "Save") return "js/Save.js";

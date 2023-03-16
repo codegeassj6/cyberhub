@@ -79,9 +79,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 //import name from './
 
@@ -127,7 +124,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-profile[data-v-0b1dd512] {\n  background-image: linear-gradient(to bottom, #277bfa , #70a6f7);\n  height: 300px;\n}\n.bg-profile-2[data-v-0b1dd512] {\n  background-color: #f2f2f2;\n  height: 150px;\n}\n.space-intro[data-v-0b1dd512] {\n    margin-top: 150px;\n}\n.space-intro[data-v-0b1dd512] {\n    margin-top: 175px;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-profile[data-v-0b1dd512] {\n  background-image: linear-gradient(to bottom, #277bfa , #70a6f7);\n  height: 300px;\n}\n.bg-profile-2[data-v-0b1dd512] {\n  background-color: #f2f2f2;\n  height: 150px;\n}\n.space-intro[data-v-0b1dd512] {\n    margin-top: 140px;\n}\n.space-name[data-v-0b1dd512] {\n    margin-top: 210px;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -264,7 +261,7 @@ var render = function () {
   return _c("div", [
     _c("div", { staticClass: "bg-profile" }, [
       _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "d-flex p-4" }, [
+        _c("div", { staticClass: "d-flex px-4" }, [
           _c("div", { staticClass: "space-intro" }, [
             _c("img", {
               staticClass: "border border-5 rounded",
@@ -282,29 +279,7 @@ var render = function () {
       ]),
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "bg-profile-2" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "d-flex p-4" }, [
-          _c(
-            "div",
-            { staticClass: "mt-4" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "btn btn-outline-secondary mt-2 ms-3",
-                  attrs: { to: "/account/update" },
-                },
-                [_vm._v("Update Profile")]
-              ),
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _vm._m(1),
-        ]),
-      ]),
-    ]),
+    _vm._m(1),
     _vm._v(" "),
     _vm._m(2),
   ])
@@ -314,7 +289,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "space-intro p-4 text-white" }, [
+    return _c("div", { staticClass: "space-name p-4 text-white" }, [
       _c("h3", [_vm._v("Jhon Rey Repuela")]),
       _vm._v(" "),
       _c("div", [_c("span", [_vm._v("@codegeassj6")])]),
@@ -324,26 +299,32 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ms-auto" }, [
-      _c("div", { staticClass: "d-flex" }, [
-        _c("div", [
-          _c("button", { staticClass: "btn btn-primary" }, [
-            _c("i", { staticClass: "fa fa-facebook" }),
-            _vm._v(" Facebook"),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mx-1" }, [
-          _c("button", { staticClass: "btn btn-info text-white" }, [
-            _c("i", { staticClass: "fa fa-twitter" }),
-            _vm._v(" Twitter"),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _c("button", { staticClass: "btn btn-danger" }, [
-            _c("i", { staticClass: "fa fa-google" }),
-            _vm._v(" Google"),
+    return _c("div", { staticClass: "bg-profile-2" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "d-flex p-4" }, [
+          _c("div", { staticClass: "ms-auto" }, [
+            _c("div", { staticClass: "d-flex" }, [
+              _c("div", [
+                _c("button", { staticClass: "btn btn-primary" }, [
+                  _c("i", { staticClass: "fa fa-facebook" }),
+                  _vm._v(" Facebook"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mx-1" }, [
+                _c("button", { staticClass: "btn btn-info text-white" }, [
+                  _c("i", { staticClass: "fa fa-twitter" }),
+                  _vm._v(" Twitter"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("button", { staticClass: "btn btn-danger" }, [
+                  _c("i", { staticClass: "fa fa-google" }),
+                  _vm._v(" Google"),
+                ]),
+              ]),
+            ]),
           ]),
         ]),
       ]),

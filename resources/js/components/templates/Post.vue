@@ -12,9 +12,6 @@
                 <div class="ms-auto mt-1 dropdown dropdown-menu-end" v-if="$store.getters.currentUser.id == data.user_id && $route.name == 'Home'">
                     <a role="button" class="p-2 text-secondary" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                     <ul class="dropdown-menu">
-                        <!-- <li>
-                            <router-link :to="`post/${data.id}/edit/`" role="button" class="dropdown-item">Edit</router-link>
-                        </li> -->
                         <li><a role="button" class="dropdown-item" data-bs-toggle="modal" @click="updateParentEditPost(data)" data-bs-target="#editModal">Edit</a></li>
                         <li class="dropdown-divider"></li>
                         <li>
@@ -24,7 +21,6 @@
                 </div>
             </div>
 
-
             <div class="px-3">
                 <div class="text-justify div-like-pre" :id="`post_message_${data.id}`">{{ data.message }}</div>
             </div>
@@ -33,32 +29,74 @@
             <div v-if="$route.path == '/'">
                 <div v-if="data.get_attach_files.length == 1">
                     <div class="w-100" v-for="(file, index) in data.get_attach_files" :key="index">
-                        <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
-                            <img :src="computedPostImage(file.file_link)" class="img attach_image">
+                        <router-link
+                            :to="{ name: 'PostPage', params: { id: data.id, page: index }}"
+                        >
+                            <img :src="computedPostFile(file.file_link)" class="w-100 attach_image"
+                            v-if="getFileFormat(file.file_link) == 'jpg' || getFileFormat(file.file_link) == 'jpeg' || getFileFormat(file.file_link) == 'png'"
+                            >
+                            <video class="w-100 h-100" v-else controls>
+                                <source :src="computedPostFile(file.file_link)" type="video/mp4">
+                            </video>
+
                         </router-link>
                     </div>
-
                 </div>
 
                 <div v-if="data.get_attach_files.length == 2">
-                    <div class="w-50 d-inline-block" v-for="(file, index) in data.get_attach_files" :key="index">
-                        <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
-                            <img :src="computedPostImage(file.file_link)" class="img attach_image">
+                    <div class="w-50 d-inline-block position-relative" v-for="(file, index) in data.get_attach_files" :key="index">
+                        <!-- <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
+                            <img :src="computedPostFile(file.file_link)" class="w-100 attach_image">
+                        </router-link> -->
+                        <router-link
+                            :to="{ name: 'PostPage', params: { id: data.id, page: index }}"
+                        >
+                            <img :src="computedPostFile(file.file_link)" class="w-100 attach_image"
+                            v-if="getFileFormat(file.file_link) == 'jpg' || getFileFormat(file.file_link) == 'jpeg' || getFileFormat(file.file_link) == 'png'"
+                            >
+                            <video class="w-100 h-100" v-else controls>
+                                <source :src="computedPostFile(file.file_link)" type="video/mp4">
+                            </video>
+
                         </router-link>
+
                     </div>
                 </div>
 
                 <div v-if="data.get_attach_files.length == 3">
                     <span v-for="(file, index) in data.get_attach_files" :key="index">
                         <div class="d-inline-block w-50" v-if="index != 2">
-                            <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
-                                <img :src="computedPostImage(file.file_link)" class="img attach_image">
+                            <!-- <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
+                                <img :src="computedPostFile(file.file_link)" class="w-100 attach_image">
+                            </router-link> -->
+                            <router-link
+                                :to="{ name: 'PostPage', params: { id: data.id, page: index }}"
+                            >
+                                <img :src="computedPostFile(file.file_link)" class="w-100 attach_image"
+                                v-if="getFileFormat(file.file_link) == 'jpg' || getFileFormat(file.file_link) == 'jpeg' || getFileFormat(file.file_link) == 'png'"
+                                >
+                                <video class="w-100 h-100" v-else controls>
+                                    <source :src="computedPostFile(file.file_link)" type="video/mp4">
+                                </video>
+
                             </router-link>
                         </div>
                         <div class="w-100 d-block" v-else>
-                            <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
-                                <img :src="computedPostImage(file.file_link)" class="img attach_image">
+                            <!-- <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
+                                <img :src="computedPostFile(file.file_link)" class="w-100 attach_image">
+                            </router-link> -->
+                            <router-link
+                                :to="{ name: 'PostPage', params: { id: data.id, page: index }}"
+                            >
+                                <img :src="computedPostFile(file.file_link)" class="w-100 attach_image"
+                                v-if="getFileFormat(file.file_link) == 'jpg' || getFileFormat(file.file_link) == 'jpeg' || getFileFormat(file.file_link) == 'png'"
+                                >
+                                <video class="w-100 h-100" v-else controls>
+                                    <source :src="computedPostFile(file.file_link)" type="video/mp4">
+                                </video>
+
                             </router-link>
+
                         </div>
                     </span>
                 </div>
@@ -66,9 +104,21 @@
                 <div v-if="data.get_attach_files.length == 4">
                     <span v-for="(file, index) in data.get_attach_files" :key="index">
                         <div class="d-inline-block w-50">
-                            <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
-                                <img :src="computedPostImage(file.file_link)" :data-index="index" class="img attach_image">
+                            <!-- <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
+                                <img :src="computedPostFile(file.file_link)" :data-index="index" class="w-100 attach_image">
+                            </router-link> -->
+                            <router-link
+                                :to="{ name: 'PostPage', params: { id: data.id, page: index }}"
+                            >
+                                <img :src="computedPostFile(file.file_link)" class="w-100 attach_image"
+                                v-if="getFileFormat(file.file_link) == 'jpg' || getFileFormat(file.file_link) == 'jpeg' || getFileFormat(file.file_link) == 'png'"
+                                >
+                                <video class="w-100 h-100" v-else controls>
+                                    <source :src="computedPostFile(file.file_link)" type="video/mp4">
+                                </video>
+
                             </router-link>
+
                         </div>
                     </span>
                 </div>
@@ -76,15 +126,24 @@
                 <div v-if="data.get_attach_files.length >= 5">
                     <span v-for="(file, index) in data.get_attach_files" :key="index">
                         <div class="d-inline-block position-relative w-50" v-if="index <= 3">
-                            <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
-                                <img :src="computedPostImage(file.file_link)" :class="index == 3 ? 'opacity-50' : ''" class="img attach_image">
+                            <!-- <router-link :to="{ name: 'PostPage', params: { id: data.id, page: index }}">
+                                <img :src="computedPostFile(file.file_link)" :class="index == 3 ? 'opacity-50' : ''" class="w-100 attach_image">
                                 <div class="position-absolute" v-if="index == 3">
                                     <i class="fa fa-plus-square text-light fa-lg"></i>
                                 </div>
+                            </router-link> -->
+                            <router-link
+                                :to="{ name: 'PostPage', params: { id: data.id, page: index }}"
+                            >
+                                <img :src="computedPostFile(file.file_link)" class="w-100 attach_image"
+                                v-if="getFileFormat(file.file_link) == 'jpg' || getFileFormat(file.file_link) == 'jpeg' || getFileFormat(file.file_link) == 'png'"
+                                >
+                                <video class="w-100 h-100" v-else controls>
+                                    <source :src="computedPostFile(file.file_link)" type="video/mp4">
+                                </video>
+
                             </router-link>
-
                         </div>
-
                     </span>
                 </div>
             </div>
@@ -107,22 +166,6 @@
                     </a>
                     <a role="button" class="btn btn-outline-secondary w-100"><i class="fa fa-share"></i> Share</a>
                 </div>
-
-                <!-- <div class="d-flex justify-content-between align-items-center px-2">
-                    <div class="d-flex flex-row icons d-flex align-items-center">
-                        <img class="img" src="/img/like.jpg" />
-                        {{data.get_post_likes.length}} Likes
-                    </div>
-                    <div class="d-flex flex-row muted-color">
-                        <div class="dropdown dropdown-menu-end">
-                            <a href="" class="dropdown-toggle" data-bs-toggle="dropdown">Latest Comments</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" @click="latestComments(data)" role="button">Latest Comments</a></li>
-                                <li><a class="dropdown-item" @click="oldComments(data)" role="button">Old Comments</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> -->
 
                 <div class="d-flex">
                     <div v-if="data.get_post_likes.length">
@@ -178,7 +221,7 @@ export default {
     },
 
     methods: {
-        computedPostImage(file_link) {
+        computedPostFile(file_link) {
             return `/storage/post/file/${file_link}`;
         },
 
@@ -242,6 +285,12 @@ export default {
             this.$parent.edit_post.attachment_remove = [];
         },
 
+        getFileFormat(fileName) {
+            var re = /(?:\.([^.]+))?$/;
+            var ext = re.exec(fileName)[1];
+            return ext.trim();
+        }
+
     },
 
     watch: {
@@ -279,7 +328,7 @@ export default {
 }
 
 .attach_image {
-    height: 350px;
+    height: 500px;
 }
 
 .position-absolute {

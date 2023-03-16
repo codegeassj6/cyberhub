@@ -2,11 +2,11 @@
     <div>
         <div class="bg-profile">
             <div class="container">
-                <div class="d-flex p-4">
+                <div class="d-flex px-4">
                     <div class="space-intro">
                         <img :src="profileImage" height="150" class="border border-5 rounded" width="150" alt="">
                     </div>
-                    <div class="space-intro p-4 text-white">
+                    <div class="space-name p-4 text-white">
                         <h3>Jhon Rey Repuela</h3>
                         <div>
                             <span>@codegeassj6</span>
@@ -19,9 +19,6 @@
         <div class="bg-profile-2">
             <div class="container">
                 <div class="d-flex p-4">
-                    <div class="mt-4">
-                        <router-link to="/account/update" class="btn btn-outline-secondary mt-2 ms-3">Update Profile</router-link>
-                    </div>
                     <div class="ms-auto">
                         <div class="d-flex">
                             <div>
@@ -126,11 +123,11 @@ export default {
 }
 
 .space-intro {
-    margin-top: 150px;
+    margin-top: 140px;
 }
 
-.space-intro {
-    margin-top: 175px;
+.space-name {
+    margin-top: 210px;
 }
 
 
