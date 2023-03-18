@@ -32,14 +32,14 @@
                                                         <source :src="`/storage/post/file/${file.file_link}`" type="video/mp4">
                                                     </video>
 
-                                                    <div class="position-absolute mx-0 absolute-center-left" v-if="currentFile == 1">
-                                                        <a role="button" @click="prevImage" class="text-secondary">
+                                                    <div class="position-absolute mx-0 absolute-center-left" v-if="currentFile > 0">
+                                                        <a role="button" @click="prevImage" class="text-secondary p-3">
                                                             <i class="fa fa-arrow-left fa-2x"></i>
                                                         </a>
                                                     </div>
 
                                                     <div class="position-absolute mx-0 absolute-center-right" v-if="currentFile+1 != data.get_attach_files.length">
-                                                        <a role="button" @click="nextImage(data)" class="text-secondary">
+                                                        <a role="button" @click="nextImage(data)" class="text-secondary p-3">
                                                             <i class="fa fa-arrow-right fa-2x"></i>
                                                         </a>
                                                     </div>

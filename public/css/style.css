@@ -63,3 +63,9 @@ pre {
         max-width: 100%;
     }
 }
+
+.center {
+    top: 48%;
+    left: 50%;
+    right: 0;
+}

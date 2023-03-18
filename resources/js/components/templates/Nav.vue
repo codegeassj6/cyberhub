@@ -23,9 +23,9 @@
 
                     <div class="d-flex my-2 my-lg-0">
                         <template v-if="$store.getters.currentUser">
-                            <button class="btn btn-primary hide-sm" type="button">
+                            <router-link to="/account" class="btn btn-primary hide-sm" type="button">
                                 {{ currentUser.first_name }} {{ currentUser.last_name }}
-                            </button>
+                            </router-link>
                             <router-link to="/cart" class="btn btn-primary position-relative">
                                 <i class="fa fa-shopping-cart fa-lg"></i>
                                 <span class="badge bg-info" id="cart_count">{{ $store.getters.getCartCount }}</span>
@@ -35,6 +35,7 @@
                                     <i class="fa fa-cog fa-lg"></i>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><router-link to="/account/update" class="dropdown-item" href="#">Update Account</router-link></li>
                                     <li><router-link to="/setting" class="dropdown-item" href="#">Setting</router-link></li>
                                     <li><router-link to="/save" class="dropdown-item" href="#">My Saves</router-link></li>
                                     <li><hr class="dropdown-divider"></li>

@@ -12,7 +12,10 @@
 
                     <div class="col-md-4">
                         <div class="card">
-                            s
+                            <Adsense
+                                data-ad-client="ca-pub-5828491790124517"
+                                data-ad-slot="7486431136">
+                            </Adsense>
                         </div>
                     </div>
 

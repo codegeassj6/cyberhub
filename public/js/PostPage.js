@@ -394,7 +394,7 @@ var render = function () {
                                           ]
                                         ),
                                     _vm._v(" "),
-                                    _vm.currentFile == 1
+                                    _vm.currentFile > 0
                                       ? _c(
                                           "div",
                                           {
@@ -405,7 +405,8 @@ var render = function () {
                                             _c(
                                               "a",
                                               {
-                                                staticClass: "text-secondary",
+                                                staticClass:
+                                                  "text-secondary p-3",
                                                 attrs: { role: "button" },
                                                 on: { click: _vm.prevImage },
                                               },
@@ -432,7 +433,8 @@ var render = function () {
                                             _c(
                                               "a",
                                               {
-                                                staticClass: "text-secondary",
+                                                staticClass:
+                                                  "text-secondary p-3",
                                                 attrs: { role: "button" },
                                                 on: {
                                                   click: function ($event) {

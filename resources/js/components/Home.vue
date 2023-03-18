@@ -286,7 +286,7 @@
         <template v-else>
             <div class="container space-intro">
                 <div class="row d-flex">
-                    <div class="col-md-8">
+                    <div class="col-lg-8">
                         <div class="card mb-4">
                             <div class="card-header">
                                 <div class="h6">What's up</div>
@@ -303,15 +303,27 @@
                                     <div
                                         class="card w-25 position-relative me-1 dropbox rounded-0"
                                         v-for="(file, index) in attach.files" :key="index"
+                                        v-show="index < 4"
+                                        :class="index == 3 ? 'opacity-50' : ''"
                                     >
-                                        <div v-if="attach.file_type[index] == 'video/mp4'">
-                                            <video class="w-100 attach_video" controls>
-                                                <source :src="file" type="video/mp4">
-                                            </video>
-                                        </div>
+                                        <video
+                                            v-if="attach.file_type[index] == 'video/mp4'"
+                                            class="w-100 bg-dark"
+                                            height="150"
+                                            controls
+                                        >
+                                            <source :src="file" type="video/mp4">
+                                        </video>
 
-                                        <div v-else>
-                                            <img :src="file" class="w-100" height="150" />
+                                        <img
+                                            v-else
+                                            :src="file"
+                                            class="w-100"
+                                            height="150"
+                                        />
+
+                                        <div v-show="index == 3" class="position-absolute center text-dark h3">
+                                            <span class="me-2">{{attach.files.length - 4}}</span><i class="fa fa-plus-square"></i>
                                         </div>
 
                                         <div class="position-absolute img_attach_remove">
@@ -355,11 +367,13 @@
                         <Post :datas="posts" />
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-lg-4">
                          <!-- <Adsense
                             data-ad-client="ca-pub-5828491790124517"
                             data-ad-slot="7486431136">
                         </Adsense> -->
+
+
                     </div>
                 </div>
             </div>
@@ -391,7 +405,7 @@
                                                         v-if="getFileFormat(file.file_link) == 'jpg' || getFileFormat(file.file_link) == 'jpeg' || getFileFormat(file.file_link) == 'png'"
                                                         height="150"
                                                     >
-                                                    <video class="w-100" v-else controls height="170">
+                                                    <video class="w-100 bg-dark" v-else controls height="170">
                                                         <source :src="computedPostFile(file.file_link)" type="video/mp4">
                                                     </video>
 
@@ -495,7 +509,7 @@ export default {
                     document.getElementById('editable').innerHTML = '';
                     this.posts = res.data;
                 }).catch(err => {
-
+                    console.log(err);
                 });
             }
 
@@ -635,6 +649,11 @@ export default {
 
 .attach_video {
     height: 150px;
+}
+
+.center {
+    top: 40% !important;
+    left: 42% !important;
 }
 
 </style>

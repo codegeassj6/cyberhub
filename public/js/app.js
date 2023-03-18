@@ -5782,6 +5782,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5847,7 +5861,9 @@ __webpack_require__.r(__webpack_exports__);
           _this.form_data = '';
           document.getElementById('editable').innerHTML = '';
           _this.posts = res.data;
-        })["catch"](function (err) {});
+        })["catch"](function (err) {
+          console.log(err);
+        });
       }
     },
     attachFile: function attachFile(e) {
@@ -6316,6 +6332,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 //import name from './
 
@@ -6376,35 +6393,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Comment_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Comment.vue */ "./resources/js/components/templates/Comment.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -12335,7 +12323,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#carouselintro img[data-v-f2b6376c]  {\n    height: 600px;\n}\n#carouselintro[data-v-f2b6376c] {\n    margin-top: 26px;\n}\n.name[data-v-f2b6376c] {\n    font-size: 20px;\n}\n.btn-status[data-v-f2b6376c] {\n    padding: 0 !important;\n}\n.min-100[data-v-f2b6376c] {\n    min-height: 100px;\n}\n.dropbox[data-v-f2b6376c] {\n    height: 150px;\n}\n.img_attach_remove[data-v-f2b6376c] {\n    right: 0%;\n    top: 0%;\n    color: #ffffff;\n}\n.attach_video[data-v-f2b6376c] {\n    height: 150px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#carouselintro img[data-v-f2b6376c]  {\n    height: 600px;\n}\n#carouselintro[data-v-f2b6376c] {\n    margin-top: 26px;\n}\n.name[data-v-f2b6376c] {\n    font-size: 20px;\n}\n.btn-status[data-v-f2b6376c] {\n    padding: 0 !important;\n}\n.min-100[data-v-f2b6376c] {\n    min-height: 100px;\n}\n.dropbox[data-v-f2b6376c] {\n    height: 150px;\n}\n.img_attach_remove[data-v-f2b6376c] {\n    right: 0%;\n    top: 0%;\n    color: #ffffff;\n}\n.attach_video[data-v-f2b6376c] {\n    height: 150px;\n}\n.center[data-v-f2b6376c] {\n    top: 40% !important;\n    left: 42% !important;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12407,7 +12395,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.border-post[data-v-038d89e1] {\n    border: 1px solid #e1e1e1;\n}\n.attach_image[data-v-038d89e1] {\n    height: 500px;\n}\n.position-absolute[data-v-038d89e1] {\n    top: 50%;\n    left: 50%;\n    right: 0;\n}\n.btn-outline-secondary[data-v-038d89e1]:hover {\n    background: #ffffff;\n    color: #0d6efd !important;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.border-post[data-v-038d89e1] {\n    border: 1px solid #e1e1e1;\n}\n.attach_image[data-v-038d89e1] {\n    height: 300px;\n}\n.btn-outline-secondary[data-v-038d89e1]:hover {\n    background: #ffffff;\n    color: #0d6efd !important;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -30893,7 +30881,7 @@ var render = function () {
               _c("div", { staticClass: "row d-flex" }, [
                 _c(
                   "div",
-                  { staticClass: "col-md-8" },
+                  { staticClass: "col-lg-8" },
                   [
                     _c("div", { staticClass: "card mb-4" }, [
                       _vm._m(4),
@@ -30908,35 +30896,66 @@ var render = function () {
                             return _c(
                               "div",
                               {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: index < 4,
+                                    expression: "index < 4",
+                                  },
+                                ],
                                 key: index,
                                 staticClass:
                                   "card w-25 position-relative me-1 dropbox rounded-0",
+                                class: index == 3 ? "opacity-50" : "",
                               },
                               [
                                 _vm.attach.file_type[index] == "video/mp4"
-                                  ? _c("div", [
-                                      _c(
-                                        "video",
-                                        {
-                                          staticClass: "w-100 attach_video",
-                                          attrs: { controls: "" },
-                                        },
-                                        [
-                                          _c("source", {
-                                            attrs: {
-                                              src: file,
-                                              type: "video/mp4",
-                                            },
-                                          }),
-                                        ]
+                                  ? _c(
+                                      "video",
+                                      {
+                                        staticClass: "w-100 bg-dark",
+                                        attrs: { height: "150", controls: "" },
+                                      },
+                                      [
+                                        _c("source", {
+                                          attrs: {
+                                            src: file,
+                                            type: "video/mp4",
+                                          },
+                                        }),
+                                      ]
+                                    )
+                                  : _c("img", {
+                                      staticClass: "w-100",
+                                      attrs: { src: file, height: "150" },
+                                    }),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: index == 3,
+                                        expression: "index == 3",
+                                      },
+                                    ],
+                                    staticClass:
+                                      "position-absolute center text-dark h3",
+                                  },
+                                  [
+                                    _c("span", { staticClass: "me-2" }, [
+                                      _vm._v(
+                                        _vm._s(_vm.attach.files.length - 4)
                                       ),
-                                    ])
-                                  : _c("div", [
-                                      _c("img", {
-                                        staticClass: "w-100",
-                                        attrs: { src: file, height: "150" },
-                                      }),
                                     ]),
+                                    _c("i", {
+                                      staticClass: "fa fa-plus-square",
+                                    }),
+                                  ]
+                                ),
                                 _vm._v(" "),
                                 _c(
                                   "div",
@@ -31019,7 +31038,7 @@ var render = function () {
                   1
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }),
+                _c("div", { staticClass: "col-lg-4" }),
               ]),
             ]),
             _vm._v(" "),
@@ -31104,7 +31123,7 @@ var render = function () {
                                             : _c(
                                                 "video",
                                                 {
-                                                  staticClass: "w-100",
+                                                  staticClass: "w-100 bg-dark",
                                                   attrs: {
                                                     controls: "",
                                                     height: "170",
@@ -32279,10 +32298,10 @@ var render = function () {
                     _vm.$store.getters.currentUser
                       ? [
                           _c(
-                            "button",
+                            "router-link",
                             {
                               staticClass: "btn btn-primary hide-sm",
-                              attrs: { type: "button" },
+                              attrs: { to: "/account", type: "button" },
                             },
                             [
                               _vm._v(
@@ -32330,6 +32349,24 @@ var render = function () {
                                 staticClass: "dropdown-menu dropdown-menu-end",
                               },
                               [
+                                _c(
+                                  "li",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass: "dropdown-item",
+                                        attrs: {
+                                          to: "/account/update",
+                                          href: "#",
+                                        },
+                                      },
+                                      [_vm._v("Update Account")]
+                                    ),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
                                 _c(
                                   "li",
                                   [
@@ -32633,13 +32670,11 @@ var render = function () {
               data.get_attach_files.length == 2
                 ? _c(
                     "div",
+                    { staticClass: "d-inline-flex w-100" },
                     _vm._l(data.get_attach_files, function (file, index) {
                       return _c(
                         "div",
-                        {
-                          key: index,
-                          staticClass: "w-50 d-inline-block position-relative",
-                        },
+                        { key: index, staticClass: "w-50 bg-dark" },
                         [
                           _c(
                             "router-link",
@@ -32664,7 +32699,7 @@ var render = function () {
                                 : _c(
                                     "video",
                                     {
-                                      staticClass: "w-100 h-100",
+                                      staticClass: "w-100 attach_image",
                                       attrs: { controls: "" },
                                     },
                                     [
@@ -32689,14 +32724,21 @@ var render = function () {
                 : _vm._e(),
               _vm._v(" "),
               data.get_attach_files.length == 3
-                ? _c(
-                    "div",
-                    _vm._l(data.get_attach_files, function (file, index) {
-                      return _c("span", { key: index }, [
-                        index != 2
-                          ? _c(
+                ? _c("div", [
+                    _c(
+                      "div",
+                      { staticClass: "row mx-0" },
+                      _vm._l(data.get_attach_files, function (file, index) {
+                        return _c(
+                          "div",
+                          {
+                            key: index,
+                            class: index == 2 ? "col-12 px-0" : "col-md-6 px-0",
+                          },
+                          [
+                            _c(
                               "div",
-                              { staticClass: "d-inline-block w-50" },
+                              { staticClass: "bg-dark h-100" },
                               [
                                 _c(
                                   "router-link",
@@ -32725,57 +32767,7 @@ var render = function () {
                                       : _c(
                                           "video",
                                           {
-                                            staticClass: "w-100 h-100",
-                                            attrs: { controls: "" },
-                                          },
-                                          [
-                                            _c("source", {
-                                              attrs: {
-                                                src: _vm.computedPostFile(
-                                                  file.file_link
-                                                ),
-                                                type: "video/mp4",
-                                              },
-                                            }),
-                                          ]
-                                        ),
-                                  ]
-                                ),
-                              ],
-                              1
-                            )
-                          : _c(
-                              "div",
-                              { staticClass: "w-100 d-block" },
-                              [
-                                _c(
-                                  "router-link",
-                                  {
-                                    attrs: {
-                                      to: {
-                                        name: "PostPage",
-                                        params: { id: data.id, page: index },
-                                      },
-                                    },
-                                  },
-                                  [
-                                    _vm.getFileFormat(file.file_link) ==
-                                      "jpg" ||
-                                    _vm.getFileFormat(file.file_link) ==
-                                      "jpeg" ||
-                                    _vm.getFileFormat(file.file_link) == "png"
-                                      ? _c("img", {
-                                          staticClass: "w-100 attach_image",
-                                          attrs: {
-                                            src: _vm.computedPostFile(
-                                              file.file_link
-                                            ),
-                                          },
-                                        })
-                                      : _c(
-                                          "video",
-                                          {
-                                            staticClass: "w-100 h-100",
+                                            staticClass: "w-100 attach_image",
                                             attrs: { controls: "" },
                                           },
                                           [
@@ -32794,83 +32786,27 @@ var render = function () {
                               ],
                               1
                             ),
-                      ])
-                    }),
-                    0
-                  )
+                          ]
+                        )
+                      }),
+                      0
+                    ),
+                  ])
                 : _vm._e(),
               _vm._v(" "),
               data.get_attach_files.length == 4
-                ? _c(
-                    "div",
-                    _vm._l(data.get_attach_files, function (file, index) {
-                      return _c("span", { key: index }, [
-                        _c(
+                ? _c("div", [
+                    _c(
+                      "div",
+                      { staticClass: "row mx-0" },
+                      _vm._l(data.get_attach_files, function (file, index) {
+                        return _c(
                           "div",
-                          { staticClass: "d-inline-block w-50" },
+                          { key: index, staticClass: "col-md-6 px-0" },
                           [
                             _c(
-                              "router-link",
-                              {
-                                attrs: {
-                                  to: {
-                                    name: "PostPage",
-                                    params: { id: data.id, page: index },
-                                  },
-                                },
-                              },
-                              [
-                                _vm.getFileFormat(file.file_link) == "jpg" ||
-                                _vm.getFileFormat(file.file_link) == "jpeg" ||
-                                _vm.getFileFormat(file.file_link) == "png"
-                                  ? _c("img", {
-                                      staticClass: "w-100 attach_image",
-                                      attrs: {
-                                        src: _vm.computedPostFile(
-                                          file.file_link
-                                        ),
-                                      },
-                                    })
-                                  : _c(
-                                      "video",
-                                      {
-                                        staticClass: "w-100 h-100",
-                                        attrs: { controls: "" },
-                                      },
-                                      [
-                                        _c("source", {
-                                          attrs: {
-                                            src: _vm.computedPostFile(
-                                              file.file_link
-                                            ),
-                                            type: "video/mp4",
-                                          },
-                                        }),
-                                      ]
-                                    ),
-                              ]
-                            ),
-                          ],
-                          1
-                        ),
-                      ])
-                    }),
-                    0
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              data.get_attach_files.length >= 5
-                ? _c(
-                    "div",
-                    _vm._l(data.get_attach_files, function (file, index) {
-                      return _c("span", { key: index }, [
-                        index <= 3
-                          ? _c(
                               "div",
-                              {
-                                staticClass:
-                                  "d-inline-block position-relative w-50",
-                              },
+                              { staticClass: "bg-dark h-100" },
                               [
                                 _c(
                                   "router-link",
@@ -32899,7 +32835,7 @@ var render = function () {
                                       : _c(
                                           "video",
                                           {
-                                            staticClass: "w-100 h-100",
+                                            staticClass: "w-100 attach_image",
                                             attrs: { controls: "" },
                                           },
                                           [
@@ -32917,12 +32853,116 @@ var render = function () {
                                 ),
                               ],
                               1
-                            )
-                          : _vm._e(),
-                      ])
-                    }),
-                    0
-                  )
+                            ),
+                          ]
+                        )
+                      }),
+                      0
+                    ),
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              data.get_attach_files.length >= 5
+                ? _c("div", [
+                    _c(
+                      "div",
+                      { staticClass: "row mx-0" },
+                      _vm._l(data.get_attach_files, function (file, index) {
+                        return _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: index < 4,
+                                expression: "index < 4",
+                              },
+                            ],
+                            key: index,
+                            staticClass: "col-md-6 position-relative px-0",
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "bg-dark h-100" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    attrs: {
+                                      to: {
+                                        name: "PostPage",
+                                        params: { id: data.id, page: index },
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _vm.getFileFormat(file.file_link) ==
+                                      "jpg" ||
+                                    _vm.getFileFormat(file.file_link) ==
+                                      "jpeg" ||
+                                    _vm.getFileFormat(file.file_link) == "png"
+                                      ? _c("img", {
+                                          staticClass: "w-100 attach_image",
+                                          class: index == 3 ? "opacity-25" : "",
+                                          attrs: {
+                                            src: _vm.computedPostFile(
+                                              file.file_link
+                                            ),
+                                          },
+                                        })
+                                      : _c(
+                                          "video",
+                                          {
+                                            staticClass: "w-100 attach_image",
+                                            class:
+                                              index == 3 ? "opacity-25" : "",
+                                            attrs: { controls: "" },
+                                          },
+                                          [
+                                            _c("source", {
+                                              attrs: {
+                                                src: _vm.computedPostFile(
+                                                  file.file_link
+                                                ),
+                                                type: "video/mp4",
+                                              },
+                                            }),
+                                          ]
+                                        ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: index == 3,
+                                            expression: "index == 3",
+                                          },
+                                        ],
+                                        staticClass:
+                                          "position-absolute center text-white",
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fa fa-plus-square",
+                                        }),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ],
+                              1
+                            ),
+                          ]
+                        )
+                      }),
+                      0
+                    ),
+                  ])
                 : _vm._e(),
             ])
           : _vm._e(),

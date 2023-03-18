@@ -1,6 +1,2 @@
 Task:
-
-
-Home:
-Allow upload Video
-Rename image name into file
+toast bs5
