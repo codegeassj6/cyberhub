@@ -65,7 +65,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'message' => 'string|max:1000',
+            'message' => 'max:1000',
             'files' => 'max:6', [
                 'files.max' => 'Only 6 files allowed!',
             ],

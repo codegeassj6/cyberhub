@@ -172,9 +172,9 @@ export default {
                     url: `/api/cart/${item.id}`,
                     headers: {Authorization: AuthStr}
                 }).then(res => {
-                    console.log(res.data);
+
                 }).catch(err => {
-                    console.log(err);
+
                 });
             }
 
@@ -196,9 +196,9 @@ export default {
                     url: `/api/cart/${item.id}`,
                     headers: {Authorization: AuthStr}
                 }).then(res => {
-                    console.log(res.data);
+
                 }).catch(err => {
-                    console.log(err);
+
                 });
             }
         },

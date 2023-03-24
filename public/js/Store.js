@@ -1107,7 +1107,7 @@ var render = function () {
                 ),
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-md-6 col-lg-12 col-xl-6" }, [
+              _c("div", { staticClass: "col-md-6 col-lg-12 col-xl-7" }, [
                 _c("h5", [_vm._v(_vm._s(data.name))]),
                 _vm._v(" "),
                 _c(
@@ -1174,7 +1174,7 @@ var render = function () {
                 "div",
                 {
                   staticClass:
-                    "col-md-6 col-lg-12 col-xl-3 border-sm-start-none border-start",
+                    "col-lg-12 col-md-7 col-xl-2 border-sm-start-none border-start",
                 },
                 [
                   _c(

@@ -9,7 +9,7 @@
                             class="w-100 product-img img-thumbnail" />
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-12 col-xl-6">
+                    <div class="col-md-6 col-lg-12 col-xl-7">
                         <h5>{{ data.name }}</h5>
                         <div class="d-flex flex-row mb-2">
                             <Star :rating="data.rating" />
@@ -38,7 +38,7 @@
 
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-12 col-xl-3 border-sm-start-none border-start">
+                    <div class="col-lg-12 col-md-7 col-xl-2 border-sm-start-none border-start">
                         <h4 class="mb-1 text-center" :id="`price_`+data.id">
                             ₱{{data.default_price}}
                         </h4>

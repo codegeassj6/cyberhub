@@ -274,11 +274,7 @@ __webpack_require__.r(__webpack_exports__);
           headers: {
             Authorization: AuthStr
           }
-        }).then(function (res) {
-          console.log(res.data);
-        })["catch"](function (err) {
-          console.log(err);
-        });
+        }).then(function (res) {})["catch"](function (err) {});
       }
     },
     decreaseQuantity: function decreaseQuantity(item) {
@@ -295,11 +291,7 @@ __webpack_require__.r(__webpack_exports__);
           headers: {
             Authorization: AuthStr
           }
-        }).then(function (res) {
-          console.log(res.data);
-        })["catch"](function (err) {
-          console.log(err);
-        });
+        }).then(function (res) {})["catch"](function (err) {});
       }
     },
     changeQuantity: function changeQuantity(item) {

@@ -327,7 +327,7 @@
                                         </div>
 
                                         <div class="position-absolute img_attach_remove">
-                                            <button class="btn btn-close border bg-primary text-white" @click="removeAttachInPost(file)"></button>
+                                            <button class="btn btn-close btn-close-white bg-info border" @click="removeAttachInPost(file)"></button>
                                         </div>
                                     </div>
                                 </div>
@@ -368,12 +368,11 @@
                     </div>
 
                     <div class="col-lg-4">
-                         <!-- <Adsense
+
+                        <!-- <Adsense
                             data-ad-client="ca-pub-5828491790124517"
                             data-ad-slot="7486431136">
                         </Adsense> -->
-
-
                     </div>
                 </div>
             </div>
@@ -490,6 +489,11 @@ export default {
         },
 
         createPost() {
+            if(document.getElementById('editable').innerText.length > 1000) {
+                this.$parent.notification.message = 'Message is too long. Only 1000 characters allow';
+                return false;
+            }
+
             if(document.getElementById('editable').innerText.length || this.form_data) {
                 const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
                 axios({
@@ -503,7 +507,7 @@ export default {
                     headers: {
                         Authorization: AuthStr,
                     }
-                }).then(res => {console.log(res.data);
+                }).then(res => {
                     this.attach_exist = false;
                     this.form_data = '';
                     document.getElementById('editable').innerHTML = '';
@@ -516,8 +520,8 @@ export default {
         },
 
         attachFile(e) {
-            this.attach_exist = true;
-            if(this.$refs.input_upload.files.length) {
+            if(this.$refs.input_upload.files.length <= 6) {
+                this.attach_exist = true;
                 this.attach.files = [];
                 this.attach.file_type = [];
                 let formData = new FormData;
@@ -528,6 +532,8 @@ export default {
 
                 }
                 this.form_data = formData;
+            } else {
+                this.$parent.notification.message = 'Too many files!. Only 6 files can be uploaded.';
             }
         },
 
