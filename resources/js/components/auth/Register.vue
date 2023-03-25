@@ -1,46 +1,5 @@
 <template>
     <div>
-        <!-- <div class="container">
-            <div class="card">
-                <div class="card-body p-10">
-                    <form @submit="register">
-                        <div class="mb-3">
-                            <label for="pwd" class="form-label">First Name:</label>
-                            <input type="text" class="form-control" v-model="fname" placeholder="Enter First Name">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="pwd" class="form-label">Last Name:</label>
-                            <input type="text" class="form-control" v-model="lname" placeholder="Enter Last Name">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email:</label>
-                            <input type="email" class="form-control" v-model="email" placeholder="Enter email">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="pwd" class="form-label">Password:</label>
-                            <input type="password" class="form-control" v-model="password" placeholder="Enter password">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="pwd" class="form-label">Confirm Password:</label>
-                            <input type="password" class="form-control" v-model="confirm" placeholder="Confirm password">
-                        </div>
-
-
-
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-block">Register</button>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div> -->
-
-
         <div class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
             <div class="mask d-flex align-items-center h-100 gradient-custom-3">
                 <div class="container">

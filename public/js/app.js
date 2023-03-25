@@ -31199,19 +31199,7 @@ var render = function () {
                   1
                 ),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-lg-4" },
-                  [
-                    _c("Adsense", {
-                      attrs: {
-                        "data-ad-client": "ca-pub-5828491790124517",
-                        "data-ad-slot": "7486431136",
-                      },
-                    }),
-                  ],
-                  1
-                ),
+                _c("div", { staticClass: "col-lg-4" }),
               ]),
             ]),
             _vm._v(" "),

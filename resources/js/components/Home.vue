@@ -369,10 +369,10 @@
 
                     <div class="col-lg-4">
 
-                        <Adsense
+                        <!-- <Adsense
                             data-ad-client="ca-pub-5828491790124517"
                             data-ad-slot="7486431136">
-                        </Adsense>
+                        </Adsense> -->
                     </div>
                 </div>
             </div>
