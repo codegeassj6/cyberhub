@@ -15,6 +15,24 @@ export const routes = [
     },
 
     {
+        path: '/reset/password',
+        name: "ResetPassword",
+        component: () => import(/* webpackChunkName: "ResetPassword" */ "./components/auth/ResetPassword.vue"),
+        meta: {
+            disableIfLoggedIn: true
+        },
+    },
+
+    {
+        path: '/reset/password/request',
+        name: "ResetPassword",
+        component: () => import(/* webpackChunkName: "ResetPasswordRequest" */ "./components/auth/ResetPasswordRequest.vue"),
+        meta: {
+            disableIfLoggedIn: true
+        },
+    },
+
+    {
         path: '/api/oauth/login/callback/:provider',
         name: "Callback_provider",
         component: () => import(/* webpackChunkName: "Oauth" */ "./components/auth/Oauth.vue"),

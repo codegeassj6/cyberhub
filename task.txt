@@ -1,2 +1,11 @@
 Task:
 drag and drop to download
+live chat
+email notification
+user change password
+
+
+
+facebook login
+google adsense
+

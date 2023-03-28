@@ -17,7 +17,7 @@
                 </div>
             </div>
 
-            <div class="float-end">
+            <div class="d-flex flex-row-reverse">
                 <PaginateButton :paginate_data="games" />
             </div>
 

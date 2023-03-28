@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ul class="pagination">
+        <ul class="pagination mb-4">
             <li class="page-item"><a class="page-link" @click="prev(paginate_data.prev_page_url)">Previous</a></li>
 
             <li class="page-item" :class="index == paginate_data.current_page ? 'active' : null" v-for="(index) in paginate_data.last_page" :key="index">

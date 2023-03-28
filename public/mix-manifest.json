@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/Login.js": "/js/Login.js",
+    "/js/ResetPassword.js": "/js/ResetPassword.js",
     "/js/Oauth.js": "/js/Oauth.js",
     "/js/Register.js": "/js/Register.js",
     "/js/Game.js": "/js/Game.js",
@@ -11,5 +12,6 @@
     "/js/Save.js": "/js/Save.js",
     "/js/PostPage.js": "/js/PostPage.js",
     "/js/NotFound.js": "/js/NotFound.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/ResetPasswordRequest.js": "/js/ResetPasswordRequest.js"
 }

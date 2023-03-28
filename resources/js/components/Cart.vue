@@ -8,7 +8,8 @@
                             <div class="col-lg-8">
                                 <div class="card shadow mb-4">
                                     <div class="card-body p-4">
-                                        <div class="h5">Shopping Cart</div>
+                                        <div class="h5" v-if="cart_items.length">Shopping Cart</div>
+                                        <div v-else class="h5">No items in the cart yet.</div>
                                         <hr />
 
                                         <div class="form-check mb-3" v-if="cart_items.length">

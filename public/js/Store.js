@@ -999,7 +999,7 @@ var render = function () {
   return _c("div", [
     _c(
       "ul",
-      { staticClass: "pagination" },
+      { staticClass: "pagination mb-4" },
       [
         _c("li", { staticClass: "page-item" }, [
           _c(

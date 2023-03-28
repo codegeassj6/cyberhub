@@ -85,7 +85,7 @@ export default {
                     last_name: this.lname,
                     email: this.email,
                     password: this.password,
-                    confirm: this.confirm
+                    confirm: this.confirm,
                 },
                 url: `/api/auth/register`,
             }).then(res => {

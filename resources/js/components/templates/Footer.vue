@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="bg-primary mt-4 text-white" :class="$route.name == 'Login' || $route.name == 'Register' || $route.path == '/games' || $route.name == 'Callback_provider' ? 'fixed-bottom' : null">
+        <div class="bg-primary mt-4 text-white" :class="$route.name == 'Login' || $route.name == 'Register' || $route.name == 'ResetPassword' ? 'fixed-bottom' : null">
             <div class="container">
                 <div class="d-flex">
                     <div class="p-4 flex-fill">

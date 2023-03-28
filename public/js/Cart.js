@@ -228,6 +228,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -699,9 +700,13 @@ var render = function () {
                     "div",
                     { staticClass: "card-body p-4" },
                     [
-                      _c("div", { staticClass: "h5" }, [
-                        _vm._v("Shopping Cart"),
-                      ]),
+                      _vm.cart_items.length
+                        ? _c("div", { staticClass: "h5" }, [
+                            _vm._v("Shopping Cart"),
+                          ])
+                        : _c("div", { staticClass: "h5" }, [
+                            _vm._v("No items in the cart yet."),
+                          ]),
                       _vm._v(" "),
                       _c("hr"),
                       _vm._v(" "),

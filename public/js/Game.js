@@ -750,7 +750,7 @@ var render = function () {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "float-end" },
+        { staticClass: "d-flex flex-row-reverse" },
         [_c("PaginateButton", { attrs: { paginate_data: _vm.games } })],
         1
       ),
@@ -782,7 +782,7 @@ var render = function () {
   return _c("div", [
     _c(
       "ul",
-      { staticClass: "pagination" },
+      { staticClass: "pagination mb-4" },
       [
         _c("li", { staticClass: "page-item" }, [
           _c(

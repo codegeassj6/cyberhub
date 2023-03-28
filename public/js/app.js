@@ -5369,9 +5369,7 @@ __webpack_require__.r(__webpack_exports__);
     Footer: _templates_Footer_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Home: _Home_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  mounted: function mounted() {
-    console.log(this.$route);
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -6943,6 +6941,24 @@ var routes = [{
   name: "Login",
   component: function component() {
     return __webpack_require__.e(/*! import() | Login */ "Login").then(__webpack_require__.bind(__webpack_require__, /*! ./components/auth/Login.vue */ "./resources/js/components/auth/Login.vue"));
+  },
+  meta: {
+    disableIfLoggedIn: true
+  }
+}, {
+  path: '/reset/password',
+  name: "ResetPassword",
+  component: function component() {
+    return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module './components/auth/ResetPassword.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
+  },
+  meta: {
+    disableIfLoggedIn: true
+  }
+}, {
+  path: '/reset/password/request',
+  name: "ResetPassword",
+  component: function component() {
+    return __webpack_require__.e(/*! import() | ResetPasswordRequest */ "ResetPasswordRequest").then(__webpack_require__.bind(__webpack_require__, /*! ./components/auth/ResetPasswordRequest.vue */ "./resources/js/components/auth/ResetPasswordRequest.vue"));
   },
   meta: {
     disableIfLoggedIn: true
@@ -32285,8 +32301,7 @@ var render = function () {
         class:
           _vm.$route.name == "Login" ||
           _vm.$route.name == "Register" ||
-          _vm.$route.path == "/games" ||
-          _vm.$route.name == "Callback_provider"
+          _vm.$route.name == "ResetPassword"
             ? "fixed-bottom"
             : null,
       },
@@ -50090,7 +50105,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"Login":1,"Oauth":1,"Register":1,"Store":1,"Account":1,"UpdateAccount":1,"PostPage":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"Login":1,"ResetPasswordRequest":1,"Oauth":1,"Register":1,"Store":1,"Account":1,"UpdateAccount":1,"PostPage":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			if (chunkId === "Game") return "js/Game.js";
 /******/ 			if (chunkId === "Cart") return "js/Cart.js";
 /******/ 			if (chunkId === "Save") return "js/Save.js";

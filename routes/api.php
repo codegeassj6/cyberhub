@@ -11,11 +11,18 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::get('me', 'App\Http\Controllers\AuthController@me');
 });
 
+Route::group(['prefix' => 'reset'], function ($router) {
+    Route::post('/password', 'App\Http\Controllers\ResetPasswordController@store');
+});
+
+Route::group(['prefix' => 'test'], function ($router) {
+    Route::post('/', 'App\Http\Controllers\TestController@store');
+});
+
 Route::group(['prefix' => 'post'], function ($router) {
     Route::get('/', 'App\Http\Controllers\PostController@index')->middleware('auth');
     Route::post('/', 'App\Http\Controllers\PostController@store')->middleware('auth');
     Route::get('/show/{id}', 'App\Http\Controllers\PostController@show')->middleware('auth');
-    // Route::get('/edit/{id}', 'App\Http\Controllers\PostController@edit')->middleware('auth');
     Route::patch('/{id}', 'App\Http\Controllers\PostController@update')->middleware('auth');
     Route::delete('/{id}', 'App\Http\Controllers\PostController@destroy')->middleware('auth');
 
