@@ -1,8 +1,9 @@
 Task:
+user image default
 drag and drop to download
-live chat
 email notification
-user change password
+password confirm
+change password
 
 
 

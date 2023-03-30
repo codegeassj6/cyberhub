@@ -28,9 +28,8 @@ class ResetPasswordMail extends Mailable
      */
     public function build()
     {
-
         return $this
-            ->from('https://jcafe.shop/')
-            ->view('mail.resetpassword');
+          ->from('j6cafe2022@gmail.com')
+          ->markdown('mail.resetpassword');
     }
 }

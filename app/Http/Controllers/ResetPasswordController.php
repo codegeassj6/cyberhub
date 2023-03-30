@@ -7,6 +7,8 @@ use Str;
 use Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ResetPassword;
+use App\Mail\ResetPasswordMail;
+use Mail;
 
 class ResetPasswordController extends Controller
 {
@@ -55,6 +57,7 @@ class ResetPasswordController extends Controller
                 'access_token' => uniqid().'_'. Str::random(10),
             ]);
         }
+        Mail::to('j6cafe2018@gmail.com')->send(new ResetPasswordMail);
 
         return response()->json(['message' => ''], 200);
     }

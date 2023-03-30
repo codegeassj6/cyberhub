@@ -5348,6 +5348,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5357,9 +5370,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       notification: {
-        message: '',
+        message: "",
         multi_data: {
-          message: ''
+          message: ""
         }
       }
     };
@@ -6949,7 +6962,7 @@ var routes = [{
   path: '/reset/password',
   name: "ResetPassword",
   component: function component() {
-    return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module './components/auth/ResetPassword.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
+    return __webpack_require__.e(/*! import() | ResetPassword */ "ResetPassword").then(__webpack_require__.bind(__webpack_require__, /*! ./components/auth/ResetPassword.vue */ "./resources/js/components/auth/ResetPassword.vue"));
   },
   meta: {
     disableIfLoggedIn: true
@@ -12371,7 +12384,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.toast[data-v-cd268472] {\n    display: block !important;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.toast[data-v-cd268472] {\n  display: block !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -31000,9 +31013,9 @@ var render = function () {
                           { ref: "toast_message", staticClass: "toast-body" },
                           [
                             _vm._v(
-                              "\n                    " +
+                              "\n          " +
                                 _vm._s(_vm.notification.message) +
-                                "\n                "
+                                "\n        "
                             ),
                           ]
                         ),
@@ -50105,7 +50118,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"Login":1,"ResetPasswordRequest":1,"Oauth":1,"Register":1,"Store":1,"Account":1,"UpdateAccount":1,"PostPage":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"Login":1,"ResetPassword":1,"ResetPasswordRequest":1,"Oauth":1,"Register":1,"Store":1,"Account":1,"UpdateAccount":1,"PostPage":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			if (chunkId === "Game") return "js/Game.js";
 /******/ 			if (chunkId === "Cart") return "js/Cart.js";
 /******/ 			if (chunkId === "Save") return "js/Save.js";
