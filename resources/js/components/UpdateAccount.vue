@@ -204,7 +204,7 @@ export default {
                 this.form.address = res.data.address;
                 this.form.contact = res.data.contact;
                 this.form.birthday = res.data.birthday;
-                this.form.photo = res.data.profile_img ? this.getProfilePicture : 'http://bootdey.com/img/Content/avatar/avatar1.png';
+                this.form.photo = res.data.profile_img ? this.getProfilePicture : 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
 
             }).catch(err => {
 

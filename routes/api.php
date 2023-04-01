@@ -12,7 +12,9 @@ Route::group(['prefix' => 'auth'], function ($router) {
 });
 
 Route::group(['prefix' => 'reset'], function ($router) {
-    Route::post('/password', 'App\Http\Controllers\ResetPasswordController@store');
+  Route::patch('/password', 'App\Http\Controllers\ResetPasswordController@update');
+  Route::post('/password/request', 'App\Http\Controllers\ResetPasswordController@store');
+  Route::get('/password/{token}', 'App\Http\Controllers\ResetPasswordController@show');
 });
 
 Route::group(['prefix' => 'test'], function ($router) {

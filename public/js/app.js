@@ -5834,6 +5834,184 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5845,16 +6023,23 @@ __webpack_require__.r(__webpack_exports__);
         files: [],
         file_type: []
       },
-      form_data: '',
-      posts: '',
+      form_data: "",
+      posts: "",
       edit_post: {
         attachment_remove: [],
-        data: '',
-        message: ''
+        data: "",
+        message: ""
+      },
+      error: {
+        post: {
+          message: '',
+          files: '',
+          file_max: ''
+        }
       }
     };
   },
-  name: 'HomeComponent',
+  name: "HomeComponent",
   components: {
     Post: _templates_Post_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -5878,18 +6063,19 @@ __webpack_require__.r(__webpack_exports__);
         elem.dispatchEvent(evt);
       }
     },
-    createPost: function createPost() {
+    createPost: function createPost(e) {
       var _this = this;
-      if (document.getElementById('editable').innerText.length > 1000) {
-        this.$parent.notification.message = 'Message is too long. Only 1000 characters allow';
+      if (document.getElementById("editable").innerText.length > 1000) {
+        this.$parent.notification.message = "Message is too long. Only 1000 characters allow";
         return false;
       }
-      if (document.getElementById('editable').innerText.length || this.form_data) {
-        var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      if (document.getElementById("editable").innerText.length || this.form_data) {
+        e.target.setAttribute('disabled', true);
+        var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
         axios({
-          method: 'POST',
+          method: "POST",
           params: {
-            message: document.getElementById('editable').innerText,
+            message: document.getElementById("editable").innerText,
             files: this.form_data
           },
           data: this.form_data,
@@ -5898,12 +6084,14 @@ __webpack_require__.r(__webpack_exports__);
             Authorization: AuthStr
           }
         }).then(function (res) {
+          e.target.setAttribute('disabled', false);
           _this.attach_exist = false;
-          _this.form_data = '';
-          document.getElementById('editable').innerHTML = '';
+          _this.form_data = "";
+          document.getElementById("editable").innerHTML = "";
           _this.posts = res.data;
         })["catch"](function (err) {
-          console.log(err);
+          e.target.setAttribute('disabled', false);
+          console.log(err.response.data);
         });
       }
     },
@@ -5916,11 +6104,11 @@ __webpack_require__.r(__webpack_exports__);
         for (var index = 0; index < this.$refs.input_upload.files.length; index++) {
           this.attach.files.push(URL.createObjectURL(this.$refs.input_upload.files[index]));
           this.attach.file_type.push(this.$refs.input_upload.files[index].type);
-          formData.append('files[]', this.$refs.input_upload.files[index]);
+          formData.append("files[]", this.$refs.input_upload.files[index]);
         }
         this.form_data = formData;
       } else {
-        this.$parent.notification.message = 'Too many files!. Only 6 files can be uploaded.';
+        this.$parent.notification.message = "Too many files!. Only 6 files can be uploaded.";
       }
     },
     removeAttachInPost: function removeAttachInPost(file) {
@@ -5932,9 +6120,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     updatePost: function updatePost() {
       var _this2 = this;
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'patch',
+        method: "patch",
         params: {
           message: this.edit_post.message,
           image: this.edit_post.attachment_remove
@@ -5966,25 +6154,19 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     $data: {
       handler: function handler(val, oldVal) {
-        console.log('Watch Home: ', val);
+        console.log("Watch Home: ", val);
       },
       deep: true
     }
   },
   updated: function updated() {},
   beforeMount: function beforeMount() {},
-  // create prev route data (this.prevRoute)
-  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
-    next(function (vm) {
-      vm.prevRoute = from;
-    });
-  },
   mounted: function mounted() {
     var _this4 = this;
     if (this.$store.getters.currentUser) {
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'get',
+        method: "get",
         params: {
           id: 1
         },
@@ -6075,15 +6257,85 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 //import name from './
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      comments: '',
+      comments: "",
       edit: {
-        comment: ''
+        comment: ""
       }
     };
   },
@@ -6101,15 +6353,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     profileImage: function profileImage() {
-      return this.$store.getters.currentUser.profile_img ? '/storage/user/' + this.$store.getters.currentUser.id + '/img/' + this.$store.getters.currentUser.profile_img : 'https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp';
+      return this.$store.getters.currentUser.profile_img ? "/storage/user/" + this.$store.getters.currentUser.id + "/img/" + this.$store.getters.currentUser.profile_img : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y";
     }
   },
   methods: {
+    computedUserAvatar: function computedUserAvatar(data) {
+      if (data.user_details.profile_img) {
+        return '/storage/user/' + data.user_details.id + '/img/' + data.user_details.profile_img;
+      } else {
+        return 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
+      }
+    },
     postComment: function postComment(post_id) {
       var _this = this;
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'post',
+        method: "post",
         params: {
           post_id: this.post_id,
           comment: document.getElementById("content_".concat(post_id)).innerText
@@ -6119,14 +6378,14 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: AuthStr
         }
       }).then(function (res) {
-        document.getElementById("content_".concat(post_id)).innerText = '';
+        document.getElementById("content_".concat(post_id)).innerText = "";
         _this.comments.data.push(res.data);
       })["catch"](function (err) {});
     },
     likeComment: function likeComment(e, data) {
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'post',
+        method: "post",
         params: {
           id: data.id
         },
@@ -6135,20 +6394,20 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: AuthStr
         }
       }).then(function (res) {
-        if (e.target.classList.contains('text-secondary')) {
-          e.target.classList.remove('text-secondary');
-          e.target.classList.add('text-primary');
+        if (e.target.classList.contains("text-secondary")) {
+          e.target.classList.remove("text-secondary");
+          e.target.classList.add("text-primary");
         } else {
-          e.target.classList.remove('text-primary');
-          e.target.classList.add('text-secondary');
+          e.target.classList.remove("text-primary");
+          e.target.classList.add("text-secondary");
         }
       })["catch"](function (err) {});
     },
     deleteComment: function deleteComment(comment) {
       var _this2 = this;
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'delete',
+        method: "delete",
         url: "/api/comment/".concat(comment.id),
         headers: {
           Authorization: AuthStr
@@ -6163,9 +6422,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     editComment: function editComment(post_id) {
       var _this3 = this;
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'patch',
+        method: "patch",
         params: {
           message: document.getElementById("content_".concat(post_id)).innerText
         },
@@ -6179,8 +6438,8 @@ __webpack_require__.r(__webpack_exports__);
             _this3.comments.data[index].message = document.getElementById("content_".concat(post_id)).innerText;
           }
         });
-        _this3.edit.comment = '';
-        document.getElementById("content_".concat(post_id)).innerText = '';
+        _this3.edit.comment = "";
+        document.getElementById("content_".concat(post_id)).innerText = "";
       })["catch"](function (err) {});
     },
     initEditComment: function initEditComment(comment, post_id) {
@@ -6189,14 +6448,14 @@ __webpack_require__.r(__webpack_exports__);
       document.getElementById("content_".concat(post_id)).innerText = comment.message;
     },
     cancelEditComment: function cancelEditComment(post_id) {
-      document.getElementById("content_".concat(post_id)).innerText = '';
-      this.edit.comment = '';
+      document.getElementById("content_".concat(post_id)).innerText = "";
+      this.edit.comment = "";
     },
     getComments: function getComments() {
       var _this4 = this;
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'get',
+        method: "get",
         params: {
           post_id: this.post_id,
           sort: this.sort
@@ -6242,6 +6501,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
 //
 //
 //
@@ -6604,6 +6867,148 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6611,7 +7016,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       // datas: '',
       data_pass: {
-        sort: '',
+        sort: "",
         sort_id: null
       }
     };
@@ -6619,18 +7024,25 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Comment: _Comment_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['datas'],
+  props: ["datas"],
   computed: {},
   methods: {
     computedPostFile: function computedPostFile(file_link) {
       return "/storage/post/file/".concat(file_link);
     },
+    computedUserAvatar: function computedUserAvatar(data) {
+      if (data.get_user.profile_img) {
+        return '/storage/user/' + data.get_user.id + '/img/' + data.get_user.profile_img;
+      } else {
+        return 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
+      }
+    },
     likePost: function likePost(e, data) {
       var _this = this;
       data.authLikes = !data.authLikes;
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'post',
+        method: "post",
         params: {
           id: data.id
         },
@@ -6652,9 +7064,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     deletePost: function deletePost(data) {
       var _this2 = this;
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'delete',
+        method: "delete",
         url: "/api/post/".concat(data.id),
         headers: {
           Authorization: AuthStr
@@ -6668,11 +7080,11 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {});
     },
     latestComments: function latestComments(data) {
-      this.data_pass.sort = 'latest';
+      this.data_pass.sort = "latest";
       this.data_pass.sort_id = data.id;
     },
     oldComments: function oldComments(data) {
-      this.data_pass.sort = 'oldest';
+      this.data_pass.sort = "oldest";
       this.data_pass.sort_id = data.id;
     },
     updateParentEditPost: function updateParentEditPost(data) {
@@ -6689,13 +7101,13 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     $data: {
       handler: function handler(val, oldVal) {
-        console.log('Watch Post: ', val);
+        console.log("Watch Post: ", val);
       },
       deep: true
     },
     $props: {
       handler: function handler(val, oldVal) {
-        console.log('Watch Post: ', val);
+        console.log("Watch Post: ", val);
       },
       deep: true
     }
@@ -6869,7 +7281,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function login(credentials) {
   return new Promise(function (res, rej) {
-    axios.post('/api/auth/login', credentials).then(function (response) {
+    axios.post("/api/auth/login", credentials).then(function (response) {
       (0,_general__WEBPACK_IMPORTED_MODULE_0__.setAuthorization)(response.data.access_token);
       res(response.data);
     })["catch"](function (err) {
@@ -6959,7 +7371,7 @@ var routes = [{
     disableIfLoggedIn: true
   }
 }, {
-  path: '/reset/password',
+  path: '/reset/password/',
   name: "ResetPassword",
   component: function component() {
     return __webpack_require__.e(/*! import() | ResetPassword */ "ResetPassword").then(__webpack_require__.bind(__webpack_require__, /*! ./components/auth/ResetPassword.vue */ "./resources/js/components/auth/ResetPassword.vue"));
@@ -6969,7 +7381,7 @@ var routes = [{
   }
 }, {
   path: '/reset/password/request',
-  name: "ResetPassword",
+  name: "ResetPasswordRequest",
   component: function component() {
     return __webpack_require__.e(/*! import() | ResetPasswordRequest */ "ResetPasswordRequest").then(__webpack_require__.bind(__webpack_require__, /*! ./components/auth/ResetPasswordRequest.vue */ "./resources/js/components/auth/ResetPasswordRequest.vue"));
   },
@@ -12408,7 +12820,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#carouselintro img[data-v-f2b6376c]  {\n    height: 600px;\n}\n#carouselintro[data-v-f2b6376c] {\n    margin-top: 26px;\n}\n.name[data-v-f2b6376c] {\n    font-size: 20px;\n}\n.btn-status[data-v-f2b6376c] {\n    padding: 0 !important;\n}\n.min-100[data-v-f2b6376c] {\n    min-height: 100px;\n}\n.dropbox[data-v-f2b6376c] {\n    height: 150px;\n}\n.img_attach_remove[data-v-f2b6376c] {\n    right: 0%;\n    top: 0%;\n    color: #ffffff;\n}\n.attach_video[data-v-f2b6376c] {\n    height: 150px;\n}\n.center[data-v-f2b6376c] {\n    top: 40% !important;\n    left: 42% !important;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#carouselintro img[data-v-f2b6376c] {\n  height: 600px;\n}\n#carouselintro[data-v-f2b6376c] {\n  margin-top: 26px;\n}\n.name[data-v-f2b6376c] {\n  font-size: 20px;\n}\n.btn-status[data-v-f2b6376c] {\n  padding: 0 !important;\n}\n.min-100[data-v-f2b6376c] {\n  min-height: 100px;\n}\n.dropbox[data-v-f2b6376c] {\n  height: 150px;\n}\n.img_attach_remove[data-v-f2b6376c] {\n  right: 0%;\n  top: 0%;\n  color: #ffffff;\n}\n.attach_video[data-v-f2b6376c] {\n  height: 150px;\n}\n.center[data-v-f2b6376c] {\n  top: 40% !important;\n  left: 42% !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12432,7 +12844,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-comment[data-v-396a43a4] {\n    background: #f1f1f1;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-comment[data-v-396a43a4] {\n  background: #f1f1f1;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12480,7 +12892,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.border-post[data-v-038d89e1] {\n    border: 1px solid #e1e1e1;\n}\n.attach_image[data-v-038d89e1] {\n    height: 300px;\n}\n.btn-outline-secondary[data-v-038d89e1]:hover {\n    background: #ffffff;\n    color: #0d6efd !important;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.border-post[data-v-038d89e1] {\n  border: 1px solid #e1e1e1;\n}\n.attach_image[data-v-038d89e1] {\n  height: 300px;\n}\n.btn-outline-secondary[data-v-038d89e1]:hover {\n  background: #ffffff;\n  color: #0d6efd !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -31215,7 +31627,11 @@ var render = function () {
                                     "btn btn-primary btn-sm px-5 shadow",
                                   on: { click: _vm.createPost },
                                 },
-                                [_vm._v("Post")]
+                                [
+                                  _vm._v(
+                                    "\n                      Post\n                    "
+                                  ),
+                                ]
                               ),
                             ]),
                           ]),
@@ -31228,7 +31644,19 @@ var render = function () {
                   1
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-4" }),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-4" },
+                  [
+                    _c("Adsense", {
+                      attrs: {
+                        "data-ad-client": "ca-pub-5828491790124517",
+                        "data-ad-slot": "7486431136",
+                      },
+                    }),
+                  ],
+                  1
+                ),
               ]),
             ]),
             _vm._v(" "),
@@ -31267,7 +31695,13 @@ var render = function () {
                                   attrs: { contenteditable: "true" },
                                   on: { keyup: _vm.updateEditPostMessage },
                                 },
-                                [_vm._v(_vm._s(_vm.edit_post.data.message))]
+                                [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(_vm.edit_post.data.message) +
+                                      "\n                  "
+                                  ),
+                                ]
                               ),
                             ]
                           ),
@@ -31371,7 +31805,7 @@ var render = function () {
                           staticClass: "btn btn-secondary",
                           attrs: { type: "button", "data-bs-dismiss": "modal" },
                         },
-                        [_vm._v("Cancel")]
+                        [_vm._v("\n              Cancel\n            ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -31381,7 +31815,7 @@ var render = function () {
                           attrs: { type: "button", "data-bs-dismiss": "modal" },
                           on: { click: _vm.updatePost },
                         },
-                        [_vm._v("Save changes")]
+                        [_vm._v("\n              Save changes\n            ")]
                       ),
                     ]),
                   ]),
@@ -31448,7 +31882,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", [
                 _vm._v(
-                  "Some representative placeholder content for the first slide."
+                  "\n              Some representative placeholder content for the first slide.\n            "
                 ),
               ]),
             ]),
@@ -31465,7 +31899,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", [
                 _vm._v(
-                  "Some representative placeholder content for the second slide."
+                  "\n              Some representative placeholder content for the second slide.\n            "
                 ),
               ]),
             ]),
@@ -31482,7 +31916,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", [
                 _vm._v(
-                  "Some representative placeholder content for the third slide."
+                  "\n              Some representative placeholder content for the third slide.\n            "
                 ),
               ]),
             ]),
@@ -31553,7 +31987,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("div", { staticClass: "card-body text-dark" }, [
                 _vm._v(
-                  "\n                            Ut Lorem eiusmod aliquip deserunt proident mollit. Ipsum tempor ad ea reprehenderit qui amet occaecat adipisicing veniam fugiat. Consectetur esse deserunt in amet minim reprehenderit Lorem non. Incididunt in veniam irure ipsum eu Lorem consectetur mollit consequat. Dolore duis id id Lorem est enim do pariatur cillum nulla nostrud ex laboris. Consectetur cillum labore proident excepteur nisi sint proident adipisicing nostrud. Enim deserunt proident proident sit.\n                        "
+                  "\n              Ut Lorem eiusmod aliquip deserunt proident mollit. Ipsum tempor\n              ad ea reprehenderit qui amet occaecat adipisicing veniam fugiat.\n              Consectetur esse deserunt in amet minim reprehenderit Lorem non.\n              Incididunt in veniam irure ipsum eu Lorem consectetur mollit\n              consequat. Dolore duis id id Lorem est enim do pariatur cillum\n              nulla nostrud ex laboris. Consectetur cillum labore proident\n              excepteur nisi sint proident adipisicing nostrud. Enim deserunt\n              proident proident sit.\n            "
                 ),
               ]),
               _vm._v(" "),
@@ -31580,7 +32014,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("div", { staticClass: "card-body text-dark" }, [
                 _vm._v(
-                  "\n                            Ut Lorem eiusmod aliquip deserunt proident mollit. Ipsum tempor ad ea reprehenderit qui amet occaecat adipisicing veniam fugiat. Consectetur esse deserunt in amet minim reprehenderit Lorem non. Incididunt in veniam irure ipsum eu Lorem consectetur mollit consequat. Dolore duis id id Lorem est enim do pariatur cillum nulla nostrud ex laboris. Consectetur cillum labore proident excepteur nisi sint proident adipisicing nostrud. Enim deserunt proident proident sit.\n                        "
+                  "\n              Ut Lorem eiusmod aliquip deserunt proident mollit. Ipsum tempor\n              ad ea reprehenderit qui amet occaecat adipisicing veniam fugiat.\n              Consectetur esse deserunt in amet minim reprehenderit Lorem non.\n              Incididunt in veniam irure ipsum eu Lorem consectetur mollit\n              consequat. Dolore duis id id Lorem est enim do pariatur cillum\n              nulla nostrud ex laboris. Consectetur cillum labore proident\n              excepteur nisi sint proident adipisicing nostrud. Enim deserunt\n              proident proident sit.\n            "
                 ),
               ]),
               _vm._v(" "),
@@ -31607,7 +32041,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("div", { staticClass: "card-body text-dark" }, [
                 _vm._v(
-                  "\n                            Ut Lorem eiusmod aliquip deserunt proident mollit. Ipsum tempor ad ea reprehenderit qui amet occaecat adipisicing veniam fugiat. Consectetur esse deserunt in amet minim reprehenderit Lorem non. Incididunt in veniam irure ipsum eu Lorem consectetur mollit consequat. Dolore duis id id Lorem est enim do pariatur cillum nulla nostrud ex laboris. Consectetur cillum labore proident excepteur nisi sint proident adipisicing nostrud. Enim deserunt proident proident sit.\n                        "
+                  "\n              Ut Lorem eiusmod aliquip deserunt proident mollit. Ipsum tempor\n              ad ea reprehenderit qui amet occaecat adipisicing veniam fugiat.\n              Consectetur esse deserunt in amet minim reprehenderit Lorem non.\n              Incididunt in veniam irure ipsum eu Lorem consectetur mollit\n              consequat. Dolore duis id id Lorem est enim do pariatur cillum\n              nulla nostrud ex laboris. Consectetur cillum labore proident\n              excepteur nisi sint proident adipisicing nostrud. Enim deserunt\n              proident proident sit.\n            "
                 ),
               ]),
               _vm._v(" "),
@@ -31643,7 +32077,7 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("div", { staticClass: "text-center mt-4" }, [
               _vm._v(
-                "\n                            Consequat non sunt dolor eiusmod consequat. Deserunt nulla excepteur culpa esse excepteur id cupidatat mollit. Est nulla non occaecat veniam. Qui culpa id laboris fugiat enim. Fugiat in qui voluptate laborum et do amet consectetur tempor commodo nisi. Fugiat magna deserunt adipisicing irure esse eu consequat duis cillum fugiat commodo ex sit. Eiusmod ipsum in amet sunt quis officia quis officia reprehenderit nisi.\n                        "
+                "\n              Consequat non sunt dolor eiusmod consequat. Deserunt nulla\n              excepteur culpa esse excepteur id cupidatat mollit. Est nulla\n              non occaecat veniam. Qui culpa id laboris fugiat enim. Fugiat in\n              qui voluptate laborum et do amet consectetur tempor commodo\n              nisi. Fugiat magna deserunt adipisicing irure esse eu consequat\n              duis cillum fugiat commodo ex sit. Eiusmod ipsum in amet sunt\n              quis officia quis officia reprehenderit nisi.\n            "
               ),
             ]),
           ]),
@@ -31666,7 +32100,7 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("div", { staticClass: "text-center mt-4" }, [
               _vm._v(
-                "\n                            Consequat non sunt dolor eiusmod consequat. Deserunt nulla excepteur culpa esse excepteur id cupidatat mollit. Est nulla non occaecat veniam. Qui culpa id laboris fugiat enim. Fugiat in qui voluptate laborum et do amet consectetur tempor commodo nisi. Fugiat magna deserunt adipisicing irure esse eu consequat duis cillum fugiat commodo ex sit. Eiusmod ipsum in amet sunt quis officia quis officia reprehenderit nisi.\n                        "
+                "\n              Consequat non sunt dolor eiusmod consequat. Deserunt nulla\n              excepteur culpa esse excepteur id cupidatat mollit. Est nulla\n              non occaecat veniam. Qui culpa id laboris fugiat enim. Fugiat in\n              qui voluptate laborum et do amet consectetur tempor commodo\n              nisi. Fugiat magna deserunt adipisicing irure esse eu consequat\n              duis cillum fugiat commodo ex sit. Eiusmod ipsum in amet sunt\n              quis officia quis officia reprehenderit nisi.\n            "
               ),
             ]),
           ]),
@@ -31689,7 +32123,7 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("div", { staticClass: "text-center mt-4" }, [
               _vm._v(
-                "\n                            Consequat non sunt dolor eiusmod consequat. Deserunt nulla excepteur culpa esse excepteur id cupidatat mollit. Est nulla non occaecat veniam. Qui culpa id laboris fugiat enim. Fugiat in qui voluptate laborum et do amet consectetur tempor commodo nisi. Fugiat magna deserunt adipisicing irure esse eu consequat duis cillum fugiat commodo ex sit. Eiusmod ipsum in amet sunt quis officia quis officia reprehenderit nisi.\n                        "
+                "\n              Consequat non sunt dolor eiusmod consequat. Deserunt nulla\n              excepteur culpa esse excepteur id cupidatat mollit. Est nulla\n              non occaecat veniam. Qui culpa id laboris fugiat enim. Fugiat in\n              qui voluptate laborum et do amet consectetur tempor commodo\n              nisi. Fugiat magna deserunt adipisicing irure esse eu consequat\n              duis cillum fugiat commodo ex sit. Eiusmod ipsum in amet sunt\n              quis officia quis officia reprehenderit nisi.\n            "
               ),
             ]),
           ]),
@@ -32068,11 +32502,7 @@ var render = function () {
             _c("img", {
               staticClass: "rounded-image",
               attrs: {
-                src:
-                  "/storage/user/" +
-                  comment.user_details.id +
-                  "/img/" +
-                  comment.user_details.profile_img,
+                src: _vm.computedUserAvatar(comment),
                 width: "50",
                 height: "50",
               },
@@ -32112,11 +32542,7 @@ var render = function () {
                           },
                         },
                       },
-                      [
-                        _vm._v(
-                          "\n                            Like\n                        "
-                        ),
-                      ]
+                      [_vm._v("\n              Like\n            ")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -32222,7 +32648,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._v("Post comment")]
+                [_vm._v("\n        Post comment\n      ")]
               )
             : _vm._e(),
           _vm._v(" "),
@@ -32238,7 +32664,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._v("Edit comment")]
+                [_vm._v("\n        Edit comment\n      ")]
               )
             : _vm._e(),
           _vm._v(" "),
@@ -32254,7 +32680,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._v("Cancel")]
+                [_vm._v("\n        Cancel\n      ")]
               )
             : _vm._e(),
         ]),
@@ -32306,84 +32732,80 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      {
-        staticClass: "bg-primary mt-4 text-white",
-        class:
-          _vm.$route.name == "Login" ||
-          _vm.$route.name == "Register" ||
-          _vm.$route.name == "ResetPassword"
-            ? "fixed-bottom"
-            : null,
-      },
-      [_vm._m(0)]
-    ),
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "d-flex" }, [
-        _c("div", { staticClass: "p-4 flex-fill" }, [
-          _c("h5", [_vm._v("Location")]),
-          _vm._v(" "),
-          _c("div", [
-            _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
-              _vm._v("Lapu-lapu, San Pedro"),
+    return _c("div", [
+      _c("div", { staticClass: "bg-primary mt-4 text-white" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "d-flex" }, [
+            _c("div", { staticClass: "p-4 flex-fill" }, [
+              _c("h5", [_vm._v("Location")]),
+              _vm._v(" "),
+              _c("div", [
+                _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
+                  _vm._v("Lapu-lapu, San Pedro"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
+                  _vm._v("Bangus, San Pedro"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
+                  _vm._v("Bagdhad, San Pedro"),
+                ]),
+              ]),
             ]),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
-              _vm._v("Bangus, San Pedro"),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
-              _vm._v("Bagdhad, San Pedro"),
-            ]),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-4 flex-fill" }, [
-          _c("h5", [_vm._v("Frequest Asked Question")]),
-          _vm._v(" "),
-          _c("div", [
-            _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
-              _vm._v("Price"),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
-              _vm._v("Opening Time"),
-            ]),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-4 flex-fill" }, [
-          _c("h5", [_vm._v("Subscribe")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "text", placeholder: "Email" },
-            }),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-info text-white",
-                attrs: { type: "button" },
-              },
-              [_c("i", { staticClass: "fa fa-send" }), _vm._v(" Send")]
-            ),
+            _c("div", { staticClass: "p-4 flex-fill" }, [
+              _c("h5", [_vm._v("Frequest Asked Question")]),
+              _vm._v(" "),
+              _c("div", [
+                _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
+                  _vm._v("Price"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
+                  _vm._v("Opening Time"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
+                  _vm._v("Reservation Rules"),
+                ]),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-4 flex-fill" }, [
+              _c("h5", [_vm._v("Subscribe")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Email" },
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-info text-white",
+                    attrs: { type: "button" },
+                  },
+                  [_c("i", { staticClass: "fa fa-send" }), _vm._v(" Send")]
+                ),
+              ]),
+            ]),
           ]),
         ]),
       ]),
@@ -32710,11 +33132,7 @@ var render = function () {
           _c("div", { staticClass: "d-flex flex-row align-items-center" }, [
             _c("img", {
               attrs: {
-                src:
-                  "/storage/user/" +
-                  data.get_user.id +
-                  "/img/" +
-                  data.get_user.profile_img,
+                src: _vm.computedUserAvatar(data),
                 height: "50",
                 width: "50",
               },
@@ -32726,7 +33144,7 @@ var render = function () {
                   _vm._s(data.get_user.first_name) +
                     " " +
                     _vm._s(data.get_user.last_name) +
-                    " "
+                    "\n          "
                 ),
               ]),
               _vm._v(" "),

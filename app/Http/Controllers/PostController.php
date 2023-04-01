@@ -66,17 +66,16 @@ class PostController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'message' => 'max:1000',
-            'files' => 'max:6', [
-                'files.max' => 'Only 6 files allowed!',
-            ],
-            'files.*' => 'mimes:jpg,jpeg,png,bmp,mp4',
-            [
-                'files.*.mimes' => 'Only jpeg, png and bmp images are allowed',
-            ]
-        ]);
+            'files' => 'array|max:1',
+            'files.*' => 'file|max:20480|mimes:jpg,jpeg,png,bmp,mp4',
+        ],
+          [
+            'files.*.max' => 'File must be 20MB only',
+          ]
+        );
 
         if($validator->fails()) {
-            return response()->json(['message' => $validator->messages()->get('*')], 500);
+            return response()->json($validator->messages()->get('*'), 500);
         }
 
         $post = Post::create([

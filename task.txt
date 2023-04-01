@@ -1,11 +1,9 @@
 Task:
-user image default
+error response
 drag and drop to download
-email notification
-password confirm
-change password
-
-
+personal profile post
+chat
+mobile view
 
 facebook login
 google adsense

@@ -64,6 +64,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -71,8 +92,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
-        email: '',
-        password: ''
+        email: "",
+        password: ""
       }
     };
   },
@@ -84,13 +105,13 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     authenticate: function authenticate() {
       var _this = this;
-      this.$store.dispatch('login');
+      this.$store.dispatch("login");
       (0,_helpers_auth__WEBPACK_IMPORTED_MODULE_0__.login)(this.form).then(function (res) {
         // commit function is used for running mutation function in storejs
         _this.$store.commit("loginSuccess", res);
-        var AuthStr = 'Bearer '.concat(_this.$store.getters.currentUser.token);
+        var AuthStr = "Bearer ".concat(_this.$store.getters.currentUser.token);
         axios({
-          method: 'get',
+          method: "get",
           url: "/api/cart/",
           headers: {
             Authorization: AuthStr
@@ -100,37 +121,17 @@ __webpack_require__.r(__webpack_exports__);
         })["catch"](function (err) {});
         _this.$router.push('/');
       })["catch"](function (error) {
+        alert(error);
         _this.$store.commit("loginFailed", {
           error: error
         });
       });
-    },
-    OAuthLogin: function OAuthLogin(provider) {
-      // new Promise((resolve, reject) => {
-      //     axios({
-      //         method: 'get',
-      //         url: `/api/oauth/login/redirect/${provider}`,
-      //     }).then(res => {console.log(res.data);
-      //         window.location.href = res.data.url;
-      //         this.$router.push({
-      //             name: 'Callback_provider',
-      //             params: {
-      //                 provider: provider,
-      //             },
-      //             query: {
-      //                 code: 'xyz',
-      //             }
-      //         });
-      //     }).catch(err => {
-
-      //     });
-      // });
     }
   },
   watch: {
     $data: {
       handler: function handler(val, oldVal) {
-        console.log('watcher: ', val);
+        console.log("watcher: ", val);
       },
       deep: true
     }
@@ -158,7 +159,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .container {\n    margin-top: 100px;\n    max-width: 900px;\n} */\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .container {\n    margin-top: 100px;\n    max-width: 900px;\n} */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -337,6 +338,15 @@ var render = function () {
                   },
                   [
                     _c("div", { staticClass: "form-outline mb-4" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-label",
+                          attrs: { for: "form1Example13" },
+                        },
+                        [_vm._v("Email address:")]
+                      ),
+                      _vm._v(" "),
                       _c("input", {
                         directives: [
                           {
@@ -358,18 +368,18 @@ var render = function () {
                           },
                         },
                       }),
-                      _vm._v(" "),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-outline mb-4" }, [
                       _c(
                         "label",
                         {
                           staticClass: "form-label",
-                          attrs: { for: "form1Example13" },
+                          attrs: { for: "form1Example23" },
                         },
-                        [_vm._v("Email address")]
+                        [_vm._v("Password:")]
                       ),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-outline mb-4" }, [
+                      _vm._v(" "),
                       _c("input", {
                         directives: [
                           {
@@ -391,15 +401,6 @@ var render = function () {
                           },
                         },
                       }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-label",
-                          attrs: { for: "form1Example23" },
-                        },
-                        [_vm._v("Password")]
-                      ),
                     ]),
                     _vm._v(" "),
                     _c(
@@ -424,7 +425,7 @@ var render = function () {
                         staticClass: "btn btn-primary btn-lg btn-block",
                         attrs: { type: "submit" },
                       },
-                      [_vm._v("Sign in")]
+                      [_vm._v("\n              Sign in\n            ")]
                     ),
                     _vm._v(" "),
                     _vm._m(1),
@@ -486,7 +487,7 @@ var staticRenderFns = [
       },
       [
         _c("i", { staticClass: "fa fa-google me-2" }),
-        _vm._v("Continue with Google\n                        "),
+        _vm._v("Continue with Google\n            "),
       ]
     )
   },

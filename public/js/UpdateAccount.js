@@ -206,7 +206,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.form.address = res.data.address;
         _this2.form.contact = res.data.contact;
         _this2.form.birthday = res.data.birthday;
-        _this2.form.photo = res.data.profile_img ? _this2.getProfilePicture : 'http://bootdey.com/img/Content/avatar/avatar1.png';
+        _this2.form.photo = res.data.profile_img ? _this2.getProfilePicture : 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
       })["catch"](function (err) {});
     }
   },

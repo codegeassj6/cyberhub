@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="bg-primary mt-4 text-white" :class="$route.name == 'Login' || $route.name == 'Register' || $route.name == 'ResetPassword' ? 'fixed-bottom' : null">
+        <!-- <div class="bg-primary mt-4 text-white" :class="$route.name == 'Login' || $route.name == 'Register' || $route.name == 'ResetPasswordRequest' || $route.name == 'ResetPassword' ? 'fixed-bottom' : null"> -->
+        <div class="bg-primary mt-4 text-white">
             <div class="container">
                 <div class="d-flex">
                     <div class="p-4 flex-fill">
@@ -22,6 +23,9 @@
                         </div>
                         <div>
                             <a href="#!" class="text-white">Opening Time</a>
+                        </div>
+                        <div>
+                            <a href="#!" class="text-white">Reservation Rules</a>
                         </div>
                     </div>
                     <div class="p-4 flex-fill">

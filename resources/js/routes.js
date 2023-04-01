@@ -15,7 +15,7 @@ export const routes = [
     },
 
     {
-        path: '/reset/password',
+        path: '/reset/password/',
         name: "ResetPassword",
         component: () => import(/* webpackChunkName: "ResetPassword" */ "./components/auth/ResetPassword.vue"),
         meta: {
@@ -25,7 +25,7 @@ export const routes = [
 
     {
         path: '/reset/password/request',
-        name: "ResetPassword",
+        name: "ResetPasswordRequest",
         component: () => import(/* webpackChunkName: "ResetPasswordRequest" */ "./components/auth/ResetPasswordRequest.vue"),
         meta: {
             disableIfLoggedIn: true

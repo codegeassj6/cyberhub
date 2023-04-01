@@ -29,16 +29,16 @@
     "colId": "b154bdef-b387-401c-b79a-62448aff0d4e",
     "containerId": "",
     "name": "Store",
-    "url": "/reset/password?email={{email}}",
+    "url": "/reset/password?email",
     "method": "POST",
     "sortNum": 10000,
     "created": "2023-03-27T12:12:07.110Z",
-    "modified": "2023-03-27T12:16:35.155Z",
+    "modified": "2023-03-31T01:09:51.293Z",
     "headers": [],
     "params": [
       {
         "name": "email",
-        "value": "{{email}}",
+        "value": "",
         "isPath": false
       }
     ],
@@ -56,6 +56,57 @@
     "modified": "2023-03-28T05:48:15.077Z",
     "headers": [],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "4566d7ed-47e2-436a-b500-8ffc5a4b3151",
+    "colId": "b154bdef-b387-401c-b79a-62448aff0d4e",
+    "containerId": "",
+    "name": "Show",
+    "url": "/reset/password/642643d7593d9_Mw249YLXyj",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2023-03-31T02:34:56.133Z",
+    "modified": "2023-03-31T02:36:35.332Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "access_token",
+        "value": "642643d7593d9_Mw249YLXyj",
+        "isDisabled": true,
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "a42b8d52-e1b2-4822-b4cb-7b3271f21b1a",
+    "colId": "b154bdef-b387-401c-b79a-62448aff0d4e",
+    "containerId": "",
+    "name": "Update",
+    "url": "/reset/password?password=jhonreyj6&confirm_password=jhonreyj6&access_token=642643d7593d9_Mw249YLXyj",
+    "method": "PATCH",
+    "sortNum": 30000,
+    "created": "2023-03-31T02:50:32.120Z",
+    "modified": "2023-03-31T03:17:02.774Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "password",
+        "value": "jhonreyj6",
+        "isPath": false
+      },
+      {
+        "name": "confirm_password",
+        "value": "jhonreyj6",
+        "isPath": false
+      },
+      {
+        "name": "access_token",
+        "value": "642643d7593d9_Mw249YLXyj",
+        "isPath": false
+      }
+    ],
     "tests": []
   }
 ]

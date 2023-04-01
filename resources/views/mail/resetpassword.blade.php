@@ -1,10 +1,8 @@
 @component('mail::message')
-# Introduction
+# Reset Password
 
-The body of your message.
-
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::button', ['url' => config('app.url').'/reset/password?access_token='. $data->access_token])
+Redirect Link
 @endcomponent
 
 Thanks,<br>

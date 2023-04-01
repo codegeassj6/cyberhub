@@ -16,27 +16,94 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 //import name from './
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {};
+    return {
+      token: "",
+      form: {
+        password: 'jhonreyj6',
+        confirm_password: 'jhonreyj6'
+      }
+    };
   },
   components: {},
   props: {},
   computed: {},
-  methods: {},
+  methods: {
+    changePass: function changePass() {
+      axios({
+        method: 'patch',
+        params: {
+          password: this.form.password,
+          confirm_password: this.form.confirm_password,
+          access_token: this.token
+        },
+        url: "/api/reset/password"
+      }).then(function (res) {
+        console.log(res.data);
+      })["catch"](function (err) {});
+    }
+  },
   watch: {
     $data: {
       handler: function handler(val, oldVal) {
-        console.log('watcher: ', val);
+        console.log("watcher: ", val);
       },
       deep: true
     },
     $props: {
       handler: function handler(val, oldVal) {
-        console.log('watcher: ', val);
+        console.log("watcher: ", val);
       },
       deep: true
     },
@@ -46,7 +113,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   updated: function updated() {},
   beforeMounted: function beforeMounted() {},
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    var _this = this;
+    axios({
+      method: "get",
+      url: "/api/reset/password/".concat(this.$route.query.access_token)
+    }).then(function (res) {
+      _this.token = res.data;
+    })["catch"](function (err) {});
+  }
 });
 
 /***/ }),
@@ -135,9 +210,144 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    resetpassword\n")])
+  return _c("div", { staticClass: "space-intro" }, [
+    _c("div", { staticClass: "container d-flex flex-column" }, [
+      _c(
+        "div",
+        { staticClass: "row align-items-center justify-content-center" },
+        [
+          _c("div", { staticClass: "col-sm-12 col-md-10 col-lg-6 col-xl-5" }, [
+            _c("div", { staticClass: "card shadow-sm" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function ($event) {
+                        $event.preventDefault()
+                        return _vm.changePass.apply(null, arguments)
+                      },
+                    },
+                  },
+                  [
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c(
+                        "label",
+                        { staticClass: "form-label", attrs: { for: "pass" } },
+                        [_vm._v("Password:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.password,
+                            expression: "form.password",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "password",
+                          id: "pass",
+                          placeholder: "New Password",
+                        },
+                        domProps: { value: _vm.form.password },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "password", $event.target.value)
+                          },
+                        },
+                      }),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c(
+                        "label",
+                        { staticClass: "form-label", attrs: { for: "cpass" } },
+                        [_vm._v("Confrim Password:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.confirm_password,
+                            expression: "form.confirm_password",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "password",
+                          id: "cpass",
+                          placeholder: "Repeat password",
+                        },
+                        domProps: { value: _vm.form.confirm_password },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "confirm_password",
+                              $event.target.value
+                            )
+                          },
+                        },
+                      }),
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      [
+                        _vm._v("Don't have an account?\n                "),
+                        _c("router-link", { attrs: { to: "/register" } }, [
+                          _vm._v("Click here to register."),
+                        ]),
+                      ],
+                      1
+                    ),
+                  ]
+                ),
+              ]),
+            ]),
+          ]),
+        ]
+      ),
+    ]),
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-4" }, [
+      _c("h5", [_vm._v("Enter new password")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-3 d-grid" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("\n                  Change Password\n                ")]
+      ),
+    ])
+  },
+]
 render._withStripped = true
 
 
