@@ -124,7 +124,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-profile[data-v-7199e12c] {\n  background-image: linear-gradient(to bottom, #277bfa , #70a6f7);\n  height: 300px;\n}\n.bg-profile-2[data-v-7199e12c] {\n  background-color: #f2f2f2;\n  height: 150px;\n}\n.space-intro[data-v-7199e12c] {\n    margin-top: 140px;\n}\n.space-name[data-v-7199e12c] {\n    margin-top: 210px;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-profile[data-v-7199e12c] {\r\n  background-image: linear-gradient(to bottom, #277bfa , #70a6f7);\r\n  height: 300px;\n}\n.bg-profile-2[data-v-7199e12c] {\r\n  background-color: #f2f2f2;\r\n  height: 150px;\n}\n.space-intro[data-v-7199e12c] {\r\n    margin-top: 140px;\n}\n.space-name[data-v-7199e12c] {\r\n    margin-top: 210px;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
