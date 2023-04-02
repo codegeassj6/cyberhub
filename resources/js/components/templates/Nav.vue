@@ -97,12 +97,12 @@
 
             <template v-else>
               <li class="nav-item">
-                <router-link to="/login" class="btn nav-link btn-primary"
+                <router-link to="/login" class="nav-link"
                   >Login</router-link
                 >
               </li>
               <li class="nav-it">
-                <router-link to="/register" class="btn nav-link btn-primary"
+                <router-link to="/register" class="nav-link"
                   >Register</router-link
                 >
               </li>

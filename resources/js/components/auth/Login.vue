@@ -53,15 +53,7 @@
                 <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
               </div>
 
-              <v-facebook-login app-id="966242223397117"></v-facebook-login>
-
-              <a
-                class="btn btn-danger btn-lg mb-2 btn-block"
-                href="#!"
-                role="button"
-              >
-                <i class="fa fa-google me-2"></i>Continue with Google
-              </a>
+              <v-facebook-login app-id="6050990288293828"></v-facebook-login>
             </form>
           </div>
         </div>

@@ -6540,7 +6540,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 //import name from './
 
@@ -6561,7 +6560,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   updated: function updated() {},
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    console.log('demo');
+  }
 });
 
 /***/ }),
@@ -32800,7 +32801,10 @@ var render = function () {
       {
         staticClass: "bg-primary text-white",
         class:
-          _vm.$route.name == "ResetPasswordRequest" ? "fixed-bottom" : null,
+          _vm.$route.name == "ResetPasswordRequest" ||
+          _vm.$route.name == "Login"
+            ? "fixed-bottom"
+            : null,
       },
       [_vm._m(0)]
     ),
@@ -33127,7 +33131,7 @@ var render = function () {
                               _c(
                                 "router-link",
                                 {
-                                  staticClass: "btn nav-link btn-primary",
+                                  staticClass: "nav-link",
                                   attrs: { to: "/login" },
                                 },
                                 [_vm._v("Login")]
@@ -33143,7 +33147,7 @@ var render = function () {
                               _c(
                                 "router-link",
                                 {
-                                  staticClass: "btn nav-link btn-primary",
+                                  staticClass: "nav-link",
                                   attrs: { to: "/register" },
                                 },
                                 [_vm._v("Register")]

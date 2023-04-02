@@ -1,7 +1,6 @@
 <template>
     <div>
-        <!-- <div class="bg-primary mt-4 text-white" :class="$route.name == 'Login' || $route.name == 'Register' || $route.name == 'ResetPasswordRequest' || $route.name == 'ResetPassword' ? 'fixed-bottom' : null"> -->
-        <div class="bg-primary text-white" :class="$route.name == 'ResetPasswordRequest' ? 'fixed-bottom' : null">
+        <div class="bg-primary text-white" :class="$route.name == 'ResetPasswordRequest' || $route.name == 'Login' ? 'fixed-bottom' : null">
             <div class="container">
                 <div class="d-flex">
                     <div class="p-4 flex-fill">
@@ -78,7 +77,7 @@ export default {
     },
 
     mounted() {
-
+      console.log('demo');
     },
 }
 </script>

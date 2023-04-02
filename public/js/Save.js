@@ -174,6 +174,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 //import name from './
 
@@ -182,13 +186,13 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   components: {},
-  props: ['saves'],
+  props: ["saves"],
   computed: {},
   methods: {
     download: function download(data) {
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'get',
+        method: "get",
         url: "/api/save/" + data.id,
         headers: {
           Authorization: AuthStr
@@ -202,32 +206,20 @@ __webpack_require__.r(__webpack_exports__);
           _this.saves.splice(index, 1);
         }
       });
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'delete',
+        method: "delete",
         url: "/api/save/" + data.id,
         headers: {
           Authorization: AuthStr
         }
       }).then(function (res) {})["catch"](function (err) {});
-
-      // const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-      // axios.delete(`/api/save/`+data.id, {
-      //     headers: {
-      //         Authorization: AuthStr
-      //     },
-      // }).then(res => {
-      //     console.log(res.data);
-      // }).catch(err => {
-
-      // });
     }
   },
-
   watch: {
     $data: {
       handler: function handler(val, oldVal) {
-        console.log('watcher: ', val);
+        console.log("watcher: ", val);
       },
       deep: true
     }
