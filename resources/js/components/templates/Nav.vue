@@ -32,7 +32,7 @@
             <template v-if="$store.getters.currentUser">
               <li class="nav-item">
                 <router-link
-                  to="/account"
+                  to="/timeline"
                   class="btn nav-link hide-sm"
                   type="button"
                 >
@@ -62,7 +62,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <router-link to="/account" class="dropdown-item" href="#"
+                      <router-link to="/timeline" class="dropdown-item" href="#"
                         >My Timeline</router-link
                       >
                     </li>

@@ -64,10 +64,10 @@ export const routes = [
 
 
     {
-        path: "/account",
-        name: "Account",
+        path: "/timeline",
+        name: "Timeline",
         meta: { requiresAuth: true },
-        component: () => import(/* webpackChunkName: "Account" */ "./components/Account.vue"),
+        component: () => import(/* webpackChunkName: "Timeline" */ "./components/Timeline.vue"),
     },
 
     {

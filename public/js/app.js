@@ -7472,13 +7472,13 @@ var routes = [{
     return __webpack_require__.e(/*! import() | Store */ "Store").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Store.vue */ "./resources/js/components/Store.vue"));
   }
 }, {
-  path: "/account",
-  name: "Account",
+  path: "/timeline",
+  name: "Timeline",
   meta: {
     requiresAuth: true
   },
   component: function component() {
-    return __webpack_require__.e(/*! import() | Account */ "Account").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Account.vue */ "./resources/js/components/Account.vue"));
+    return __webpack_require__.e(/*! import() | Timeline */ "Timeline").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Timeline.vue */ "./resources/js/components/Timeline.vue"));
   }
 }, {
   path: "/cart",
@@ -32970,7 +32970,7 @@ var render = function () {
                                 "router-link",
                                 {
                                   staticClass: "btn nav-link hide-sm",
-                                  attrs: { to: "/account", type: "button" },
+                                  attrs: { to: "/timeline", type: "button" },
                                 },
                                 [
                                   _vm._v(
@@ -33037,7 +33037,7 @@ var render = function () {
                                         "router-link",
                                         {
                                           staticClass: "dropdown-item",
-                                          attrs: { to: "/account", href: "#" },
+                                          attrs: { to: "/timeline", href: "#" },
                                         },
                                         [_vm._v("My Timeline")]
                                       ),
@@ -50636,7 +50636,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"Login":1,"ResetPassword":1,"ResetPasswordRequest":1,"Oauth":1,"Register":1,"Store":1,"Account":1,"UpdateAccount":1,"PostPage":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"Login":1,"ResetPassword":1,"ResetPasswordRequest":1,"Oauth":1,"Register":1,"Store":1,"Timeline":1,"UpdateAccount":1,"PostPage":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			if (chunkId === "Game") return "js/Game.js";
 /******/ 			if (chunkId === "Cart") return "js/Cart.js";
 /******/ 			if (chunkId === "Save") return "js/Save.js";

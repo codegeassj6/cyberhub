@@ -1,8 +1,10 @@
 Task:
-mobile view Gameurl
+facebook login
 personal profile post
+google adsense
+
+
+mobile view Gameurl
 chat
 
-facebook login
-google adsense
 
