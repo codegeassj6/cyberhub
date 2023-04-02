@@ -33,7 +33,7 @@
               <li class="nav-item">
                 <router-link
                   to="/timeline"
-                  class="btn nav-link hide-sm"
+                  class="nav-link hide-sm"
                   type="button"
                 >
                   {{ currentUser.first_name }} {{ currentUser.last_name }}
@@ -166,7 +166,5 @@ export default {
 </script>
 
 <style scoped>
-.btn-primary:hover {
-  color: white;
-}
+
 </style>
