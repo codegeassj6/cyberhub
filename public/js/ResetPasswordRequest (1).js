@@ -61,7 +61,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      email: ""
+      email: "j6cafe2018@gmail.com"
     };
   },
   components: {},
@@ -76,10 +76,8 @@ __webpack_require__.r(__webpack_exports__);
         data: {
           email: this.email
         }
-      }).then(function (res) {
-        console.log(res.data);
-      })["catch"](function (err) {
-        console.log(err);
+      }).then(function (res) {})["catch"](function (err) {
+        // this.$refs.reset_btn.removeAttribute('disabled');
       });
     }
   },
@@ -238,7 +236,21 @@ var render = function () {
                     }),
                   ]),
                   _vm._v(" "),
-                  _vm._m(1),
+                  _c("div", { staticClass: "mb-3 d-grid" }, [
+                    _c(
+                      "button",
+                      {
+                        ref: "reset_btn",
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "submit" },
+                      },
+                      [
+                        _vm._v(
+                          "\n                  Reset Password\n                "
+                        ),
+                      ]
+                    ),
+                  ]),
                   _vm._v(" "),
                   _c(
                     "span",
@@ -272,18 +284,6 @@ var staticRenderFns = [
           "\n                Enter your registered email ID to reset the password\n              "
         ),
       ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-3 d-grid" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("\n                  Reset Password\n                ")]
-      ),
     ])
   },
 ]

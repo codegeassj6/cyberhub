@@ -5361,6 +5361,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -5370,7 +5374,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       notification: {
-        message: "",
+        message: [],
         multi_data: {
           message: ""
         }
@@ -6029,13 +6033,6 @@ __webpack_require__.r(__webpack_exports__);
         attachment_remove: [],
         data: "",
         message: ""
-      },
-      error: {
-        post: {
-          message: '',
-          files: '',
-          file_max: ''
-        }
       }
     };
   },
@@ -6066,7 +6063,7 @@ __webpack_require__.r(__webpack_exports__);
     createPost: function createPost(e) {
       var _this = this;
       if (document.getElementById("editable").innerText.length > 1000) {
-        this.$parent.notification.message = "Message is too long. Only 1000 characters allow";
+        this.$parent.notification.message.push("Message is too long. Only 1000 characters allow");
         return false;
       }
       if (document.getElementById("editable").innerText.length || this.form_data) {
@@ -6108,7 +6105,7 @@ __webpack_require__.r(__webpack_exports__);
         }
         this.form_data = formData;
       } else {
-        this.$parent.notification.message = "Too many files!. Only 6 files can be uploaded.";
+        this.$parent.notification.message.push("Too many files!. Only 6 files can be uploaded.");
       }
     },
     removeAttachInPost: function removeAttachInPost(file) {
@@ -6639,6 +6636,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 //import name from './
 
@@ -6662,7 +6715,7 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     $data: {
       handler: function handler(val, oldVal) {
-        console.log('watcher: ', val);
+        console.log("watcher: ", val);
       },
       deep: true
     }
@@ -6671,9 +6724,9 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
     if (this.currentUser) {
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'get',
+        method: "get",
         url: "/api/cart/",
         headers: {
           Authorization: AuthStr
@@ -12868,7 +12921,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-primary[data-v-7e788a72]:hover {\n    color: white;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-primary[data-v-7e788a72]:hover {\n  color: white;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -31361,6 +31414,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { ref: "body" },
     [
       _c("Nav"),
       _vm._v(" "),
@@ -31379,10 +31433,12 @@ var render = function () {
       _vm._v(" "),
       !_vm.$store.getters.currentUser ? [_c("Footer")] : _vm._e(),
       _vm._v(" "),
-      _vm.$route.fullPath == "/"
-        ? _c("div", { staticClass: "toast-container" }, [
-            _vm.notification.message
-              ? _c(
+      _vm.$route.name == "Home" || _vm.$route.name == "Save"
+        ? _c(
+            "div",
+            _vm._l(_vm.notification.message, function (message, index) {
+              return _c("div", { key: index, staticClass: "toast-container" }, [
+                _c(
                   "div",
                   {
                     staticClass: "position-fixed bottom-0 end-0 px-3",
@@ -31422,21 +31478,27 @@ var render = function () {
                         _vm._v(" "),
                         _c(
                           "div",
-                          { ref: "toast_message", staticClass: "toast-body" },
+                          {
+                            ref: "toast_message",
+                            refInFor: true,
+                            staticClass: "toast-body",
+                          },
                           [
                             _vm._v(
-                              "\n          " +
-                                _vm._s(_vm.notification.message) +
-                                "\n        "
+                              "\n            " +
+                                _vm._s(message) +
+                                "\n          "
                             ),
                           ]
                         ),
                       ]
                     ),
                   ]
-                )
-              : _vm._e(),
-          ])
+                ),
+              ])
+            }),
+            0
+          )
         : _vm._e(),
     ],
     2
@@ -32732,80 +32794,86 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "bg-primary text-white",
+        class:
+          _vm.$route.name == "ResetPasswordRequest" ? "fixed-bottom" : null,
+      },
+      [_vm._m(0)]
+    ),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "bg-primary mt-4 text-white" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "d-flex" }, [
-            _c("div", { staticClass: "p-4 flex-fill" }, [
-              _c("h5", [_vm._v("Location")]),
-              _vm._v(" "),
-              _c("div", [
-                _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
-                  _vm._v("Lapu-lapu, San Pedro"),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", [
-                _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
-                  _vm._v("Bangus, San Pedro"),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", [
-                _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
-                  _vm._v("Bagdhad, San Pedro"),
-                ]),
-              ]),
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "d-flex" }, [
+        _c("div", { staticClass: "p-4 flex-fill" }, [
+          _c("h5", [_vm._v("Location")]),
+          _vm._v(" "),
+          _c("div", [
+            _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
+              _vm._v("Lapu-lapu, San Pedro"),
             ]),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
+              _vm._v("Bangus, San Pedro"),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
+              _vm._v("Bagdhad, San Pedro"),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "p-4 flex-fill" }, [
+          _c("h5", [_vm._v("Frequest Asked Question")]),
+          _vm._v(" "),
+          _c("div", [
+            _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
+              _vm._v("Price"),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
+              _vm._v("Opening Time"),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
+              _vm._v("Reservation Rules"),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "p-4 flex-fill" }, [
+          _c("h5", [_vm._v("Subscribe")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group" }, [
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "Email" },
+            }),
             _vm._v(" "),
-            _c("div", { staticClass: "p-4 flex-fill" }, [
-              _c("h5", [_vm._v("Frequest Asked Question")]),
-              _vm._v(" "),
-              _c("div", [
-                _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
-                  _vm._v("Price"),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", [
-                _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
-                  _vm._v("Opening Time"),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", [
-                _c("a", { staticClass: "text-white", attrs: { href: "#!" } }, [
-                  _vm._v("Reservation Rules"),
-                ]),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "p-4 flex-fill" }, [
-              _c("h5", [_vm._v("Subscribe")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "text", placeholder: "Email" },
-                }),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-info text-white",
-                    attrs: { type: "button" },
-                  },
-                  [_c("i", { staticClass: "fa fa-send" }), _vm._v(" Send")]
-                ),
-              ]),
-            ]),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-info text-white",
+                attrs: { type: "button" },
+              },
+              [_c("i", { staticClass: "fa fa-send" }), _vm._v(" Send")]
+            ),
           ]),
         ]),
       ]),
@@ -32867,15 +32935,8 @@ var render = function () {
                     [
                       _c(
                         "router-link",
-                        {
-                          staticClass: "nav-link btn btn-primary",
-                          attrs: { to: "/games" },
-                        },
-                        [
-                          _vm._v(
-                            "\n                           Games\n                        "
-                          ),
-                        ]
+                        { staticClass: "nav-link", attrs: { to: "/games" } },
+                        [_vm._v("\n              Games\n            ")]
                       ),
                     ],
                     1
@@ -32887,15 +32948,8 @@ var render = function () {
                     [
                       _c(
                         "router-link",
-                        {
-                          staticClass: "nav-link btn btn-primary",
-                          attrs: { to: "/store" },
-                        },
-                        [
-                          _vm._v(
-                            "\n                            Store\n                        "
-                          ),
-                        ]
+                        { staticClass: "nav-link", attrs: { to: "/store" } },
+                        [_vm._v("\n              Store\n            ")]
                       ),
                     ],
                     1
@@ -32903,153 +32957,199 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c(
-                  "div",
-                  { staticClass: "d-flex my-2 my-lg-0" },
+                  "ul",
+                  { staticClass: "navbar-nav mt-lg-0" },
                   [
                     _vm.$store.getters.currentUser
                       ? [
                           _c(
-                            "router-link",
-                            {
-                              staticClass: "btn btn-primary hide-sm",
-                              attrs: { to: "/account", type: "button" },
-                            },
+                            "li",
+                            { staticClass: "nav-item" },
                             [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(_vm.currentUser.first_name) +
-                                  " " +
-                                  _vm._s(_vm.currentUser.last_name) +
-                                  "\n                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "btn btn-primary position-relative",
-                              attrs: { to: "/cart" },
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fa fa-shopping-cart fa-lg",
-                              }),
-                              _vm._v(" "),
                               _c(
-                                "span",
+                                "router-link",
                                 {
-                                  staticClass: "badge bg-info",
-                                  attrs: { id: "cart_count" },
+                                  staticClass: "btn nav-link hide-sm",
+                                  attrs: { to: "/account", type: "button" },
                                 },
                                 [
                                   _vm._v(
-                                    _vm._s(_vm.$store.getters.getCartCount)
+                                    "\n                " +
+                                      _vm._s(_vm.currentUser.first_name) +
+                                      " " +
+                                      _vm._s(_vm.currentUser.last_name) +
+                                      "\n              "
                                   ),
                                 ]
                               ),
-                            ]
+                            ],
+                            1
                           ),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown" }, [
-                            _vm._m(1),
-                            _vm._v(" "),
-                            _c(
-                              "ul",
-                              {
-                                staticClass: "dropdown-menu dropdown-menu-end",
-                              },
-                              [
-                                _c(
-                                  "li",
-                                  [
-                                    _c(
-                                      "router-link",
-                                      {
-                                        staticClass: "dropdown-item",
-                                        attrs: {
-                                          to: "/account/update",
-                                          href: "#",
-                                        },
-                                      },
-                                      [_vm._v("Update Account")]
-                                    ),
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "li",
-                                  [
-                                    _c(
-                                      "router-link",
-                                      {
-                                        staticClass: "dropdown-item",
-                                        attrs: { to: "/setting", href: "#" },
-                                      },
-                                      [_vm._v("Setting")]
-                                    ),
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "li",
-                                  [
-                                    _c(
-                                      "router-link",
-                                      {
-                                        staticClass: "dropdown-item",
-                                        attrs: { to: "/save", href: "#" },
-                                      },
-                                      [_vm._v("My Saves")]
-                                    ),
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _vm._m(2),
-                                _vm._v(" "),
-                                _c("li", [
+                          _c(
+                            "li",
+                            { staticClass: "nav-item" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "nav-link position-relative",
+                                  attrs: { to: "/cart" },
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fa fa-shopping-cart fa-lg",
+                                  }),
+                                  _vm._v(" "),
                                   _c(
-                                    "a",
+                                    "span",
                                     {
-                                      staticClass: "dropdown-item",
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function ($event) {
-                                          $event.preventDefault()
-                                          return _vm.logout.apply(
-                                            null,
-                                            arguments
-                                          )
+                                      staticClass: "badge bg-info",
+                                      attrs: { id: "cart_count" },
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.$store.getters.getCartCount)
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("li", { staticClass: "nav-item" }, [
+                            _c("div", { staticClass: "dropdown" }, [
+                              _vm._m(1),
+                              _vm._v(" "),
+                              _c(
+                                "ul",
+                                {
+                                  staticClass:
+                                    "dropdown-menu dropdown-menu-end",
+                                },
+                                [
+                                  _c(
+                                    "li",
+                                    [
+                                      _c(
+                                        "router-link",
+                                        {
+                                          staticClass: "dropdown-item",
+                                          attrs: { to: "/account", href: "#" },
+                                        },
+                                        [_vm._v("My Timeline")]
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "li",
+                                    [
+                                      _c(
+                                        "router-link",
+                                        {
+                                          staticClass: "dropdown-item",
+                                          attrs: {
+                                            to: "/account/update",
+                                            href: "#",
+                                          },
+                                        },
+                                        [_vm._v("Update Account")]
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "li",
+                                    [
+                                      _c(
+                                        "router-link",
+                                        {
+                                          staticClass: "dropdown-item",
+                                          attrs: { to: "/setting", href: "#" },
+                                        },
+                                        [_vm._v("Setting")]
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "li",
+                                    [
+                                      _c(
+                                        "router-link",
+                                        {
+                                          staticClass: "dropdown-item",
+                                          attrs: { to: "/save", href: "#" },
+                                        },
+                                        [_vm._v("My Saves")]
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._m(2),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "dropdown-item",
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function ($event) {
+                                            $event.preventDefault()
+                                            return _vm.logout.apply(
+                                              null,
+                                              arguments
+                                            )
+                                          },
                                         },
                                       },
-                                    },
-                                    [_vm._v("Logout")]
-                                  ),
-                                ]),
-                              ]
-                            ),
+                                      [_vm._v("Logout")]
+                                    ),
+                                  ]),
+                                ]
+                              ),
+                            ]),
                           ]),
                         ]
                       : [
                           _c(
-                            "router-link",
-                            {
-                              staticClass: "btn btn-primary",
-                              attrs: { to: "/login" },
-                            },
-                            [_vm._v("Login")]
+                            "li",
+                            { staticClass: "nav-item" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "btn nav-link btn-primary",
+                                  attrs: { to: "/login" },
+                                },
+                                [_vm._v("Login")]
+                              ),
+                            ],
+                            1
                           ),
                           _vm._v(" "),
                           _c(
-                            "router-link",
-                            {
-                              staticClass: "btn btn-primary",
-                              attrs: { to: "/register" },
-                            },
-                            [_vm._v("Register")]
+                            "li",
+                            { staticClass: "nav-it" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "btn nav-link btn-primary",
+                                  attrs: { to: "/register" },
+                                },
+                                [_vm._v("Register")]
+                              ),
+                            ],
+                            1
                           ),
                         ],
                   ],
@@ -33087,10 +33187,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "button",
+      "a",
       {
-        staticClass: "btn btn-primary dropdown-toggle",
-        attrs: { "data-bs-toggle": "dropdown", type: "button" },
+        staticClass: "dropdown-toggle nav-link",
+        attrs: { "data-bs-toggle": "dropdown", role: "button" },
       },
       [_c("i", { staticClass: "fa fa-cog fa-lg" })]
     )

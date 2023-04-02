@@ -58,14 +58,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      input_file: '',
+      input_file: "",
       isUploading: false,
-      saves: ''
+      saves: ""
     };
   },
   components: {
@@ -74,22 +78,42 @@ __webpack_require__.r(__webpack_exports__);
   props: [],
   computed: {},
   methods: {
+    dragOver: function dragOver(e) {
+      e.preventDefault();
+      this.$refs.dropbox.classList.add("shadow", "border-5");
+    },
+    dragLeave: function dragLeave() {
+      this.$refs.dropbox.classList.remove("shadow", "border-5");
+    },
+    dropped: function dropped(e) {
+      e.preventDefault();
+      if (e.dataTransfer.files[0].size > 20480000) {
+        this.$parent.notification.message.push("File is too large. Only 20MB allowed!");
+        return;
+      }
+      this.input_file = e.dataTransfer.files[0];
+      this.isUploading = true;
+    },
     inputFile: function inputFile(e) {
+      if (e.target.files[0].size > 20480000) {
+        this.$parent.notification.message.push("File is too large. Only 20MB allowed!");
+        return;
+      }
       this.input_file = e.target.files[0] || e.dataTransfer.files[0];
       this.isUploading = true;
     },
     UploadFile: function UploadFile() {
       var _this = this;
       var formData = new FormData();
-      formData.append('file', this.input_file);
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      formData.append("file", this.input_file);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios.post("/api/save", formData, {
         headers: {
           Authorization: AuthStr
         }
       }).then(function (res) {
         _this.isUploading = false;
-        _this.input_file = '';
+        _this.input_file = "";
         _this.saves = res.data;
       })["catch"](function (err) {});
     },
@@ -100,7 +124,7 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     $data: {
       handler: function handler(val, oldVal) {
-        console.log('watcher: ', val);
+        console.log("watcher: ", val);
       },
       deep: true
     }
@@ -108,9 +132,9 @@ __webpack_require__.r(__webpack_exports__);
   updated: function updated() {},
   mounted: function mounted() {
     var _this2 = this;
-    var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+    var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
     axios({
-      method: 'get',
+      method: "get",
       url: "/api/save",
       headers: {
         Authorization: AuthStr
@@ -230,7 +254,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.upload[data-v-281631e8] {\n    height: 200px ;\n    width: 450px;\n}\n@media (max-width: 768px) {\n.w-100[data-v-281631e8] {\n        width: 50% !important;\n}\n}\n.p-10[data-v-281631e8] {\n    padding: 50px;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.upload[data-v-281631e8] {\n  height: 200px;\n  width: 450px;\n}\n@media (max-width: 768px) {\n.w-100[data-v-281631e8] {\n    width: 50% !important;\n}\n}\n.p-10[data-v-281631e8] {\n  padding: 50px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -439,7 +463,7 @@ var render = function () {
         _c("div", { staticClass: "row" }, [
           _c(
             "div",
-            { staticClass: "col-xl-9" },
+            { staticClass: "col-xl-8" },
             [
               _c(
                 "div",
@@ -450,14 +474,20 @@ var render = function () {
                 [
                   _c(
                     "label",
-                    { staticClass: "pointer", attrs: { for: "input_upload" } },
+                    {
+                      ref: "dropbox",
+                      staticClass: "pointer border border-info",
+                      attrs: { for: "input_upload" },
+                      on: { dragover: _vm.dragOver, dragleave: _vm.dragLeave },
+                    },
                     [
-                      _c("div", { staticClass: "card border border-info" }, [
+                      _c("div", { staticClass: "card border-0" }, [
                         _c(
                           "div",
                           {
                             staticClass:
                               "m-auto p-10 bg-muted upload text-center",
+                            on: { drop: _vm.dropped },
                           },
                           [
                             _c("input", {
@@ -477,8 +507,6 @@ var render = function () {
                             _c("i", {
                               staticClass: "fa fa-upload fa-5x text-primary",
                             }),
-                            _vm._v(" "),
-                            _c("div", [_vm._v("Upload")]),
                           ]
                         ),
                       ]),
@@ -498,11 +526,7 @@ var render = function () {
                           staticClass: "btn btn-sm btn-primary",
                           on: { click: _vm.UploadFile },
                         },
-                        [
-                          _vm._v(
-                            "\n                                Upload\n                            "
-                          ),
-                        ]
+                        [_vm._v("\n                Upload\n              ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -513,7 +537,7 @@ var render = function () {
                         },
                         [
                           _c("i", { staticClass: "fa fa-close" }),
-                          _vm._v(" Cancel\n                            "),
+                          _vm._v(" Cancel\n              "),
                         ]
                       ),
                     ]),
@@ -525,9 +549,7 @@ var render = function () {
             1
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-3" }, [
-            _vm._v("\n                    s\n                "),
-          ]),
+          _c("div", { staticClass: "col-md-4" }, [_vm._v("s")]),
         ]),
       ]),
     ]),
@@ -546,7 +568,7 @@ var staticRenderFns = [
             "progress-bar progress-bar-striped progress-bar-animated",
           staticStyle: { width: "0%" },
         },
-        [_vm._v("0%")]
+        [_vm._v("\n                0%\n              ")]
       ),
     ])
   },

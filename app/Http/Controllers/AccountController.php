@@ -52,7 +52,6 @@ class AccountController extends Controller
      */
     public function update(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'first_name' => 'string|min:2|max:20|required',
             'last_name' => 'string|min:2|max:20|required',

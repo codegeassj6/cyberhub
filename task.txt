@@ -1,9 +1,7 @@
 Task:
-error response
-drag and drop to download
+mobile view Gameurl
 personal profile post
 chat
-mobile view
 
 facebook login
 google adsense

@@ -24,7 +24,7 @@
                   />
                 </div>
                 <div class="mb-3 d-grid">
-                  <button type="submit" class="btn btn-primary">
+                  <button type="submit" ref="reset_btn" class="btn btn-primary">
                     Reset Password
                   </button>
                 </div>
@@ -48,7 +48,7 @@
 export default {
   data() {
     return {
-      email: "",
+      email: "j6cafe2018@gmail.com",
     };
   },
   components: {},
@@ -68,11 +68,12 @@ export default {
         },
       })
         .then(function (res) {
-          console.log(res.data);
+
         })
         .catch(function (err) {
-          console.log(err);
+          // this.$refs.reset_btn.removeAttribute('disabled');
         });
+
     },
   },
 

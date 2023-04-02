@@ -96,7 +96,6 @@ export default {
     data() {
         return {
             form: {
-                username: '',
                 first_name: '',
                 last_name: '',
                 birthday: '',
@@ -108,6 +107,12 @@ export default {
                 photo: '',
             },
             user: '',
+            error: {
+              birthday: '',
+              first_name: '',
+              last_name: '',
+              contact: '',
+            }
         }
     },
     components: {

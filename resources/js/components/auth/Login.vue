@@ -45,7 +45,7 @@
               </div>
 
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-lg btn-block">
+              <button type="submit" ref="login_btn" class="btn btn-primary btn-lg btn-block">
                 Sign in
               </button>
 
@@ -92,6 +92,7 @@ export default {
 
   methods: {
     authenticate() {
+      this.$refs.login_btn.setAttribute('disabled', true);
       this.$store.dispatch("login");
       login(this.form)
         .then((res) => {
@@ -113,7 +114,10 @@ export default {
             this.$router.push('/');
         })
         .catch((error) => {
+          // console.log(this.$refs.login_btn);
+          this.$refs.login_btn.removeAttribute('disabled');
           alert(error);
+
           this.$store.commit("loginFailed", { error });
         });
     },

@@ -37,12 +37,6 @@ class PostController extends Controller
 
     public function show($id)
     {
-        // $post = Post::whereId($id)->first();
-        // $post->getUser;
-        // $post->created_time = Carbon::create($post->created_at)->toDayDateTimeString();
-        // $post->getAttachFiles;
-        // $post->getPostLikes;
-
         $post = Post::whereId($id)->paginate(1);
         $post->getCollection()->transform(function($value) {
             $value->getUser;
@@ -57,8 +51,6 @@ class PostController extends Controller
             }
             return $value;
         });
-
-
         return $post;
     }
 

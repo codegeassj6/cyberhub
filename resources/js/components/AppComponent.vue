@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="body">
     <Nav />
 
     <div>
@@ -11,30 +11,34 @@
       <Footer />
     </template>
 
-    <div class="toast-container" v-if="$route.fullPath == '/'">
-      <div
-        v-if="notification.message"
-        class="position-fixed bottom-0 end-0 px-3"
-        style="z-index: 11"
+    <div v-if="$route.name == 'Home' || $route.name == 'Save'">
+      <div class="toast-container"
+        v-for="(message, index) in notification.message"
+        :key="index"
       >
         <div
-          class="toast mb-2"
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
+          class="position-fixed bottom-0 end-0 px-3"
+          style="z-index: 11"
         >
-          <div class="toast-header bg-danger">
-            <strong class="me-auto text-white">Error</strong>
-            <a
-              role="button"
-              class="text-white"
-              @click="notification.message = ''"
-            >
-              <i class="fa fa-close"></i>
-            </a>
-          </div>
-          <div class="toast-body" ref="toast_message">
-            {{ notification.message }}
+          <div
+            class="toast mb-2"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div class="toast-header bg-danger">
+              <strong class="me-auto text-white">Error</strong>
+              <a
+                role="button"
+                class="text-white"
+                @click="notification.message = ''"
+              >
+                <i class="fa fa-close"></i>
+              </a>
+            </div>
+            <div class="toast-body" ref="toast_message">
+              {{ message }}
+            </div>
           </div>
         </div>
       </div>
@@ -52,7 +56,7 @@ export default {
   data() {
     return {
       notification: {
-        message: "",
+        message: [],
         multi_data: {
           message: "",
         },

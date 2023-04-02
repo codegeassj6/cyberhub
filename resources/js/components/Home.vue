@@ -630,13 +630,6 @@ export default {
         data: "",
         message: "",
       },
-      error: {
-        post: {
-          message: '',
-          files: '',
-          file_max: '',
-        }
-      }
     };
   },
 
@@ -672,8 +665,7 @@ export default {
 
     createPost(e) {
       if (document.getElementById("editable").innerText.length > 1000) {
-        this.$parent.notification.message =
-          "Message is too long. Only 1000 characters allow";
+        this.$parent.notification.message.push("Message is too long. Only 1000 characters allow");
         return false;
       }
 
@@ -728,8 +720,7 @@ export default {
         }
         this.form_data = formData;
       } else {
-        this.$parent.notification.message =
-          "Too many files!. Only 6 files can be uploaded.";
+        this.$parent.notification.message.push("Too many files!. Only 6 files can be uploaded.");
       }
     },
 

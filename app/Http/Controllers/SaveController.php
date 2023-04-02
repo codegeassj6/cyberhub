@@ -37,7 +37,7 @@ class SaveController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'file' => 'file|mimes:zip,rar,7zip'
+            'file' => 'file|mimes:zip,rar,7zip,rar4'
         ]);
 
         if($validator->fails()) {

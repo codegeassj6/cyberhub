@@ -108,7 +108,6 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
-        username: '',
         first_name: '',
         last_name: '',
         birthday: '',
@@ -119,7 +118,13 @@ __webpack_require__.r(__webpack_exports__);
         boolUpload: true,
         photo: ''
       },
-      user: ''
+      user: '',
+      error: {
+        birthday: '',
+        first_name: '',
+        last_name: '',
+        contact: ''
+      }
     };
   },
   components: {},
