@@ -3,5 +3,3 @@ mobile view Gameurl
 chat
 google adsense
 facebook login
-
-

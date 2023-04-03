@@ -39,13 +39,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      games: ''
+      games: ""
     };
   },
   components: {
@@ -57,14 +73,14 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     limitText: function limitText(input, _int) {
       if (input.length > _int) {
-        return input.substring(0, _int) + '...';
+        return input.substring(0, _int) + "...";
       }
       return input;
     },
     nextPage: function nextPage(url) {
       var _this = this;
       axios({
-        method: 'get',
+        method: "get",
         url: url
       }).then(function (res) {
         _this.games = res.data;
@@ -73,7 +89,7 @@ __webpack_require__.r(__webpack_exports__);
     prevPage: function prevPage(url) {
       var _this2 = this;
       axios({
-        method: 'get',
+        method: "get",
         url: url
       }).then(function (res) {
         _this2.games = res.data;
@@ -82,7 +98,7 @@ __webpack_require__.r(__webpack_exports__);
     goToPage: function goToPage(url, page) {
       var _this3 = this;
       axios({
-        method: 'get',
+        method: "get",
         url: "".concat(url, "?page=").concat(page)
       }).then(function (res) {
         _this3.games = res.data;
@@ -101,7 +117,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this4 = this;
     axios({
-      method: 'get',
+      method: "get",
       url: "/api/games/"
     }).then(function (res) {
       _this4.games = res.data;
@@ -286,7 +302,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.text-limit[data-v-3a2c79dd] {\r\n    height: 100px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.text-limit[data-v-3a2c79dd] {\n  height: 90px;\n  word-wrap: break-word;\n  overflow-y: hidden;\n}\n@media (max-width: 991px) {\n.card-img-top[data-v-3a2c79dd] {\n      height: 320px;\n}\n.text-limit[data-v-3a2c79dd] {\n      height: 60px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -696,7 +712,7 @@ var render = function () {
         "div",
         { staticClass: "row" },
         _vm._l(_vm.games.data, function (game, index) {
-          return _c("div", { key: index, staticClass: "col-md-2" }, [
+          return _c("div", { key: index, staticClass: "col-lg-2" }, [
             _c("div", { staticClass: "card mb-4" }, [
               _c("img", {
                 staticClass: "card-img-top",
@@ -711,8 +727,17 @@ var render = function () {
               _c("div", { staticClass: "card-body" }, [
                 _c(
                   "h5",
-                  { staticClass: "card-title", attrs: { title: game.name } },
-                  [_vm._v(_vm._s(_vm.limitText(game.name, 14)))]
+                  {
+                    staticClass: "card-title text-truncate",
+                    attrs: { title: game.name },
+                  },
+                  [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(_vm.limitText(game.name, 14)) +
+                        "\n            "
+                    ),
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
@@ -724,23 +749,31 @@ var render = function () {
                     _c(
                       "p",
                       {
-                        staticClass: "text-limit",
+                        staticClass: "text-limit mb-2",
                         attrs: { title: game.genre },
                       },
-                      [_vm._v(_vm._s(_vm.limitText(game.genre, 80)))]
+                      [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.limitText(game.genre, 80)) +
+                            "\n              "
+                        ),
+                      ]
                     ),
                   ],
                   1
                 ),
                 _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { href: game.trailer_link, target: "_blank" },
-                  },
-                  [_vm._v("Watch Trailer")]
-                ),
+                _c("div", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { href: game.trailer_link, target: "_blank" },
+                    },
+                    [_vm._v("Watch Trailer")]
+                  ),
+                ]),
               ]),
             ]),
           ])
