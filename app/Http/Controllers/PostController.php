@@ -103,7 +103,6 @@ class PostController extends Controller
   {
     $validator = Validator::make($request->all(), [
       'message' => 'string',
-      'files.*' => 'exists:post_images,id|nullable',
     ]);
 
     if ($validator->fails()) {

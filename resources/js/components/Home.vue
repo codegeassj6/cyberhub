@@ -736,12 +736,12 @@ export default {
         method: "patch",
         params: {
           message: this.edit_post.message,
-          image: this.edit_post.attachment_remove,
+          files: this.edit_post.attachment_remove,
         },
         url: `/api/post/${this.edit_post.data.id}`,
         headers: { Authorization: AuthStr },
       })
-        .then((res) => {
+        .then((res) => {console.log(res.data);
           document.getElementById(
             `post_message_${this.edit_post.data.id}`
           ).innerText = this.edit_post.message;

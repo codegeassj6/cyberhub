@@ -6120,13 +6120,14 @@ __webpack_require__.r(__webpack_exports__);
         method: "patch",
         params: {
           message: this.edit_post.message,
-          image: this.edit_post.attachment_remove
+          files: this.edit_post.attachment_remove
         },
         url: "/api/post/".concat(this.edit_post.data.id),
         headers: {
           Authorization: AuthStr
         }
       }).then(function (res) {
+        console.log(res.data);
         document.getElementById("post_message_".concat(_this2.edit_post.data.id)).innerText = _this2.edit_post.message;
       })["catch"](function (err) {});
     },
