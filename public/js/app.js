@@ -6079,13 +6079,13 @@ __webpack_require__.r(__webpack_exports__);
             Authorization: AuthStr
           }
         }).then(function (res) {
-          e.target.setAttribute('disabled', false);
+          e.target.removeAttribute('disabled');
           _this.attach_exist = false;
           _this.form_data = "";
           document.getElementById("editable").innerHTML = "";
           _this.posts = res.data;
         })["catch"](function (err) {
-          e.target.setAttribute('disabled', false);
+          e.target.removeAttribute('disabled');
           console.log(err.response.data);
         });
       }
@@ -31601,21 +31601,19 @@ var render = function () {
                               ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "ms-auto" }, [
-                                _c("div", {}, [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass:
-                                        "btn btn-primary btn-sm px-5 shadow",
-                                      on: { click: _vm.createPost },
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                      Post\n                    "
-                                      ),
-                                    ]
-                                  ),
-                                ]),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-primary btn-sm px-5 shadow",
+                                    on: { click: _vm.createPost },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                      Post\n                    "
+                                    ),
+                                  ]
+                                ),
                               ]),
                             ]),
                           ]),

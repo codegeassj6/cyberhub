@@ -484,14 +484,14 @@
                   </div>
 
                   <div class="ms-auto">
-                    <div class="">
+
                       <button
                         class="btn btn-primary btn-sm px-5 shadow"
                         @click="createPost"
                       >
                         Post
                       </button>
-                    </div>
+
                   </div>
                 </div>
               </div>
@@ -686,14 +686,14 @@ export default {
           },
         })
           .then((res) => {
-            e.target.setAttribute('disabled', false);
+            e.target.removeAttribute('disabled');
             this.attach_exist = false;
             this.form_data = "";
             document.getElementById("editable").innerHTML = "";
             this.posts = res.data;
           })
           .catch((err) => {
-            e.target.setAttribute('disabled', false);
+            e.target.removeAttribute('disabled');
             console.log(err.response.data);
           });
       }
