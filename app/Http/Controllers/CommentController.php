@@ -141,8 +141,11 @@ class CommentController extends Controller
     public function destroy($id)
     {
         $comment = Comment::whereId($id)->firstOrFail();
-        $comment->getCommentLikes()->delete();
-        $comment->delete();
-        return response()->json(['message' => 'deleted'], 200);
+        if($comment->user_id == Auth::id() || Auth::user()->role == 1) {
+          $comment->getCommentLikes()->delete();
+          $comment->delete();
+          return response()->json(['message' => 'deleted'], 200);
+        }
+
     }
 }

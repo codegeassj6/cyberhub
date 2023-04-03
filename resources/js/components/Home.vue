@@ -536,9 +536,7 @@
                       contenteditable="true"
                       ref="trial"
                       @keyup="updateEditPostMessage"
-                    >
-                      {{ edit_post.data.message }}
-                    </div>
+                    >{{ edit_post.data.message }}</div>
                   </div>
 
                   <div

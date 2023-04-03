@@ -2,18 +2,6 @@
   <div>
     <div v-for="(comment, index) in comments.data" :key="index">
       <div class="d-flex flex-row mb-2">
-        <!-- <img
-          :src="
-            '/storage/user/' +
-            comment.user_details.id +
-            '/img/' +
-            comment.user_details.profile_img
-          "
-          width="50"
-          height="50"
-          class="rounded-image"
-        /> -->
-
         <img
           :src="computedUserAvatar(comment)"
           width="50"
@@ -48,7 +36,7 @@
 
         <div
           class="ms-auto"
-          v-if="comment.user_id == $store.getters.currentUser.id"
+          v-if="comment.user_id == $store.getters.currentUser.id || $store.getters.currentUser.role == 1"
         >
           <div class="dropdown dropdown-menu-end">
             <a

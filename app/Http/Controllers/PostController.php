@@ -58,15 +58,15 @@ class PostController extends Controller
       $request->all(),
       [
         'message' => 'max:1000',
-        'files' => 'array|max:1',
-        'files.*' => 'file|max:20480|mimes:jpg,jpeg,png,bmp,mp4',
+        'files' => 'array|max:1|nullable',
+        'files.*' => 'file|max:20480|mimes:jpg,jpeg,png,bmp,mp4|nullable',
       ],
       [
         'files.*.max' => 'File must be 20MB only',
       ]
     );
 
-    if ($validator->fails()) {
+    if ($validator->fails() || Auth::user()->role != 1) {
       return response()->json($validator->messages()->get('*'), 500);
     }
 
@@ -103,7 +103,7 @@ class PostController extends Controller
   {
     $validator = Validator::make($request->all(), [
       'message' => 'string',
-      // 'files.*' => 'exists:post_images,id',
+      'files.*' => 'exists:post_images,id|nullable',
     ]);
 
     if ($validator->fails()) {

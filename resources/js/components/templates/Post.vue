@@ -3,16 +3,6 @@
     <div class="card mb-3" v-for="(data, index) in datas.data" :key="index">
       <div class="d-flex p-2 px-3">
         <div class="d-flex flex-row align-items-center">
-          <!-- <img
-            :src="
-              '/storage/user/' +
-              data.get_user.id +
-              '/img/' +
-              data.get_user.profile_img
-            "
-            height="50"
-            width="50"
-          /> -->
           <img
             :src="computedUserAvatar(data)"
             height="50"
@@ -256,11 +246,8 @@
           </a>
           <a role="button" class="btn btn-outline-secondary w-100">
             <i class="fa fa-commenting-o"></i>
-            <span>{{ data.get_comments }} Comments</span>
+            <span>Comments</span>
           </a>
-          <a role="button" class="btn btn-outline-secondary w-100"
-            ><i class="fa fa-share"></i> Share</a
-          >
         </div>
 
         <div class="d-flex">
