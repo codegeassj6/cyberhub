@@ -41,7 +41,7 @@
               </a>
 
               <a role="button" class="me-2 text-secondary">Reply</a>
-              <small>18 mins</small>
+              <small>{{ comment.created_time }}</small>
             </div>
           </div>
         </div>
@@ -290,6 +290,13 @@ export default {
   },
 
   watch: {
+    $data: {
+        handler: function (val, oldVal) {
+          console.log("Watch Comment: ", val);
+        },
+        deep: true,
+    },
+
     $props: {
       handler: function (val, oldVal) {
         if (this.sort_id == this.post_id) {

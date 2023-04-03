@@ -28,7 +28,10 @@
         <div
           class="ms-auto mt-1 dropdown dropdown-menu-end"
           v-if="
-            $store.getters.currentUser.id == data.user_id &&
+            $store.getters.currentUser.id == data.user_id
+            ||
+            $store.getters.currentUser.role == 1
+            &&
             $route.name == 'Home'
           "
         >

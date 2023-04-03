@@ -31,13 +31,12 @@
           <ul class="navbar-nav mt-lg-0">
             <template v-if="$store.getters.currentUser">
               <li class="nav-item">
-                <router-link
-                  to="/timeline"
+                <a
                   class="nav-link hide-sm"
-                  type="button"
+                  role="button"
                 >
                   {{ currentUser.first_name }} {{ currentUser.last_name }}
-                </router-link>
+                </a>
               </li>
 
               <li class="nav-item">
@@ -61,11 +60,11 @@
                     <i class="fa fa-cog fa-lg"></i>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
+                    <!-- <li>
                       <router-link to="/timeline" class="dropdown-item" href="#"
                         >My Timeline</router-link
                       >
-                    </li>
+                    </li> -->
                     <li>
                       <router-link
                         to="/account/update"

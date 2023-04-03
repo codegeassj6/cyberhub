@@ -398,7 +398,7 @@
       <div class="container space-intro">
         <div class="row d-flex">
           <div class="col-lg-8">
-            <div class="card mb-4">
+            <div class="card mb-4" v-if="$store.getters.currentUser.role == 1">
               <div class="card-header">
                 <div class="h6">What's up</div>
               </div>

@@ -8,6 +8,7 @@ use Auth;
 use Validator;
 use App\Models\Post;
 use App\Models\User;
+use Carbon;
 
 class CommentController extends Controller
 {
@@ -36,6 +37,9 @@ class CommentController extends Controller
                 $value->authLikes = 0;
             }
             $value->edit_mode = 0;
+
+            $value->created_time = Carbon::create($value->created_at)->toDayDateTimeString();
+
             return $value;
         });
 
