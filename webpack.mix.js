@@ -11,7 +11,12 @@ const mix = require('laravel-mix');
  |
  */
 
+ mix.webpackConfig({
+  output: {
+      path: "public/js"
+  }
+});
+
 mix.js('resources/js/app.js', 'public/js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css');
-mix.browserSync("cyberhub.test");
