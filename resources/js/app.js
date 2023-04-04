@@ -6,11 +6,6 @@ import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import StoreData from './store'
 
-import Adsense from 'vue-google-adsense/dist/Adsense.min.js';
-import vueScript2 from 'vue-script2';
-Vue.use(Adsense);
-Vue.use(vueScript2);
-
 Vue.use(Vuex);
 Vue.use(VueRouter);
 Vue.component('app-component', require('./components/AppComponent.vue').default);
