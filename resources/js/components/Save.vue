@@ -136,7 +136,6 @@ export default {
     })
       .then((res) => {
         this.saves = res.data;
-        console.log(this.saves);
       })
       .catch((err) => {});
   },

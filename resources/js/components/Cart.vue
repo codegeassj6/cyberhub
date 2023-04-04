@@ -370,14 +370,6 @@ export default {
     },
   },
 
-  watch: {
-    $data: {
-      handler: function (val, oldVal) {
-        console.log("watcher: ", val);
-      },
-      deep: true,
-    },
-  },
 
   updated() {},
 
