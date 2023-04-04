@@ -10,13 +10,7 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
- mix.webpackConfig({
-  output: {
-      path: "public/js"
-  }
-});
-
 mix.js('resources/js/app.js', 'public/js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css');
+    mix.browserSync("cyberhub.test");
