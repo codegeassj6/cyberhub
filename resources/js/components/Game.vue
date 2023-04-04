@@ -17,7 +17,7 @@
               </h5>
               <div class="card-text mb-2">
                 <Star :rating="game.rating" />
-                <p class="text-limit mb-2" :title="game.genre">
+                <p class="mb-2" style="height: 90px; word-wrap: break-word; overflow-y: hidden;" :title="game.genre">
                   {{ limitText(game.genre, 80) }}
                 </p>
               </div>
@@ -124,22 +124,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.text-limit {
-  height: 90px;
-  word-wrap: break-word;
-  overflow-y: hidden;
-}
-
-
-@media (max-width: 991px) {
-    .card-img-top {
-      height: 320px;
-    }
-
-    .text-limit {
-      height: 60px;
-    }
-}
-</style>

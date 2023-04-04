@@ -7,7 +7,7 @@
             <div class="d-flex justify-content-center mb-3" id="myId">
               <label for="input_upload" class="pointer border border-info" ref="dropbox" @dragover="dragOver" @dragleave="dragLeave">
                 <div class="card border-0">
-                  <div class="m-auto p-10 bg-muted upload text-center" @drop="dropped">
+                  <div class="m-auto bg-muted text-center" style="height: 200px; padding: 50px; width: 450px" @drop="dropped">
                     <input
                       type="file"
                       class="d-none"
@@ -151,20 +151,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.upload {
-  height: 200px;
-  width: 450px;
-}
-
-@media (max-width: 768px) {
-  .w-100 {
-    width: 50% !important;
-  }
-}
-
-.p-10 {
-  padding: 50px;
-}
-</style>
