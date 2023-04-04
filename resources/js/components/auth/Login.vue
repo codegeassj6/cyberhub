@@ -136,7 +136,7 @@ export default {
   updated() {},
 
   mounted() {
-      console.log('test');
+
   },
 };
 </script>

@@ -103,7 +103,7 @@
                                                 </div>
                                             </div>
 
-                                            <BillingCard class="mb-2" />
+                                            <!-- <BillingCard class="mb-2" /> -->
 
                                             <div class="text-center">
                                                 <button @click="submitOrder" class="btn btn-primary w-100">
@@ -278,17 +278,6 @@ export default {
             if(this.orders.length == this.cart_items.length) {
                 this.$refs.selectAll.checked = true;
             }
-
-            // const index = this.orders.indexOf(item.id);
-            // if(index > -1) {
-            //     this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) + item.product_size_details.price * +document.getElementById('input_'+item.id).value ;
-            // } else {
-            //     this.$refs.subtotal.innerText = parseInt(this.$refs.subtotal.innerText) - item.product_size_details.price * +document.getElementById('input_'+item.id).value;
-
-
-            // }
-            // this.$refs.total.innerText = parseInt(this.$refs.subtotal.innerText);
-
 
         },
 
