@@ -277,24 +277,6 @@ export default {
     },
   },
 
-  watch: {
-    $data: {
-        handler: function (val, oldVal) {
-          console.log("Watch Comment: ", val);
-        },
-        deep: true,
-    },
-
-    $props: {
-      handler: function (val, oldVal) {
-        if (this.sort_id == this.post_id) {
-          this.getComments(this.sort);
-        }
-      },
-      deep: true,
-    },
-  },
-
   updated() {},
 
   mounted() {

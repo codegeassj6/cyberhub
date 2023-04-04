@@ -763,16 +763,6 @@ export default {
       return `/storage/post/file/${file_link}`;
     },
   },
-
-  watch: {
-    $data: {
-      handler: function (val, oldVal) {
-        console.log("Watch Home: ", val);
-      },
-      deep: true,
-    },
-  },
-
   updated() {},
 
   beforeMount() {},

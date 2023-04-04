@@ -397,23 +397,6 @@ export default {
       return ext.trim();
     },
   },
-
-  watch: {
-    $data: {
-      handler: function (val, oldVal) {
-        console.log("Watch Post: ", val);
-      },
-      deep: true,
-    },
-
-    $props: {
-      handler: function (val, oldVal) {
-        console.log("Watch Post: ", val);
-      },
-      deep: true,
-    },
-  },
-
   updated() {},
 
   mounted() {},
