@@ -103,27 +103,104 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       form: {
-        first_name: '',
-        last_name: '',
-        birthday: '',
-        contact: '',
-        address: '',
-        email: '',
-        file: '',
+        first_name: "",
+        last_name: "",
+        birthday: "",
+        contact: "",
+        address: "",
+        email: "",
+        file: "",
         boolUpload: true,
-        photo: ''
+        photo: ""
       },
-      user: '',
+      user: "",
       error: {
-        birthday: '',
-        first_name: '',
-        last_name: '',
-        contact: ''
+        birthday: "",
+        first_name: "",
+        last_name: "",
+        contact: ""
       }
     };
   },
@@ -134,15 +211,15 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters.currentUser;
     },
     getProfilePicture: function getProfilePicture() {
-      return '/storage/user/' + this.user.id + '/img/' + this.user.profile_img;
+      return "/storage/user/" + this.user.id + "/img/" + this.user.profile_img;
     }
   },
   methods: {
     updateProfile: function updateProfile(e) {
-      e.target.setAttribute('disabled', true);
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      e.target.setAttribute("disabled", true);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'post',
+        method: "post",
         params: {
           username: this.form.username,
           first_name: this.form.first_name,
@@ -156,12 +233,12 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: AuthStr
         }
       }).then(function (res) {
-        e.target.removeAttribute('disabled');
+        e.target.removeAttribute("disabled");
       })["catch"](function (err) {});
     },
     // trigger the input file
     uploadTriggerInput: function uploadTriggerInput() {
-      var elem = document.getElementById('input_upload');
+      var elem = document.getElementById("input_upload");
       if (elem && document.createEvent) {
         var evt = document.createEvent("MouseEvents");
         evt.initEvent("click", true, false);
@@ -173,32 +250,33 @@ __webpack_require__.r(__webpack_exports__);
       if (this.form.file) {
         this.form.boolUpload = false;
         // this.previewImage(this.form.file);
-        document.getElementById('myPhoto').src = URL.createObjectURL(this.form.file);
+        document.getElementById("myPhoto").src = URL.createObjectURL(this.form.file);
       }
     },
     cancelUpload: function cancelUpload() {
       this.form.file = null;
       this.form.boolUpload = true;
-      document.getElementById('myPhoto').src = this.form.photo;
+      document.getElementById("myPhoto").src = this.form.photo;
     },
     uploadImage: function uploadImage() {
       var _this = this;
       var formData = new FormData();
-      formData.set('image', this.form.file);
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-      axios.post('/api/account/update/image', formData, {
+      formData.set("image", this.form.file);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
+      axios.post("/api/account/update/image", formData, {
         headers: {
           Authorization: AuthStr
         }
       }).then(function (res) {
         _this.form.boolUpload = true;
+        // mutate user profile imaage
       })["catch"](function (error) {});
     },
     getAuthUserDetails: function getAuthUserDetails() {
       var _this2 = this;
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'get',
+        method: "get",
         url: "/api/auth/me",
         headers: {
           Authorization: AuthStr
@@ -211,7 +289,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.form.address = res.data.address;
         _this2.form.contact = res.data.contact;
         _this2.form.birthday = res.data.birthday;
-        _this2.form.photo = res.data.profile_img ? _this2.getProfilePicture : 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
+        _this2.form.photo = res.data.profile_img ? _this2.getProfilePicture : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y";
       })["catch"](function (err) {});
     }
   },
@@ -344,7 +422,11 @@ var render = function () {
                     _c(
                       "div",
                       { staticClass: "small font-italic text-muted mb-4" },
-                      [_vm._v("JPG or PNG no larger than 5 MB")]
+                      [
+                        _vm._v(
+                          "\n                  JPG or PNG no larger than 5 MB\n                "
+                        ),
+                      ]
                     ),
                     _vm._v(" "),
                     _c("input", {
@@ -366,7 +448,11 @@ var render = function () {
                               attrs: { type: "button" },
                               on: { click: _vm.uploadTriggerInput },
                             },
-                            [_vm._v("Upload Image")]
+                            [
+                              _vm._v(
+                                "\n                    Upload Image\n                  "
+                              ),
+                            ]
                           ),
                         ]
                       : [
@@ -377,7 +463,11 @@ var render = function () {
                               attrs: { type: "button" },
                               on: { click: _vm.cancelUpload },
                             },
-                            [_vm._v("Cancel")]
+                            [
+                              _vm._v(
+                                "\n                    Cancel\n                  "
+                              ),
+                            ]
                           ),
                           _vm._v(" "),
                           _c(
@@ -387,7 +477,11 @@ var render = function () {
                               attrs: { type: "button" },
                               on: { click: _vm.uploadImage },
                             },
-                            [_vm._v("Upload")]
+                            [
+                              _vm._v(
+                                "\n                    Upload\n                  "
+                              ),
+                            ]
                           ),
                         ],
                   ],
@@ -642,7 +736,11 @@ var render = function () {
                         attrs: { type: "button" },
                         on: { click: _vm.updateProfile },
                       },
-                      [_vm._v("Save changes")]
+                      [
+                        _vm._v(
+                          "\n                    Save changes\n                  "
+                        ),
+                      ]
                     ),
                   ]),
                 ]),

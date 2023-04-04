@@ -7572,6 +7572,9 @@ var user = (0,_helpers_auth__WEBPACK_IMPORTED_MODULE_0__.getLocalUser)();
     },
     mutateCartCount: function mutateCartCount(state, payload) {
       state.cart_count = payload;
+    },
+    mutateUserDetails: function mutateUserDetails() {
+      state.currentUser = '';
     }
   },
   actions: {

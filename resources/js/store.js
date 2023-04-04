@@ -49,9 +49,14 @@ export default {
             state.isLoggedIn = false;
             state.currentUser = null;
         },
+
         mutateCartCount(state, payload) {
             state.cart_count = payload;
         },
+        mutateUserDetails() {
+          state.currentUser = '';
+        },
+
 
     },
     actions: {

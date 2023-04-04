@@ -58,7 +58,7 @@ class PostController extends Controller
       $request->all(),
       [
         'message' => 'max:1000',
-        'files' => 'array|max:1|nullable',
+        'files' => 'array|max:6|nullable',
         'files.*' => 'file|max:20480|mimes:jpg,jpeg,png,bmp,mp4|nullable',
       ],
       [
