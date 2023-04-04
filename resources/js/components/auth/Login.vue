@@ -49,11 +49,11 @@
                 Sign in
               </button>
 
-              <div class="divider d-flex align-items-center my-4">
+              <!-- <div class="divider d-flex align-items-center my-4">
                 <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
               </div>
+              <v-facebook-login app-id="6050990288293828" v-model="model" @sdk-init="handleSdkInit"></v-facebook-login> -->
 
-              <v-facebook-login app-id="6050990288293828"></v-facebook-login>
             </form>
           </div>
         </div>
@@ -72,6 +72,9 @@ export default {
         email: "",
         password: "",
       },
+      FB: {},
+      model: {},
+      scope: {},
     };
   },
   components: {
@@ -83,6 +86,12 @@ export default {
   computed: {},
 
   methods: {
+    handleSdkInit({ FB, scope }) {
+      this.FB = FB;
+      this.scope = scope;
+    },
+
+
     authenticate() {
       this.$refs.login_btn.setAttribute('disabled', true);
       this.$store.dispatch("login");
@@ -126,7 +135,9 @@ export default {
 
   updated() {},
 
-  mounted() {},
+  mounted() {
+      console.log('test');
+  },
 };
 </script>
 

@@ -86,7 +86,10 @@ __webpack_require__.r(__webpack_exports__);
       form: {
         email: "",
         password: ""
-      }
+      },
+      FB: {},
+      model: {},
+      scope: {}
     };
   },
   components: {
@@ -95,6 +98,12 @@ __webpack_require__.r(__webpack_exports__);
   props: [],
   computed: {},
   methods: {
+    handleSdkInit: function handleSdkInit(_ref) {
+      var FB = _ref.FB,
+        scope = _ref.scope;
+      this.FB = FB;
+      this.scope = scope;
+    },
     authenticate: function authenticate() {
       var _this = this;
       this.$refs.login_btn.setAttribute('disabled', true);
@@ -132,7 +141,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   updated: function updated() {},
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    console.log('test');
+  }
 });
 
 /***/ }),
@@ -154,7 +165,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* .container {\r\n    margin-top: 100px;\r\n    max-width: 900px;\r\n} */\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .container {\n    margin-top: 100px;\n    max-width: 900px;\n} */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -423,14 +434,7 @@ var render = function () {
                       },
                       [_vm._v("\n              Sign in\n            ")]
                     ),
-                    _vm._v(" "),
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _c("v-facebook-login", {
-                      attrs: { "app-id": "6050990288293828" },
-                    }),
-                  ],
-                  1
+                  ]
                 ),
               ]
             ),
@@ -454,20 +458,6 @@ var staticRenderFns = [
         },
       }),
     ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "divider d-flex align-items-center my-4" },
-      [
-        _c("p", { staticClass: "text-center fw-bold mx-3 mb-0 text-muted" }, [
-          _vm._v("OR"),
-        ]),
-      ]
-    )
   },
 ]
 render._withStripped = true
