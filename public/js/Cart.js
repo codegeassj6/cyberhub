@@ -229,14 +229,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      cart_items: '',
+      cart_items: "",
       orders: [],
-      subtotal: ''
+      subtotal: ""
     };
   },
   components: {
@@ -264,10 +308,10 @@ __webpack_require__.r(__webpack_exports__);
     increaseQuantity: function increaseQuantity(item) {
       if (item.quantity < item.product_size_details.stock) {
         item.quantity++;
-        this.$store.commit('mutateCartCount', this.$store.getters.getCartCount + 1);
-        var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+        this.$store.commit("mutateCartCount", this.$store.getters.getCartCount + 1);
+        var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
         axios({
-          method: 'patch',
+          method: "patch",
           params: {
             quantity: item.quantity
           },
@@ -281,10 +325,10 @@ __webpack_require__.r(__webpack_exports__);
     decreaseQuantity: function decreaseQuantity(item) {
       if (item.quantity > 1) {
         item.quantity--;
-        this.$store.commit('mutateCartCount', this.$store.getters.getCartCount - 1);
-        var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+        this.$store.commit("mutateCartCount", this.$store.getters.getCartCount - 1);
+        var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
         axios({
-          method: 'patch',
+          method: "patch",
           params: {
             quantity: item.quantity
           },
@@ -296,23 +340,23 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     changeQuantity: function changeQuantity(item) {
-      if (document.getElementById('input_' + item.id).value == '' || document.getElementById('input_' + item.id).value == 0) {
-        document.getElementById('input_' + item.id).value = item.quantity;
+      if (document.getElementById("input_" + item.id).value == "" || document.getElementById("input_" + item.id).value == 0) {
+        document.getElementById("input_" + item.id).value = item.quantity;
       }
-      if (document.getElementById('input_' + item.id).value > item.product_size_details.stock) {
-        document.getElementById('input_' + item.id).value = item.product_size_details.stock;
+      if (document.getElementById("input_" + item.id).value > item.product_size_details.stock) {
+        document.getElementById("input_" + item.id).value = item.product_size_details.stock;
       }
 
       // commit mutation for cart count
-      if (item.quantity > +document.getElementById('input_' + item.id).value) {
-        this.$store.commit('mutateCartCount', this.$store.getters.getCartCount - (item.quantity - +document.getElementById('input_' + item.id).value));
+      if (item.quantity > +document.getElementById("input_" + item.id).value) {
+        this.$store.commit("mutateCartCount", this.$store.getters.getCartCount - (item.quantity - +document.getElementById("input_" + item.id).value));
       } else {
-        this.$store.commit('mutateCartCount', this.$store.getters.getCartCount + +document.getElementById('input_' + item.id).value - item.quantity);
+        this.$store.commit("mutateCartCount", this.$store.getters.getCartCount + +document.getElementById("input_" + item.id).value - item.quantity);
       }
-      item.quantity = +document.getElementById('input_' + item.id).value;
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      item.quantity = +document.getElementById("input_" + item.id).value;
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'patch',
+        method: "patch",
         params: {
           quantity: item.quantity
         },
@@ -340,11 +384,11 @@ __webpack_require__.r(__webpack_exports__);
         this.orders.forEach(function (elem, index) {
           if (elem == item.id) {
             _this2.orders.splice(index, 1);
-            _this2.$refs.subtotal.innerText = parseInt(_this2.$refs.subtotal.innerText) - item.product_size_details.price * +document.getElementById('input_' + item.id).value;
+            _this2.$refs.subtotal.innerText = parseInt(_this2.$refs.subtotal.innerText) - item.product_size_details.price * +document.getElementById("input_" + item.id).value;
           }
         });
       }
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios["delete"]("/api/cart/".concat(item.id), {
         headers: {
           Authorization: AuthStr
@@ -373,9 +417,9 @@ __webpack_require__.r(__webpack_exports__);
     submitOrder: function submitOrder() {
       var _this4 = this;
       if (this.orders.length) {
-        var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+        var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
         axios({
-          method: 'post',
+          method: "post",
           data: {
             id: this.orders
           },
@@ -393,7 +437,7 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     $data: {
       handler: function handler(val, oldVal) {
-        console.log('watcher: ', val);
+        console.log("watcher: ", val);
       },
       deep: true
     }
@@ -401,9 +445,9 @@ __webpack_require__.r(__webpack_exports__);
   updated: function updated() {},
   mounted: function mounted() {
     var _this5 = this;
-    var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+    var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
     axios({
-      method: 'get',
+      method: "get",
       url: "/api/cart/",
       headers: {
         Authorization: AuthStr
@@ -432,7 +476,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-info[data-v-b7f93bea] {\n    color: white;\n}\nlabel[data-v-b7f93bea] {\n    display: block !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-info[data-v-b7f93bea] {\n  color: white;\n}\nlabel[data-v-b7f93bea] {\n  display: block !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -715,7 +759,7 @@ var render = function () {
                                 },
                               }),
                               _vm._v(
-                                " Select All\n                                        "
+                                "\n                      Select All\n                    "
                               ),
                             ]),
                           ])
@@ -805,7 +849,11 @@ var render = function () {
                                 _vm._v(" "),
                                 _c("div", { staticClass: "col-md-7 mb-2" }, [
                                   _c("div", { staticClass: "h5" }, [
-                                    _vm._v(_vm._s(item.product_details.name)),
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s(item.product_details.name) +
+                                        "\n                          "
+                                    ),
                                   ]),
                                   _vm._v(" "),
                                   _c("div", [
@@ -817,11 +865,12 @@ var render = function () {
                                   _c("div", { staticClass: "mt-2" }, [
                                     _c("div", { staticClass: "h5" }, [
                                       _vm._v(
-                                        "Size: " +
+                                        "\n                              Size:\n                              " +
                                           _vm._s(
                                             item.product_size_details.value +
                                               item.product_size_details.unit
-                                          )
+                                          ) +
+                                          "\n                            "
                                       ),
                                     ]),
                                   ]),
@@ -850,11 +899,11 @@ var render = function () {
                                 _c("div", { staticClass: "col-md-3" }, [
                                   _c("div", { staticClass: "text-center h4" }, [
                                     _vm._v(
-                                      "\n                                                        P " +
+                                      "\n                            P " +
                                         _vm._s(
                                           item.product_size_details.price
                                         ) +
-                                        "\n                                                    "
+                                        "\n                          "
                                     ),
                                   ]),
                                   _vm._v(" "),
@@ -913,11 +962,11 @@ var render = function () {
                                   _vm._v(" "),
                                   _c("div", { staticClass: "text-center" }, [
                                     _vm._v(
-                                      "\n                                                        " +
+                                      "\n                            " +
                                         _vm._s(
                                           item.product_size_details.stock
                                         ) +
-                                        " stocks left\n                                                    "
+                                        " stocks left\n                          "
                                     ),
                                   ]),
                                 ]),
@@ -973,7 +1022,7 @@ var render = function () {
                           },
                           [
                             _vm._v(
-                              "\n                                                Place Order\n                                            "
+                              "\n                        Place Order\n                      "
                             ),
                           ]
                         ),

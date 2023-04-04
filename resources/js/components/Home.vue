@@ -405,7 +405,7 @@
               <div class="card-body">
                 <div class="d-flex flex-column mb-2 rounded">
                   <div
-                    class="flex-fill p-2 min-100"
+                    class="flex-fill min-100"
                     id="editable"
                     contenteditable="true"
                   ></div>

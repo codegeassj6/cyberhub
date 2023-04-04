@@ -32385,7 +32385,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "d-flex flex-column mb-2 rounded" }, [
       _c("div", {
-        staticClass: "flex-fill p-2 min-100",
+        staticClass: "flex-fill min-100",
         attrs: { id: "editable", contenteditable: "true" },
       }),
     ])

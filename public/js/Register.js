@@ -11,6 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _helpers_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/auth */ "./resources/js/helpers/auth.js");
 //
 //
 //
@@ -149,16 +150,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-//import name from './
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      fname: null,
-      lname: null,
-      email: null,
-      password: null,
-      confirm: null,
+      form: {
+        fname: null,
+        lname: null,
+        email: null,
+        password: null,
+        confirm: null
+      },
       error: {
         first_name: "",
         last_name: "",
@@ -178,16 +180,16 @@ __webpack_require__.r(__webpack_exports__);
         axios({
           method: "post",
           params: {
-            first_name: _this.fname,
-            last_name: _this.lname,
-            email: _this.email,
-            password: _this.password,
-            confirm: _this.confirm
+            first_name: _this.form.fname,
+            last_name: _this.form.lname,
+            email: _this.form.email,
+            password: _this.form.password,
+            confirm: _this.form.confirm
           },
           url: "/api/auth/register"
         }).then(function (res) {
-          res(response.data);
-          _this.$router.push("/login");
+          _this.authenticate();
+          // this.$router.push("/login");
         })["catch"](function (err) {
           _this.error.first_name = err.response.data.first_name;
           _this.error.last_name = err.response.data.last_name;
@@ -195,6 +197,28 @@ __webpack_require__.r(__webpack_exports__);
           _this.error.password = err.response.data.password;
           _this.error.confirm = err.response.data.confirm;
           reject(err);
+        });
+      });
+    },
+    authenticate: function authenticate() {
+      var _this2 = this;
+      this.$store.dispatch("login");
+      (0,_helpers_auth__WEBPACK_IMPORTED_MODULE_0__.login)(this.form).then(function (res) {
+        _this2.$store.commit("loginSuccess", res);
+        var AuthStr = "Bearer ".concat(_this2.$store.getters.currentUser.token);
+        axios({
+          method: "get",
+          url: "/api/cart/",
+          headers: {
+            Authorization: AuthStr
+          }
+        }).then(function (res) {
+          _this2.$store.commit("mutateCartCount", res.data.cart_count);
+        })["catch"](function (err) {});
+        _this2.$router.push('/');
+      })["catch"](function (error) {
+        _this2.$store.commit("loginFailed", {
+          error: error
         });
       });
     }
@@ -229,7 +253,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* .container {\r\n    margin-top: 100px;\r\n    max-width: 900px;\r\n}\r\n\r\n.p-10 {\r\n    padding: 40px 80px;\r\n} */\n.gradient-custom-3[data-v-d4f9cbe2] {\r\n  /* fallback for old browsers */\r\n  background: #84fab0;\r\n\r\n  /* Chrome 10-25, Safari 5.1-6 */\r\n\r\n  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\r\n  background: linear-gradient(\r\n    to right,\r\n    rgba(132, 250, 176, 0.5),\r\n    rgba(143, 211, 244, 0.5)\r\n  );\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .container {\n    margin-top: 100px;\n    max-width: 900px;\n}\n\n.p-10 {\n    padding: 40px 80px;\n} */\n.gradient-custom-3[data-v-d4f9cbe2] {\n  /* fallback for old browsers */\n  background: #84fab0;\n\n  /* Chrome 10-25, Safari 5.1-6 */\n\n  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  background: linear-gradient(\n    to right,\n    rgba(132, 250, 176, 0.5),\n    rgba(143, 211, 244, 0.5)\n  );\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -431,8 +455,8 @@ var render = function () {
                                       {
                                         name: "model",
                                         rawName: "v-model",
-                                        value: _vm.fname,
-                                        expression: "fname",
+                                        value: _vm.form.fname,
+                                        expression: "form.fname",
                                       },
                                     ],
                                     staticClass: "form-control form-control-lg",
@@ -441,13 +465,17 @@ var render = function () {
                                       id: "form3Example1cg",
                                       required: "",
                                     },
-                                    domProps: { value: _vm.fname },
+                                    domProps: { value: _vm.form.fname },
                                     on: {
                                       input: function ($event) {
                                         if ($event.target.composing) {
                                           return
                                         }
-                                        _vm.fname = $event.target.value
+                                        _vm.$set(
+                                          _vm.form,
+                                          "fname",
+                                          $event.target.value
+                                        )
                                       },
                                     },
                                   }),
@@ -487,8 +515,8 @@ var render = function () {
                                       {
                                         name: "model",
                                         rawName: "v-model",
-                                        value: _vm.lname,
-                                        expression: "lname",
+                                        value: _vm.form.lname,
+                                        expression: "form.lname",
                                       },
                                     ],
                                     staticClass: "form-control form-control-lg",
@@ -497,13 +525,17 @@ var render = function () {
                                       id: "form4Example1cg",
                                       required: "",
                                     },
-                                    domProps: { value: _vm.lname },
+                                    domProps: { value: _vm.form.lname },
                                     on: {
                                       input: function ($event) {
                                         if ($event.target.composing) {
                                           return
                                         }
-                                        _vm.lname = $event.target.value
+                                        _vm.$set(
+                                          _vm.form,
+                                          "lname",
+                                          $event.target.value
+                                        )
                                       },
                                     },
                                   }),
@@ -543,8 +575,8 @@ var render = function () {
                                       {
                                         name: "model",
                                         rawName: "v-model",
-                                        value: _vm.email,
-                                        expression: "email",
+                                        value: _vm.form.email,
+                                        expression: "form.email",
                                       },
                                     ],
                                     staticClass: "form-control form-control-lg",
@@ -553,13 +585,17 @@ var render = function () {
                                       id: "form3Example3cg",
                                       required: "",
                                     },
-                                    domProps: { value: _vm.email },
+                                    domProps: { value: _vm.form.email },
                                     on: {
                                       input: function ($event) {
                                         if ($event.target.composing) {
                                           return
                                         }
-                                        _vm.email = $event.target.value
+                                        _vm.$set(
+                                          _vm.form,
+                                          "email",
+                                          $event.target.value
+                                        )
                                       },
                                     },
                                   }),
@@ -599,8 +635,8 @@ var render = function () {
                                       {
                                         name: "model",
                                         rawName: "v-model",
-                                        value: _vm.password,
-                                        expression: "password",
+                                        value: _vm.form.password,
+                                        expression: "form.password",
                                       },
                                     ],
                                     staticClass: "form-control form-control-lg",
@@ -609,13 +645,17 @@ var render = function () {
                                       id: "form3Example4cg",
                                       required: "",
                                     },
-                                    domProps: { value: _vm.password },
+                                    domProps: { value: _vm.form.password },
                                     on: {
                                       input: function ($event) {
                                         if ($event.target.composing) {
                                           return
                                         }
-                                        _vm.password = $event.target.value
+                                        _vm.$set(
+                                          _vm.form,
+                                          "password",
+                                          $event.target.value
+                                        )
                                       },
                                     },
                                   }),
@@ -655,8 +695,8 @@ var render = function () {
                                       {
                                         name: "model",
                                         rawName: "v-model",
-                                        value: _vm.confirm,
-                                        expression: "confirm",
+                                        value: _vm.form.confirm,
+                                        expression: "form.confirm",
                                       },
                                     ],
                                     staticClass: "form-control form-control-lg",
@@ -665,13 +705,17 @@ var render = function () {
                                       id: "form3Example4cdg",
                                       required: "",
                                     },
-                                    domProps: { value: _vm.confirm },
+                                    domProps: { value: _vm.form.confirm },
                                     on: {
                                       input: function ($event) {
                                         if ($event.target.composing) {
                                           return
                                         }
-                                        _vm.confirm = $event.target.value
+                                        _vm.$set(
+                                          _vm.form,
+                                          "confirm",
+                                          $event.target.value
+                                        )
                                       },
                                     },
                                   }),

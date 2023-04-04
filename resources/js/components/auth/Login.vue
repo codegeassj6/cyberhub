@@ -115,10 +115,7 @@ export default {
             this.$router.push('/');
         })
         .catch((error) => {
-          // console.log(this.$refs.login_btn);
           this.$refs.login_btn.removeAttribute('disabled');
-          alert(error);
-
           this.$store.commit("loginFailed", { error });
         });
     },

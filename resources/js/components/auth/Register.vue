@@ -22,7 +22,7 @@
                       <input
                         type="text"
                         id="form3Example1cg"
-                        v-model="fname"
+                        v-model="form.fname"
                         class="form-control form-control-lg"
                         required
                       />
@@ -41,7 +41,7 @@
                       <input
                         type="text"
                         id="form4Example1cg"
-                        v-model="lname"
+                        v-model="form.lname"
                         class="form-control form-control-lg"
                         required
                       />
@@ -60,7 +60,7 @@
                       <input
                         type="email"
                         id="form3Example3cg"
-                        v-model="email"
+                        v-model="form.email"
                         class="form-control form-control-lg"
                         required
                       />
@@ -79,7 +79,7 @@
                       <input
                         type="password"
                         id="form3Example4cg"
-                        v-model="password"
+                        v-model="form.password"
                         class="form-control form-control-lg"
                         required
                       />
@@ -98,7 +98,7 @@
                       <input
                         type="password"
                         id="form3Example4cdg"
-                        v-model="confirm"
+                        v-model="form.confirm"
                         class="form-control form-control-lg"
                         required
                       />
@@ -136,16 +136,19 @@
   </div>
 </template>
 <script>
-//import name from './
+import { login } from "../../helpers/auth";
 
 export default {
   data() {
     return {
-      fname: null,
+      form: {
+        fname: null,
       lname: null,
       email: null,
       password: null,
       confirm: null,
+      },
+
       error: {
         first_name: "",
         last_name: "",
@@ -167,17 +170,17 @@ export default {
         axios({
           method: "post",
           params: {
-            first_name: this.fname,
-            last_name: this.lname,
-            email: this.email,
-            password: this.password,
-            confirm: this.confirm,
+            first_name: this.form.fname,
+            last_name: this.form.lname,
+            email: this.form.email,
+            password: this.form.password,
+            confirm: this.form.confirm,
           },
           url: `/api/auth/register`,
         })
           .then((res) => {
-            res(response.data);
-            this.$router.push("/login");
+            this.authenticate();
+            // this.$router.push("/login");
           })
           .catch((err) => {
             this.error.first_name = err.response.data.first_name;
@@ -188,6 +191,31 @@ export default {
             reject(err);
           });
       });
+    },
+
+    authenticate() {
+      this.$store.dispatch("login");
+      login(this.form)
+        .then((res) => {
+          this.$store.commit("loginSuccess", res);
+
+          const AuthStr = "Bearer ".concat(
+            this.$store.getters.currentUser.token
+          );
+          axios({
+            method: "get",
+            url: `/api/cart/`,
+            headers: { Authorization: AuthStr },
+          })
+            .then((res) => {
+              this.$store.commit("mutateCartCount", res.data.cart_count);
+            })
+            .catch((err) => {});
+            this.$router.push('/');
+        })
+        .catch((error) => {
+          this.$store.commit("loginFailed", { error });
+        });
     },
   },
 
