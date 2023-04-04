@@ -146,8 +146,6 @@
                         </div>
                       </div>
 
-                      <!-- <BillingCard class="mb-2" /> -->
-
                       <div class="text-center">
                         <button
                           @click="submitOrder"
@@ -168,7 +166,6 @@
   </div>
 </template>
 <script>
-import BillingCard from "./BillingCard.vue";
 
 export default {
   data() {
@@ -179,7 +176,7 @@ export default {
     };
   },
   components: {
-    BillingCard,
+
   },
 
   props: [],

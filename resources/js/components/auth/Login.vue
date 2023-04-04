@@ -65,13 +65,10 @@ export default {
         email: "",
         password: "",
       },
-      FB: {},
-      model: {},
-      scope: {},
     };
   },
   components: {
-    VFacebookLogin,
+
   },
 
   props: [],
@@ -79,12 +76,6 @@ export default {
   computed: {},
 
   methods: {
-    handleSdkInit({ FB, scope }) {
-      this.FB = FB;
-      this.scope = scope;
-    },
-
-
     authenticate() {
       this.$refs.login_btn.setAttribute('disabled', true);
       this.$store.dispatch("login");

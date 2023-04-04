@@ -5316,7 +5316,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _templates_Nav_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./templates/Nav.vue */ "./resources/js/components/templates/Nav.vue");
 /* harmony import */ var _templates_Footer_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./templates/Footer.vue */ "./resources/js/components/templates/Footer.vue");
 /* harmony import */ var _Home_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Home.vue */ "./resources/js/components/Home.vue");
-/* harmony import */ var _helpers_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helpers/auth */ "./resources/js/helpers/auth.js");
 //
 //
 //
@@ -5365,7 +5364,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 
 
@@ -5403,9 +5401,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _templates_Post_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./templates/Post.vue */ "./resources/js/components/templates/Post.vue");
-//
-//
-//
 //
 //
 //
@@ -7160,15 +7155,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
-/* harmony import */ var vue_google_adsense_dist_Adsense_min_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-google-adsense/dist/Adsense.min.js */ "./node_modules/vue-google-adsense/dist/Adsense.min.js");
-/* harmony import */ var vue_google_adsense_dist_Adsense_min_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_google_adsense_dist_Adsense_min_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vue_script2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-script2 */ "./node_modules/vue-script2/dist/vue-script2.js");
-/* harmony import */ var vue_script2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_script2__WEBPACK_IMPORTED_MODULE_3__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]);
 
@@ -7176,27 +7167,23 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 
 
 
-
-
-vue__WEBPACK_IMPORTED_MODULE_4__["default"].use((vue_google_adsense_dist_Adsense_min_js__WEBPACK_IMPORTED_MODULE_2___default()));
-vue__WEBPACK_IMPORTED_MODULE_4__["default"].use((vue_script2__WEBPACK_IMPORTED_MODULE_3___default()));
-vue__WEBPACK_IMPORTED_MODULE_4__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_5__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_4__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_6__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('app-component', (__webpack_require__(/*! ./components/AppComponent.vue */ "./resources/js/components/AppComponent.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_4__["default"].mixin({
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('app-component', (__webpack_require__(/*! ./components/AppComponent.vue */ "./resources/js/components/AppComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].mixin({
   methods: {
     capitalizeFirstLetter: function capitalizeFirstLetter(val) {
       return val.charAt(0).toUpperCase() + val.slice(1);
     }
   }
 });
-var store = new vuex__WEBPACK_IMPORTED_MODULE_5__["default"].Store({
+var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
   modules: {
     StoreData: _store__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   plugins: []
 });
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_6__["default"]({
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   routes: _routes__WEBPACK_IMPORTED_MODULE_0__.routes,
   mode: 'history',
   scrollBehavior: function scrollBehavior(to, from, savedPosition) {
@@ -7252,7 +7239,7 @@ router.beforeEach(function (to, from, next) {
     next();
   }
 });
-var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
+var app = new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
   el: '#app',
   router: router,
   store: store
@@ -12833,7 +12820,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.toast[data-v-cd268472] {\r\n  display: block !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.toast[data-v-cd268472] {\n  display: block !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12881,7 +12868,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-comment[data-v-396a43a4] {\n  background: #f1f1f1;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-comment[data-v-396a43a4] {\r\n  background: #f1f1f1;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12905,7 +12892,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.border-post[data-v-038d89e1] {\n  border: 1px solid #e1e1e1;\n}\n.attach_image[data-v-038d89e1] {\n  height: 300px;\n}\n.btn-outline-secondary[data-v-038d89e1]:hover {\n  background: #ffffff;\n  color: #0d6efd !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.border-post[data-v-038d89e1] {\r\n  border: 1px solid #e1e1e1;\n}\n.attach_image[data-v-038d89e1] {\r\n  height: 300px;\n}\n.btn-outline-secondary[data-v-038d89e1]:hover {\r\n  background: #ffffff;\r\n  color: #0d6efd !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -30806,19 +30793,6 @@ module.exports = function (list, options) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-google-adsense/dist/Adsense.min.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/vue-google-adsense/dist/Adsense.min.js ***!
-  \*************************************************************/
-/***/ ((module) => {
-
-"use strict";
-var t="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";var e=function(t,e,a,s,n,d,o,i,r,l){"boolean"!=typeof o&&(r=i,i=o,o=!1);var p,c="function"==typeof a?a.options:a;if(t&&t.render&&(c.render=t.render,c.staticRenderFns=t.staticRenderFns,c._compiled=!0,n&&(c.functional=!0)),s&&(c._scopeId=s),d?(p=function(t){(t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),e&&e.call(this,r(t)),t&&t._registeredComponents&&t._registeredComponents.add(d)},c._ssrRegister=p):e&&(p=o?function(){e.call(this,l(this.$root.$options.shadowRoot))}:function(t){e.call(this,i(t))}),p)if(c.functional){var u=c.render;c.render=function(t,e){return p.call(e),u(t,e)}}else{var g=c.beforeCreate;c.beforeCreate=g?[].concat(g,p):[p]}return a}({render:function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("div",{class:t.rootClass},["yes"===t.isNewAdsCode?[a("script2",{attrs:{type:"text/javascript",async:"true",src:t.ADS_SCRIPT+"?client="+t.dataAdClient,crossorigin:"anonymous"}})]:t._e(),t._v(" "),"no"===t.isNewAdsCode?[a("script2",{attrs:{type:"text/javascript",async:"true",src:t.ADS_SCRIPT}})]:t._e(),t._v(" "),a("ins",{staticClass:"adsbygoogle",class:t.insClass,style:t.insStyle,attrs:{"data-ad-client":t.dataAdClient,"data-ad-slot":t.dataAdSlot,"data-ad-test":t.dataAdTest,"data-ad-format":t.dataAdFormat,"data-ad-region":t.dataAdRegion,"data-full-width-responsive":"yes"===t.dataFullWidthResponsive}}),t._v(" "),"yes"===t.isNonPersonalizedAds?[a("script2",{attrs:{type:"text/javascript"}},[t._v("\n      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1; (adsbygoogle = window.adsbygoogle || []).push({});\n    ")])]:t._e(),t._v(" "),"no"===t.isNonPersonalizedAds?[a("script2",{attrs:{type:"text/javascript"}},[t._v(" (adsbygoogle = window.adsbygoogle || []).push({}); ")])]:t._e()],2)},staticRenderFns:[]},void 0,{name:"Adsense",props:{rootClass:{type:String,default:"adswrapper"},insClass:{type:String,default:""},insStyle:{type:String,default:"display:block;"},dataAdClient:{type:String,default:""},dataAdSlot:{type:String,default:""},dataAdLayoutKey:{type:String,default:"-fg+5n+6t-e7+r"},dataAdTest:{type:String,default:""},dataAdFormat:{type:String,default:"auto"},isNonPersonalizedAds:{type:String,default:"no"},dataFullWidthResponsive:{type:String,default:"no"},dataAdRegion:{type:String,default:""},isNewAdsCode:{type:String,default:"no"}},data:function(){return{ADS_SCRIPT:t}}},void 0,!1,void 0,void 0,void 0),a={install:function(t){t.component("Adsense",e)}};module.exports=a;
-//# sourceMappingURL=Adsense.min.js.map
-
-
-/***/ }),
-
 /***/ "./resources/js/components/AppComponent.vue":
 /*!**************************************************!*\
   !*** ./resources/js/components/AppComponent.vue ***!
@@ -31626,19 +31600,7 @@ var render = function () {
                   1
                 ),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-lg-4" },
-                  [
-                    _c("Adsense", {
-                      attrs: {
-                        "data-ad-client": "ca-pub-5828491790124517",
-                        "data-ad-slot": "7486431136",
-                      },
-                    }),
-                  ],
-                  1
-                ),
+                _c("div", { staticClass: "col-lg-4" }),
               ]),
             ]),
             _vm._v(" "),
@@ -37016,188 +36978,6 @@ if (inBrowser && window.Vue) {
 var version = '3.6.5';
 
 
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-script2/dist/vue-script2.js":
-/*!******************************************************!*\
-  !*** ./node_modules/vue-script2/dist/vue-script2.js ***!
-  \******************************************************/
-/***/ (function(module) {
-
-/*!
-  * vue-script2 v2.1.0
-  * (c) 2016-2019 Greg Slepak
-  * @license MIT License
-  */
-(function (global, factory) {
-   true ? module.exports = factory() :
-  0;
-}(this, function () { 'use strict';
-
-  var Script2 = {
-    installed: false,
-    p: Promise.resolve(),
-    version: '2.1.0',
-    // grunt will overwrite to match package.json
-    loaded: {},
-
-    // keys are the scripts that is loading or loaded, values are promises
-    install(Vue) {
-      if (Script2.installed) return;
-      var customAttrs = ['unload']; // from: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script
-      // 'async' and 'defer' don't allow document.write according to:
-      // http://www.html5rocks.com/en/tutorials/speed/script-loading/
-      // we ignore 'defer' and handle 'async' specially.
-
-      var props = customAttrs.concat(['src', 'type', 'async', 'integrity', 'text', 'crossorigin']);
-      Vue.component('script2', {
-        props: props,
-
-        // <slot> is important, see: http://vuejs.org/guide/components.html#Named-Slots
-        // template: '<div style="display:none"><slot></slot></div>',
-        // NOTE: Instead of using `template` we can use the `render` function like so:
-        render(h) {
-          return h('div', {
-            style: 'display:none'
-          }, this.$slots.default);
-        },
-
-        mounted() {
-          var parent = this.$el.parentElement;
-
-          if (!this.src) {
-            Script2.p = Script2.p.then(() => {
-              var s = document.createElement('script');
-              var h = this.$el.innerHTML;
-              h = h.replace(/&lt;/gi, '<').replace(/&gt;/gi, '>').replace(/&amp;/gi, '&');
-              s.type = 'text/javascript';
-              s.appendChild(document.createTextNode(h));
-              parent.appendChild(s);
-              this.$emit('loaded'); // any other proper way to do this or emit error?
-            });
-          } else {
-            var opts = _.omitBy(_.pick(this, props), _.isUndefined);
-
-            opts.parent = parent; // this syntax results in an implicit return
-
-            var load = () => Script2.load(this.src, opts).then(() => this.$emit('loaded'), err => this.$emit('error', err));
-
-            _.isUndefined(this.async) || this.async === 'false' ? Script2.p = Script2.p.then(load) // serialize execution
-            : load(); // inject immediately
-          } // see: https://vuejs.org/v2/guide/migration.html#ready-replaced
-
-
-          this.$nextTick(() => {
-            // code that assumes this.$el is in-document
-            // NOTE: we could've done this.$el.remove(), but IE sucks, see:
-            //       https://github.com/taoeffect/vue-script2/pull/17
-            this.$el.parentElement.removeChild(this.$el); // remove dummy template <div>
-          });
-        },
-
-        destroyed() {
-          if (this.unload) {
-            new Function(this.unload)(); // eslint-disable-line
-
-            delete Script2.loaded[this.src];
-          }
-        }
-
-      });
-      Script2.installed = true;
-    },
-
-    load(src) {
-      let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
-        parent: document.head
-      };
-
-      if (!Script2.loaded[src]) {
-        Script2.loaded[src] = new Promise((resolve, reject) => {
-          var s = document.createElement('script'); // omit the special options that Script2 supports
-
-          _.defaults2(s, _.omit(opts, ['unload', 'parent']), {
-            type: 'text/javascript'
-          }); // according to: http://www.html5rocks.com/en/tutorials/speed/script-loading/
-          // async does not like 'document.write' usage, which we & vue.js make
-          // heavy use of based on the SPA style. Also, async can result
-          // in code getting executed out of order from how it is inlined on the page.
-
-
-          s.async = false; // therefore set this to false
-
-          s.src = src; // crossorigin in HTML and crossOrigin in the DOM per HTML spec
-          // https://html.spec.whatwg.org/multipage/embedded-content.html#dom-img-crossorigin
-
-          if (opts.crossorigin) {
-            s.crossOrigin = opts.crossorigin;
-          } // inspiration from: https://github.com/eldargab/load-script/blob/master/index.js
-          // and: https://github.com/ded/script.js/blob/master/src/script.js#L70-L82
-
-
-          s.onload = () => resolve(src); // IE should now support onerror and onload. If necessary, take a look
-          // at this to add older IE support: http://stackoverflow.com/a/4845802/1781435
-
-
-          s.onerror = () => reject(new Error(src));
-
-          opts.parent.appendChild(s);
-        });
-      }
-
-      return Script2.loaded[src];
-    }
-
-  };
-  var _ = {
-    isUndefined(x) {
-      return x === undefined;
-    },
-
-    pick(o, props) {
-      var x = {};
-      props.forEach(k => {
-        x[k] = o[k];
-      });
-      return x;
-    },
-
-    omit(o, props) {
-      var x = {};
-      Object.keys(o).forEach(k => {
-        if (props.indexOf(k) === -1) x[k] = o[k];
-      });
-      return x;
-    },
-
-    omitBy(o, pred) {
-      var x = {};
-      Object.keys(o).forEach(k => {
-        if (!pred(o[k])) x[k] = o[k];
-      });
-      return x;
-    },
-
-    // custom defaults function suited to our specific purpose
-    defaults2(o) {
-      for (var _len = arguments.length, sources = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        sources[_key - 1] = arguments[_key];
-      }
-
-      sources.forEach(s => {
-        Object.keys(s).forEach(k => {
-          if (_.isUndefined(o[k]) || o[k] === '') o[k] = s[k];
-        });
-      });
-    }
-
-  };
-
-  return Script2;
-
-}));
 
 
 /***/ }),

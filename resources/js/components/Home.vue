@@ -501,10 +501,7 @@
           </div>
 
           <div class="col-lg-4">
-            <Adsense
-              data-ad-client="ca-pub-5828491790124517"
-              data-ad-slot="7486431136">
-            </Adsense>
+
           </div>
         </div>
       </div>

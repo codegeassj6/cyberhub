@@ -50,7 +50,6 @@
 import Nav from "./templates/Nav.vue";
 import Footer from "./templates/Footer.vue";
 import Home from "./Home.vue";
-import { login } from "../helpers/auth";
 
 export default {
   data() {
