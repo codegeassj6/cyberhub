@@ -21,7 +21,7 @@
           style="z-index: 11"
         >
           <div
-            class="toast mb-2"
+            class="toast mb-2 d-block"
             role="alert"
             aria-live="assertive"
             aria-atomic="true"
@@ -72,9 +72,3 @@ export default {
   mounted() {},
 };
 </script>
-
-<style scoped>
-.toast {
-  display: block !important;
-}
-</style>
