@@ -50251,8 +50251,13 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 	(() => {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
+/******/ 			// return url for filenames not based on template
+/******/ 			if ({"Login":1,"ResetPassword":1,"ResetPasswordRequest":1,"Oauth":1,"Register":1,"Store":1,"Timeline":1,"UpdateAccount":1,"PostPage":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if (chunkId === "Game") return "js/Game.js";
+/******/ 			if (chunkId === "Cart") return "js/Cart.js";
+/******/ 			if (chunkId === "Save") return "js/Save.js";
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js";
+/******/ 			return undefined;
 /******/ 		};
 /******/ 	})();
 /******/ 	
