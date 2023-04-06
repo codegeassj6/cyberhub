@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top">
       <div class="container">
         <router-link to="/"
-          ><a class="navbar-brand" href="#!">CyberHub</a></router-link
+          ><a class="navbar-brand" href="#!">JCafe</a></router-link
         >
         <button
           class="navbar-toggler"
