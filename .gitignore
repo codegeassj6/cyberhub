@@ -1,4 +1,5 @@
 .git
+.env
 *.zip
 /node_modules
 /public/hot
