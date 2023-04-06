@@ -13,7 +13,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _templates_PaginateButton_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./templates/PaginateButton.vue */ "./resources/js/components/templates/PaginateButton.vue");
 /* harmony import */ var _templates_Star_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./templates/Star.vue */ "./resources/js/components/templates/Star.vue");
-/* harmony import */ var _css_test_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../css/test.scss */ "./resources/css/test.scss");
 //
 //
 //
@@ -56,7 +55,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 
 

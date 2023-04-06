@@ -10,7 +10,16 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+
+//  sourcemap is a debugging tool. no need to add in production
+
 mix.js('resources/js/app.js', 'public/js')
     .vue()
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+    .sourceMaps();
+
+if (mix.inProduction()) {
+  mix.version();
+}
+
 mix.browserSync("cyberhub.test");

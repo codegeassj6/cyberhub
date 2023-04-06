@@ -91,7 +91,7 @@
                 consequat. Dolore duis id id Lorem est enim do pariatur cillum
                 nulla nostrud ex laboris. Consectetur cillum labore proident
                 excepteur nisi sint proident adipisicing nostrud. Enim deserunt
-                proident proident sit.
+                proident proident sit.s
               </div>
               <div class="card-footer">
                 <div class="btn btn-primary">Browse Games</div>
