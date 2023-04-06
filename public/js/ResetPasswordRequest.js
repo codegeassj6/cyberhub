@@ -1,4 +1,12 @@
 "use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
 (self["webpackChunk"] = self["webpackChunk"] || []).push([["ResetPasswordRequest"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/auth/ResetPasswordRequest.vue?vue&type=script&lang=js&":
@@ -7,101 +15,7 @@
   \********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-//import name from './
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      email: "j6cafe2018@gmail.com"
-    };
-  },
-  components: {},
-  props: {},
-  computed: {},
-  methods: {
-    resetPassword: function resetPassword(e) {
-      e.preventDefault();
-      axios({
-        method: "post",
-        url: "/api/reset/password/request",
-        data: {
-          email: this.email
-        }
-      }).then(function (res) {})["catch"](function (err) {
-        // this.$refs.reset_btn.removeAttribute('disabled');
-      });
-    }
-  },
-  watch: {
-    $data: {
-      handler: function handler(val, oldVal) {
-        console.log("watcher: ", val);
-      },
-      deep: true
-    },
-    $props: {
-      handler: function handler(val, oldVal) {
-        console.log("watcher: ", val);
-      },
-      deep: true
-    },
-    some_prop: function some_prop() {
-      //do something if some_prop updated
-    }
-  },
-  updated: function updated() {},
-  beforeMounted: function beforeMounted() {},
-  mounted: function mounted() {}
-});
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n//import name from './\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\n  data: function data() {\n    return {\n      email: \"j6cafe2018@gmail.com\"\n    };\n  },\n  components: {},\n  props: {},\n  computed: {},\n  methods: {\n    resetPassword: function resetPassword(e) {\n      e.preventDefault();\n      axios({\n        method: \"post\",\n        url: \"/api/reset/password/request\",\n        data: {\n          email: this.email\n        }\n      }).then(function (res) {})[\"catch\"](function (err) {\n        // this.$refs.reset_btn.removeAttribute('disabled');\n      });\n    }\n  },\n  watch: {\n    $data: {\n      handler: function handler(val, oldVal) {\n        console.log(\"watcher: \", val);\n      },\n      deep: true\n    },\n    $props: {\n      handler: function handler(val, oldVal) {\n        console.log(\"watcher: \", val);\n      },\n      deep: true\n    },\n    some_prop: function some_prop() {\n      //do something if some_prop updated\n    }\n  },\n  updated: function updated() {},\n  beforeMounted: function beforeMounted() {},\n  mounted: function mounted() {}\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9ub2RlX21vZHVsZXMvYmFiZWwtbG9hZGVyL2xpYi9pbmRleC5qcz8/Y2xvbmVkUnVsZVNldC01WzBdLnJ1bGVzWzBdLnVzZVswXSEuL25vZGVfbW9kdWxlcy92dWUtbG9hZGVyL2xpYi9pbmRleC5qcz8/dnVlLWxvYWRlci1vcHRpb25zIS4vcmVzb3VyY2VzL2pzL2NvbXBvbmVudHMvYXV0aC9SZXNldFBhc3N3b3JkUmVxdWVzdC52dWU/dnVlJnR5cGU9c2NyaXB0Jmxhbmc9anMmLmpzIiwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUE2Q0E7O0FBRUEsaUVBQWU7RUFDZkEsSUFBQSxXQUFBQSxLQUFBO0lBQ0E7TUFDQUMsS0FBQTtJQUNBO0VBQ0E7RUFDQUMsVUFBQTtFQUVBQyxLQUFBO0VBRUFDLFFBQUE7RUFFQUMsT0FBQTtJQUNBQyxhQUFBLFdBQUFBLGNBQUFDLENBQUE7TUFDQUEsQ0FBQSxDQUFBQyxjQUFBO01BQ0FDLEtBQUE7UUFDQUMsTUFBQTtRQUNBQyxHQUFBO1FBQ0FYLElBQUE7VUFDQUMsS0FBQSxPQUFBQTtRQUNBO01BQ0EsR0FDQVcsSUFBQSxXQUFBQyxHQUFBLEdBRUEsV0FDQSxXQUFBQyxHQUFBO1FBQ0E7TUFBQSxDQUNBO0lBRUE7RUFDQTtFQUVBQyxLQUFBO0lBQ0FDLEtBQUE7TUFDQUMsT0FBQSxXQUFBQSxRQUFBQyxHQUFBLEVBQUFDLE1BQUE7UUFDQUMsT0FBQSxDQUFBQyxHQUFBLGNBQUFILEdBQUE7TUFDQTtNQUNBSSxJQUFBO0lBQ0E7SUFFQUMsTUFBQTtNQUNBTixPQUFBLFdBQUFBLFFBQUFDLEdBQUEsRUFBQUMsTUFBQTtRQUNBQyxPQUFBLENBQUFDLEdBQUEsY0FBQUgsR0FBQTtNQUNBO01BQ0FJLElBQUE7SUFDQTtJQUNBRSxTQUFBLFdBQUFBLFVBQUE7TUFDQTtJQUFBO0VBRUE7RUFFQUMsT0FBQSxXQUFBQSxRQUFBO0VBRUFDLGFBQUEsV0FBQUEsY0FBQTtFQUVBQyxPQUFBLFdBQUFBLFFBQUE7QUFDQSxDQUFDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vL3Jlc291cmNlcy9qcy9jb21wb25lbnRzL2F1dGgvUmVzZXRQYXNzd29yZFJlcXVlc3QudnVlP2YyMzQiXSwic291cmNlc0NvbnRlbnQiOlsiPHRlbXBsYXRlPlxyXG4gIDxkaXYgY2xhc3M9XCJzcGFjZS1pbnRyb1wiPlxyXG4gICAgPGRpdiBjbGFzcz1cImNvbnRhaW5lciBkLWZsZXggZmxleC1jb2x1bW5cIj5cclxuICAgICAgPGRpdiBjbGFzcz1cInJvdyBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWNlbnRlclwiPlxyXG4gICAgICAgIDxkaXYgY2xhc3M9XCJjb2wtc20tMTIgY29sLW1kLTEwIGNvbC1sZy02IGNvbC14bC01XCI+XHJcbiAgICAgICAgICA8ZGl2IGNsYXNzPVwiY2FyZCBzaGFkb3ctc21cIj5cclxuICAgICAgICAgICAgPGRpdiBjbGFzcz1cImNhcmQtYm9keVwiPlxyXG4gICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJtYi00XCI+XHJcbiAgICAgICAgICAgICAgICA8aDU+Rm9yZ290IFBhc3N3b3JkPzwvaDU+XHJcbiAgICAgICAgICAgICAgICA8cCBjbGFzcz1cIm1iLTJcIj5cclxuICAgICAgICAgICAgICAgICAgRW50ZXIgeW91ciByZWdpc3RlcmVkIGVtYWlsIElEIHRvIHJlc2V0IHRoZSBwYXNzd29yZFxyXG4gICAgICAgICAgICAgICAgPC9wPlxyXG4gICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICAgIDxmb3JtIEBzdWJtaXQ9XCJyZXNldFBhc3N3b3JkXCI+XHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwibWItM1wiPlxyXG4gICAgICAgICAgICAgICAgICA8bGFiZWwgZm9yPVwiZW1haWxcIiBjbGFzcz1cImZvcm0tbGFiZWxcIj5FbWFpbDwvbGFiZWw+XHJcbiAgICAgICAgICAgICAgICAgIDxpbnB1dFxyXG4gICAgICAgICAgICAgICAgICAgIHR5cGU9XCJlbWFpbFwiXHJcbiAgICAgICAgICAgICAgICAgICAgY2xhc3M9XCJmb3JtLWNvbnRyb2xcIlxyXG4gICAgICAgICAgICAgICAgICAgIHBsYWNlaG9sZGVyPVwiRW50ZXIgWW91ciBFbWFpbFwiXHJcbiAgICAgICAgICAgICAgICAgICAgcmVxdWlyZWRcclxuICAgICAgICAgICAgICAgICAgICB2LW1vZGVsPVwiZW1haWxcIlxyXG4gICAgICAgICAgICAgICAgICAgIGF1dG9jb21wbGV0ZT1cIm9uXCJcclxuICAgICAgICAgICAgICAgICAgLz5cclxuICAgICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cIm1iLTMgZC1ncmlkXCI+XHJcbiAgICAgICAgICAgICAgICAgIDxidXR0b24gdHlwZT1cInN1Ym1pdFwiIHJlZj1cInJlc2V0X2J0blwiIGNsYXNzPVwiYnRuIGJ0bi1wcmltYXJ5XCI+XHJcbiAgICAgICAgICAgICAgICAgICAgUmVzZXQgUGFzc3dvcmRcclxuICAgICAgICAgICAgICAgICAgPC9idXR0b24+XHJcbiAgICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgICAgIDxzcGFuXHJcbiAgICAgICAgICAgICAgICAgID5Eb24ndCBoYXZlIGFuIGFjY291bnQ/XHJcbiAgICAgICAgICAgICAgICAgIDxyb3V0ZXItbGluayB0bz1cIi9yZWdpc3RlclwiXHJcbiAgICAgICAgICAgICAgICAgICAgPkNsaWNrIGhlcmUgdG8gcmVnaXN0ZXIuPC9yb3V0ZXItbGlua1xyXG4gICAgICAgICAgICAgICAgICA+PC9zcGFuXHJcbiAgICAgICAgICAgICAgICA+XHJcbiAgICAgICAgICAgICAgPC9mb3JtPlxyXG4gICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICA8L2Rpdj5cclxuICAgIDwvZGl2PlxyXG4gIDwvZGl2PlxyXG48L3RlbXBsYXRlPlxyXG48c2NyaXB0PlxyXG4vL2ltcG9ydCBuYW1lIGZyb20gJy4vXHJcblxyXG5leHBvcnQgZGVmYXVsdCB7XHJcbiAgZGF0YSgpIHtcclxuICAgIHJldHVybiB7XHJcbiAgICAgIGVtYWlsOiBcImo2Y2FmZTIwMThAZ21haWwuY29tXCIsXHJcbiAgICB9O1xyXG4gIH0sXHJcbiAgY29tcG9uZW50czoge30sXHJcblxyXG4gIHByb3BzOiB7fSxcclxuXHJcbiAgY29tcHV0ZWQ6IHt9LFxyXG5cclxuICBtZXRob2RzOiB7XHJcbiAgICByZXNldFBhc3N3b3JkKGUpIHtcclxuICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpO1xyXG4gICAgICBheGlvcyh7XHJcbiAgICAgICAgbWV0aG9kOiBcInBvc3RcIixcclxuICAgICAgICB1cmw6IFwiL2FwaS9yZXNldC9wYXNzd29yZC9yZXF1ZXN0XCIsXHJcbiAgICAgICAgZGF0YToge1xyXG4gICAgICAgICAgZW1haWw6IHRoaXMuZW1haWwsXHJcbiAgICAgICAgfSxcclxuICAgICAgfSlcclxuICAgICAgICAudGhlbihmdW5jdGlvbiAocmVzKSB7XHJcblxyXG4gICAgICAgIH0pXHJcbiAgICAgICAgLmNhdGNoKGZ1bmN0aW9uIChlcnIpIHtcclxuICAgICAgICAgIC8vIHRoaXMuJHJlZnMucmVzZXRfYnRuLnJlbW92ZUF0dHJpYnV0ZSgnZGlzYWJsZWQnKTtcclxuICAgICAgICB9KTtcclxuXHJcbiAgICB9LFxyXG4gIH0sXHJcblxyXG4gIHdhdGNoOiB7XHJcbiAgICAkZGF0YToge1xyXG4gICAgICBoYW5kbGVyOiBmdW5jdGlvbiAodmFsLCBvbGRWYWwpIHtcclxuICAgICAgICBjb25zb2xlLmxvZyhcIndhdGNoZXI6IFwiLCB2YWwpO1xyXG4gICAgICB9LFxyXG4gICAgICBkZWVwOiB0cnVlLFxyXG4gICAgfSxcclxuXHJcbiAgICAkcHJvcHM6IHtcclxuICAgICAgaGFuZGxlcjogZnVuY3Rpb24gKHZhbCwgb2xkVmFsKSB7XHJcbiAgICAgICAgY29uc29sZS5sb2coXCJ3YXRjaGVyOiBcIiwgdmFsKTtcclxuICAgICAgfSxcclxuICAgICAgZGVlcDogdHJ1ZSxcclxuICAgIH0sXHJcbiAgICBzb21lX3Byb3A6IGZ1bmN0aW9uICgpIHtcclxuICAgICAgLy9kbyBzb21ldGhpbmcgaWYgc29tZV9wcm9wIHVwZGF0ZWRcclxuICAgIH0sXHJcbiAgfSxcclxuXHJcbiAgdXBkYXRlZCgpIHt9LFxyXG5cclxuICBiZWZvcmVNb3VudGVkKCkge30sXHJcblxyXG4gIG1vdW50ZWQoKSB7fSxcclxufTtcclxuPC9zY3JpcHQ+XHJcblxyXG48c3R5bGUgc2NvcGVkPlxyXG5cclxuPC9zdHlsZT5cclxuIl0sIm5hbWVzIjpbImRhdGEiLCJlbWFpbCIsImNvbXBvbmVudHMiLCJwcm9wcyIsImNvbXB1dGVkIiwibWV0aG9kcyIsInJlc2V0UGFzc3dvcmQiLCJlIiwicHJldmVudERlZmF1bHQiLCJheGlvcyIsIm1ldGhvZCIsInVybCIsInRoZW4iLCJyZXMiLCJlcnIiLCJ3YXRjaCIsIiRkYXRhIiwiaGFuZGxlciIsInZhbCIsIm9sZFZhbCIsImNvbnNvbGUiLCJsb2ciLCJkZWVwIiwiJHByb3BzIiwic29tZV9wcm9wIiwidXBkYXRlZCIsImJlZm9yZU1vdW50ZWQiLCJtb3VudGVkIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/auth/ResetPasswordRequest.vue?vue&type=script&lang=js&\n");
 
 /***/ }),
 
@@ -111,35 +25,7 @@ __webpack_require__.r(__webpack_exports__);
   \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _ResetPasswordRequest_vue_vue_type_template_id_af98aade_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResetPasswordRequest.vue?vue&type=template&id=af98aade&scoped=true& */ "./resources/js/components/auth/ResetPasswordRequest.vue?vue&type=template&id=af98aade&scoped=true&");
-/* harmony import */ var _ResetPasswordRequest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResetPasswordRequest.vue?vue&type=script&lang=js& */ "./resources/js/components/auth/ResetPasswordRequest.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ResetPasswordRequest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ResetPasswordRequest_vue_vue_type_template_id_af98aade_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _ResetPasswordRequest_vue_vue_type_template_id_af98aade_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  "af98aade",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/auth/ResetPasswordRequest.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _ResetPasswordRequest_vue_vue_type_template_id_af98aade_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResetPasswordRequest.vue?vue&type=template&id=af98aade&scoped=true& */ \"./resources/js/components/auth/ResetPasswordRequest.vue?vue&type=template&id=af98aade&scoped=true&\");\n/* harmony import */ var _ResetPasswordRequest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResetPasswordRequest.vue?vue&type=script&lang=js& */ \"./resources/js/components/auth/ResetPasswordRequest.vue?vue&type=script&lang=js&\");\n/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n;\nvar component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _ResetPasswordRequest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _ResetPasswordRequest_vue_vue_type_template_id_af98aade_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,\n  _ResetPasswordRequest_vue_vue_type_template_id_af98aade_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,\n  false,\n  null,\n  \"af98aade\",\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"resources/js/components/auth/ResetPasswordRequest.vue\"\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvY29tcG9uZW50cy9hdXRoL1Jlc2V0UGFzc3dvcmRSZXF1ZXN0LnZ1ZS5qcyIsIm1hcHBpbmdzIjoiOzs7Ozs7O0FBQStHO0FBQ3ZDO0FBQ0w7OztBQUduRTtBQUNBLENBQWdHO0FBQ2hHLGdCQUFnQix1R0FBVTtBQUMxQixFQUFFLDBGQUFNO0FBQ1IsRUFBRSx3R0FBTTtBQUNSLEVBQUUsaUhBQWU7QUFDakI7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0EsSUFBSSxLQUFVLEVBQUUsWUFpQmY7QUFDRDtBQUNBLGlFQUFlIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vcmVzb3VyY2VzL2pzL2NvbXBvbmVudHMvYXV0aC9SZXNldFBhc3N3b3JkUmVxdWVzdC52dWU/YmRmNCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyByZW5kZXIsIHN0YXRpY1JlbmRlckZucyB9IGZyb20gXCIuL1Jlc2V0UGFzc3dvcmRSZXF1ZXN0LnZ1ZT92dWUmdHlwZT10ZW1wbGF0ZSZpZD1hZjk4YWFkZSZzY29wZWQ9dHJ1ZSZcIlxuaW1wb3J0IHNjcmlwdCBmcm9tIFwiLi9SZXNldFBhc3N3b3JkUmVxdWVzdC52dWU/dnVlJnR5cGU9c2NyaXB0Jmxhbmc9anMmXCJcbmV4cG9ydCAqIGZyb20gXCIuL1Jlc2V0UGFzc3dvcmRSZXF1ZXN0LnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qcyZcIlxuXG5cbi8qIG5vcm1hbGl6ZSBjb21wb25lbnQgKi9cbmltcG9ydCBub3JtYWxpemVyIGZyb20gXCIhLi4vLi4vLi4vLi4vbm9kZV9tb2R1bGVzL3Z1ZS1sb2FkZXIvbGliL3J1bnRpbWUvY29tcG9uZW50Tm9ybWFsaXplci5qc1wiXG52YXIgY29tcG9uZW50ID0gbm9ybWFsaXplcihcbiAgc2NyaXB0LFxuICByZW5kZXIsXG4gIHN0YXRpY1JlbmRlckZucyxcbiAgZmFsc2UsXG4gIG51bGwsXG4gIFwiYWY5OGFhZGVcIixcbiAgbnVsbFxuICBcbilcblxuLyogaG90IHJlbG9hZCAqL1xuaWYgKG1vZHVsZS5ob3QpIHtcbiAgdmFyIGFwaSA9IHJlcXVpcmUoXCJDOlxcXFxNeSBGaWxlc1xcXFxXZWJcXFxcRGV2ZWxvcG1lbnRcXFxcY3liZXJodWJcXFxcbm9kZV9tb2R1bGVzXFxcXHZ1ZS1ob3QtcmVsb2FkLWFwaVxcXFxkaXN0XFxcXGluZGV4LmpzXCIpXG4gIGFwaS5pbnN0YWxsKHJlcXVpcmUoJ3Z1ZScpKVxuICBpZiAoYXBpLmNvbXBhdGlibGUpIHtcbiAgICBtb2R1bGUuaG90LmFjY2VwdCgpXG4gICAgaWYgKCFhcGkuaXNSZWNvcmRlZCgnYWY5OGFhZGUnKSkge1xuICAgICAgYXBpLmNyZWF0ZVJlY29yZCgnYWY5OGFhZGUnLCBjb21wb25lbnQub3B0aW9ucylcbiAgICB9IGVsc2Uge1xuICAgICAgYXBpLnJlbG9hZCgnYWY5OGFhZGUnLCBjb21wb25lbnQub3B0aW9ucylcbiAgICB9XG4gICAgbW9kdWxlLmhvdC5hY2NlcHQoXCIuL1Jlc2V0UGFzc3dvcmRSZXF1ZXN0LnZ1ZT92dWUmdHlwZT10ZW1wbGF0ZSZpZD1hZjk4YWFkZSZzY29wZWQ9dHJ1ZSZcIiwgZnVuY3Rpb24gKCkge1xuICAgICAgYXBpLnJlcmVuZGVyKCdhZjk4YWFkZScsIHtcbiAgICAgICAgcmVuZGVyOiByZW5kZXIsXG4gICAgICAgIHN0YXRpY1JlbmRlckZuczogc3RhdGljUmVuZGVyRm5zXG4gICAgICB9KVxuICAgIH0pXG4gIH1cbn1cbmNvbXBvbmVudC5vcHRpb25zLl9fZmlsZSA9IFwicmVzb3VyY2VzL2pzL2NvbXBvbmVudHMvYXV0aC9SZXNldFBhc3N3b3JkUmVxdWVzdC52dWVcIlxuZXhwb3J0IGRlZmF1bHQgY29tcG9uZW50LmV4cG9ydHMiXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./resources/js/components/auth/ResetPasswordRequest.vue\n");
 
 /***/ }),
 
@@ -149,12 +35,7 @@ component.options.__file = "resources/js/components/auth/ResetPasswordRequest.vu
   \****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPasswordRequest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ResetPasswordRequest.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/auth/ResetPasswordRequest.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPasswordRequest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPasswordRequest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ResetPasswordRequest.vue?vue&type=script&lang=js& */ \"./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/auth/ResetPasswordRequest.vue?vue&type=script&lang=js&\");\n /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPasswordRequest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); //# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvY29tcG9uZW50cy9hdXRoL1Jlc2V0UGFzc3dvcmRSZXF1ZXN0LnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qcyYuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBb08sQ0FBQyxpRUFBZSx5TkFBRyxFQUFDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vcmVzb3VyY2VzL2pzL2NvbXBvbmVudHMvYXV0aC9SZXNldFBhc3N3b3JkUmVxdWVzdC52dWU/ZTA5MiJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgbW9kIGZyb20gXCItIS4uLy4uLy4uLy4uL25vZGVfbW9kdWxlcy9iYWJlbC1sb2FkZXIvbGliL2luZGV4LmpzPz9jbG9uZWRSdWxlU2V0LTVbMF0ucnVsZXNbMF0udXNlWzBdIS4uLy4uLy4uLy4uL25vZGVfbW9kdWxlcy92dWUtbG9hZGVyL2xpYi9pbmRleC5qcz8/dnVlLWxvYWRlci1vcHRpb25zIS4vUmVzZXRQYXNzd29yZFJlcXVlc3QudnVlP3Z1ZSZ0eXBlPXNjcmlwdCZsYW5nPWpzJlwiOyBleHBvcnQgZGVmYXVsdCBtb2Q7IGV4cG9ydCAqIGZyb20gXCItIS4uLy4uLy4uLy4uL25vZGVfbW9kdWxlcy9iYWJlbC1sb2FkZXIvbGliL2luZGV4LmpzPz9jbG9uZWRSdWxlU2V0LTVbMF0ucnVsZXNbMF0udXNlWzBdIS4uLy4uLy4uLy4uL25vZGVfbW9kdWxlcy92dWUtbG9hZGVyL2xpYi9pbmRleC5qcz8/dnVlLWxvYWRlci1vcHRpb25zIS4vUmVzZXRQYXNzd29yZFJlcXVlc3QudnVlP3Z1ZSZ0eXBlPXNjcmlwdCZsYW5nPWpzJlwiIl0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./resources/js/components/auth/ResetPasswordRequest.vue?vue&type=script&lang=js&\n");
 
 /***/ }),
 
@@ -180,116 +61,7 @@ __webpack_require__.r(__webpack_exports__);
   \*************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function () {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "space-intro" }, [
-    _c("div", { staticClass: "container d-flex flex-column" }, [
-      _c(
-        "div",
-        { staticClass: "row align-items-center justify-content-center" },
-        [
-          _c("div", { staticClass: "col-sm-12 col-md-10 col-lg-6 col-xl-5" }, [
-            _c("div", { staticClass: "card shadow-sm" }, [
-              _c("div", { staticClass: "card-body" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("form", { on: { submit: _vm.resetPassword } }, [
-                  _c("div", { staticClass: "mb-3" }, [
-                    _c(
-                      "label",
-                      { staticClass: "form-label", attrs: { for: "email" } },
-                      [_vm._v("Email")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.email,
-                          expression: "email",
-                        },
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "email",
-                        placeholder: "Enter Your Email",
-                        required: "",
-                        autocomplete: "on",
-                      },
-                      domProps: { value: _vm.email },
-                      on: {
-                        input: function ($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.email = $event.target.value
-                        },
-                      },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "mb-3 d-grid" }, [
-                    _c(
-                      "button",
-                      {
-                        ref: "reset_btn",
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "submit" },
-                      },
-                      [
-                        _vm._v(
-                          "\n                  Reset Password\n                "
-                        ),
-                      ]
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    [
-                      _vm._v("Don't have an account?\n                "),
-                      _c("router-link", { attrs: { to: "/register" } }, [
-                        _vm._v("Click here to register."),
-                      ]),
-                    ],
-                    1
-                  ),
-                ]),
-              ]),
-            ]),
-          ]),
-        ]
-      ),
-    ]),
-  ])
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-4" }, [
-      _c("h5", [_vm._v("Forgot Password?")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "mb-2" }, [
-        _vm._v(
-          "\n                Enter your registered email ID to reset the password\n              "
-        ),
-      ]),
-    ])
-  },
-]
-render._withStripped = true
-
-
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"render\": () => (/* binding */ render),\n/* harmony export */   \"staticRenderFns\": () => (/* binding */ staticRenderFns)\n/* harmony export */ });\nvar render = function () {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"div\", { staticClass: \"space-intro\" }, [\n    _c(\"div\", { staticClass: \"container d-flex flex-column\" }, [\n      _c(\n        \"div\",\n        { staticClass: \"row align-items-center justify-content-center\" },\n        [\n          _c(\"div\", { staticClass: \"col-sm-12 col-md-10 col-lg-6 col-xl-5\" }, [\n            _c(\"div\", { staticClass: \"card shadow-sm\" }, [\n              _c(\"div\", { staticClass: \"card-body\" }, [\n                _vm._m(0),\n                _vm._v(\" \"),\n                _c(\"form\", { on: { submit: _vm.resetPassword } }, [\n                  _c(\"div\", { staticClass: \"mb-3\" }, [\n                    _c(\n                      \"label\",\n                      { staticClass: \"form-label\", attrs: { for: \"email\" } },\n                      [_vm._v(\"Email\")]\n                    ),\n                    _vm._v(\" \"),\n                    _c(\"input\", {\n                      directives: [\n                        {\n                          name: \"model\",\n                          rawName: \"v-model\",\n                          value: _vm.email,\n                          expression: \"email\",\n                        },\n                      ],\n                      staticClass: \"form-control\",\n                      attrs: {\n                        type: \"email\",\n                        placeholder: \"Enter Your Email\",\n                        required: \"\",\n                        autocomplete: \"on\",\n                      },\n                      domProps: { value: _vm.email },\n                      on: {\n                        input: function ($event) {\n                          if ($event.target.composing) {\n                            return\n                          }\n                          _vm.email = $event.target.value\n                        },\n                      },\n                    }),\n                  ]),\n                  _vm._v(\" \"),\n                  _c(\"div\", { staticClass: \"mb-3 d-grid\" }, [\n                    _c(\n                      \"button\",\n                      {\n                        ref: \"reset_btn\",\n                        staticClass: \"btn btn-primary\",\n                        attrs: { type: \"submit\" },\n                      },\n                      [\n                        _vm._v(\n                          \"\\n                  Reset Password\\n                \"\n                        ),\n                      ]\n                    ),\n                  ]),\n                  _vm._v(\" \"),\n                  _c(\n                    \"span\",\n                    [\n                      _vm._v(\"Don't have an account?\\n                \"),\n                      _c(\"router-link\", { attrs: { to: \"/register\" } }, [\n                        _vm._v(\"Click here to register.\"),\n                      ]),\n                    ],\n                    1\n                  ),\n                ]),\n              ]),\n            ]),\n          ]),\n        ]\n      ),\n    ]),\n  ])\n}\nvar staticRenderFns = [\n  function () {\n    var _vm = this\n    var _h = _vm.$createElement\n    var _c = _vm._self._c || _h\n    return _c(\"div\", { staticClass: \"mb-4\" }, [\n      _c(\"h5\", [_vm._v(\"Forgot Password?\")]),\n      _vm._v(\" \"),\n      _c(\"p\", { staticClass: \"mb-2\" }, [\n        _vm._v(\n          \"\\n                Enter your registered email ID to reset the password\\n              \"\n        ),\n      ]),\n    ])\n  },\n]\nrender._withStripped = true\n\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9saWIvbG9hZGVycy90ZW1wbGF0ZUxvYWRlci5qcz8/dnVlLWxvYWRlci1vcHRpb25zIS4vbm9kZV9tb2R1bGVzL3Z1ZS1sb2FkZXIvbGliL2luZGV4LmpzPz92dWUtbG9hZGVyLW9wdGlvbnMhLi9yZXNvdXJjZXMvanMvY29tcG9uZW50cy9hdXRoL1Jlc2V0UGFzc3dvcmRSZXF1ZXN0LnZ1ZT92dWUmdHlwZT10ZW1wbGF0ZSZpZD1hZjk4YWFkZSZzY29wZWQ9dHJ1ZSYuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLHFCQUFxQiw0QkFBNEI7QUFDakQsZ0JBQWdCLDZDQUE2QztBQUM3RDtBQUNBO0FBQ0EsVUFBVSw4REFBOEQ7QUFDeEU7QUFDQSxzQkFBc0Isc0RBQXNEO0FBQzVFLHdCQUF3QiwrQkFBK0I7QUFDdkQsMEJBQTBCLDBCQUEwQjtBQUNwRDtBQUNBO0FBQ0EsNkJBQTZCLE1BQU0sNkJBQTZCO0FBQ2hFLDhCQUE4QixxQkFBcUI7QUFDbkQ7QUFDQTtBQUNBLHdCQUF3QixvQ0FBb0MsZ0JBQWdCO0FBQzVFO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EseUJBQXlCO0FBQ3pCO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsdUJBQXVCO0FBQ3ZCLGtDQUFrQyxrQkFBa0I7QUFDcEQ7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EseUJBQXlCO0FBQ3pCLHVCQUF1QjtBQUN2QixxQkFBcUI7QUFDckI7QUFDQTtBQUNBLDhCQUE4Qiw0QkFBNEI7QUFDMUQ7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLGlDQUFpQyxnQkFBZ0I7QUFDakQsdUJBQXVCO0FBQ3ZCO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLDBDQUEwQyxTQUFTLG1CQUFtQjtBQUN0RTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLHVCQUF1QixxQkFBcUI7QUFDNUM7QUFDQTtBQUNBLGdCQUFnQixxQkFBcUI7QUFDckM7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLEdBQUc7QUFDSDtBQUNBIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vcmVzb3VyY2VzL2pzL2NvbXBvbmVudHMvYXV0aC9SZXNldFBhc3N3b3JkUmVxdWVzdC52dWU/MWY0NSJdLCJzb3VyY2VzQ29udGVudCI6WyJ2YXIgcmVuZGVyID0gZnVuY3Rpb24gKCkge1xuICB2YXIgX3ZtID0gdGhpc1xuICB2YXIgX2ggPSBfdm0uJGNyZWF0ZUVsZW1lbnRcbiAgdmFyIF9jID0gX3ZtLl9zZWxmLl9jIHx8IF9oXG4gIHJldHVybiBfYyhcImRpdlwiLCB7IHN0YXRpY0NsYXNzOiBcInNwYWNlLWludHJvXCIgfSwgW1xuICAgIF9jKFwiZGl2XCIsIHsgc3RhdGljQ2xhc3M6IFwiY29udGFpbmVyIGQtZmxleCBmbGV4LWNvbHVtblwiIH0sIFtcbiAgICAgIF9jKFxuICAgICAgICBcImRpdlwiLFxuICAgICAgICB7IHN0YXRpY0NsYXNzOiBcInJvdyBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWNlbnRlclwiIH0sXG4gICAgICAgIFtcbiAgICAgICAgICBfYyhcImRpdlwiLCB7IHN0YXRpY0NsYXNzOiBcImNvbC1zbS0xMiBjb2wtbWQtMTAgY29sLWxnLTYgY29sLXhsLTVcIiB9LCBbXG4gICAgICAgICAgICBfYyhcImRpdlwiLCB7IHN0YXRpY0NsYXNzOiBcImNhcmQgc2hhZG93LXNtXCIgfSwgW1xuICAgICAgICAgICAgICBfYyhcImRpdlwiLCB7IHN0YXRpY0NsYXNzOiBcImNhcmQtYm9keVwiIH0sIFtcbiAgICAgICAgICAgICAgICBfdm0uX20oMCksXG4gICAgICAgICAgICAgICAgX3ZtLl92KFwiIFwiKSxcbiAgICAgICAgICAgICAgICBfYyhcImZvcm1cIiwgeyBvbjogeyBzdWJtaXQ6IF92bS5yZXNldFBhc3N3b3JkIH0gfSwgW1xuICAgICAgICAgICAgICAgICAgX2MoXCJkaXZcIiwgeyBzdGF0aWNDbGFzczogXCJtYi0zXCIgfSwgW1xuICAgICAgICAgICAgICAgICAgICBfYyhcbiAgICAgICAgICAgICAgICAgICAgICBcImxhYmVsXCIsXG4gICAgICAgICAgICAgICAgICAgICAgeyBzdGF0aWNDbGFzczogXCJmb3JtLWxhYmVsXCIsIGF0dHJzOiB7IGZvcjogXCJlbWFpbFwiIH0gfSxcbiAgICAgICAgICAgICAgICAgICAgICBbX3ZtLl92KFwiRW1haWxcIildXG4gICAgICAgICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgICAgICAgIF92bS5fdihcIiBcIiksXG4gICAgICAgICAgICAgICAgICAgIF9jKFwiaW5wdXRcIiwge1xuICAgICAgICAgICAgICAgICAgICAgIGRpcmVjdGl2ZXM6IFtcbiAgICAgICAgICAgICAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgbmFtZTogXCJtb2RlbFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICByYXdOYW1lOiBcInYtbW9kZWxcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgdmFsdWU6IF92bS5lbWFpbCxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgZXhwcmVzc2lvbjogXCJlbWFpbFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgfSxcbiAgICAgICAgICAgICAgICAgICAgICBdLFxuICAgICAgICAgICAgICAgICAgICAgIHN0YXRpY0NsYXNzOiBcImZvcm0tY29udHJvbFwiLFxuICAgICAgICAgICAgICAgICAgICAgIGF0dHJzOiB7XG4gICAgICAgICAgICAgICAgICAgICAgICB0eXBlOiBcImVtYWlsXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICBwbGFjZWhvbGRlcjogXCJFbnRlciBZb3VyIEVtYWlsXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICByZXF1aXJlZDogXCJcIixcbiAgICAgICAgICAgICAgICAgICAgICAgIGF1dG9jb21wbGV0ZTogXCJvblwiLFxuICAgICAgICAgICAgICAgICAgICAgIH0sXG4gICAgICAgICAgICAgICAgICAgICAgZG9tUHJvcHM6IHsgdmFsdWU6IF92bS5lbWFpbCB9LFxuICAgICAgICAgICAgICAgICAgICAgIG9uOiB7XG4gICAgICAgICAgICAgICAgICAgICAgICBpbnB1dDogZnVuY3Rpb24gKCRldmVudCkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICBpZiAoJGV2ZW50LnRhcmdldC5jb21wb3NpbmcpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm5cbiAgICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgICBfdm0uZW1haWwgPSAkZXZlbnQudGFyZ2V0LnZhbHVlXG4gICAgICAgICAgICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICAgICAgICAgIH0sXG4gICAgICAgICAgICAgICAgICAgIH0pLFxuICAgICAgICAgICAgICAgICAgXSksXG4gICAgICAgICAgICAgICAgICBfdm0uX3YoXCIgXCIpLFxuICAgICAgICAgICAgICAgICAgX2MoXCJkaXZcIiwgeyBzdGF0aWNDbGFzczogXCJtYi0zIGQtZ3JpZFwiIH0sIFtcbiAgICAgICAgICAgICAgICAgICAgX2MoXG4gICAgICAgICAgICAgICAgICAgICAgXCJidXR0b25cIixcbiAgICAgICAgICAgICAgICAgICAgICB7XG4gICAgICAgICAgICAgICAgICAgICAgICByZWY6IFwicmVzZXRfYnRuXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICBzdGF0aWNDbGFzczogXCJidG4gYnRuLXByaW1hcnlcIixcbiAgICAgICAgICAgICAgICAgICAgICAgIGF0dHJzOiB7IHR5cGU6IFwic3VibWl0XCIgfSxcbiAgICAgICAgICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICAgICAgICAgIFtcbiAgICAgICAgICAgICAgICAgICAgICAgIF92bS5fdihcbiAgICAgICAgICAgICAgICAgICAgICAgICAgXCJcXG4gICAgICAgICAgICAgICAgICBSZXNldCBQYXNzd29yZFxcbiAgICAgICAgICAgICAgICBcIlxuICAgICAgICAgICAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgICAgICAgICBdXG4gICAgICAgICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgICAgICBdKSxcbiAgICAgICAgICAgICAgICAgIF92bS5fdihcIiBcIiksXG4gICAgICAgICAgICAgICAgICBfYyhcbiAgICAgICAgICAgICAgICAgICAgXCJzcGFuXCIsXG4gICAgICAgICAgICAgICAgICAgIFtcbiAgICAgICAgICAgICAgICAgICAgICBfdm0uX3YoXCJEb24ndCBoYXZlIGFuIGFjY291bnQ/XFxuICAgICAgICAgICAgICAgIFwiKSxcbiAgICAgICAgICAgICAgICAgICAgICBfYyhcInJvdXRlci1saW5rXCIsIHsgYXR0cnM6IHsgdG86IFwiL3JlZ2lzdGVyXCIgfSB9LCBbXG4gICAgICAgICAgICAgICAgICAgICAgICBfdm0uX3YoXCJDbGljayBoZXJlIHRvIHJlZ2lzdGVyLlwiKSxcbiAgICAgICAgICAgICAgICAgICAgICBdKSxcbiAgICAgICAgICAgICAgICAgICAgXSxcbiAgICAgICAgICAgICAgICAgICAgMVxuICAgICAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgICBdKSxcbiAgICAgICAgICAgICAgXSksXG4gICAgICAgICAgICBdKSxcbiAgICAgICAgICBdKSxcbiAgICAgICAgXVxuICAgICAgKSxcbiAgICBdKSxcbiAgXSlcbn1cbnZhciBzdGF0aWNSZW5kZXJGbnMgPSBbXG4gIGZ1bmN0aW9uICgpIHtcbiAgICB2YXIgX3ZtID0gdGhpc1xuICAgIHZhciBfaCA9IF92bS4kY3JlYXRlRWxlbWVudFxuICAgIHZhciBfYyA9IF92bS5fc2VsZi5fYyB8fCBfaFxuICAgIHJldHVybiBfYyhcImRpdlwiLCB7IHN0YXRpY0NsYXNzOiBcIm1iLTRcIiB9LCBbXG4gICAgICBfYyhcImg1XCIsIFtfdm0uX3YoXCJGb3Jnb3QgUGFzc3dvcmQ/XCIpXSksXG4gICAgICBfdm0uX3YoXCIgXCIpLFxuICAgICAgX2MoXCJwXCIsIHsgc3RhdGljQ2xhc3M6IFwibWItMlwiIH0sIFtcbiAgICAgICAgX3ZtLl92KFxuICAgICAgICAgIFwiXFxuICAgICAgICAgICAgICAgIEVudGVyIHlvdXIgcmVnaXN0ZXJlZCBlbWFpbCBJRCB0byByZXNldCB0aGUgcGFzc3dvcmRcXG4gICAgICAgICAgICAgIFwiXG4gICAgICAgICksXG4gICAgICBdKSxcbiAgICBdKVxuICB9LFxuXVxucmVuZGVyLl93aXRoU3RyaXBwZWQgPSB0cnVlXG5cbmV4cG9ydCB7IHJlbmRlciwgc3RhdGljUmVuZGVyRm5zIH0iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/auth/ResetPasswordRequest.vue?vue&type=template&id=af98aade&scoped=true&\n");
 
 /***/ })
 
