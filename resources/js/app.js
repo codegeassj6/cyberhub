@@ -38,20 +38,6 @@ const router = new VueRouter({
     },
 })
 
-// if vue route fail
-router.onError(error => {
-  console.error(error);
-  Vue.prototype.$log.error('Failure Reason: ', error.message, error);
-  if (/ChunkLoadError:.*failed./i.test(error.message)) {
-    Vue.prototype.$log.error('Reloading Window 1');
-    window.location.reload();
-  }
-  else if (/Loading.*chunk.*failed./i.test(error.message)) {
-    Vue.prototype.$log.error('Reloading Window 2');
-    window.location.reload();
-  }
-});
-
 // check the token if not expired
 axios.interceptors.response.use(function (response) {
     return response;
