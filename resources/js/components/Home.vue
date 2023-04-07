@@ -624,12 +624,18 @@ export default {
         file_type: [],
       },
       form_data: "",
-      posts: "",
+      posts: '',
       edit_post: {
         attachment_remove: [],
         data: "",
         message: "",
       },
+      test: {
+        count: 1,
+      },
+      post: {
+        paginate_count: 5,
+      }
     };
   },
 
@@ -767,25 +773,57 @@ export default {
     computedPostFile(file_link) {
       return `/storage/post/file/${file_link}`;
     },
+
+    getPost() {
+      if (this.$store.getters.currentUser) {
+      const AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "get",
+          params: {
+            quantity: this.post.paginate_count,
+          },
+          url: `/api/post`,
+          headers: { Authorization: AuthStr },
+        })
+          .then((res) => {
+            resolve(this.posts = res.data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+        });
+      }
+    },
+
+    handleScroll (event) {console.log(document.documentElement.scrollHeight/window.scrollY);
+      if(document.documentElement.scrollHeight/window.scrollY < 2.5) {
+        this.post.paginate_count += 5;
+        this.getPost();
+      }
+    },
+
   },
+
+  watch: {
+        $data: {
+            handler: function(val, oldVal) {
+                console.log('watcher: ',val);
+            },
+            deep: true
+        },
+    },
+
+  created() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+
   updated() {},
 
   beforeMount() {},
 
   mounted() {
-    if (this.$store.getters.currentUser) {
-      const AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
-      axios({
-        method: "get",
-        params: { id: 1 },
-        url: `/api/post`,
-        headers: { Authorization: AuthStr },
-      })
-        .then((res) => {
-          this.posts = res.data;
-        })
-        .catch((err) => {});
-    }
+    this.getPost();
   },
 };
 </script>
@@ -830,3 +868,5 @@ export default {
   left: 42% !important;
 }
 </style>
+
+

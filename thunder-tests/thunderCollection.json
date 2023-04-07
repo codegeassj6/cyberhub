@@ -1,0 +1,28 @@
+[
+  {
+    "_id": "afb73763-ad83-489e-8d6c-807e114146db",
+    "colName": "Post",
+    "created": "2023-04-07T15:25:01.274Z",
+    "sortNum": 10000,
+    "folders": [],
+    "settings": {
+      "auth": {
+        "type": "bearer",
+        "bearer": "{{token}}"
+      }
+    }
+  },
+  {
+    "_id": "89ba56e9-b7de-49e5-97f0-ff06a0a20b64",
+    "colName": "Auth",
+    "created": "2023-04-07T15:25:38.731Z",
+    "sortNum": 5000,
+    "folders": [],
+    "settings": {
+      "auth": {
+        "type": "bearer",
+        "bearer": "{{token}}"
+      }
+    }
+  }
+]

@@ -5384,17 +5384,8 @@ __webpack_require__.r(__webpack_exports__);
     Footer: _templates_Footer_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Home: _Home_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  methods: {
-    handleScroll: function handleScroll(event) {
-      console.log(window.scrollY, window.innerHeight);
-      if (window.innerHeight <= this.$refs.body.scrollHeight) {
-        //alert('yes')
-      }
-    }
-  },
-  created: function created() {
-    window.addEventListener('scroll', this.handleScroll);
-  },
+  methods: {},
+  created: function created() {},
   mounted: function mounted() {}
 });
 
@@ -6037,11 +6028,17 @@ __webpack_require__.r(__webpack_exports__);
         file_type: []
       },
       form_data: "",
-      posts: "",
+      posts: '',
       edit_post: {
         attachment_remove: [],
         data: "",
         message: ""
+      },
+      test: {
+        count: 1
+      },
+      post: {
+        paginate_count: 5
       }
     };
   },
@@ -6156,27 +6153,52 @@ __webpack_require__.r(__webpack_exports__);
     },
     computedPostFile: function computedPostFile(file_link) {
       return "/storage/post/file/".concat(file_link);
+    },
+    getPost: function getPost() {
+      var _this4 = this;
+      if (this.$store.getters.currentUser) {
+        var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
+        return new Promise(function (resolve, reject) {
+          axios({
+            method: "get",
+            params: {
+              quantity: _this4.post.paginate_count
+            },
+            url: "/api/post",
+            headers: {
+              Authorization: AuthStr
+            }
+          }).then(function (res) {
+            resolve(_this4.posts = res.data);
+          })["catch"](function (err) {
+            reject(err);
+          });
+        });
+      }
+    },
+    handleScroll: function handleScroll(event) {
+      console.log(document.documentElement.scrollHeight / window.scrollY);
+      if (document.documentElement.scrollHeight / window.scrollY < 2.5) {
+        this.post.paginate_count += 5;
+        this.getPost();
+      }
     }
+  },
+  watch: {
+    $data: {
+      handler: function handler(val, oldVal) {
+        console.log('watcher: ', val);
+      },
+      deep: true
+    }
+  },
+  created: function created() {
+    window.addEventListener('scroll', this.handleScroll);
   },
   updated: function updated() {},
   beforeMount: function beforeMount() {},
   mounted: function mounted() {
-    var _this4 = this;
-    if (this.$store.getters.currentUser) {
-      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
-      axios({
-        method: "get",
-        params: {
-          id: 1
-        },
-        url: "/api/post",
-        headers: {
-          Authorization: AuthStr
-        }
-      }).then(function (res) {
-        _this4.posts = res.data;
-      })["catch"](function (err) {});
-    }
+    this.getPost();
   }
 });
 
@@ -12792,7 +12814,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#carouselintro img[data-v-f2b6376c] {\r\n  height: 600px;\n}\n#carouselintro[data-v-f2b6376c] {\r\n  margin-top: 26px;\n}\n.name[data-v-f2b6376c] {\r\n  font-size: 20px;\n}\n.btn-status[data-v-f2b6376c] {\r\n  padding: 0 !important;\n}\n.min-100[data-v-f2b6376c] {\r\n  min-height: 100px;\n}\n.dropbox[data-v-f2b6376c] {\r\n  height: 150px;\n}\n.img_attach_remove[data-v-f2b6376c] {\r\n  right: 0%;\r\n  top: 0%;\r\n  color: #ffffff;\n}\n.attach_video[data-v-f2b6376c] {\r\n  height: 150px;\n}\n.center[data-v-f2b6376c] {\r\n  top: 40% !important;\r\n  left: 42% !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#carouselintro img[data-v-f2b6376c] {\n  height: 600px;\n}\n#carouselintro[data-v-f2b6376c] {\n  margin-top: 26px;\n}\n.name[data-v-f2b6376c] {\n  font-size: 20px;\n}\n.btn-status[data-v-f2b6376c] {\n  padding: 0 !important;\n}\n.min-100[data-v-f2b6376c] {\n  min-height: 100px;\n}\n.dropbox[data-v-f2b6376c] {\n  height: 150px;\n}\n.img_attach_remove[data-v-f2b6376c] {\n  right: 0%;\n  top: 0%;\n  color: #ffffff;\n}\n.attach_video[data-v-f2b6376c] {\n  height: 150px;\n}\n.center[data-v-f2b6376c] {\n  top: 40% !important;\n  left: 42% !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

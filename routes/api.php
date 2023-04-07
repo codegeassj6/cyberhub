@@ -22,7 +22,7 @@ Route::group(['prefix' => 'test'], function ($router) {
 });
 
 Route::group(['prefix' => 'post'], function ($router) {
-    Route::get('/', 'App\Http\Controllers\PostController@index')->middleware('auth');
+    Route::get('/', 'App\Http\Controllers\PostController@index');
     Route::post('/', 'App\Http\Controllers\PostController@store')->middleware('auth');
     Route::get('/show/{id}', 'App\Http\Controllers\PostController@show')->middleware('auth');
     Route::patch('/{id}', 'App\Http\Controllers\PostController@update')->middleware('auth');

@@ -396,8 +396,13 @@ export default {
       var ext = re.exec(fileName)[1];
       return ext.trim();
     },
+
+
+
   },
   updated() {},
+
+
 
   mounted() {},
 };
