@@ -69,6 +69,20 @@ export default {
     Home,
   },
 
-  mounted() {},
+  methods: {
+    handleScroll (event) {console.log(window.scrollY, window.innerHeight);
+      if(window.innerHeight <= this.$refs.body.scrollHeight) {
+        //alert('yes')
+      }
+    }
+  },
+
+  created () {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+
+  mounted() {
+
+  },
 };
 </script>

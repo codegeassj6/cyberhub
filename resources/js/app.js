@@ -5,6 +5,11 @@ import { routes } from './routes'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import StoreData from './store'
+import Adsense from 'vue-google-adsense/dist/Adsense.min.js'
+
+Vue.use(require('vue-script2'))
+Vue.use(Adsense)
+
 
 Vue.use(Vuex);
 Vue.use(VueRouter);

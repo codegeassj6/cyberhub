@@ -272,15 +272,24 @@ export default {
         .catch((err) => {});
     },
 
-    forceUpdateComponent() {
-      this.$forceUpdate();
-    },
+
   },
 
-  updated() {},
+  watch: {
+      $props: {
+          handler: function(val, oldVal) {
+              this.getComments();
+          },
+          deep: true
+      },
+  },
+
+  updated() {
+
+  },
 
   mounted() {
-    this.getComments(this.sort);
+    this.getComments();
   },
 };
 </script>
@@ -290,4 +299,5 @@ export default {
   background: #f1f1f1;
 }
 </style>
+
 

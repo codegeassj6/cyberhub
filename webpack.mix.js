@@ -21,4 +21,4 @@ if (mix.inProduction()) {
   mix.version();
 }
 
-// mix.browserSync("cyberhub.test");
+mix.browserSync("cyberhub.test");
