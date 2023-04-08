@@ -636,6 +636,7 @@ export default {
       post: {
         currentPage: 1,
         timeout: 0,
+        collection: [],
       }
     };
   },
@@ -694,7 +695,7 @@ export default {
             Authorization: AuthStr,
           },
         })
-          .then((res) => {console.log(res.data);
+          .then((res) => {
             e.target.removeAttribute('disabled');
             this.attach_exist = false;
             this.form_data = "";
@@ -704,7 +705,6 @@ export default {
           })
           .catch((err) => {
             e.target.removeAttribute('disabled');
-            console.log(err.response.data);
           });
       }
     },
@@ -751,7 +751,7 @@ export default {
         url: `/api/post/${this.edit_post.data.id}`,
         headers: { Authorization: AuthStr },
       })
-        .then((res) => {console.log(res.data);
+        .then((res) => {
           document.getElementById(
             `post_message_${this.edit_post.data.id}`
           ).innerText = this.edit_post.message;
@@ -788,11 +788,19 @@ export default {
           .then((res) => {
             this.post.timeout = 1;
             if(this.post.currentPage == 1) {
-              resolve(this.posts = res.data);
+              this.posts = res.data;
+              resolve(
+                res.data.data.forEach(data => {
+                  this.post.collection.push(data.id);
+                })
+              );
             } else {
               resolve(
                 res.data.data.forEach(data => {
-                  this.posts.data.push(data);
+                  if(!this.post.collection.includes(data.id)) {
+                    this.posts.data.push(data);
+                    this.post.collection.push(data.id);
+                  }
                 })
               );
             }

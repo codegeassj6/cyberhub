@@ -41,7 +41,6 @@
           <div class="dropdown dropdown-menu-end">
             <a
               role="button"
-              id="triggerId"
               class="p-2"
               data-bs-toggle="dropdown"
               aria-haspopup="true"
@@ -49,7 +48,7 @@
             >
               <i class="fa fa-ellipsis-h"></i>
             </a>
-            <div class="dropdown-menu" aria-labelledby="triggerId">
+            <div class="dropdown-menu">
               <a
                 class="dropdown-item"
                 role="button"
@@ -70,7 +69,7 @@
     </div>
 
     <div class="flex mb-2" v-if="comments.length || comments.last_page != comment.currentPage">
-      <a role="button" @click="loadMoreComment">Load more comments</a>
+      <a role="button" class="text-primary" @click="loadMoreComment">Load more comments</a>
     </div>
 
     <div class="card-footer border-0 px-3 py-3 bg-comment">
@@ -136,6 +135,7 @@ export default {
       comment: {
         currentPage: 1,
         timeout: 0,
+        collection: [],
       }
 
     };
@@ -187,7 +187,8 @@ export default {
       })
         .then((res) => {
           document.getElementById(`content_${post_id}`).innerText = "";
-          this.comments.data.push(res.data);
+          this.comments.data.unshift(res.data);
+          // this.comments = res.data;
         })
         .catch((err) => {});
     },
@@ -224,6 +225,7 @@ export default {
             if (elem.id == comment.id) {
               this.comments.data.splice(index, 1);
             }
+            this.comment.currentPage = 0;
           });
         })
         .catch((err) => {});
@@ -278,9 +280,15 @@ export default {
         .then((res) => {
           if(this.comment.currentPage == 1) {
             this.comments = res.data;
+            res.data.data.forEach(data => {
+              this.comment.collection.push(data.id);
+            })
           } else {
             res.data.data.forEach(data => {
-              this.comments.data.push(data);
+              if(!this.comment.collection.includes(data.id)) {
+                this.comments.data.push(data);
+                this.comment.collection.push(data.id);
+              }
             })
           }
 
@@ -298,21 +306,23 @@ export default {
   },
 
   watch: {
-      $data: {
+      // $data: {
+      //     handler: function(val, oldVal) {
+      //         console.log('comment:', val);
+      //     },
+      //     deep: true
+      // },
+
+      $props: {
           handler: function(val, oldVal) {
-              console.log('comment:', val);
+              this.getComments();
           },
           deep: true
       },
   },
 
   // watch: {
-  //     $props: {
-  //         handler: function(val, oldVal) {
-  //             this.getComments();
-  //         },
-  //         deep: true
-  //     },
+  //
   // },
 
   updated() {

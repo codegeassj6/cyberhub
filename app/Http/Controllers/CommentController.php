@@ -23,7 +23,7 @@ class CommentController extends Controller
         if($request->input('sort') == 'latest') {
             $comments = $post->getComments()->orderBy('created_at', 'desc')->paginate(3);
         } elseif($request->input('sort') == 'oldest') {
-            $comments = $post->getComments()->paginate(4);
+            $comments = $post->getComments()->paginate(3);
         } else {
             $comments = $post->getComments()->orderBy('created_at', 'desc')->paginate(3);
         }

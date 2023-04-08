@@ -6039,7 +6039,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       post: {
         currentPage: 1,
-        timeout: 0
+        timeout: 0,
+        collection: []
       }
     };
   },
@@ -6088,7 +6089,6 @@ __webpack_require__.r(__webpack_exports__);
             Authorization: AuthStr
           }
         }).then(function (res) {
-          console.log(res.data);
           e.target.removeAttribute('disabled');
           _this.attach_exist = false;
           _this.form_data = "";
@@ -6097,7 +6097,6 @@ __webpack_require__.r(__webpack_exports__);
           _this.post.currentPage = 1;
         })["catch"](function (err) {
           e.target.removeAttribute('disabled');
-          console.log(err.response.data);
         });
       }
     },
@@ -6138,7 +6137,6 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: AuthStr
         }
       }).then(function (res) {
-        console.log(res.data);
         document.getElementById("post_message_".concat(_this2.edit_post.data.id)).innerText = _this2.edit_post.message;
       })["catch"](function (err) {});
     },
@@ -6171,10 +6169,16 @@ __webpack_require__.r(__webpack_exports__);
           }).then(function (res) {
             _this4.post.timeout = 1;
             if (_this4.post.currentPage == 1) {
-              resolve(_this4.posts = res.data);
+              _this4.posts = res.data;
+              resolve(res.data.data.forEach(function (data) {
+                _this4.post.collection.push(data.id);
+              }));
             } else {
               resolve(res.data.data.forEach(function (data) {
-                _this4.posts.data.push(data);
+                if (!_this4.post.collection.includes(data.id)) {
+                  _this4.posts.data.push(data);
+                  _this4.post.collection.push(data.id);
+                }
               }));
             }
           })["catch"](function (err) {
@@ -6348,7 +6352,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 //import name from './
 
@@ -6361,7 +6364,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       comment: {
         currentPage: 1,
-        timeout: 0
+        timeout: 0,
+        collection: []
       }
     };
   },
@@ -6405,7 +6409,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (res) {
         document.getElementById("content_".concat(post_id)).innerText = "";
-        _this.comments.data.push(res.data);
+        _this.comments.data.unshift(res.data);
+        // this.comments = res.data;
       })["catch"](function (err) {});
     },
     likeComment: function likeComment(e, data) {
@@ -6443,6 +6448,7 @@ __webpack_require__.r(__webpack_exports__);
           if (elem.id == comment.id) {
             _this2.comments.data.splice(index, 1);
           }
+          _this2.comment.currentPage = 0;
         });
       })["catch"](function (err) {});
     },
@@ -6493,9 +6499,15 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         if (_this4.comment.currentPage == 1) {
           _this4.comments = res.data;
+          res.data.data.forEach(function (data) {
+            _this4.comment.collection.push(data.id);
+          });
         } else {
           res.data.data.forEach(function (data) {
-            _this4.comments.data.push(data);
+            if (!_this4.comment.collection.includes(data.id)) {
+              _this4.comments.data.push(data);
+              _this4.comment.collection.push(data.id);
+            }
           });
         }
       })["catch"](function (err) {});
@@ -6508,20 +6520,22 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   watch: {
-    $data: {
+    // $data: {
+    //     handler: function(val, oldVal) {
+    //         console.log('comment:', val);
+    //     },
+    //     deep: true
+    // },
+
+    $props: {
       handler: function handler(val, oldVal) {
-        console.log('comment:', val);
+        this.getComments();
       },
       deep: true
     }
   },
   // watch: {
-  //     $props: {
-  //         handler: function(val, oldVal) {
-  //             this.getComments();
-  //         },
-  //         deep: true
-  //     },
+  //
   // },
   updated: function updated() {},
   mounted: function mounted() {
@@ -32493,44 +32507,37 @@ var render = function () {
                   _c("div", { staticClass: "dropdown dropdown-menu-end" }, [
                     _vm._m(0, true),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "dropdown-menu",
-                        attrs: { "aria-labelledby": "triggerId" },
-                      },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: { role: "button" },
-                            on: {
-                              click: function ($event) {
-                                return _vm.initEditComment(comment, _vm.post_id)
-                              },
+                    _c("div", { staticClass: "dropdown-menu" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          attrs: { role: "button" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.initEditComment(comment, _vm.post_id)
                             },
                           },
-                          [_vm._v("Edit")]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "dropdown-divider" }),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: { role: "button" },
-                            on: {
-                              click: function ($event) {
-                                return _vm.deleteComment(comment)
-                              },
+                        },
+                        [_vm._v("Edit")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "dropdown-divider" }),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          attrs: { role: "button" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.deleteComment(comment)
                             },
                           },
-                          [_vm._v("Delete")]
-                        ),
-                      ]
-                    ),
+                        },
+                        [_vm._v("Delete")]
+                      ),
+                    ]),
                   ]),
                 ])
               : _vm._e(),
@@ -32542,7 +32549,11 @@ var render = function () {
         ? _c("div", { staticClass: "flex mb-2" }, [
             _c(
               "a",
-              { attrs: { role: "button" }, on: { click: _vm.loadMoreComment } },
+              {
+                staticClass: "text-primary",
+                attrs: { role: "button" },
+                on: { click: _vm.loadMoreComment },
+              },
               [_vm._v("Load more comments")]
             ),
           ])
@@ -32638,7 +32649,6 @@ var staticRenderFns = [
         staticClass: "p-2",
         attrs: {
           role: "button",
-          id: "triggerId",
           "data-bs-toggle": "dropdown",
           "aria-haspopup": "true",
           "aria-expanded": "false",
