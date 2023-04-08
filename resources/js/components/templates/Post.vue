@@ -49,7 +49,7 @@
         </div>
       </div>
 
-      <div class="px-3">
+      <div class="px-3 mb-2">
         <div class="text-justify div-like-pre" :id="`post_message_${data.id}`">{{ data.message }}</div>
       </div>
 

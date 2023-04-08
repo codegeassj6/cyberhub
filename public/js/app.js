@@ -33177,7 +33177,7 @@ var render = function () {
             : _vm._e(),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "px-3" }, [
+        _c("div", { staticClass: "px-3 mb-2" }, [
           _c(
             "div",
             {
