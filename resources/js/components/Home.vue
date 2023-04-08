@@ -634,7 +634,8 @@ export default {
         count: 1,
       },
       post: {
-        paginate_count: 5,
+        paginate_count: 3,
+        page: 1,
       }
     };
   },
@@ -693,7 +694,7 @@ export default {
             Authorization: AuthStr,
           },
         })
-          .then((res) => {
+          .then((res) => {console.log(res.data);
             e.target.removeAttribute('disabled');
             this.attach_exist = false;
             this.form_data = "";
@@ -780,10 +781,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios({
           method: "get",
-          params: {
-            quantity: this.post.paginate_count,
-          },
-          url: `/api/post`,
+          url: `/api/post?page=${this.post.page}`,
           headers: { Authorization: AuthStr },
         })
           .then((res) => {
@@ -796,10 +794,10 @@ export default {
       }
     },
 
-    handleScroll (event) {console.log(document.documentElement.scrollHeight/window.scrollY);
-      if(document.documentElement.scrollHeight/window.scrollY < 2.5) {
-        this.post.paginate_count += 5;
-        this.getPost();
+    handleScroll (event) {console.log(window.scrollY, document.documentElement.scrollHeight / 2);
+      if(window.scrollY > document.documentElement.scrollHeight / 2) {
+        // this.getPost();
+        alert('t');
       }
     },
 
