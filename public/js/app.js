@@ -6193,6 +6193,7 @@ __webpack_require__.r(__webpack_exports__);
           this.post.timeout = 0;
           this.post.currentPage++;
           this.getPost();
+          console.log(this.post.currentPage);
         }
       }
     }

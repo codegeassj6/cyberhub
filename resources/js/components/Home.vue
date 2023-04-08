@@ -819,6 +819,7 @@ export default {
           this.post.timeout = 0;
           this.post.currentPage++;
           this.getPost();
+          console.log(this.post.currentPage);
         }
       }
     },

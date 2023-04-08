@@ -14,7 +14,7 @@ class PostController extends Controller
 {
   public function index()
   {
-    $post = Post::orderBy('created_at', 'desc')->paginate(5);
+    $post = Post::orderBy('created_at', 'desc')->paginate(3);
     $post->getCollection()->transform(function ($value) {
       $value->getUser;
       $value->created_time = Carbon::create($value->created_at)->toDayDateTimeString();
