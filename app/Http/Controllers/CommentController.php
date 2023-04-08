@@ -21,11 +21,11 @@ class CommentController extends Controller
     {
         $post = Post::where('id', $request->input('post_id'))->firstOrFail();
         if($request->input('sort') == 'latest') {
-            $comments = $post->getComments()->orderBy('created_at', 'desc')->paginate(4);
+            $comments = $post->getComments()->orderBy('created_at', 'desc')->paginate(3);
         } elseif($request->input('sort') == 'oldest') {
             $comments = $post->getComments()->paginate(4);
         } else {
-            $comments = $post->getComments()->orderBy('created_at', 'desc')->paginate(4);
+            $comments = $post->getComments()->orderBy('created_at', 'desc')->paginate(3);
         }
 
         $comments->transform(function($value) {

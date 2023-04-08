@@ -55,6 +55,9 @@ axios.interceptors.response.use(function (response) {
     return Promise.reject(error);
 });
 
+
+
+
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.requiresAuth)) {
         if(!store.getters.currentUser) {

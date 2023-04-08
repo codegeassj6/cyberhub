@@ -69,6 +69,10 @@
       </div>
     </div>
 
+    <div class="flex mb-2" v-if="comments.length || comments.last_page != comment.currentPage">
+      <a role="button" @click="loadMoreComment">Load more comments</a>
+    </div>
+
     <div class="card-footer border-0 px-3 py-3 bg-comment">
       <div class="d-flex flex-start w-100">
         <img
@@ -129,6 +133,11 @@ export default {
       edit: {
         comment: "",
       },
+      comment: {
+        currentPage: 1,
+        timeout: 0,
+      }
+
     };
   },
   components: {},
@@ -263,26 +272,48 @@ export default {
           post_id: this.post_id,
           sort: this.sort,
         },
-        url: `/api/comment/`,
+        url: `/api/comment?page=${this.comment.currentPage}`,
         headers: { Authorization: AuthStr },
       })
         .then((res) => {
-          this.comments = res.data;
+          if(this.comment.currentPage == 1) {
+            this.comments = res.data;
+          } else {
+            res.data.data.forEach(data => {
+              this.comments.data.push(data);
+            })
+          }
+
         })
         .catch((err) => {});
     },
 
+    loadMoreComment() {
+      if(this.comments.last_page != this.comment.currentPage) {
+        this.comment.currentPage++;
+        this.getComments();
+      }
 
+    },
   },
 
   watch: {
-      $props: {
+      $data: {
           handler: function(val, oldVal) {
-              this.getComments();
+              console.log('comment:', val);
           },
           deep: true
       },
   },
+
+  // watch: {
+  //     $props: {
+  //         handler: function(val, oldVal) {
+  //             this.getComments();
+  //         },
+  //         deep: true
+  //     },
+  // },
 
   updated() {
 

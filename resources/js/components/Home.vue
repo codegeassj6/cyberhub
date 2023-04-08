@@ -634,8 +634,8 @@ export default {
         count: 1,
       },
       post: {
-        paginate_count: 3,
-        page: 1,
+        currentPage: 1,
+        timeout: 0,
       }
     };
   },
@@ -700,6 +700,7 @@ export default {
             this.form_data = "";
             document.getElementById("editable").innerHTML = "";
             this.posts = res.data;
+            this.post.currentPage = 1;
           })
           .catch((err) => {
             e.target.removeAttribute('disabled');
@@ -776,16 +777,26 @@ export default {
     },
 
     getPost() {
-      if (this.$store.getters.currentUser) {
+      if (this.$store.getters.currentUser && this.post.currentPage) {
       const AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       return new Promise((resolve, reject) => {
         axios({
           method: "get",
-          url: `/api/post?page=${this.post.page}`,
+          url: `/api/post?page=${this.post.currentPage}`,
           headers: { Authorization: AuthStr },
         })
           .then((res) => {
-            resolve(this.posts = res.data);
+            this.post.timeout = 1;
+            if(this.post.currentPage == 1) {
+              resolve(this.posts = res.data);
+            } else {
+              resolve(
+                res.data.data.forEach(data => {
+                  this.posts.data.push(data);
+                })
+              );
+            }
+
           })
           .catch((err) => {
             reject(err);
@@ -794,23 +805,26 @@ export default {
       }
     },
 
-    handleScroll (event) {console.log(window.scrollY, document.documentElement.scrollHeight / 2);
-      if(window.scrollY > document.documentElement.scrollHeight / 2) {
-        // this.getPost();
-        alert('t');
+    handleScroll (event) {
+      if(window.scrollY + 200 > document.documentElement.scrollHeight - document.documentElement.clientHeight) {
+        if(this.posts.last_page  != this.post.currentPage && this.post.timeout) {
+          this.post.timeout = 0;
+          this.post.currentPage++;
+          this.getPost();
+        }
       }
     },
 
   },
 
-  watch: {
-        $data: {
-            handler: function(val, oldVal) {
-                console.log('watcher: ',val);
-            },
-            deep: true
-        },
-    },
+  // watch: {
+  //       $data: {
+  //           handler: function(val, oldVal) {
+  //               console.log('watcher: ',val);
+  //           },
+  //           deep: true
+  //       },
+  //   },
 
   created() {
     window.addEventListener('scroll', this.handleScroll);

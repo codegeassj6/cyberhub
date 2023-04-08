@@ -6038,8 +6038,8 @@ __webpack_require__.r(__webpack_exports__);
         count: 1
       },
       post: {
-        paginate_count: 3,
-        page: 1
+        currentPage: 1,
+        timeout: 0
       }
     };
   },
@@ -6094,6 +6094,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.form_data = "";
           document.getElementById("editable").innerHTML = "";
           _this.posts = res.data;
+          _this.post.currentPage = 1;
         })["catch"](function (err) {
           e.target.removeAttribute('disabled');
           console.log(err.response.data);
@@ -6158,17 +6159,24 @@ __webpack_require__.r(__webpack_exports__);
     },
     getPost: function getPost() {
       var _this4 = this;
-      if (this.$store.getters.currentUser) {
+      if (this.$store.getters.currentUser && this.post.currentPage) {
         var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
         return new Promise(function (resolve, reject) {
           axios({
             method: "get",
-            url: "/api/post?page=".concat(_this4.post.page),
+            url: "/api/post?page=".concat(_this4.post.currentPage),
             headers: {
               Authorization: AuthStr
             }
           }).then(function (res) {
-            resolve(_this4.posts = res.data);
+            _this4.post.timeout = 1;
+            if (_this4.post.currentPage == 1) {
+              resolve(_this4.posts = res.data);
+            } else {
+              resolve(res.data.data.forEach(function (data) {
+                _this4.posts.data.push(data);
+              }));
+            }
           })["catch"](function (err) {
             reject(err);
           });
@@ -6176,21 +6184,23 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     handleScroll: function handleScroll(event) {
-      console.log(window.scrollY, document.documentElement.scrollHeight / 2);
-      if (window.scrollY > document.documentElement.scrollHeight / 2) {
-        // this.getPost();
-        alert('t');
+      if (window.scrollY + 200 > document.documentElement.scrollHeight - document.documentElement.clientHeight) {
+        if (this.posts.last_page != this.post.currentPage && this.post.timeout) {
+          this.post.timeout = 0;
+          this.post.currentPage++;
+          this.getPost();
+        }
       }
     }
   },
-  watch: {
-    $data: {
-      handler: function handler(val, oldVal) {
-        console.log('watcher: ', val);
-      },
-      deep: true
-    }
-  },
+  // watch: {
+  //       $data: {
+  //           handler: function(val, oldVal) {
+  //               console.log('watcher: ',val);
+  //           },
+  //           deep: true
+  //       },
+  //   },
   created: function created() {
     window.addEventListener('scroll', this.handleScroll);
   },
@@ -6335,6 +6345,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 //import name from './
 
@@ -6344,6 +6358,10 @@ __webpack_require__.r(__webpack_exports__);
       comments: "",
       edit: {
         comment: ""
+      },
+      comment: {
+        currentPage: 1,
+        timeout: 0
       }
     };
   },
@@ -6468,23 +6486,43 @@ __webpack_require__.r(__webpack_exports__);
           post_id: this.post_id,
           sort: this.sort
         },
-        url: "/api/comment/",
+        url: "/api/comment?page=".concat(this.comment.currentPage),
         headers: {
           Authorization: AuthStr
         }
       }).then(function (res) {
-        _this4.comments = res.data;
+        if (_this4.comment.currentPage == 1) {
+          _this4.comments = res.data;
+        } else {
+          res.data.data.forEach(function (data) {
+            _this4.comments.data.push(data);
+          });
+        }
       })["catch"](function (err) {});
+    },
+    loadMoreComment: function loadMoreComment() {
+      if (this.comments.last_page != this.comment.currentPage) {
+        this.comment.currentPage++;
+        this.getComments();
+      }
     }
   },
   watch: {
-    $props: {
+    $data: {
       handler: function handler(val, oldVal) {
-        this.getComments();
+        console.log('comment:', val);
       },
       deep: true
     }
   },
+  // watch: {
+  //     $props: {
+  //         handler: function(val, oldVal) {
+  //             this.getComments();
+  //         },
+  //         deep: true
+  //     },
+  // },
   updated: function updated() {},
   mounted: function mounted() {
     this.getComments();
@@ -12861,7 +12899,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.border-post[data-v-038d89e1] {\r\n  border: 1px solid #e1e1e1;\n}\n.attach_image[data-v-038d89e1] {\r\n  height: 300px;\n}\n.btn-outline-secondary[data-v-038d89e1]:hover {\r\n  background: #ffffff;\r\n  color: #0d6efd !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.border-post[data-v-038d89e1] {\n  border: 1px solid #e1e1e1;\n}\n.attach_image[data-v-038d89e1] {\n  height: 300px;\n}\n.btn-outline-secondary[data-v-038d89e1]:hover {\n  background: #ffffff;\n  color: #0d6efd !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -32499,6 +32537,16 @@ var render = function () {
           ]),
         ])
       }),
+      _vm._v(" "),
+      _vm.comments.length || _vm.comments.last_page != _vm.comment.currentPage
+        ? _c("div", { staticClass: "flex mb-2" }, [
+            _c(
+              "a",
+              { attrs: { role: "button" }, on: { click: _vm.loadMoreComment } },
+              [_vm._v("Load more comments")]
+            ),
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "card-footer border-0 px-3 py-3 bg-comment" }, [
         _c("div", { staticClass: "d-flex flex-start w-100" }, [
