@@ -6380,6 +6380,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     sort_id: {
       type: Number
+    },
+    display: {
+      type: Array
     }
   },
   computed: {
@@ -7093,6 +7096,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -7101,7 +7105,8 @@ __webpack_require__.r(__webpack_exports__);
       // datas: '',
       data_pass: {
         sort: "",
-        sort_id: null
+        sort_id: null,
+        isShow: []
       }
     };
   },
@@ -7111,6 +7116,17 @@ __webpack_require__.r(__webpack_exports__);
   props: ["datas"],
   computed: {},
   methods: {
+    hideComments: function hideComments(e, post_id) {
+      if (this.data_pass.isShow.includes(post_id)) {
+        e.target.classList.remove('text-primary');
+        this.data_pass.isShow = this.data_pass.isShow.filter(function (data) {
+          return data !== post_id;
+        });
+      } else {
+        e.target.classList.add('text-primary');
+        this.data_pass.isShow.push(post_id);
+      }
+    },
     computedPostFile: function computedPostFile(file_link) {
       return "/storage/post/file/".concat(file_link);
     },
@@ -7180,6 +7196,14 @@ __webpack_require__.r(__webpack_exports__);
       var re = /(?:\.([^.]+))?$/;
       var ext = re.exec(fileName)[1];
       return ext.trim();
+    }
+  },
+  watch: {
+    $data: {
+      handler: function handler(val, oldVal) {
+        console.log('watcher: ', val);
+      },
+      deep: true
     }
   },
   updated: function updated() {},
@@ -12866,7 +12890,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#carouselintro img[data-v-f2b6376c] {\n  height: 600px;\n}\n#carouselintro[data-v-f2b6376c] {\n  margin-top: 26px;\n}\n.name[data-v-f2b6376c] {\n  font-size: 20px;\n}\n.btn-status[data-v-f2b6376c] {\n  padding: 0 !important;\n}\n.min-100[data-v-f2b6376c] {\n  min-height: 100px;\n}\n.dropbox[data-v-f2b6376c] {\n  height: 150px;\n}\n.img_attach_remove[data-v-f2b6376c] {\n  right: 0%;\n  top: 0%;\n  color: #ffffff;\n}\n.attach_video[data-v-f2b6376c] {\n  height: 150px;\n}\n.center[data-v-f2b6376c] {\n  top: 40% !important;\n  left: 42% !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#carouselintro img[data-v-f2b6376c] {\r\n  height: 600px;\n}\n#carouselintro[data-v-f2b6376c] {\r\n  margin-top: 26px;\n}\n.name[data-v-f2b6376c] {\r\n  font-size: 20px;\n}\n.btn-status[data-v-f2b6376c] {\r\n  padding: 0 !important;\n}\n.min-100[data-v-f2b6376c] {\r\n  min-height: 100px;\n}\n.dropbox[data-v-f2b6376c] {\r\n  height: 150px;\n}\n.img_attach_remove[data-v-f2b6376c] {\r\n  right: 0%;\r\n  top: 0%;\r\n  color: #ffffff;\n}\n.attach_video[data-v-f2b6376c] {\r\n  height: 150px;\n}\n.center[data-v-f2b6376c] {\r\n  top: 40% !important;\r\n  left: 42% !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -32439,111 +32463,125 @@ var render = function () {
     "div",
     [
       _vm._l(_vm.comments.data, function (comment, index) {
-        return _c("div", { key: index }, [
-          _c("div", { staticClass: "d-flex flex-row mb-2" }, [
-            _c("img", {
-              staticClass: "rounded-image",
-              attrs: {
-                src: _vm.computedUserAvatar(comment),
-                width: "50",
-                height: "50",
+        return _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: !_vm.display.includes(comment.post_id),
+                expression: "!display.includes(comment.post_id)",
               },
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-flex" }, [
-              _c("div", { staticClass: "d-flex flex-column ms-3" }, [
-                _c("span", { staticClass: "name" }, [
-                  _vm._v(
-                    _vm._s(
-                      comment.user_details.first_name +
-                        " " +
-                        comment.user_details.last_name
-                    )
+            ],
+            key: index,
+          },
+          [
+            _c("div", { staticClass: "d-flex flex-row mb-2" }, [
+              _c("img", {
+                staticClass: "rounded-image",
+                attrs: {
+                  src: _vm.computedUserAvatar(comment),
+                  width: "50",
+                  height: "50",
+                },
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "d-flex" }, [
+                _c("div", { staticClass: "d-flex flex-column ms-3" }, [
+                  _c("span", { staticClass: "name" }, [
+                    _vm._v(
+                      _vm._s(
+                        comment.user_details.first_name +
+                          " " +
+                          comment.user_details.last_name
+                      )
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("pre", { staticClass: "comment-text" }, [
+                    _vm._v(_vm._s(comment.message)),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "d-flex flex-row align-items-center" },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "me-2",
+                          class: comment.authLikes
+                            ? "text-primary"
+                            : "text-secondary",
+                          attrs: { role: "button" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.likeComment($event, comment)
+                            },
+                          },
+                        },
+                        [_vm._v("\n              Like\n            ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "me-2 text-secondary",
+                          attrs: { role: "button" },
+                        },
+                        [_vm._v("Reply")]
+                      ),
+                      _vm._v(" "),
+                      _c("small", [_vm._v(_vm._s(comment.created_time))]),
+                    ]
                   ),
                 ]),
-                _vm._v(" "),
-                _c("pre", { staticClass: "comment-text" }, [
-                  _vm._v(_vm._s(comment.message)),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "d-flex flex-row align-items-center" },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "me-2",
-                        class: comment.authLikes
-                          ? "text-primary"
-                          : "text-secondary",
-                        attrs: { role: "button" },
-                        on: {
-                          click: function ($event) {
-                            return _vm.likeComment($event, comment)
-                          },
-                        },
-                      },
-                      [_vm._v("\n              Like\n            ")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "me-2 text-secondary",
-                        attrs: { role: "button" },
-                      },
-                      [_vm._v("Reply")]
-                    ),
-                    _vm._v(" "),
-                    _c("small", [_vm._v(_vm._s(comment.created_time))]),
-                  ]
-                ),
               ]),
-            ]),
-            _vm._v(" "),
-            comment.user_id == _vm.$store.getters.currentUser.id ||
-            _vm.$store.getters.currentUser.role == 1
-              ? _c("div", { staticClass: "ms-auto" }, [
-                  _c("div", { staticClass: "dropdown dropdown-menu-end" }, [
-                    _vm._m(0, true),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "dropdown-menu" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "dropdown-item",
-                          attrs: { role: "button" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.initEditComment(comment, _vm.post_id)
+              _vm._v(" "),
+              comment.user_id == _vm.$store.getters.currentUser.id ||
+              _vm.$store.getters.currentUser.role == 1
+                ? _c("div", { staticClass: "ms-auto" }, [
+                    _c("div", { staticClass: "dropdown dropdown-menu-end" }, [
+                      _vm._m(0, true),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "dropdown-menu" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { role: "button" },
+                            on: {
+                              click: function ($event) {
+                                return _vm.initEditComment(comment, _vm.post_id)
+                              },
                             },
                           },
-                        },
-                        [_vm._v("Edit")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "dropdown-divider" }),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "dropdown-item",
-                          attrs: { role: "button" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.deleteComment(comment)
+                          [_vm._v("Edit")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "dropdown-divider" }),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { role: "button" },
+                            on: {
+                              click: function ($event) {
+                                return _vm.deleteComment(comment)
+                              },
                             },
                           },
-                        },
-                        [_vm._v("Delete")]
-                      ),
+                          [_vm._v("Delete")]
+                        ),
+                      ]),
                     ]),
-                  ]),
-                ])
-              : _vm._e(),
-          ]),
-        ])
+                  ])
+                : _vm._e(),
+            ]),
+          ]
+        )
       }),
       _vm._v(" "),
       _vm.comments.length || _vm.comments.last_page != _vm.comment.currentPage
@@ -33571,7 +33609,23 @@ var render = function () {
                 ]
               ),
               _vm._v(" "),
-              _vm._m(1, true),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary w-100",
+                  attrs: { role: "button" },
+                  on: {
+                    click: function ($event) {
+                      return _vm.hideComments($event, data.id)
+                    },
+                  },
+                },
+                [
+                  _c("i", { staticClass: "fa fa-commenting-o" }),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Comments")]),
+                ]
+              ),
             ]
           ),
           _vm._v(" "),
@@ -33650,6 +33704,7 @@ var render = function () {
                   post_id: data.id,
                   sort: _vm.data_pass.sort,
                   sort_id: _vm.data_pass.sort_id,
+                  display: _vm.data_pass.isShow,
                 },
               }),
             ],
@@ -33673,23 +33728,6 @@ var staticRenderFns = [
         attrs: { role: "button", "data-bs-toggle": "dropdown" },
       },
       [_c("i", { staticClass: "fa fa-ellipsis-h" })]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "btn btn-outline-secondary w-100",
-        attrs: { role: "button" },
-      },
-      [
-        _c("i", { staticClass: "fa fa-commenting-o" }),
-        _vm._v(" "),
-        _c("span", [_vm._v("Comments")]),
-      ]
     )
   },
 ]

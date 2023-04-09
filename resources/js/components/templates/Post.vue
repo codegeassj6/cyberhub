@@ -244,7 +244,7 @@
             <i class="fa fa-thumbs-up"></i>
             <span>Like</span>
           </a>
-          <a role="button" class="btn btn-outline-secondary w-100">
+          <a role="button" class="btn btn-outline-secondary w-100" @click="hideComments($event, data.id)">
             <i class="fa fa-commenting-o"></i>
             <span>Comments</span>
           </a>
@@ -291,6 +291,7 @@
             :post_id="data.id"
             :sort="data_pass.sort"
             :sort_id="data_pass.sort_id"
+            :display="data_pass.isShow"
             :key="data.id"
           />
         </div>
@@ -308,6 +309,7 @@ export default {
       data_pass: {
         sort: "",
         sort_id: null,
+        isShow: [],
       },
     };
   },
@@ -320,6 +322,19 @@ export default {
   computed: {},
 
   methods: {
+    hideComments(e, post_id) {
+      if(this.data_pass.isShow.includes(post_id)) {
+        e.target.classList.remove('text-primary');
+        this.data_pass.isShow = this.data_pass.isShow.filter(data => {
+          return data !== post_id;
+        })
+      } else {
+        e.target.classList.add('text-primary');
+        this.data_pass.isShow.push(post_id);
+      }
+
+    },
+
     computedPostFile(file_link) {
       return `/storage/post/file/${file_link}`;
     },
@@ -396,10 +411,17 @@ export default {
       var ext = re.exec(fileName)[1];
       return ext.trim();
     },
-
-
-
   },
+
+  watch: {
+      $data: {
+          handler: function(val, oldVal) {
+              console.log('watcher: ',val);
+          },
+          deep: true
+      },
+  },
+
   updated() {},
 
 
@@ -422,3 +444,5 @@ export default {
   color: #0d6efd !important;
 }
 </style>
+
+

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="(comment, index) in comments.data" :key="index">
+    <div v-show="!display.includes(comment.post_id)" v-for="(comment, index) in comments.data" :key="index">
       <div class="d-flex flex-row mb-2">
         <img
           :src="computedUserAvatar(comment)"
@@ -152,6 +152,9 @@ export default {
     sort_id: {
       type: Number,
     },
+    display: {
+      type: Array,
+    }
   },
 
   computed: {
