@@ -1,6 +1,4 @@
 Task:
-scroll post paginate
-scroll comment paginate
 pin to top post
 change password
 google adsense
