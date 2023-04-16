@@ -7,3 +7,4 @@ google adsense
 facebook login
 chat
 emoji on post
+payment

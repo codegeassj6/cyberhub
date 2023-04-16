@@ -17,7 +17,7 @@
         :key="index"
       >
         <div
-          class="position-fixed bottom-0 end-0 px-3"
+          class="position-fixed top-0 end-50 px-3"
           style="z-index: 11"
         >
           <div
@@ -43,13 +43,20 @@
         </div>
       </div>
     </div>
+
+    <div v-if="$store.getters.currentUser.role == 1">
+      <ChatButton />
+    </div>
+
   </div>
 </template>
+
 
 <script>
 import Nav from "./templates/Nav.vue";
 import Footer from "./templates/Footer.vue";
 import Home from "./Home.vue";
+import ChatButton from './templates/ChatButton.vue'
 
 export default {
   data() {
@@ -67,6 +74,7 @@ export default {
     Nav,
     Footer,
     Home,
+    ChatButton,
   },
 
   methods: {
@@ -82,3 +90,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.top-0 {
+  top: 2% !important;
+}
+</style>

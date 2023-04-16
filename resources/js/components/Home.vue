@@ -468,7 +468,7 @@
                     <button
                       class="btn btn-light px-2 btn-sm"
                       type="button"
-                      @click="uploadTriggerInput"
+                      @click="inputTriggerButton('upload_files')"
                     >
                       <i class="fa fa-file-image-o fa-lg"></i>
                     </button>
@@ -479,27 +479,9 @@
                       accept="image/png, image/jpg, image/jpeg, video/mp4"
                       multiple
                       @change="attachFile"
+                      id="upload_files"
                     />
                   </div>
-
-                  <div class="">
-                    <button
-                      class="btn btn-light px-2 btn-sm"
-                      type="button"
-                    >
-                      <i class="fa fa-camera-retro fa-lg"></i>
-                    </button>
-                  </div>
-
-                  <div class="">
-                    <button
-                      class="btn btn-light px-2 btn-sm"
-                      type="button"
-                    >
-                      <i class="fa fa-video-camera fa-lg"></i>
-                    </button>
-                  </div>
-
 
                   <div class="ms-auto">
                       <button
@@ -679,14 +661,19 @@ export default {
       return ext.trim();
     },
 
-    uploadTriggerInput() {
-      var elem = this.$refs.input_upload;
-      if (elem && document.createEvent) {
-        var evt = document.createEvent("MouseEvents");
-        evt.initEvent("click", true, false);
-        elem.dispatchEvent(evt);
-      }
+    // uploadTriggerInput(e) {
+    //   var elem = this.$refs.input_upload;
+    //   if (elem && document.createEvent) {
+    //     var evt = document.createEvent("MouseEvents");
+    //     evt.initEvent("click", true, false);
+    //     elem.dispatchEvent(evt);
+    //   }
+    // },
+
+    inputTriggerButton(id) {
+      document.getElementById(id).click();
     },
+
 
     createPost(e) {
       if (document.getElementById("editable").innerText.length > 1000) {
