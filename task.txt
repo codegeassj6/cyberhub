@@ -1,5 +1,7 @@
 Task:
 pin to top post
+take camera
+record a video
 change password
 google adsense
 facebook login
