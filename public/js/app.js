@@ -33434,6 +33434,7 @@ var render = function () {
         staticClass: "bg-primary text-white",
         class:
           _vm.$route.name == "ResetPasswordRequest" ||
+          _vm.$route.name == "Game" ||
           _vm.$route.name == "Login"
             ? "fixed-bottom"
             : null,
