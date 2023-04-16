@@ -463,28 +463,45 @@
                       <li><a class="dropdown-item" href="#">Link 3</a></li>
                     </ul>
                   </div>
-                  <div>
-                    <div class="">
-                      <button
-                        class="btn btn-light px-4 btn-sm"
-                        type="button"
-                        @click="uploadTriggerInput"
-                      >
-                        <i class="fa fa-file-image-o fa-lg"></i>
-                      </button>
-                      <input
-                        type="file"
-                        class="d-none"
-                        ref="input_upload"
-                        accept="image/png, image/jpg, image/jpeg, video/mp4"
-                        multiple
-                        @change="attachFile"
-                      />
-                    </div>
+
+                  <div class="">
+                    <button
+                      class="btn btn-light px-2 btn-sm"
+                      type="button"
+                      @click="uploadTriggerInput"
+                    >
+                      <i class="fa fa-file-image-o fa-lg"></i>
+                    </button>
+                    <input
+                      type="file"
+                      class="d-none"
+                      ref="input_upload"
+                      accept="image/png, image/jpg, image/jpeg, video/mp4"
+                      multiple
+                      @change="attachFile"
+                    />
                   </div>
 
-                  <div class="ms-auto">
+                  <div class="">
+                    <button
+                      class="btn btn-light px-2 btn-sm"
+                      type="button"
+                    >
+                      <i class="fa fa-camera-retro fa-lg"></i>
+                    </button>
+                  </div>
 
+                  <div class="">
+                    <button
+                      class="btn btn-light px-2 btn-sm"
+                      type="button"
+                    >
+                      <i class="fa fa-video-camera fa-lg"></i>
+                    </button>
+                  </div>
+
+
+                  <div class="ms-auto">
                       <button
                         class="btn btn-primary btn-sm px-5 shadow"
                         @click="createPost"

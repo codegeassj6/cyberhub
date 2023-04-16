@@ -6016,6 +6016,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -31559,35 +31576,37 @@ var render = function () {
                             _c("div", { staticClass: "d-flex" }, [
                               _vm._m(6),
                               _vm._v(" "),
-                              _c("div", [
-                                _c("div", {}, [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-light px-4 btn-sm",
-                                      attrs: { type: "button" },
-                                      on: { click: _vm.uploadTriggerInput },
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fa fa-file-image-o fa-lg",
-                                      }),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    ref: "input_upload",
-                                    staticClass: "d-none",
-                                    attrs: {
-                                      type: "file",
-                                      accept:
-                                        "image/png, image/jpg, image/jpeg, video/mp4",
-                                      multiple: "",
-                                    },
-                                    on: { change: _vm.attachFile },
-                                  }),
-                                ]),
+                              _c("div", {}, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-light px-2 btn-sm",
+                                    attrs: { type: "button" },
+                                    on: { click: _vm.uploadTriggerInput },
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-file-image-o fa-lg",
+                                    }),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("input", {
+                                  ref: "input_upload",
+                                  staticClass: "d-none",
+                                  attrs: {
+                                    type: "file",
+                                    accept:
+                                      "image/png, image/jpg, image/jpeg, video/mp4",
+                                    multiple: "",
+                                  },
+                                  on: { change: _vm.attachFile },
+                                }),
                               ]),
+                              _vm._v(" "),
+                              _vm._m(7),
+                              _vm._v(" "),
+                              _vm._m(8),
                               _vm._v(" "),
                               _c("div", { staticClass: "ms-auto" }, [
                                 _c(
@@ -31646,7 +31665,7 @@ var render = function () {
               [
                 _c("div", { staticClass: "modal-dialog modal-lg" }, [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(7),
+                    _vm._m(9),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-body" }, [
                       _c("div", { staticClass: "card mb-4" }, [
@@ -32413,6 +32432,30 @@ var staticRenderFns = [
           ]),
         ]),
       ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", {}, [
+      _c(
+        "button",
+        { staticClass: "btn btn-light px-2 btn-sm", attrs: { type: "button" } },
+        [_c("i", { staticClass: "fa fa-camera-retro fa-lg" })]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", {}, [
+      _c(
+        "button",
+        { staticClass: "btn btn-light px-2 btn-sm", attrs: { type: "button" } },
+        [_c("i", { staticClass: "fa fa-video-camera fa-lg" })]
+      ),
     ])
   },
   function () {
