@@ -841,9 +841,12 @@ export default {
 
   created() {
     window.addEventListener('scroll', this.handleScroll);
+
   },
 
-  updated() {},
+  updated() {
+
+  },
 
   beforeMount() {},
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary bg-gradient fixed-top">
       <div class="container">
         <router-link to="/"
           ><a class="navbar-brand" href="#!">JCafe</a></router-link

@@ -6273,6 +6273,118 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 //import name from './
 
@@ -13028,7 +13140,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.fixed-btm[data-v-efab83aa] {\n    position: fixed;\n    right: 0;\n    bottom: 0;\n    z-index: 1030;\n}\n.accordion[data-v-efab83aa] {\n  border: 1px solid #e1e1e1;\n}\n.w-25[data-v-efab83aa] {\n  width: 350px !important;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.fixed-btm[data-v-efab83aa] {\n    position: fixed;\n    right: 0;\n    bottom: 0;\n    z-index: 1030;\n}\n.accordion[data-v-efab83aa] {\n  border: 1px solid #e1e1e1;\n}\n.w-25[data-v-efab83aa] {\n  width: 350px !important;\n}\n.accordion-body[data-v-efab83aa] {\n  height: 352px;\n  padding: 0 !important;\n}\n.chat-user[data-v-efab83aa] {\n  height: 60px;\n}\n.chat-user-size[data-v-efab83aa] {\n  height: 308px;\n  overflow-y: scroll;\n}\n.front-index[data-v-efab83aa] {\n  z-index: 1000;\n}\n.send-btn-0[data-v-efab83aa] {\n  bottom: 4px !important;\n  right: 8px !important;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13052,7 +13164,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-comment[data-v-396a43a4] {\r\n  background: #f1f1f1;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-comment[data-v-396a43a4] {\n  background: #f1f1f1;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13076,7 +13188,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.border-post[data-v-038d89e1] {\r\n  border: 1px solid #e1e1e1;\n}\n.attach_image[data-v-038d89e1] {\r\n  height: 300px;\n}\n.btn-outline-secondary[data-v-038d89e1]:hover {\r\n  background: #ffffff;\r\n  color: #0d6efd !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.border-post[data-v-038d89e1] {\n  border: 1px solid #e1e1e1;\n}\n.attach_image[data-v-038d89e1] {\n  height: 300px;\n}\n.btn-outline-secondary[data-v-038d89e1]:hover {\n  background: #ffffff;\n  color: #0d6efd !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -31704,7 +31816,7 @@ var render = function () {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.$store.getters.currentUser.role == 1
+      _vm.$store.getters.currentUser && _vm.$store.getters.currentUser.role == 1
         ? _c("div", [_c("ChatButton")], 1)
         : _vm._e(),
     ],
@@ -32824,13 +32936,205 @@ var staticRenderFns = [
                 },
               },
               [
-                _c("div", { staticClass: "accordion-body" }, [
-                  _vm._v(
-                    "\n          Placeholder content for this accordion, which is intended to\n          demonstrate the "
-                  ),
-                  _c("code", [_vm._v(".accordion-flush")]),
-                  _vm._v(
-                    " class. This is the\n          first item's accordion body.\n        "
+                _c("div", { staticClass: "accordion-body position-relative" }, [
+                  _c("div", { staticClass: "chat-user-size" }, [
+                    _c("div", { staticClass: "d-flex flex-column" }, [
+                      _c("div", { staticClass: "border pointer" }, [
+                        _c("div", { staticClass: "d-flex chat-user" }, [
+                          _c("div", { staticClass: "mx-2 py-1" }, [
+                            _c("img", {
+                              staticClass: "h-100",
+                              attrs: {
+                                src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU",
+                                width: "55",
+                                alt: "",
+                              },
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "d-flex flex-column mt-2" },
+                            [
+                              _c("div", [_vm._v("Jhon Rey Repuela")]),
+                              _vm._v(" "),
+                              _c("div", [_vm._v("f")]),
+                            ]
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "d-flex flex-column" }, [
+                      _c("div", { staticClass: "border pointer" }, [
+                        _c("div", { staticClass: "d-flex chat-user" }, [
+                          _c("div", { staticClass: "me-2" }, [
+                            _c("img", {
+                              staticClass: "h-100",
+                              attrs: {
+                                src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU",
+                                width: "60",
+                                alt: "",
+                              },
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "d-flex flex-column mt-2" },
+                            [
+                              _c("div", [_vm._v("Jhon Rey Repuela")]),
+                              _vm._v(" "),
+                              _c("div", [_vm._v("e")]),
+                            ]
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "d-flex flex-column" }, [
+                      _c("div", { staticClass: "border pointer" }, [
+                        _c("div", { staticClass: "d-flex chat-user" }, [
+                          _c("div", { staticClass: "me-2" }, [
+                            _c("img", {
+                              staticClass: "h-100",
+                              attrs: {
+                                src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU",
+                                width: "60",
+                                alt: "",
+                              },
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "d-flex flex-column mt-2" },
+                            [
+                              _c("div", [_vm._v("Jhon Rey Repuela")]),
+                              _vm._v(" "),
+                              _c("div", [_vm._v("d")]),
+                            ]
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "d-flex flex-column" }, [
+                      _c("div", { staticClass: "border pointer" }, [
+                        _c("div", { staticClass: "d-flex chat-user" }, [
+                          _c("div", { staticClass: "me-2" }, [
+                            _c("img", {
+                              staticClass: "h-100",
+                              attrs: {
+                                src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU",
+                                width: "60",
+                                alt: "",
+                              },
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "d-flex flex-column mt-2" },
+                            [
+                              _c("div", [_vm._v("Jhon Rey Repuela")]),
+                              _vm._v(" "),
+                              _c("div", [_vm._v("c")]),
+                            ]
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "d-flex flex-column" }, [
+                      _c("div", { staticClass: "border pointer" }, [
+                        _c("div", { staticClass: "d-flex chat-user" }, [
+                          _c("div", { staticClass: "me-2" }, [
+                            _c("img", {
+                              staticClass: "h-100",
+                              attrs: {
+                                src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU",
+                                width: "60",
+                                alt: "",
+                              },
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "d-flex flex-column mt-2" },
+                            [
+                              _c("div", [_vm._v("Jhon Rey Repuela")]),
+                              _vm._v(" "),
+                              _c("div", [_vm._v("b")]),
+                            ]
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "d-flex flex-column" }, [
+                      _c("div", { staticClass: "border pointer" }, [
+                        _c("div", { staticClass: "d-flex chat-user" }, [
+                          _c("div", { staticClass: "me-2" }, [
+                            _c("img", {
+                              staticClass: "h-100",
+                              attrs: {
+                                src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU",
+                                width: "60",
+                                alt: "",
+                              },
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "d-flex flex-column mt-2" },
+                            [
+                              _c("div", [_vm._v("Jhon Rey Repuela")]),
+                              _vm._v(" "),
+                              _c("div", [_vm._v("a")]),
+                            ]
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "position-absolute bottom-0 w-100" },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "d-flex border-1 shadow border-info border p-2 bg-white front-index position-relative",
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "me-5",
+                              attrs: { contenteditable: "true" },
+                            },
+                            [_vm._v("\n                s\n              ")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "position-absolute send-btn-0" },
+                            [
+                              _c(
+                                "button",
+                                { staticClass: "btn btn-default btn-sm" },
+                                [_c("i", { staticClass: "fa fa-send fa-lg" })]
+                              ),
+                            ]
+                          ),
+                        ]
+                      ),
+                    ]
                   ),
                 ]),
               ]
@@ -33238,7 +33542,8 @@ var render = function () {
     _c(
       "nav",
       {
-        staticClass: "navbar navbar-expand-sm navbar-dark bg-primary fixed-top",
+        staticClass:
+          "navbar navbar-expand-sm navbar-dark bg-primary bg-gradient fixed-top",
       },
       [
         _c(

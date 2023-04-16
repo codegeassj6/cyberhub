@@ -21,11 +21,123 @@
           aria-labelledby="flush-headingOne"
           data-bs-parent="#accordionFlushExample"
         >
-          <div class="accordion-body">
-            Placeholder content for this accordion, which is intended to
-            demonstrate the <code>.accordion-flush</code> class. This is the
-            first item's accordion body.
+          <div class="accordion-body position-relative">
+            <div class="chat-user-size">
+              <div class="d-flex flex-column">
+                <div class="border pointer">
+                  <div class="d-flex chat-user">
+                    <div class="mx-2 py-1">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU" width="55" class="h-100" alt="">
+                    </div>
+
+                    <div class="d-flex flex-column mt-2">
+                      <div>Jhon Rey Repuela</div>
+                      <div>f</div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-column">
+                <div class="border pointer">
+                  <div class="d-flex chat-user">
+                    <div class="me-2">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU" width="60" class="h-100" alt="">
+                    </div>
+
+                    <div class="d-flex flex-column mt-2">
+                      <div>Jhon Rey Repuela</div>
+                      <div>e</div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-column">
+                <div class="border pointer">
+                  <div class="d-flex chat-user">
+                    <div class="me-2">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU" width="60" class="h-100" alt="">
+                    </div>
+
+                    <div class="d-flex flex-column mt-2">
+                      <div>Jhon Rey Repuela</div>
+                      <div>d</div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-column">
+                <div class="border pointer">
+                  <div class="d-flex chat-user">
+                    <div class="me-2">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU" width="60" class="h-100" alt="">
+                    </div>
+
+                    <div class="d-flex flex-column mt-2">
+                      <div>Jhon Rey Repuela</div>
+                      <div>c</div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-column">
+                <div class="border pointer">
+                  <div class="d-flex chat-user">
+                    <div class="me-2">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU" width="60" class="h-100" alt="">
+                    </div>
+
+                    <div class="d-flex flex-column mt-2">
+                      <div>Jhon Rey Repuela</div>
+                      <div>b</div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-column">
+                <div class="border pointer">
+                  <div class="d-flex chat-user">
+                    <div class="me-2">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU" width="60" class="h-100" alt="">
+                    </div>
+
+                    <div class="d-flex flex-column mt-2">
+                      <div>Jhon Rey Repuela</div>
+                      <div>a</div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+
+
+            <div class="position-absolute bottom-0 w-100">
+              <div class="d-flex border-1 shadow border-info border p-2 bg-white front-index position-relative">
+                <div class="me-5" contenteditable="true">
+                  s
+                </div>
+
+                <div class="position-absolute send-btn-0">
+                  <button class="btn btn-default btn-sm"><i class="fa fa-send fa-lg"></i></button>
+                </div>
+
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -88,6 +200,29 @@ export default {
 
 .w-25 {
   width: 350px !important;
+}
+
+.accordion-body {
+  height: 352px;
+  padding: 0 !important;
+}
+
+.chat-user {
+  height: 60px;
+}
+
+.chat-user-size {
+  height: 308px;
+  overflow-y: scroll;
+}
+
+.front-index {
+  z-index: 1000;
+}
+
+.send-btn-0 {
+  bottom: 4px !important;
+  right: 8px !important;
 }
 
 </style>
