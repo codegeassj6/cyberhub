@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="!currentUser">
+    <div v-if="!currentUser" class="mb-150">
       <div id="carouselintro" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button
@@ -392,9 +392,9 @@
           </div>
         </div>
       </div>
-    </template>
+    </div>
 
-    <template v-else>
+    <div v-else>
       <div class="container space-intro">
         <div class="row d-flex">
           <div class="col-lg-8">
@@ -607,7 +607,7 @@
           </div>
         </div>
       </div>
-    </template>
+    </div>
   </div>
 </template>
 <script>

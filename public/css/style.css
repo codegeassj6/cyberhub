@@ -9,6 +9,10 @@ a {
     padding-top: 80px;
 }
 
+.mb-150 {
+  margin-bottom: 150px;
+}
+
 [contenteditable]:focus {
     outline: 0px solid transparent;
 }
@@ -69,3 +73,4 @@ pre {
     left: 50%;
     right: 0;
 }
+

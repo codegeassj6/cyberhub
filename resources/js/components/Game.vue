@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container space-intro">
+    <div class="container space-intro mb-150">
       <div class="row">
         <div class="col-lg-2" v-for="(game, index) in games.data" :key="index">
           <div class="card mb-4">
@@ -115,3 +115,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+</style>
