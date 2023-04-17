@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="bg-primary text-white" :class="$route.name == 'ResetPasswordRequest' || $route.name == 'Game' || $route.name == 'Login' ? 'fixed-bottom' : null">
+        <div class="bg-primary bg-gradient text-white" :class="$route.name == 'ResetPasswordRequest' || $route.name == 'Game' || $route.name == 'Login' ? 'fixed-bottom' : null">
             <div class="container">
                 <div class="d-flex">
                     <div class="p-4 flex-fill">

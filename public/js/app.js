@@ -13164,7 +13164,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-comment[data-v-396a43a4] {\r\n  background: #f1f1f1;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-comment[data-v-396a43a4] {\n  background: #f1f1f1;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -32011,7 +32011,7 @@ var render = function () {
                                 "button",
                                 {
                                   staticClass:
-                                    "btn btn-primary btn-sm px-5 shadow",
+                                    "btn btn-primary bg-gradient btn-sm px-5 shadow",
                                   on: { click: _vm.createPost },
                                 },
                                 [
@@ -32185,7 +32185,7 @@ var render = function () {
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-secondary",
+                        staticClass: "btn btn-secondary bg-gradient",
                         attrs: { type: "button", "data-bs-dismiss": "modal" },
                       },
                       [_vm._v("\n              Cancel\n            ")]
@@ -33330,7 +33330,7 @@ var render = function () {
             ? _c(
                 "button",
                 {
-                  staticClass: "btn btn-primary btn-sm",
+                  staticClass: "btn btn-primary btn-sm bg-gradient",
                   attrs: { type: "button" },
                   on: {
                     click: function ($event) {
@@ -33425,7 +33425,7 @@ var render = function () {
     _c(
       "div",
       {
-        staticClass: "bg-primary text-white",
+        staticClass: "bg-primary bg-gradient text-white",
         class:
           _vm.$route.name == "ResetPasswordRequest" ||
           _vm.$route.name == "Game" ||

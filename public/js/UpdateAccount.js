@@ -436,7 +436,7 @@ var render = function () {
                           _c(
                             "button",
                             {
-                              staticClass: "btn btn-primary",
+                              staticClass: "btn btn-primary bg-gradient",
                               attrs: { type: "button" },
                               on: { click: _vm.uploadTriggerInput },
                             },
@@ -724,7 +724,7 @@ var render = function () {
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-primary",
+                        staticClass: "btn btn-primary bg-gradient",
                         attrs: { type: "button" },
                         on: { click: _vm.updateProfile },
                       },

@@ -33,7 +33,7 @@
 
                   <template v-if="form.boolUpload">
                     <button
-                      class="btn btn-primary"
+                      class="btn btn-primary bg-gradient"
                       @click="uploadTriggerInput"
                       type="button"
                     >
@@ -151,7 +151,7 @@
 
                     <!-- Save changes button-->
                     <button
-                      class="btn btn-primary"
+                      class="btn btn-primary bg-gradient"
                       @click="updateProfile"
                       type="button"
                     >

@@ -695,7 +695,8 @@ var render = function () {
                                       _c(
                                         "button",
                                         {
-                                          staticClass: "btn btn-primary btn-sm",
+                                          staticClass:
+                                            "btn btn-primary btn-sm bg-gradient",
                                           attrs: { type: "button" },
                                           on: {
                                             click: function ($event) {
@@ -728,7 +729,8 @@ var render = function () {
                                       _c(
                                         "button",
                                         {
-                                          staticClass: "btn btn-primary btn-sm",
+                                          staticClass:
+                                            "btn btn-primary btn-sm bg-gradient",
                                           attrs: { type: "button" },
                                           on: {
                                             click: function ($event) {

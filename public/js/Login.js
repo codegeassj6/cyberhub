@@ -379,7 +379,8 @@ var render = function () {
                       "button",
                       {
                         ref: "login_btn",
-                        staticClass: "btn btn-primary btn-lg btn-block",
+                        staticClass:
+                          "btn btn-primary bg-gradient btn-lg btn-block",
                         attrs: { type: "submit" },
                       },
                       [_vm._v("\n              Sign in\n            ")]

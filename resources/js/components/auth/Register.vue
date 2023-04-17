@@ -113,7 +113,7 @@
                     <div class="d-flex justify-content-center">
                       <button
                         type="submit"
-                        class="btn btn-primary btn-block btn-lg text-white"
+                        class="btn btn-primary btn-block btn-lg text-white bg-gradient"
                       >
                         Register
                       </button>

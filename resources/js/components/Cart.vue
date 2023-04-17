@@ -85,7 +85,7 @@
                             <div class="input-group mb-1">
                               <button
                                 @click="decreaseQuantity(item)"
-                                class="btn btn-primary btn-sm"
+                                class="btn btn-primary btn-sm bg-gradient"
                                 type="button"
                               >
                                 <i class="fa fa-minus"></i>
@@ -100,7 +100,7 @@
                               />
                               <button
                                 @click="increaseQuantity(item)"
-                                class="btn btn-primary btn-sm"
+                                class="btn btn-primary btn-sm bg-gradient"
                                 type="button"
                               >
                                 <i class="fa fa-plus"></i>

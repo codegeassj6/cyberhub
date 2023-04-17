@@ -444,7 +444,7 @@ var render = function () {
                       _c(
                         "button",
                         {
-                          staticClass: "btn btn-sm btn-primary",
+                          staticClass: "btn btn-sm btn-primary bg-gradient",
                           on: { click: _vm.UploadFile },
                         },
                         [_vm._v("\n                Upload\n              ")]
@@ -453,7 +453,7 @@ var render = function () {
                       _c(
                         "button",
                         {
-                          staticClass: "btn btn-danger btn-sm",
+                          staticClass: "btn btn-danger bg-gradient btn-sm",
                           on: { click: _vm.cancelUpload },
                         },
                         [

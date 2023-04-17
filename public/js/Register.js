@@ -784,7 +784,8 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-primary btn-block btn-lg text-white",
+          staticClass:
+            "btn btn-primary btn-block btn-lg text-white bg-gradient",
           attrs: { type: "submit" },
         },
         [_vm._v("\n                      Register\n                    ")]

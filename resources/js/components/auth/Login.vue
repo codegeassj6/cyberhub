@@ -45,7 +45,7 @@
               </div>
 
               <!-- Submit button -->
-              <button type="submit" ref="login_btn" class="btn btn-primary btn-lg btn-block">
+              <button type="submit" ref="login_btn" class="btn btn-primary bg-gradient btn-lg btn-block">
                 Sign in
               </button>
             </form>

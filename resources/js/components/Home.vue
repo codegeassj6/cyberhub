@@ -485,7 +485,7 @@
 
                   <div class="ms-auto">
                       <button
-                        class="btn btn-primary btn-sm px-5 shadow"
+                        class="btn btn-primary bg-gradient btn-sm px-5 shadow"
                         @click="createPost"
                       >
                         Post
@@ -590,7 +590,7 @@
             <div class="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
+                class="btn btn-secondary bg-gradient"
                 data-bs-dismiss="modal"
               >
                 Cancel

@@ -31,10 +31,10 @@
                 </div>
               </div>
               <div>
-                <button class="btn btn-sm btn-primary" @click="UploadFile">
+                <button class="btn btn-sm btn-primary bg-gradient" @click="UploadFile">
                   Upload
                 </button>
-                <button class="btn btn-danger btn-sm" @click="cancelUpload">
+                <button class="btn btn-danger bg-gradient btn-sm" @click="cancelUpload">
                   <i class="fa fa-close"></i> Cancel
                 </button>
               </div>

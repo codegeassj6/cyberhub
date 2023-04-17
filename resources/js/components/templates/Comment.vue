@@ -97,7 +97,7 @@
           v-if="!edit.comment"
           type="button"
           @click="postComment(post_id)"
-          class="btn btn-primary btn-sm"
+          class="btn btn-primary btn-sm bg-gradient"
         >
           Post comment
         </button>
