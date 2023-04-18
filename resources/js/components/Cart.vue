@@ -147,14 +147,22 @@
                       </div>
 
                       <div class="d-flex mb-2">
-                        <stripe-element-card :pk="stripe.pk"></stripe-element-card>
+                        <stripe-checkout
+                          ref="checkoutRef"
+                          mode="payment"
+                          :pk="stripe.pk"
+                          :line-items="stripe.lineItems"
+                          :success-url="stripe.successURL"
+                          :cancel-url="stripe.cancelURL"
+                          @loading="v => loading = v"
+                        />
                       </div>
 
                       <div class="text-center">
                         <button
                           @click="submitOrder"
                           class="btn btn-primary w-100"
-                        >1
+                        >
                           Place Order
                         </button>
                       </div>
@@ -170,7 +178,7 @@
   </div>
 </template>
 <script>
-import { StripeElementCard } from '@vue-stripe/vue-stripe';
+import { StripeCheckout  } from '@vue-stripe/vue-stripe';
 
 export default {
   data() {
@@ -180,11 +188,20 @@ export default {
       subtotal: "",
       stripe: {
         pk: 'pk_test_51MgvekEcY1OBCePNucDrMaR7fDOJJJXCDYzlvazEHYvkTtsAGyWAl7MYSqyRfndRhI1fdnIspNiUU77oT4d19oxG00YLvmCTb6',
+        lineItems: [
+          {
+            price: 'price_1My7fXEcY1OBCePNtbFaRpz3',
+            quanitity: 1,
+
+          }
+        ],
+        successURL: '',
+        cancelURL: '',
       }
     };
   },
   components: {
-    StripeElementCard,
+    StripeCheckout,
   },
 
   props: [],

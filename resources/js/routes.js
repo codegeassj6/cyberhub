@@ -33,6 +33,18 @@ export const routes = [
     },
 
     {
+        path: '/payment/stripe/success',
+        name: "StripeSuccess",
+        component: () => import(/* webpackChunkName: "Home" */ "./components/stripe/StripeSuccess.vue"),
+    },
+
+    {
+        path: '/payment/stripe/error',
+        name: "StripeError",
+        component: () => import(/* webpackChunkName: "Home" */ "./components/stripe/StripeError.vue"),
+    },
+
+    {
         path: '/api/oauth/login/callback/:provider',
         name: "Callback_provider",
         component: () => import(/* webpackChunkName: "Oauth" */ "./components/auth/Oauth.vue"),

@@ -7571,7 +7571,7 @@ var routes = [{
   path: '/',
   name: "Home",
   component: function component() {
-    return Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./components/Home.vue */ "./resources/js/components/Home.vue"));
+    return __webpack_require__.e(/*! import() | Home */ "Home").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Home.vue */ "./resources/js/components/Home.vue"));
   }
 }, {
   path: '/login',
@@ -7599,6 +7599,18 @@ var routes = [{
   },
   meta: {
     disableIfLoggedIn: true
+  }
+}, {
+  path: '/payment/stripe/success',
+  name: "StripeSuccess",
+  component: function component() {
+    return __webpack_require__.e(/*! import() | Home */ "Home").then(__webpack_require__.bind(__webpack_require__, /*! ./components/stripe/StripeSuccess.vue */ "./resources/js/components/stripe/StripeSuccess.vue"));
+  }
+}, {
+  path: '/payment/stripe/error',
+  name: "StripeError",
+  component: function component() {
+    return __webpack_require__.e(/*! import() | Home */ "Home").then(__webpack_require__.bind(__webpack_require__, /*! ./components/stripe/StripeError.vue */ "./resources/js/components/stripe/StripeError.vue"));
   }
 }, {
   path: '/api/oauth/login/callback/:provider',
@@ -51028,6 +51040,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
+/******/ 			if (chunkId === "Home") return "js/Home.js";
 /******/ 			if ({"Login":1,"ResetPassword":1,"ResetPasswordRequest":1,"Oauth":1,"Register":1,"Store":1,"Timeline":1,"UpdateAccount":1,"PostPage":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			if (chunkId === "Game") return "js/Game.js";
 /******/ 			if (chunkId === "Cart") return "js/Cart.js";

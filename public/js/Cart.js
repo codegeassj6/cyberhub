@@ -200,6 +200,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -209,12 +217,18 @@ __webpack_require__.r(__webpack_exports__);
       orders: [],
       subtotal: "",
       stripe: {
-        pk: 'pk_test_51MgvekEcY1OBCePNucDrMaR7fDOJJJXCDYzlvazEHYvkTtsAGyWAl7MYSqyRfndRhI1fdnIspNiUU77oT4d19oxG00YLvmCTb6'
+        pk: 'pk_test_51MgvekEcY1OBCePNucDrMaR7fDOJJJXCDYzlvazEHYvkTtsAGyWAl7MYSqyRfndRhI1fdnIspNiUU77oT4d19oxG00YLvmCTb6',
+        lineItems: [{
+          price: 'price_1My7fXEcY1OBCePNtbFaRpz3',
+          quanitity: 1
+        }],
+        successURL: '',
+        cancelURL: ''
       }
     };
   },
   components: {
-    StripeElementCard: _vue_stripe_vue_stripe__WEBPACK_IMPORTED_MODULE_0__.StripeElementCard
+    StripeCheckout: _vue_stripe_vue_stripe__WEBPACK_IMPORTED_MODULE_0__.StripeCheckout
   },
   props: [],
   computed: {
@@ -828,8 +842,20 @@ var render = function () {
                         "div",
                         { staticClass: "d-flex mb-2" },
                         [
-                          _c("stripe-element-card", {
-                            attrs: { pk: _vm.stripe.pk },
+                          _c("stripe-checkout", {
+                            ref: "checkoutRef",
+                            attrs: {
+                              mode: "payment",
+                              pk: _vm.stripe.pk,
+                              "line-items": _vm.stripe.lineItems,
+                              "success-url": _vm.stripe.successURL,
+                              "cancel-url": _vm.stripe.cancelURL,
+                            },
+                            on: {
+                              loading: function (v) {
+                                return (_vm.loading = v)
+                              },
+                            },
                           }),
                         ],
                         1
@@ -844,7 +870,7 @@ var render = function () {
                           },
                           [
                             _vm._v(
-                              "1\n                        Place Order\n                      "
+                              "\n                        Place Order\n                      "
                             ),
                           ]
                         ),
