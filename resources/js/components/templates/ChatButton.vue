@@ -4,7 +4,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingOne">
           <button
-            class="accordion-button collapsed"
+            class="accordion-button collapsed shadow-none"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#flush-collapseOne"
@@ -39,87 +39,6 @@
                 </div>
               </div>
 
-              <div class="d-flex flex-column">
-                <div class="border pointer">
-                  <div class="d-flex chat-user">
-                    <div class="me-2">
-                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU" width="60" class="h-100" alt="">
-                    </div>
-
-                    <div class="d-flex flex-column mt-2">
-                      <div>Jhon Rey Repuela</div>
-                      <div>e</div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-              <div class="d-flex flex-column">
-                <div class="border pointer">
-                  <div class="d-flex chat-user">
-                    <div class="me-2">
-                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU" width="60" class="h-100" alt="">
-                    </div>
-
-                    <div class="d-flex flex-column mt-2">
-                      <div>Jhon Rey Repuela</div>
-                      <div>d</div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-              <div class="d-flex flex-column">
-                <div class="border pointer">
-                  <div class="d-flex chat-user">
-                    <div class="me-2">
-                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU" width="60" class="h-100" alt="">
-                    </div>
-
-                    <div class="d-flex flex-column mt-2">
-                      <div>Jhon Rey Repuela</div>
-                      <div>c</div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-              <div class="d-flex flex-column">
-                <div class="border pointer">
-                  <div class="d-flex chat-user">
-                    <div class="me-2">
-                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU" width="60" class="h-100" alt="">
-                    </div>
-
-                    <div class="d-flex flex-column mt-2">
-                      <div>Jhon Rey Repuela</div>
-                      <div>b</div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-              <div class="d-flex flex-column">
-                <div class="border pointer">
-                  <div class="d-flex chat-user">
-                    <div class="me-2">
-                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU" width="60" class="h-100" alt="">
-                    </div>
-
-                    <div class="d-flex flex-column mt-2">
-                      <div>Jhon Rey Repuela</div>
-                      <div>a</div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-
             </div>
 
 
@@ -127,7 +46,7 @@
             <div class="position-absolute bottom-0 w-100">
               <div class="d-flex border-1 shadow border-info border p-2 bg-white front-index position-relative">
                 <div class="me-5" contenteditable="true">
-                  s
+                  Write a message...
                 </div>
 
                 <div class="position-absolute send-btn-0">

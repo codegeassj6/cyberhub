@@ -24,5 +24,12 @@
         "bearer": "{{token}}"
       }
     }
+  },
+  {
+    "_id": "3bb0a74c-73a7-4d56-b6fb-f6522cabadbb",
+    "colName": "Stripe",
+    "created": "2023-04-17T18:49:59.255Z",
+    "sortNum": 20000,
+    "folders": []
   }
 ]

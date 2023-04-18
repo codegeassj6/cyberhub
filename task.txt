@@ -1,10 +1,11 @@
 Task:
-pin to top post
-take camera
-record a video
+chat
+payment
+facebook login
+emoji on post
 change password
 google adsense
-facebook login
-chat
-emoji on post
-payment
+
+
+
+

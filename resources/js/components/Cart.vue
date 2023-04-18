@@ -146,11 +146,15 @@
                         </div>
                       </div>
 
+                      <div class="d-flex mb-2">
+                        <stripe-element-card :pk="stripe.pk"></stripe-element-card>
+                      </div>
+
                       <div class="text-center">
                         <button
                           @click="submitOrder"
                           class="btn btn-primary w-100"
-                        >
+                        >1
                           Place Order
                         </button>
                       </div>
@@ -166,6 +170,7 @@
   </div>
 </template>
 <script>
+import { StripeElementCard } from '@vue-stripe/vue-stripe';
 
 export default {
   data() {
@@ -173,10 +178,13 @@ export default {
       cart_items: "",
       orders: [],
       subtotal: "",
+      stripe: {
+        pk: 'pk_test_51MgvekEcY1OBCePNucDrMaR7fDOJJJXCDYzlvazEHYvkTtsAGyWAl7MYSqyRfndRhI1fdnIspNiUU77oT4d19oxG00YLvmCTb6',
+      }
     };
   },
   components: {
-
+    StripeElementCard,
   },
 
   props: [],
