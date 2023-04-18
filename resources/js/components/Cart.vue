@@ -191,12 +191,12 @@ export default {
         lineItems: [
           {
             price: 'price_1My7fXEcY1OBCePNtbFaRpz3',
-            quanitity: 1,
+            quantity: 1,
 
           }
         ],
-        successURL: '',
-        cancelURL: '',
+        successURL: 'https://jcafe.shop/payment/stripe/success',
+        cancelURL: 'https://jcafe.shop/payment/stripe/error',
       }
     };
   },
@@ -378,20 +378,21 @@ export default {
     },
 
     submitOrder() {
-      if (this.orders.length) {
-        const AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
-        axios({
-          method: "post",
-          data: { id: this.orders },
-          url: `/api/order`,
-          headers: { Authorization: AuthStr },
-        })
-          .then((res) => {
-            this.orders = [];
-            this.cart_items = res.data.cart_items;
-          })
-          .catch((err) => {});
-      }
+      this.$refs.checkoutRef.redirectToCheckout();
+      // if (this.orders.length) {
+      //   const AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
+      //   axios({
+      //     method: "post",
+      //     data: { id: this.orders },
+      //     url: `/api/order`,
+      //     headers: { Authorization: AuthStr },
+      //   })
+      //     .then((res) => {
+      //       this.orders = [];
+      //       this.cart_items = res.data.cart_items;
+      //     })
+      //     .catch((err) => {});
+      // }
     },
   },
 

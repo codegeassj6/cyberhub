@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/Home.js": "/js/Home.js",
     "/js/Login.js": "/js/Login.js",
     "/js/ResetPassword.js": "/js/ResetPassword.js",
     "/js/ResetPasswordRequest.js": "/js/ResetPasswordRequest.js",
@@ -13,6 +14,5 @@
     "/js/Save.js": "/js/Save.js",
     "/js/PostPage.js": "/js/PostPage.js",
     "/js/NotFound.js": "/js/NotFound.js",
-    "/css/app.css": "/css/app.css",
-    "/js/Home.js": "/js/Home.js"
+    "/css/app.css": "/css/app.css"
 }

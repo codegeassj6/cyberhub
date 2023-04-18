@@ -6,3 +6,9 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+$test: red;
+
+.tes-scss {
+  color: $test;
+}

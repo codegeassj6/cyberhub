@@ -220,10 +220,10 @@ __webpack_require__.r(__webpack_exports__);
         pk: 'pk_test_51MgvekEcY1OBCePNucDrMaR7fDOJJJXCDYzlvazEHYvkTtsAGyWAl7MYSqyRfndRhI1fdnIspNiUU77oT4d19oxG00YLvmCTb6',
         lineItems: [{
           price: 'price_1My7fXEcY1OBCePNtbFaRpz3',
-          quanitity: 1
+          quantity: 1
         }],
-        successURL: '',
-        cancelURL: ''
+        successURL: 'https://jcafe.shop/payment/stripe/success',
+        cancelURL: 'https://jcafe.shop/payment/stripe/error'
       }
     };
   },
@@ -359,28 +359,26 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     submitOrder: function submitOrder() {
-      var _this4 = this;
-      if (this.orders.length) {
-        var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
-        axios({
-          method: "post",
-          data: {
-            id: this.orders
-          },
-          url: "/api/order",
-          headers: {
-            Authorization: AuthStr
-          }
-        }).then(function (res) {
-          _this4.orders = [];
-          _this4.cart_items = res.data.cart_items;
-        })["catch"](function (err) {});
-      }
+      this.$refs.checkoutRef.redirectToCheckout();
+      // if (this.orders.length) {
+      //   const AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
+      //   axios({
+      //     method: "post",
+      //     data: { id: this.orders },
+      //     url: `/api/order`,
+      //     headers: { Authorization: AuthStr },
+      //   })
+      //     .then((res) => {
+      //       this.orders = [];
+      //       this.cart_items = res.data.cart_items;
+      //     })
+      //     .catch((err) => {});
+      // }
     }
   },
   updated: function updated() {},
   mounted: function mounted() {
-    var _this5 = this;
+    var _this4 = this;
     var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
     axios({
       method: "get",
@@ -389,7 +387,7 @@ __webpack_require__.r(__webpack_exports__);
         Authorization: AuthStr
       }
     }).then(function (res) {
-      _this5.cart_items = res.data.cart_items;
+      _this4.cart_items = res.data.cart_items;
     })["catch"](function (err) {});
   }
 });
