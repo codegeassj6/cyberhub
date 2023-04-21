@@ -6079,63 +6079,73 @@ __webpack_require__.r(__webpack_exports__);
     inputTriggerButton: function inputTriggerButton(id) {
       document.getElementById(id).click();
     },
-    createPost: function createPost(e) {
-      var _this = this;
-      if (document.getElementById("editable").innerText.length > 1000) {
-        this.$parent.notification.message.push("Message is too long. Only 1000 characters allow");
-        return false;
-      }
-      if (document.getElementById("editable").innerText.length || this.form_data) {
-        e.target.setAttribute('disabled', true);
-        var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
-        axios({
-          method: "POST",
-          params: {
-            message: document.getElementById("editable").innerText,
-            files: this.form_data
-          },
-          data: this.form_data,
-          url: "/api/post",
-          headers: {
-            Authorization: AuthStr
-          }
-        }).then(function (res) {
-          e.target.removeAttribute('disabled');
-          _this.attach_exist = false;
-          _this.form_data = "";
-          document.getElementById("editable").innerHTML = "";
-          _this.posts = res.data;
-          _this.post.currentPage = 1;
-        })["catch"](function (err) {
-          e.target.removeAttribute('disabled');
-        });
-      }
-    },
-    attachFile: function attachFile(e) {
-      if (this.$refs.input_upload.files.length <= 6) {
-        this.attach_exist = true;
-        this.attach.files = [];
-        this.attach.file_type = [];
-        var formData = new FormData();
-        for (var index = 0; index < this.$refs.input_upload.files.length; index++) {
-          this.attach.files.push(URL.createObjectURL(this.$refs.input_upload.files[index]));
-          this.attach.file_type.push(this.$refs.input_upload.files[index].type);
-          formData.append("files[]", this.$refs.input_upload.files[index]);
-        }
-        this.form_data = formData;
-      } else {
-        this.$parent.notification.message.push("Too many files!. Only 6 files can be uploaded.");
-      }
-    },
-    removeAttachInPost: function removeAttachInPost(file) {
-      var exist = this.attach.files.indexOf(file);
-      if (exist > -1) {
-        this.attach.files.splice(exist, 1);
-        this.attach.file_type.splice(exist, 1);
-      }
-    },
+    // createPost(e) {
+    //   if (document.getElementById("editable").innerText.length > 1000) {
+    //     this.$parent.notification.message.push("Message is too long. Only 1000 characters allow");
+    //     return false;
+    //   }
+    //   if (
+    //     document.getElementById("editable").innerText.length ||
+    //     this.form_data
+    //   ) {
+    //     e.target.setAttribute('disabled', true);
+    //     const AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
+    //     axios({
+    //       method: "POST",
+    //       params: {
+    //         message: document.getElementById("editable").innerText,
+    //         files: this.form_data,
+    //       },
+    //       data: this.form_data,
+    //       url: `/api/post`,
+    //       headers: {
+    //         Authorization: AuthStr,
+    //       },
+    //     })
+    //       .then((res) => {
+    //         e.target.removeAttribute('disabled');
+    //         this.attach_exist = false;
+    //         this.form_data = "";
+    //         document.getElementById("editable").innerHTML = "";
+    //         this.posts = res.data;
+    //         this.post.currentPage = 1;
+    //       })
+    //       .catch((err) => {
+    //         e.target.removeAttribute('disabled');
+    //       });
+    //   }
+    // },
+    // attachFile(e) {
+    //   if (this.$refs.input_upload.files.length <= 6) {
+    //     this.attach_exist = true;
+    //     this.attach.files = [];
+    //     this.attach.file_type = [];
+    //     let formData = new FormData();
+    //     for (
+    //       let index = 0;
+    //       index < this.$refs.input_upload.files.length;
+    //       index++
+    //     ) {
+    //       this.attach.files.push(
+    //         URL.createObjectURL(this.$refs.input_upload.files[index])
+    //       );
+    //       this.attach.file_type.push(this.$refs.input_upload.files[index].type);
+    //       formData.append("files[]", this.$refs.input_upload.files[index]);
+    //     }
+    //     this.form_data = formData;
+    //   } else {
+    //     this.$parent.notification.message.push("Too many files!. Only 6 files can be uploaded.");
+    //   }
+    // },
+    // removeAttachInPost(file) {
+    //   var exist = this.attach.files.indexOf(file);
+    //   if (exist > -1) {
+    //     this.attach.files.splice(exist, 1);
+    //     this.attach.file_type.splice(exist, 1);
+    //   }
+    // },
     updatePost: function updatePost() {
-      var _this2 = this;
+      var _this = this;
       var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
         method: "patch",
@@ -6148,18 +6158,18 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: AuthStr
         }
       }).then(function (res) {
-        document.getElementById("post_message_".concat(_this2.edit_post.data.id)).innerText = _this2.edit_post.message;
+        document.getElementById("post_message_".concat(_this.edit_post.data.id)).innerText = _this.edit_post.message;
       })["catch"](function (err) {});
     },
     updateEditPostMessage: function updateEditPostMessage(e) {
       this.edit_post.message = e.target.innerText;
     },
     removeAttachInEditPost: function removeAttachInEditPost(file) {
-      var _this3 = this;
+      var _this2 = this;
       this.edit_post.attachment_remove.push(file.id);
       this.edit_post.data.get_attach_files.forEach(function (elem, index) {
         if (elem.id == file.id) {
-          _this3.edit_post.data.get_attach_files.splice(index, 1);
+          _this2.edit_post.data.get_attach_files.splice(index, 1);
         }
       });
     },
@@ -6167,28 +6177,28 @@ __webpack_require__.r(__webpack_exports__);
       return "/storage/post/file/".concat(file_link);
     },
     getPost: function getPost() {
-      var _this4 = this;
+      var _this3 = this;
       if (this.$store.getters.currentUser && this.post.currentPage) {
         var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
         return new Promise(function (resolve, reject) {
           axios({
             method: "get",
-            url: "/api/post?page=".concat(_this4.post.currentPage),
+            url: "/api/post?page=".concat(_this3.post.currentPage),
             headers: {
               Authorization: AuthStr
             }
           }).then(function (res) {
-            _this4.post.timeout = 1;
-            if (_this4.post.currentPage == 1) {
-              _this4.posts = res.data;
+            _this3.post.timeout = 1;
+            if (_this3.post.currentPage == 1) {
+              _this3.posts = res.data;
               resolve(res.data.data.forEach(function (data) {
-                _this4.post.collection.push(data.id);
+                _this3.post.collection.push(data.id);
               }));
             } else {
               resolve(res.data.data.forEach(function (data) {
-                if (!_this4.post.collection.includes(data.id)) {
-                  _this4.posts.data.push(data);
-                  _this4.post.collection.push(data.id);
+                if (!_this3.post.collection.includes(data.id)) {
+                  _this3.posts.data.push(data);
+                  _this3.post.collection.push(data.id);
                 }
               }));
             }
@@ -13048,7 +13058,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#carouselintro img[data-v-f2b6376c] {\r\n  height: 600px;\n}\n#carouselintro[data-v-f2b6376c] {\r\n  margin-top: 26px;\n}\n.name[data-v-f2b6376c] {\r\n  font-size: 20px;\n}\n.btn-status[data-v-f2b6376c] {\r\n  padding: 0 !important;\n}\n.min-100[data-v-f2b6376c] {\r\n  min-height: 100px;\n}\n.dropbox[data-v-f2b6376c] {\r\n  height: 150px;\n}\n.img_attach_remove[data-v-f2b6376c] {\r\n  right: 0%;\r\n  top: 0%;\r\n  color: #ffffff;\n}\n.attach_video[data-v-f2b6376c] {\r\n  height: 150px;\n}\n.center[data-v-f2b6376c] {\r\n  top: 40% !important;\r\n  left: 42% !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#carouselintro img[data-v-f2b6376c] {\n  height: 600px;\n}\n#carouselintro[data-v-f2b6376c] {\n  margin-top: 26px;\n}\n.name[data-v-f2b6376c] {\n  font-size: 20px;\n}\n.btn-status[data-v-f2b6376c] {\n  padding: 0 !important;\n}\n.min-100[data-v-f2b6376c] {\n  min-height: 100px;\n}\n.dropbox[data-v-f2b6376c] {\n  height: 150px;\n}\n.img_attach_remove[data-v-f2b6376c] {\n  right: 0%;\n  top: 0%;\n  color: #ffffff;\n}\n.attach_video[data-v-f2b6376c] {\n  height: 150px;\n}\n.center[data-v-f2b6376c] {\n  top: 40% !important;\n  left: 42% !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38421,10 +38431,6 @@ var render = function () {
             0
           )
         : _vm._e(),
-      _vm._v(" "),
-      _vm.$store.getters.currentUser && _vm.$store.getters.currentUser.role == 1
-        ? _c("div", [_c("ChatButton")], 1)
-        : _vm._e(),
     ],
     2
   )
@@ -38469,171 +38475,7 @@ var render = function () {
               _c(
                 "div",
                 { staticClass: "col-lg-8" },
-                [
-                  _vm.$store.getters.currentUser.role == 1
-                    ? _c("div", { staticClass: "card mb-4" }, [
-                        _vm._m(4),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "card-body" }, [
-                          _vm._m(5),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { class: _vm.attach_exist ? "d-flex" : "d-none" },
-                            _vm._l(_vm.attach.files, function (file, index) {
-                              return _c(
-                                "div",
-                                {
-                                  directives: [
-                                    {
-                                      name: "show",
-                                      rawName: "v-show",
-                                      value: index < 4,
-                                      expression: "index < 4",
-                                    },
-                                  ],
-                                  key: index,
-                                  staticClass:
-                                    "card w-25 position-relative me-1 dropbox rounded-0",
-                                  class: index == 3 ? "opacity-50" : "",
-                                },
-                                [
-                                  _vm.attach.file_type[index] == "video/mp4"
-                                    ? _c(
-                                        "video",
-                                        {
-                                          staticClass: "w-100 bg-dark",
-                                          attrs: {
-                                            height: "150",
-                                            controls: "",
-                                          },
-                                        },
-                                        [
-                                          _c("source", {
-                                            attrs: {
-                                              src: file,
-                                              type: "video/mp4",
-                                            },
-                                          }),
-                                        ]
-                                      )
-                                    : _c("img", {
-                                        staticClass: "w-100",
-                                        attrs: { src: file, height: "150" },
-                                      }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "show",
-                                          rawName: "v-show",
-                                          value: index == 3,
-                                          expression: "index == 3",
-                                        },
-                                      ],
-                                      staticClass:
-                                        "position-absolute center text-dark h3",
-                                    },
-                                    [
-                                      _c("span", { staticClass: "me-2" }, [
-                                        _vm._v(
-                                          _vm._s(_vm.attach.files.length - 4)
-                                        ),
-                                      ]),
-                                      _c("i", {
-                                        staticClass: "fa fa-plus-square",
-                                      }),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "position-absolute img_attach_remove",
-                                    },
-                                    [
-                                      _c("button", {
-                                        staticClass:
-                                          "btn btn-close btn-close-white bg-info border",
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.removeAttachInPost(file)
-                                          },
-                                        },
-                                      }),
-                                    ]
-                                  ),
-                                ]
-                              )
-                            }),
-                            0
-                          ),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "card-footer text-muted" }, [
-                          _c("div", { staticClass: "d-flex" }, [
-                            _vm._m(6),
-                            _vm._v(" "),
-                            _c("div", {}, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-light px-2 btn-sm",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function ($event) {
-                                      return _vm.inputTriggerButton(
-                                        "upload_files"
-                                      )
-                                    },
-                                  },
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fa fa-file-image-o fa-lg",
-                                  }),
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("input", {
-                                ref: "input_upload",
-                                staticClass: "d-none",
-                                attrs: {
-                                  type: "file",
-                                  accept:
-                                    "image/png, image/jpg, image/jpeg, video/mp4",
-                                  multiple: "",
-                                  id: "upload_files",
-                                },
-                                on: { change: _vm.attachFile },
-                              }),
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "ms-auto" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "btn btn-primary bg-gradient btn-sm px-5 shadow",
-                                  on: { click: _vm.createPost },
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                      Post\n                    "
-                                  ),
-                                ]
-                              ),
-                            ]),
-                          ]),
-                        ]),
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c("Post", { attrs: { datas: _vm.posts } }),
-                ],
+                [_c("Post", { attrs: { datas: _vm.posts } })],
                 1
               ),
               _vm._v(" "),
@@ -38669,7 +38511,7 @@ var render = function () {
             [
               _c("div", { staticClass: "modal-dialog modal-lg" }, [
                 _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(7),
+                  _vm._m(4),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
                     _c("div", { staticClass: "card mb-4" }, [
@@ -39377,60 +39219,6 @@ var staticRenderFns = [
                 ),
               ]),
             ]),
-          ]),
-        ]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("div", { staticClass: "h6" }, [_vm._v("What's up")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "d-flex flex-column mb-2 rounded" }, [
-      _c("div", {
-        staticClass: "flex-fill min-100",
-        attrs: { id: "editable", contenteditable: "true" },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dropdown" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-light px-2 btn-sm dropdown-toggle",
-          attrs: { type: "button", "data-bs-toggle": "dropdown" },
-        },
-        [_c("i", { staticClass: "fa fa-smile-o fa-lg" })]
-      ),
-      _vm._v(" "),
-      _c("ul", { staticClass: "dropdown-menu" }, [
-        _c("li", [
-          _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-            _vm._v("Link 1"),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-            _vm._v("Link 2"),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-            _vm._v("Link 3"),
           ]),
         ]),
       ]),

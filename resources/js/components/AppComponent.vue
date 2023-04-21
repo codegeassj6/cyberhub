@@ -44,9 +44,9 @@
       </div>
     </div>
 
-    <div v-if="$store.getters.currentUser && $store.getters.currentUser.role == 1">
+    <!-- <div v-if="$store.getters.currentUser && $store.getters.currentUser.role == 1">
       <ChatButton />
-    </div>
+    </div> -->
 
   </div>
 </template>
