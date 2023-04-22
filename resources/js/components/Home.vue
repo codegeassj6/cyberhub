@@ -398,7 +398,7 @@
       <div class="container space-intro">
         <div class="row d-flex">
           <div class="col-lg-8">
-            <!-- <div class="card mb-4" v-if="$store.getters.currentUser.role == 1">
+            <div class="card mb-4" v-if="$store.getters.currentUser.role == 1">
               <div class="card-header">
                 <div class="h6">What's up</div>
               </div>
@@ -494,7 +494,7 @@
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>
 
             <Post :datas="posts" />
           </div>
@@ -661,88 +661,88 @@ export default {
       return ext.trim();
     },
 
-    // uploadTriggerInput(e) {
-    //   var elem = this.$refs.input_upload;
-    //   if (elem && document.createEvent) {
-    //     var evt = document.createEvent("MouseEvents");
-    //     evt.initEvent("click", true, false);
-    //     elem.dispatchEvent(evt);
-    //   }
-    // },
+    uploadTriggerInput(e) {
+      var elem = this.$refs.input_upload;
+      if (elem && document.createEvent) {
+        var evt = document.createEvent("MouseEvents");
+        evt.initEvent("click", true, false);
+        elem.dispatchEvent(evt);
+      }
+    },
 
     inputTriggerButton(id) {
       document.getElementById(id).click();
     },
 
 
-    // createPost(e) {
-    //   if (document.getElementById("editable").innerText.length > 1000) {
-    //     this.$parent.notification.message.push("Message is too long. Only 1000 characters allow");
-    //     return false;
-    //   }
+    createPost(e) {
+      if (document.getElementById("editable").innerText.length > 1000) {
+        this.$parent.notification.message.push("Message is too long. Only 1000 characters allow");
+        return false;
+      }
 
-    //   if (
-    //     document.getElementById("editable").innerText.length ||
-    //     this.form_data
-    //   ) {
-    //     e.target.setAttribute('disabled', true);
-    //     const AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
-    //     axios({
-    //       method: "POST",
-    //       params: {
-    //         message: document.getElementById("editable").innerText,
-    //         files: this.form_data,
-    //       },
-    //       data: this.form_data,
-    //       url: `/api/post`,
-    //       headers: {
-    //         Authorization: AuthStr,
-    //       },
-    //     })
-    //       .then((res) => {
-    //         e.target.removeAttribute('disabled');
-    //         this.attach_exist = false;
-    //         this.form_data = "";
-    //         document.getElementById("editable").innerHTML = "";
-    //         this.posts = res.data;
-    //         this.post.currentPage = 1;
-    //       })
-    //       .catch((err) => {
-    //         e.target.removeAttribute('disabled');
-    //       });
-    //   }
-    // },
+      if (
+        document.getElementById("editable").innerText.length ||
+        this.form_data
+      ) {
+        e.target.setAttribute('disabled', true);
+        const AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
+        axios({
+          method: "POST",
+          params: {
+            message: document.getElementById("editable").innerText,
+            files: this.form_data,
+          },
+          data: this.form_data,
+          url: `/api/post`,
+          headers: {
+            Authorization: AuthStr,
+          },
+        })
+          .then((res) => {
+            e.target.removeAttribute('disabled');
+            this.attach_exist = false;
+            this.form_data = "";
+            document.getElementById("editable").innerHTML = "";
+            this.posts = res.data;
+            this.post.currentPage = 1;
+          })
+          .catch((err) => {
+            e.target.removeAttribute('disabled');
+          });
+      }
+    },
 
-    // attachFile(e) {
-    //   if (this.$refs.input_upload.files.length <= 6) {
-    //     this.attach_exist = true;
-    //     this.attach.files = [];
-    //     this.attach.file_type = [];
-    //     let formData = new FormData();
-    //     for (
-    //       let index = 0;
-    //       index < this.$refs.input_upload.files.length;
-    //       index++
-    //     ) {
-    //       this.attach.files.push(
-    //         URL.createObjectURL(this.$refs.input_upload.files[index])
-    //       );
-    //       this.attach.file_type.push(this.$refs.input_upload.files[index].type);
-    //       formData.append("files[]", this.$refs.input_upload.files[index]);
-    //     }
-    //     this.form_data = formData;
-    //   } else {
-    //     this.$parent.notification.message.push("Too many files!. Only 6 files can be uploaded.");
-    //   }
-    // },
+    attachFile(e) {
+      if (this.$refs.input_upload.files.length <= 6) {
+        this.attach_exist = true;
+        this.attach.files = [];
+        this.attach.file_type = [];
+        let formData = new FormData();
+        for (
+          let index = 0;
+          index < this.$refs.input_upload.files.length;
+          index++
+        ) {
+          this.attach.files.push(
+            URL.createObjectURL(this.$refs.input_upload.files[index])
+          );
+          this.attach.file_type.push(this.$refs.input_upload.files[index].type);
+          formData.append("files[]", this.$refs.input_upload.files[index]);
+        }
+        this.form_data = formData;
+      } else {
+        this.$parent.notification.message.push("Too many files!. Only 6 files can be uploaded.");
+      }
+    },
 
-    // removeAttachInPost(file) {
-    //   var exist = this.attach.files.indexOf(file);
-    //   if (exist > -1) {
-    //     this.attach.files.splice(exist, 1);
-    //     this.attach.file_type.splice(exist, 1);
-    //   }
-    // },
+    removeAttachInPost(file) {
+      var exist = this.attach.files.indexOf(file);
+      if (exist > -1) {
+        this.attach.files.splice(exist, 1);
+        this.attach.file_type.splice(exist, 1);
+      }
+    },
 
     updatePost() {
       const AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
