@@ -1,10 +1,14 @@
 Task:
 chat
-payment
-facebook login
 emoji on post
-change password
+payment
 google adsense
+
+
+
+facebook login
+change password
+
 
 
 
