@@ -19,7 +19,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'loginAsModerator']]);
 
     }
 
@@ -40,6 +40,24 @@ class AuthController extends Controller
 
         if(Auth::check()) {
             return $this->respondWithToken($token);
+        }
+    }
+
+    public function loginAsModerator($token = null)
+    {
+        $credentials = request(['email', 'password']);
+
+        if($credentials) {
+            if (! $token = auth()->attempt($credentials)) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+        }
+
+        if(Auth::user()->role > 0) {
+            return $this->respondWithToken($token);
+        } else {
+          Auth::logout();
+          return response()->json(['error' => 'Unauthorized'], 401);
         }
     }
 
