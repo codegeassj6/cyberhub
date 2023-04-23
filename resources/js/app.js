@@ -9,8 +9,6 @@ import Adsense from 'vue-google-adsense/dist/Adsense.min.js'
 
 Vue.use(require('vue-script2'))
 Vue.use(Adsense)
-
-
 Vue.use(Vuex);
 Vue.use(VueRouter);
 Vue.component('app-component', require('./components/AppComponent.vue').default);
@@ -54,9 +52,6 @@ axios.interceptors.response.use(function (response) {
     }
     return Promise.reject(error);
 });
-
-
-
 
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.requiresAuth)) {
