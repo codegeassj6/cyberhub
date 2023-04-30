@@ -99,7 +99,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       this.$refs.login_btn.setAttribute('disabled', true);
       this.$store.dispatch("login");
-      (0,_helpers_auth__WEBPACK_IMPORTED_MODULE_0__.login)(this.form).then(function (res) {
+      (0,_helpers_auth__WEBPACK_IMPORTED_MODULE_0__.initLogin)(this.form).then(function (res) {
         // commit function is used for running mutation function in storejs
         _this.$store.commit("loginSuccess", res);
         var AuthStr = "Bearer ".concat(_this.$store.getters.currentUser.token);
@@ -415,7 +415,7 @@ var render = function () {
                       [_vm._v("\n              Sign in\n            ")]
                     ),
                     _vm._v(" "),
-                    _c("span", [_vm._v("Or")]),
+                    _c("div", [_vm._v("Or")]),
                     _vm._v(" "),
                     _c(
                       "div",

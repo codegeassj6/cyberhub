@@ -5897,11 +5897,11 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getLocalUser": () => (/* binding */ getLocalUser),
-/* harmony export */   "login": () => (/* binding */ login)
+/* harmony export */   "initLogin": () => (/* binding */ initLogin)
 /* harmony export */ });
 /* harmony import */ var _general__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./general */ "./resources/js/helpers/general.js");
 
-function login(credentials) {
+function initLogin(credentials) {
   return new Promise(function (res, rej) {
     axios.post("/api/auth/login", credentials).then(function (response) {
       (0,_general__WEBPACK_IMPORTED_MODULE_0__.setAuthorization)(response.data.access_token);

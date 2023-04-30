@@ -49,7 +49,7 @@
                 Sign in
               </button>
 
-              <span>Or</span>
+              <div>Or</div>
 
               <div>
                 <v-facebook-login app-id="6050990288293828"></v-facebook-login>
@@ -62,7 +62,7 @@
   </div>
 </template>
 <script>
-import { login } from "../../helpers/auth";
+import { initLogin } from "../../helpers/auth";
 import VFacebookLogin from 'vue-facebook-login-component'
 
 export default {
@@ -86,7 +86,7 @@ export default {
     authenticate() {
       this.$refs.login_btn.setAttribute('disabled', true);
       this.$store.dispatch("login");
-      login(this.form)
+      initLogin(this.form)
         .then((res) => {
           // commit function is used for running mutation function in storejs
           this.$store.commit("loginSuccess", res);
