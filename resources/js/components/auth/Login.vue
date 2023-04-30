@@ -48,6 +48,12 @@
               <button type="submit" ref="login_btn" class="btn btn-primary bg-gradient btn-lg btn-block">
                 Sign in
               </button>
+
+              <span>Or</span>
+
+              <div>
+                <v-facebook-login app-id="6050990288293828"></v-facebook-login>
+              </div>
             </form>
           </div>
         </div>
@@ -57,6 +63,7 @@
 </template>
 <script>
 import { login } from "../../helpers/auth";
+import VFacebookLogin from 'vue-facebook-login-component'
 
 export default {
   data() {
@@ -68,7 +75,7 @@ export default {
     };
   },
   components: {
-
+    VFacebookLogin,
   },
 
   props: [],

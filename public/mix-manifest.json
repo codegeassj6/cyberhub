@@ -1,9 +1,10 @@
 {
     "/js/app.js": "/js/app.js",
-    "/js/Home.js": "/js/Home.js",
+    "/js/Intro.js": "/js/Intro.js",
     "/js/Login.js": "/js/Login.js",
     "/js/ResetPassword.js": "/js/ResetPassword.js",
     "/js/ResetPasswordRequest.js": "/js/ResetPasswordRequest.js",
+    "/js/Home.js": "/js/Home.js",
     "/js/Oauth.js": "/js/Oauth.js",
     "/js/Register.js": "/js/Register.js",
     "/js/Game.js": "/js/Game.js",

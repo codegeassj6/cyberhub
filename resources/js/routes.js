@@ -1,8 +1,8 @@
 export const routes = [
     {
         path: '/',
-        name: "Home",
-        component: () => import(/* webpackChunkName: "Home" */ "./components/Home.vue"),
+        name: "Intro",
+        component: () => import(/* webpackChunkName: "Intro" */ "./components/Intro.vue"),
     },
 
     {

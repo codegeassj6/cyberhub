@@ -55,7 +55,6 @@
 <script>
 import Nav from "./templates/Nav.vue";
 import Footer from "./templates/Footer.vue";
-import Home from "./Home.vue";
 import ChatButton from './templates/ChatButton.vue'
 
 export default {
@@ -73,7 +72,6 @@ export default {
   components: {
     Nav,
     Footer,
-    Home,
     ChatButton,
   },
 
