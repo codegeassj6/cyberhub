@@ -52,7 +52,10 @@
               <div>Or</div>
 
               <div>
-                <v-facebook-login app-id="6050990288293828"></v-facebook-login>
+
+
+
+
               </div>
             </form>
           </div>
@@ -63,7 +66,7 @@
 </template>
 <script>
 import { initLogin } from "../../helpers/auth";
-import VFacebookLogin from 'vue-facebook-login-component'
+
 
 export default {
   data() {
@@ -75,7 +78,7 @@ export default {
     };
   },
   components: {
-    VFacebookLogin,
+
   },
 
   props: [],
@@ -83,6 +86,10 @@ export default {
   computed: {},
 
   methods: {
+    getUserData() {
+      console.log();
+    },
+
     authenticate() {
       this.$refs.login_btn.setAttribute('disabled', true);
       this.$store.dispatch("login");
