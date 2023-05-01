@@ -136,7 +136,7 @@
             <div class="modal-body">
               <div class="card mb-4">
                 <div class="card-body">
-                  <div class="d-flex flex-column mb-2 rounded border">
+                  <div class="d-flex flex-column mb-2 rounded">
                     <div
                       class="flex-fill div-like-pre p-2 min-100"
                       contenteditable="true"
@@ -464,22 +464,6 @@ export default {
 </script>
 
 <style scoped>
-#carouselintro img {
-  height: 600px;
-}
-
-#carouselintro {
-  margin-top: 26px;
-}
-
-.name {
-  font-size: 20px;
-}
-
-.btn-status {
-  padding: 0 !important;
-}
-
 .min-100 {
   min-height: 100px;
 }
@@ -494,9 +478,7 @@ export default {
   color: #ffffff;
 }
 
-.attach_video {
-  height: 150px;
-}
+
 
 .center {
   top: 40% !important;
