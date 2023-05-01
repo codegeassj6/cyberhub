@@ -45,18 +45,13 @@
               </div>
 
               <!-- Submit button -->
-              <button type="submit" ref="login_btn" class="btn btn-primary bg-gradient btn-lg btn-block">
+              <button
+                type="submit"
+                ref="login_btn"
+                class="btn btn-primary bg-gradient btn-lg btn-block"
+              >
                 Sign in
               </button>
-
-              <div>Or</div>
-
-              <div>
-
-
-
-
-              </div>
             </form>
           </div>
         </div>
@@ -65,8 +60,7 @@
   </div>
 </template>
 <script>
-import { initLogin } from "../../helpers/auth";
-
+import { login } from "../../helpers/auth";
 
 export default {
   data() {
@@ -77,9 +71,7 @@ export default {
       },
     };
   },
-  components: {
-
-  },
+  components: {},
 
   props: [],
 
@@ -91,9 +83,9 @@ export default {
     },
 
     authenticate() {
-      this.$refs.login_btn.setAttribute('disabled', true);
+      this.$refs.login_btn.setAttribute("disabled", true);
       this.$store.dispatch("login");
-      initLogin(this.form)
+      login(this.form)
         .then((res) => {
           // commit function is used for running mutation function in storejs
           this.$store.commit("loginSuccess", res);
@@ -110,10 +102,10 @@ export default {
               this.$store.commit("mutateCartCount", res.data.cart_count);
             })
             .catch((err) => {});
-            this.$router.push('/');
+          this.$router.push("/");
         })
         .catch((error) => {
-          this.$refs.login_btn.removeAttribute('disabled');
+          this.$refs.login_btn.removeAttribute("disabled");
           this.$store.commit("loginFailed", { error });
         });
     },
@@ -121,9 +113,7 @@ export default {
 
   updated() {},
 
-  mounted() {
-
-  },
+  mounted() {},
 };
 </script>
 

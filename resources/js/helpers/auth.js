@@ -1,6 +1,6 @@
 import { setAuthorization } from "./general";
 
-export function initLogin(credentials) {
+export function login(credentials) {
   return new Promise((res, rej) => {
     axios
       .post("/api/auth/login", credentials)

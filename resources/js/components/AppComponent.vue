@@ -44,9 +44,9 @@
       </div>
     </div>
 
-    <!-- <div v-if="$store.getters.currentUser && $store.getters.currentUser.role == 1">
-      <ChatButton />
-    </div> -->
+    <div>
+      <ChatBox />
+    </div>
 
   </div>
 </template>
@@ -55,7 +55,7 @@
 <script>
 import Nav from "./templates/Nav.vue";
 import Footer from "./templates/Footer.vue";
-import ChatButton from './templates/ChatButton.vue'
+import ChatBox from './templates/ChatBox.vue'
 
 export default {
   data() {
@@ -72,7 +72,7 @@ export default {
   components: {
     Nav,
     Footer,
-    ChatButton,
+    ChatBox,
   },
 
   methods: {

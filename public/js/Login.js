@@ -73,11 +73,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -98,9 +93,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     authenticate: function authenticate() {
       var _this = this;
-      this.$refs.login_btn.setAttribute('disabled', true);
+      this.$refs.login_btn.setAttribute("disabled", true);
       this.$store.dispatch("login");
-      (0,_helpers_auth__WEBPACK_IMPORTED_MODULE_0__.initLogin)(this.form).then(function (res) {
+      (0,_helpers_auth__WEBPACK_IMPORTED_MODULE_0__.login)(this.form).then(function (res) {
         // commit function is used for running mutation function in storejs
         _this.$store.commit("loginSuccess", res);
         var AuthStr = "Bearer ".concat(_this.$store.getters.currentUser.token);
@@ -113,9 +108,9 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (res) {
           _this.$store.commit("mutateCartCount", res.data.cart_count);
         })["catch"](function (err) {});
-        _this.$router.push('/');
+        _this.$router.push("/");
       })["catch"](function (error) {
-        _this.$refs.login_btn.removeAttribute('disabled');
+        _this.$refs.login_btn.removeAttribute("disabled");
         _this.$store.commit("loginFailed", {
           error: error
         });
@@ -144,7 +139,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .container {\n    margin-top: 100px;\n    max-width: 900px;\n} */\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .container {\n    margin-top: 100px;\n    max-width: 900px;\n} */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -397,10 +392,6 @@ var render = function () {
                       },
                       [_vm._v("\n              Sign in\n            ")]
                     ),
-                    _vm._v(" "),
-                    _c("div", [_vm._v("Or")]),
-                    _vm._v(" "),
-                    _c("div"),
                   ]
                 ),
               ]

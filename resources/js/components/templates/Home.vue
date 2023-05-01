@@ -1,6 +1,5 @@
 <template>
     <div>
-
       <div class="container space-intro">
         <div class="row d-flex">
           <div class="col-lg-8">

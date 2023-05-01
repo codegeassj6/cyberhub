@@ -17,26 +17,39 @@
         </h2>
         <div
           id="flush-collapseOne"
-          class="accordion-collapse collapse"
+          class="accordion-collapse"
           aria-labelledby="flush-headingOne"
           data-bs-parent="#accordionFlushExample"
         >
           <div class="accordion-body position-relative">
-            <div class="chat-user-size">
-              <div class="d-flex flex-column">
-                <div class="border pointer">
+            <div class="chat-user-size px-2">
+              <div class="d-block">
                   <div class="d-flex chat-user">
                     <div class="mx-2 py-1">
-                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU" width="55" class="h-100" alt="">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU" width="35" height="35" alt="">
                     </div>
 
-                    <div class="d-flex flex-column mt-2">
+                    <div class="d-flex flex-column">
                       <div>Jhon Rey Repuela</div>
                       <div>f</div>
                     </div>
 
                   </div>
-                </div>
+              </div>
+
+
+              <div class="float-right">
+                  <div class=" chat-user">
+                    <div class="d-flex flex-column">
+                      <div>Jhon Rey Repuela</div>
+                      <div>f ada ada das afsa faf afa asfa fasf afs afasfa sfa fsafa fa fafafas fa fsafa faf sf asfa safa fasfa </div>
+                    </div>
+
+                    <div class="mx-2 py-1">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT42STwjfKg1x3AmsXTwpXHV6DmN-ZfGoJp1A&usqp=CAU" width="35" height="35" alt="">
+                    </div>
+
+                  </div>
               </div>
 
             </div>
