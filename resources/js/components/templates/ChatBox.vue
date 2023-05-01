@@ -24,7 +24,16 @@
           <div class="accordion-body position-relative">
             <div class="p-2">
 
-              s
+              <div class="d-flex">
+                <div >
+                  <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" width="50" height="50" alt="">
+                </div>
+
+                <div class="ms-2 p-2 border-1 w-100 rounded-4">
+                s
+              </div>
+
+              </div>
 
             </div>
             <div class="position-absolute bottom-0 w-100">
