@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ChatRoom;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreChatRoomRequest;
+use App\Http\Requests\UpdateChatRoomRequest;
 
 class ChatRoomController extends Controller
 {
@@ -18,12 +19,22 @@ class ChatRoomController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show the form for creating a new resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\StoreChatRoomRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(StoreChatRoomRequest $request)
     {
         //
     }
@@ -40,13 +51,24 @@ class ChatRoomController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Show the form for editing the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\ChatRoom  $chatRoom
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ChatRoom $chatRoom)
+    public function edit(ChatRoom $chatRoom)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateChatRoomRequest  $request
+     * @param  \App\Models\ChatRoom  $chatRoom
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateChatRoomRequest $request, ChatRoom $chatRoom)
     {
         //
     }

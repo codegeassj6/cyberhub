@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <div>
+    <div v-if="$store.getters.currentUser">
       <ChatBox />
     </div>
 

@@ -7,6 +7,10 @@ import Vuex from 'vuex'
 import StoreData from './store'
 import Adsense from 'vue-google-adsense/dist/Adsense.min.js'
 
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap"
+
+
 Vue.use(require('vue-script2'))
 Vue.use(Adsense)
 Vue.use(Vuex);

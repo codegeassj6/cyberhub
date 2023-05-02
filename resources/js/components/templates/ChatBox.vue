@@ -24,32 +24,61 @@
           <div class="accordion-body position-relative">
             <div class="p-2">
 
-              <div class="d-flex">
-                <div >
-                  <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" width="50" height="50" alt="">
+              <div v-for="chat in chats" :key="chat.id">
+                <div class="d-flex mb-2" v-if="chat.user_id == $store.getters.currentUser.id">
+                  <div>
+                    <img
+                      src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+                      width="45"
+                      height="45"
+                      alt=""
+                    />
+                  </div>
+
+                  <div class="px-2 border border-1 rounded-2 rounded bg-chat">
+                    <div class="mt-2">
+                      {{ chat.message }}
+                    </div>
+                  </div>
                 </div>
 
-                <div class="ms-2 p-2 border-1 w-100 rounded-4">
-                s
+                <div class="d-flex flex-row-reverse mb-2" v-if="chat.user_id != $store.getters.currentUser.id">
+                  <div>
+                    <img
+                      src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+                      width="45"
+                      height="45"
+                      alt=""
+                    />
+                  </div>
+
+                  <div class="ms-2 px-2 border border-1 rounded-2">
+                    <div class="mt-2">
+                      {{ chat.message }}
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              </div>
 
             </div>
+
+
+
             <div class="position-absolute bottom-0 w-100">
-              <div class="d-flex border-1 shadow border-info border p-2 bg-white front-index position-relative">
-                <div class="me-5" contenteditable="true">
-                  Write a message...
-                </div>
+              <div
+                class="d-flex border-1 shadow border-info border p-2 bg-white front-index position-relative"
+              >
+                <div class="me-5 w-100" contenteditable="true" ref="chatbox" @keyup="updateFormMessage"></div>
 
                 <div class="position-absolute send-btn-0">
-                  <button class="btn btn-default btn-sm"><i class="fa fa-send fa-lg"></i></button>
+                  <button class="btn btn-default btn-sm" @click="sendMessage">
+                    <i class="fa fa-send fa-lg"></i>
+                  </button>
                 </div>
-
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -60,7 +89,12 @@
 
 export default {
   data() {
-    return {};
+    return {
+      form: {
+        message: '',
+      },
+      chats: '',
+    };
   },
   components: {},
 
@@ -68,7 +102,39 @@ export default {
 
   computed: {},
 
-  methods: {},
+  methods: {
+    getChatMessages() {
+      const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      axios({
+          method: 'get',
+          url: `/api/chat/`,
+          headers: {Authorization: AuthStr}
+      }).then(res => {
+        this.chats = res.data;
+      }).catch(err => {
+
+      });
+    },
+
+    updateFormMessage(e) {
+      this.form.message = e.target.innerText.trim();
+    },
+
+    sendMessage() {
+      const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      axios({
+          method: 'post',
+          params: {message: this.form.message},
+          url: `/api/chat`,
+          headers: {Authorization: AuthStr}
+      }).then(res => {
+        this.form.message = '';
+        this.$refs.chatbox.textContent = '';
+      }).catch(err => {
+
+      });
+    }
+  },
 
   watch: {
     $data: {
@@ -93,17 +159,18 @@ export default {
 
   beforeMounted() {},
 
-  mounted() {},
+  mounted() {
+    this.getChatMessages();
+  },
 };
 </script>
 
 <style scoped>
-
 .fixed-btm {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    z-index: 1030;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 1030;
 }
 
 .accordion {
@@ -119,14 +186,6 @@ export default {
   padding: 0 !important;
 }
 
-.chat-user {
-  height: 60px;
-}
-
-.chat-user-size {
-  height: 308px;
-  overflow-y: scroll;
-}
 
 .front-index {
   z-index: 1000;
@@ -135,6 +194,10 @@ export default {
 .send-btn-0 {
   bottom: 4px !important;
   right: 8px !important;
+}
+
+.bg-chat {
+  background: #a9d4f7;
 }
 
 </style>
