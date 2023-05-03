@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\ChatRoom;
 use Auth;
 use Validator;
+use App\Events\NewChatMessage;
 
 class ChatController extends Controller
 {
@@ -48,11 +49,13 @@ class ChatController extends Controller
         ]);
       }
 
-      Chat::create([
+      $chat = Chat::create([
         'user_id' => Auth::id(),
         'message' => $request->input('message'),
         'room_id' => $chat_room->id,
       ]);
+
+      broadcast(new NewChatMessage($chat))->toOthers();
 
       return response()->json(['message' => 'ok'], 200);
 
