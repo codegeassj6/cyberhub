@@ -94,6 +94,7 @@ export default {
         message: '',
       },
       chats: '',
+      currentRoom: '',
     };
   },
   components: {},
@@ -103,6 +104,10 @@ export default {
   computed: {},
 
   methods: {
+    connect() {
+
+    },
+
     getChatMessages() {
       const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
       axios({
@@ -133,7 +138,11 @@ export default {
       }).catch(err => {
 
       });
-    }
+    },
+
+    getCurrentRoom() {
+
+    },
   },
 
   watch: {

@@ -5503,13 +5503,15 @@ __webpack_require__.r(__webpack_exports__);
       form: {
         message: ''
       },
-      chats: ''
+      chats: '',
+      currentRoom: ''
     };
   },
   components: {},
   props: {},
   computed: {},
   methods: {
+    connect: function connect() {},
     getChatMessages: function getChatMessages() {
       var _this = this;
       var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
@@ -5542,7 +5544,8 @@ __webpack_require__.r(__webpack_exports__);
         _this2.form.message = '';
         _this2.$refs.chatbox.textContent = '';
       })["catch"](function (err) {});
-    }
+    },
+    getCurrentRoom: function getCurrentRoom() {}
   },
   watch: {
     $data: {
