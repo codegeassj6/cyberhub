@@ -105,7 +105,13 @@ export default {
 
   methods: {
     connect() {
-
+      if(this.currentRoom) {
+        let vm = this;
+        this.getChatMessages();
+        window.Echo.private("chat."+this.currentRoom).listen('.message.new', e => {
+          vm.getChatMessages();
+        })
+      }
     },
 
     getChatMessages() {

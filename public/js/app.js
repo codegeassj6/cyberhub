@@ -5511,7 +5511,15 @@ __webpack_require__.r(__webpack_exports__);
   props: {},
   computed: {},
   methods: {
-    connect: function connect() {},
+    connect: function connect() {
+      if (this.currentRoom) {
+        var vm = this;
+        this.getChatMessages();
+        window.Echo["private"]("chat." + this.currentRoom).listen('.message.new', function (e) {
+          vm.getChatMessages();
+        });
+      }
+    },
     getChatMessages: function getChatMessages() {
       var _this = this;
       var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
