@@ -26,7 +26,7 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, )
+    public function store(Request $request)
     {
         $cart = Cart::where('user_id', Auth::user()->id)->whereIn('id', $request->input('id'))->get();
 

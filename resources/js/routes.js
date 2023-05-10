@@ -39,9 +39,9 @@ export const routes = [
     },
 
     {
-        path: '/payment/stripe/error',
-        name: "StripeError",
-        component: () => import(/* webpackChunkName: "Home" */ "./components/stripe/StripeError.vue"),
+        path: '/payment/stripe/cancel',
+        name: "StripeCancel",
+        component: () => import(/* webpackChunkName: "Home" */ "./components/stripe/StripeCancel.vue"),
     },
 
     {

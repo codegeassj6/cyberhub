@@ -419,6 +419,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
+  name: 'IntroComponent',
   components: {
     Home: _templates_Home_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -1019,7 +1020,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  name: "HomeComponent",
+  // name: "HomeComponent",
+
   components: {
     Post: _Post_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },

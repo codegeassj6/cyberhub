@@ -6095,10 +6095,10 @@ var routes = [{
     return __webpack_require__.e(/*! import() | Home */ "Home").then(__webpack_require__.bind(__webpack_require__, /*! ./components/stripe/StripeSuccess.vue */ "./resources/js/components/stripe/StripeSuccess.vue"));
   }
 }, {
-  path: '/payment/stripe/error',
-  name: "StripeError",
+  path: '/payment/stripe/cancel',
+  name: "StripeCancel",
   component: function component() {
-    return __webpack_require__.e(/*! import() | Home */ "Home").then(__webpack_require__.bind(__webpack_require__, /*! ./components/stripe/StripeError.vue */ "./resources/js/components/stripe/StripeError.vue"));
+    return __webpack_require__.e(/*! import() | Home */ "Home").then(__webpack_require__.bind(__webpack_require__, /*! ./components/stripe/StripeCancel.vue */ "./resources/js/components/stripe/StripeCancel.vue"));
   }
 }, {
   path: '/api/oauth/login/callback/:provider',
@@ -36462,7 +36462,7 @@ var render = function () {
         [
           _c(
             "keep-alive",
-            { attrs: { include: "HomeComponent" } },
+            { attrs: { include: "IntroComponent" } },
             [_c("router-view", { key: _vm.$route.fullPath })],
             1
           ),

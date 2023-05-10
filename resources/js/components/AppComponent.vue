@@ -3,7 +3,7 @@
     <Nav />
 
     <div>
-      <keep-alive include="HomeComponent">
+      <keep-alive include="IntroComponent">
         <router-view :key="$route.fullPath"></router-view>
       </keep-alive>
     </div>

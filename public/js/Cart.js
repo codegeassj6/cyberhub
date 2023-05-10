@@ -218,12 +218,18 @@ __webpack_require__.r(__webpack_exports__);
       subtotal: "",
       stripe: {
         pk: 'pk_test_51MgvekEcY1OBCePNucDrMaR7fDOJJJXCDYzlvazEHYvkTtsAGyWAl7MYSqyRfndRhI1fdnIspNiUU77oT4d19oxG00YLvmCTb6',
-        lineItems: [{
-          price: 'price_1My7fXEcY1OBCePNtbFaRpz3',
-          quantity: 1
-        }],
-        successURL: 'https://jcafe.shop/payment/stripe/success',
-        cancelURL: 'https://jcafe.shop/payment/stripe/error'
+        lineItems: [
+          // {
+          //   price: 'price_1N5u4PEcY1OBCePNf2mXqkdp',
+          //   quantity: 1,
+          // },
+          // {
+          //   price: 'price_1N5u2qEcY1OBCePNSKyIiJkS',
+          //   quantity: 1,
+          // }
+        ],
+        successURL: "http://localhost:3000" + '/payment/stripe/success',
+        cancelURL: "http://localhost:3000" + '/payment/stripe/cancel'
       }
     };
   },
@@ -359,6 +365,15 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     submitOrder: function submitOrder() {
+      var _this4 = this;
+      this.cart_items.forEach(function (elem) {
+        if (_this4.orders.includes(elem.id)) {
+          _this4.stripe.lineItems.push({
+            price: elem.product_size_details.stripe_api_id,
+            quantity: elem.quantity
+          });
+        }
+      });
       this.$refs.checkoutRef.redirectToCheckout();
       // if (this.orders.length) {
       //   const AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
@@ -371,14 +386,24 @@ __webpack_require__.r(__webpack_exports__);
       //     .then((res) => {
       //       this.orders = [];
       //       this.cart_items = res.data.cart_items;
+      //       this.$refs.checkoutRef.redirectToCheckout();
       //     })
       //     .catch((err) => {});
       // }
     }
   },
+
+  watch: {
+    $data: {
+      handler: function handler(val, oldVal) {
+        console.log('watcher: ', val);
+      },
+      deep: true
+    }
+  },
   updated: function updated() {},
   mounted: function mounted() {
-    var _this4 = this;
+    var _this5 = this;
     var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
     axios({
       method: "get",
@@ -387,7 +412,7 @@ __webpack_require__.r(__webpack_exports__);
         Authorization: AuthStr
       }
     }).then(function (res) {
-      _this4.cart_items = res.data.cart_items;
+      _this5.cart_items = res.data.cart_items;
     })["catch"](function (err) {});
   }
 });
@@ -410,7 +435,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-info[data-v-b7f93bea] {\r\n  color: white;\n}\nlabel[data-v-b7f93bea] {\r\n  display: block !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-info[data-v-b7f93bea] {\n  color: white;\n}\nlabel[data-v-b7f93bea] {\n  display: block !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

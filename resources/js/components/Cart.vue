@@ -189,14 +189,17 @@ export default {
       stripe: {
         pk: 'pk_test_51MgvekEcY1OBCePNucDrMaR7fDOJJJXCDYzlvazEHYvkTtsAGyWAl7MYSqyRfndRhI1fdnIspNiUU77oT4d19oxG00YLvmCTb6',
         lineItems: [
-          {
-            price: 'price_1My7fXEcY1OBCePNtbFaRpz3',
-            quantity: 1,
-
-          }
+          // {
+          //   price: 'price_1N5u4PEcY1OBCePNf2mXqkdp',
+          //   quantity: 1,
+          // },
+          // {
+          //   price: 'price_1N5u2qEcY1OBCePNSKyIiJkS',
+          //   quantity: 1,
+          // }
         ],
-        successURL: 'https://jcafe.shop/payment/stripe/success',
-        cancelURL: 'https://jcafe.shop/payment/stripe/error',
+        successURL: process.env.MIX_APP_URL+'/payment/stripe/success',
+        cancelURL: process.env.MIX_APP_URL+'/payment/stripe/cancel',
       }
     };
   },
@@ -378,6 +381,11 @@ export default {
     },
 
     submitOrder() {
+      this.cart_items.forEach(elem => {
+        if(this.orders.includes(elem.id)) {
+          this.stripe.lineItems.push({price: elem.product_size_details.stripe_api_id, quantity: elem.quantity});
+        }
+      });
       this.$refs.checkoutRef.redirectToCheckout();
       // if (this.orders.length) {
       //   const AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
@@ -390,9 +398,19 @@ export default {
       //     .then((res) => {
       //       this.orders = [];
       //       this.cart_items = res.data.cart_items;
+      //       this.$refs.checkoutRef.redirectToCheckout();
       //     })
       //     .catch((err) => {});
       // }
+    },
+  },
+
+  watch: {
+    $data: {
+      handler: function(val, oldVal) {
+          console.log('watcher: ',val);
+      },
+      deep: true
     },
   },
 

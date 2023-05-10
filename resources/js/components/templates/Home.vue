@@ -246,11 +246,10 @@ export default {
     };
   },
 
-  name: "HomeComponent",
+  // name: "HomeComponent",
 
   components: {
     Post,
-
   },
 
   props: {},

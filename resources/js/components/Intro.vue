@@ -409,7 +409,7 @@ export default {
     }
   },
 
-
+  name: 'IntroComponent',
 
   components: {
     Home,
