@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ChatRoom;
 use App\Http\Requests\StoreChatRoomRequest;
 use App\Http\Requests\UpdateChatRoomRequest;
+use Auth;
 
 class ChatRoomController extends Controller
 {
@@ -45,9 +46,11 @@ class ChatRoomController extends Controller
      * @param  \App\Models\ChatRoom  $chatRoom
      * @return \Illuminate\Http\Response
      */
-    public function show(ChatRoom $chatRoom)
+    public function show()
     {
-        //
+        $room = ChatRoom::where('participant_id', Auth::id())->first();
+
+        return $room;
     }
 
     /**

@@ -380,28 +380,30 @@ export default {
       }
     },
 
-    submitOrder() {
+    submitOrder(e) {
+      e.target.setAttribute('disabled', true);
       this.cart_items.forEach(elem => {
         if(this.orders.includes(elem.id)) {
           this.stripe.lineItems.push({price: elem.product_size_details.stripe_api_id, quantity: elem.quantity});
         }
       });
-      this.$refs.checkoutRef.redirectToCheckout();
-      // if (this.orders.length) {
-      //   const AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
-      //   axios({
-      //     method: "post",
-      //     data: { id: this.orders },
-      //     url: `/api/order`,
-      //     headers: { Authorization: AuthStr },
-      //   })
-      //     .then((res) => {
-      //       this.orders = [];
-      //       this.cart_items = res.data.cart_items;
-      //       this.$refs.checkoutRef.redirectToCheckout();
-      //     })
-      //     .catch((err) => {});
-      // }
+
+      if (this.orders.length) {
+        const AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
+        axios({
+          method: "post",
+          data: { id: this.orders },
+          url: `/api/order`,
+          headers: { Authorization: AuthStr },
+        })
+          .then((res) => {
+            e.target.removeAttribute('disabled');
+            this.orders = [];
+            this.cart_items = res.data.cart_items;
+            this.$refs.checkoutRef.redirectToCheckout();
+          })
+          .catch((err) => {});
+      }
     },
   },
 

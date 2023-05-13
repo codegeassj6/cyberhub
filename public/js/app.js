@@ -5512,16 +5512,13 @@ __webpack_require__.r(__webpack_exports__);
   computed: {},
   methods: {
     connect: function connect() {
-      if (this.currentRoom) {
-        var vm = this;
-        this.getChatMessages();
-        window.Echo["private"]("chat." + this.currentRoom).listen('.message.new', function (e) {
-          vm.getChatMessages();
-        });
-      }
+      var _this = this;
+      window.Echo["private"]("chat." + this.currentRoom).listen('NewChatMessage', function (e) {
+        _this.getChatMessages();
+      });
     },
     getChatMessages: function getChatMessages() {
-      var _this = this;
+      var _this2 = this;
       var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
       axios({
         method: 'get',
@@ -5530,14 +5527,27 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: AuthStr
         }
       }).then(function (res) {
-        _this.chats = res.data;
+        _this2.chats = res.data;
+      })["catch"](function (err) {});
+    },
+    getChatRoom: function getChatRoom() {
+      var _this3 = this;
+      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      axios({
+        method: 'get',
+        url: "/api/chat/room/show",
+        headers: {
+          Authorization: AuthStr
+        }
+      }).then(function (res) {
+        _this3.currentRoom = res.data.id;
       })["catch"](function (err) {});
     },
     updateFormMessage: function updateFormMessage(e) {
       this.form.message = e.target.innerText.trim();
     },
     sendMessage: function sendMessage() {
-      var _this2 = this;
+      var _this4 = this;
       var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
       axios({
         method: 'post',
@@ -5549,11 +5559,11 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: AuthStr
         }
       }).then(function (res) {
-        _this2.form.message = '';
-        _this2.$refs.chatbox.textContent = '';
+        _this4.form.message = '';
+        _this4.$refs.chatbox.textContent = '';
+        _this4.connect();
       })["catch"](function (err) {});
-    },
-    getCurrentRoom: function getCurrentRoom() {}
+    }
   },
   watch: {
     $data: {
@@ -5561,21 +5571,13 @@ __webpack_require__.r(__webpack_exports__);
         console.log("watcher: ", val);
       },
       deep: true
-    },
-    $props: {
-      handler: function handler(val, oldVal) {
-        console.log("watcher: ", val);
-      },
-      deep: true
-    },
-    some_prop: function some_prop() {
-      //do something if some_prop updated
     }
   },
   updated: function updated() {},
   beforeMounted: function beforeMounted() {},
   mounted: function mounted() {
     this.getChatMessages();
+    this.getChatRoom();
   }
 });
 
@@ -5960,7 +5962,13 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: "6eecef2fbec912878cd1",
   cluster: "ap1",
-  forceTLS: true
+  forceTLS: true,
+  encrypted: true,
+  auth: {
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('access_token')
+    }
+  }
 });
 
 /***/ }),
@@ -36539,8 +36547,6 @@ var render = function () {
             0
           )
         : _vm._e(),
-      _vm._v(" "),
-      _vm.$store.getters.currentUser ? _c("div", [_c("ChatBox")], 1) : _vm._e(),
     ],
     2
   )

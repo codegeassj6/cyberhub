@@ -364,8 +364,9 @@ __webpack_require__.r(__webpack_exports__);
         this.orders = [];
       }
     },
-    submitOrder: function submitOrder() {
+    submitOrder: function submitOrder(e) {
       var _this4 = this;
+      e.target.setAttribute('disabled', true);
       this.cart_items.forEach(function (elem) {
         if (_this4.orders.includes(elem.id)) {
           _this4.stripe.lineItems.push({
@@ -374,25 +375,26 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
       });
-      this.$refs.checkoutRef.redirectToCheckout();
-      // if (this.orders.length) {
-      //   const AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
-      //   axios({
-      //     method: "post",
-      //     data: { id: this.orders },
-      //     url: `/api/order`,
-      //     headers: { Authorization: AuthStr },
-      //   })
-      //     .then((res) => {
-      //       this.orders = [];
-      //       this.cart_items = res.data.cart_items;
-      //       this.$refs.checkoutRef.redirectToCheckout();
-      //     })
-      //     .catch((err) => {});
-      // }
+      if (this.orders.length) {
+        var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
+        axios({
+          method: "post",
+          data: {
+            id: this.orders
+          },
+          url: "/api/order",
+          headers: {
+            Authorization: AuthStr
+          }
+        }).then(function (res) {
+          e.target.removeAttribute('disabled');
+          _this4.orders = [];
+          _this4.cart_items = res.data.cart_items;
+          _this4.$refs.checkoutRef.redirectToCheckout();
+        })["catch"](function (err) {});
+      }
     }
   },
-
   watch: {
     $data: {
       handler: function handler(val, oldVal) {

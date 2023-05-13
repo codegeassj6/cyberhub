@@ -18,12 +18,8 @@ Route::group(['prefix' => 'reset'], function ($router) {
   Route::get('/password/{token}', 'App\Http\Controllers\ResetPasswordController@show');
 });
 
-Route::group(['prefix' => 'test'], function ($router) {
-    Route::post('/', 'App\Http\Controllers\TestController@store');
-});
-
 Route::group(['prefix' => 'post'], function ($router) {
-    Route::get('/', 'App\Http\Controllers\PostController@index')->middleware('auth');
+    Route::get('/', 'App\Http\Controllers\PostController@index');
     Route::post('/', 'App\Http\Controllers\PostController@store')->middleware('auth');
     Route::get('/show/{id}', 'App\Http\Controllers\PostController@show')->middleware('auth');
     Route::patch('/{id}', 'App\Http\Controllers\PostController@update')->middleware('auth');
@@ -87,4 +83,8 @@ Route::group(['prefix' => 'oauth'], function ($router) {
 
 Route::group(['prefix' => 'payment'], function ($router) {
     Route::get('/', 'App\Http\Controllers\PaymentController@index');
+});
+
+Route::group(['prefix' => 'chat/room'], function ($router) {
+    Route::get('/show', 'App\Http\Controllers\ChatRoomController@show')->middleware('auth');
 });

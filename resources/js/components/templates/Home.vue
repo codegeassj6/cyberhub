@@ -246,8 +246,6 @@ export default {
     };
   },
 
-  // name: "HomeComponent",
-
   components: {
     Post,
   },

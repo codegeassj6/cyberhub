@@ -1020,8 +1020,6 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  // name: "HomeComponent",
-
   components: {
     Post: _Post_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },

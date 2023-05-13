@@ -105,13 +105,9 @@ export default {
 
   methods: {
     connect() {
-      if(this.currentRoom) {
-        let vm = this;
+      window.Echo.private("chat."+this.currentRoom).listen('NewChatMessage', e => {
         this.getChatMessages();
-        window.Echo.private("chat."+this.currentRoom).listen('.message.new', e => {
-          vm.getChatMessages();
-        })
-      }
+      })
     },
 
     getChatMessages() {
@@ -122,6 +118,19 @@ export default {
           headers: {Authorization: AuthStr}
       }).then(res => {
         this.chats = res.data;
+      }).catch(err => {
+
+      });
+    },
+
+    getChatRoom() {
+      const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      axios({
+          method: 'get',
+          url: `/api/chat/room/show`,
+          headers: {Authorization: AuthStr}
+      }).then(res => {
+        this.currentRoom = res.data.id;
       }).catch(err => {
 
       });
@@ -141,13 +150,10 @@ export default {
       }).then(res => {
         this.form.message = '';
         this.$refs.chatbox.textContent = '';
+        this.connect();
       }).catch(err => {
 
       });
-    },
-
-    getCurrentRoom() {
-
     },
   },
 
@@ -158,16 +164,6 @@ export default {
       },
       deep: true,
     },
-
-    $props: {
-      handler: function (val, oldVal) {
-        console.log("watcher: ", val);
-      },
-      deep: true,
-    },
-    some_prop: function () {
-      //do something if some_prop updated
-    },
   },
 
   updated() {},
@@ -176,6 +172,7 @@ export default {
 
   mounted() {
     this.getChatMessages();
+    this.getChatRoom();
   },
 };
 </script>

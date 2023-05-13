@@ -22,9 +22,9 @@ class Post extends Model
         'updated_at',
     ];
 
-    protected $casts = [
-        'is_like' => 'boolean',
-    ];
+    // protected $casts = [
+    //     'is_like' => 'boolean',
+    // ];
 
     public function getUser() {
         return $this->belongsTo(User::class, 'user_id');
