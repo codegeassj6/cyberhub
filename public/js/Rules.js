@@ -16,6 +16,112 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -28,13 +134,13 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     $data: {
       handler: function handler(val, oldVal) {
-        console.log('watcher: ', val);
+        console.log("watcher: ", val);
       },
       deep: true
     },
     $props: {
       handler: function handler(val, oldVal) {
-        console.log('watcher: ', val);
+        console.log("watcher: ", val);
       },
       deep: true
     },
@@ -133,9 +239,172 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {})
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "space-intro" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-9" }, [
+            _c(
+              "div",
+              {
+                staticClass: "accordion",
+                attrs: { id: "accordionPanelsStayOpenExample" },
+              },
+              [
+                _c("div", { staticClass: "accordion-item" }, [
+                  _c("h2", { staticClass: "accordion-header" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "accordion-button",
+                        attrs: {
+                          type: "button",
+                          "data-bs-toggle": "collapse",
+                          "data-bs-target": "#panelsStayOpen-collapseOne",
+                          "aria-expanded": "true",
+                          "aria-controls": "panelsStayOpen-collapseOne",
+                        },
+                      },
+                      [_vm._v("\n                No Refund\n              ")]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "accordion-collapse collapse show",
+                      attrs: { id: "panelsStayOpen-collapseOne" },
+                    },
+                    [
+                      _c("div", { staticClass: "accordion-body" }, [
+                        _c("ul", [
+                          _c("li", [
+                            _vm._v(
+                              "\n                    Blackout / Brownout\n                  "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _vm._v(
+                              "\n                    10 Pesos new variant that gives 40 minutes of time instead of 80 minutes.\n                  "
+                            ),
+                          ]),
+                        ]),
+                      ]),
+                    ]
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "accordion-item" }, [
+                  _c("h2", { staticClass: "accordion-header" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "accordion-button",
+                        attrs: {
+                          type: "button",
+                          "data-bs-toggle": "collapse",
+                          "data-bs-target": "#panelsStayOpen-collapseTwo",
+                          "aria-expanded": "false",
+                          "aria-controls": "panelsStayOpen-collapseTwo",
+                        },
+                      },
+                      [_vm._v("\n                Reservation\n              ")]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "accordion-collapse collapse show",
+                      attrs: { id: "panelsStayOpen-collapseTwo" },
+                    },
+                    [
+                      _c("div", { staticClass: "accordion-body" }, [
+                        _c("ul", [
+                          _c("li", [
+                            _vm._v(
+                              "\n                    20 minutes expiration limit for reservation as long as there is still someone plays on that pc.\n                  "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _vm._v(
+                              "\n                    Another reserver player can replace the other reserve player if the current player time is finish and the reserve player is not around\n                  "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _vm._v(
+                              "\n                    If player wants to play while the specific station he wants\n                  "
+                            ),
+                          ]),
+                        ]),
+                      ]),
+                    ]
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "accordion-item" }, [
+                  _c("h2", { staticClass: "accordion-header" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "accordion-button",
+                        attrs: {
+                          type: "button",
+                          "data-bs-toggle": "collapse",
+                          "data-bs-target": "#panelsStayOpen-collapseThree",
+                          "aria-expanded": "false",
+                          "aria-controls": "panelsStayOpen-collapseThree",
+                        },
+                      },
+                      [
+                        _vm._v(
+                          "\n                Accordion Item #3\n              "
+                        ),
+                      ]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "accordion-collapse collapse show",
+                      attrs: { id: "panelsStayOpen-collapseThree" },
+                    },
+                    [
+                      _c("div", { staticClass: "accordion-body" }, [
+                        _c("strong", [
+                          _vm._v("This is the third item's accordion body."),
+                        ]),
+                        _vm._v(
+                          " It\n                is hidden by default, until the collapse plugin adds the\n                appropriate classes that we use to style each element. These\n                classes control the overall appearance, as well as the showing\n                and hiding via CSS transitions. You can modify any of this\n                with custom CSS or overriding our default variables. It's also\n                worth noting that just about any HTML can go within the\n                "
+                        ),
+                        _c("code", [_vm._v(".accordion-body")]),
+                        _vm._v(
+                          ", though the transition does limit\n                overflow.\n              "
+                        ),
+                      ]),
+                    ]
+                  ),
+                ]),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-3" }, [_vm._v("s")]),
+        ]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
