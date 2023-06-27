@@ -57,26 +57,28 @@
     "colId": "ac81d1f0-df62-4858-af21-4817d9b19c63",
     "containerId": "",
     "name": "Store",
-    "url": "api/chat?message=my message&user_id=1&room_id=1",
+    "url": "api/chat?message=wasad",
     "method": "POST",
     "sortNum": 10000,
     "created": "2023-05-01T17:34:37.762Z",
-    "modified": "2023-05-03T12:23:46.352Z",
+    "modified": "2023-06-18T06:37:31.603Z",
     "headers": [],
     "params": [
       {
         "name": "message",
-        "value": "my message",
+        "value": "wasad",
         "isPath": false
       },
       {
         "name": "user_id",
         "value": "1",
+        "isDisabled": true,
         "isPath": false
       },
       {
         "name": "room_id",
         "value": "1",
+        "isDisabled": true,
         "isPath": false
       }
     ],

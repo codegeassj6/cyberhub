@@ -74,6 +74,12 @@ export const routes = [
         component: () => import(/* webpackChunkName: "Store" */ "./components/Store.vue")
     },
 
+    {
+      path: '/reserve/rules',
+      name: "Rules",
+      component: () => import(/* webpackChunkName: "Rules" */ "./components/Rules.vue")
+  },
+
 
     {
         path: "/timeline",

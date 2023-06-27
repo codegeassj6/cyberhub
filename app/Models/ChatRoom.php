@@ -12,7 +12,10 @@ class ChatRoom extends Model
     use HasFactory;
 
     protected $table = 'chat_rooms';
-    protected $fillable = ['participant_id'];
+    protected $fillable = [
+      'participant_id',
+      'moderator_id'
+      ];
 
     public function getChat() {
       return $this->hasMany(Chat::class, 'room_id');

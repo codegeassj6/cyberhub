@@ -15,5 +15,6 @@
     "/js/Save.js": "/js/Save.js",
     "/js/PostPage.js": "/js/PostPage.js",
     "/js/NotFound.js": "/js/NotFound.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/Rules.js": "/js/Rules.js"
 }

@@ -19,10 +19,10 @@ class ChatController extends Controller
     public function index()
     {
       $room = ChatRoom::where('participant_id', Auth::id())->first();
-
-      $chats = $room->getChat;
-
-      return $chats;
+      if($room) {
+        $chats = $room->getChat;
+        return $chats;
+      }
     }
 
     /**
@@ -38,7 +38,6 @@ class ChatController extends Controller
       ]);
 
       if($validator->fails()) {
-        return $validator->messages();
         return response()->json(['message' => $validator->messages()->get('*')], 500);
       }
 
@@ -57,8 +56,7 @@ class ChatController extends Controller
 
       broadcast(new NewChatMessage($chat))->toOthers();
 
-      return response()->json(['message' => 'ok'], 200);
-
+      return $chat;
     }
 
     /**

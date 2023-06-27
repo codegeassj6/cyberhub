@@ -90,3 +90,8 @@ const app = new Vue({
     router,
     store,
 });
+
+// window.Echo.channel('chat').listen('.message', (e) => {
+//   console.log(e);
+//   alert(e);
+// })

@@ -73,7 +73,7 @@ Route::group(['prefix' => 'save'], function ($router) {
 
 Route::group(['prefix' => 'chat'], function ($router) {
   Route::get('/', 'App\Http\Controllers\ChatController@index')->middleware('auth');
-    Route::post('/', 'App\Http\Controllers\ChatController@store')->middleware('auth');
+  Route::post('/', 'App\Http\Controllers\ChatController@store')->middleware('auth');
 });
 
 Route::group(['prefix' => 'oauth'], function ($router) {

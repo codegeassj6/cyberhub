@@ -5494,6 +5494,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 //import name from './
 
@@ -5501,56 +5554,69 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
-        message: ''
+        message: ""
       },
-      chats: '',
-      currentRoom: ''
+      chats: "",
+      // currentRoom: '',
+      chatbox_toggle: true
     };
   },
   components: {},
   props: {},
   computed: {},
   methods: {
-    connect: function connect() {
-      var _this = this;
-      window.Echo["private"]("chat." + this.currentRoom).listen('NewChatMessage', function (e) {
-        _this.getChatMessages();
-      });
+    toggleChatBox: function toggleChatBox() {
+      if (this.chatbox_toggle) {
+        this.chatbox_toggle = false;
+        this.$refs.chat_body.classList.add('d-none');
+        this.$refs.chat_angle.classList.remove('fa-angle-down');
+        this.$refs.chat_angle.classList.add('fa-angle-up');
+      } else {
+        this.$refs.chat_body.classList.remove('d-none');
+        this.chatbox_toggle = true;
+        this.$refs.chat_angle.classList.remove('fa-angle-up');
+        this.$refs.chat_angle.classList.add('fa-angle-down');
+      }
     },
     getChatMessages: function getChatMessages() {
-      var _this2 = this;
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      var _this = this;
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'get',
+        method: "get",
         url: "/api/chat/",
         headers: {
           Authorization: AuthStr
         }
       }).then(function (res) {
-        _this2.chats = res.data;
+        _this.chats = res.data;
       })["catch"](function (err) {});
     },
-    getChatRoom: function getChatRoom() {
-      var _this3 = this;
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
-      axios({
-        method: 'get',
-        url: "/api/chat/room/show",
-        headers: {
-          Authorization: AuthStr
-        }
-      }).then(function (res) {
-        _this3.currentRoom = res.data.id;
-      })["catch"](function (err) {});
-    },
+    // getChatRoom() {
+    //   const AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+    //   axios({
+    //       method: 'get',
+    //       url: `/api/chat/room/show`,
+    //       headers: {Authorization: AuthStr}
+    //   }).then(res => {
+    //     this.currentRoom = res.data.id;
+    //   }).catch(err => {
+    //   });
+    // },
     updateFormMessage: function updateFormMessage(e) {
       this.form.message = e.target.innerText.trim();
     },
+    loadNewMessages: function loadNewMessages() {
+      var _this2 = this;
+      window.Echo.channel("chat").listen(".new_chat_message", function (e) {
+        _this2.chats.push(e.chat);
+        console.log(e.chat);
+      });
+    },
     sendMessage: function sendMessage() {
-      var _this4 = this;
-      var AuthStr = 'Bearer '.concat(this.$store.getters.currentUser.token);
+      var _this3 = this;
+      var AuthStr = "Bearer ".concat(this.$store.getters.currentUser.token);
       axios({
-        method: 'post',
+        method: "post",
         params: {
           message: this.form.message
         },
@@ -5559,9 +5625,8 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: AuthStr
         }
       }).then(function (res) {
-        _this4.form.message = '';
-        _this4.$refs.chatbox.textContent = '';
-        _this4.connect();
+        _this3.form.message = "";
+        _this3.$refs.chatbox.textContent = "";
       })["catch"](function (err) {});
     }
   },
@@ -5577,7 +5642,8 @@ __webpack_require__.r(__webpack_exports__);
   beforeMounted: function beforeMounted() {},
   mounted: function mounted() {
     this.getChatMessages();
-    this.getChatRoom();
+    // this.getChatRoom();
+    this.loadNewMessages();
   }
 });
 
@@ -5664,6 +5730,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5925,6 +5996,11 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_5__["default"]({
   store: store
 });
 
+// window.Echo.channel('chat').listen('.message', (e) => {
+//   console.log(e);
+//   alert(e);
+// })
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -6137,6 +6213,12 @@ var routes = [{
   name: "Store",
   component: function component() {
     return __webpack_require__.e(/*! import() | Store */ "Store").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Store.vue */ "./resources/js/components/Store.vue"));
+  }
+}, {
+  path: '/reserve/rules',
+  name: "Rules",
+  component: function component() {
+    return __webpack_require__.e(/*! import() | Rules */ "Rules").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Rules.vue */ "./resources/js/components/Rules.vue"));
   }
 }, {
   path: "/timeline",
@@ -11567,7 +11649,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.fixed-btm[data-v-40a22dbc] {\n  position: fixed;\n  right: 0;\n  bottom: 0;\n  z-index: 1030;\n}\n.accordion[data-v-40a22dbc] {\n  border: 1px solid #e1e1e1;\n}\n.w-25[data-v-40a22dbc] {\n  width: 350px !important;\n}\n.accordion-body[data-v-40a22dbc] {\n  height: 352px;\n  padding: 0 !important;\n}\n.front-index[data-v-40a22dbc] {\n  z-index: 1000;\n}\n.send-btn-0[data-v-40a22dbc] {\n  bottom: 4px !important;\n  right: 8px !important;\n}\n.bg-chat[data-v-40a22dbc] {\n  background: #a9d4f7;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.fixed-btm[data-v-40a22dbc] {\n  position: fixed;\n  right: 0;\n  bottom: 0;\n  z-index: 1030;\n}\n.accordion[data-v-40a22dbc] {\n  border: 1px solid #e1e1e1;\n}\n.w-chat[data-v-40a22dbc] {\n  width: 450px !important;\n}\n.h-chat[data-v-40a22dbc] {\n  height: 450px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36547,6 +36629,8 @@ var render = function () {
             0
           )
         : _vm._e(),
+      _vm._v(" "),
+      _vm.$store.getters.currentUser ? _c("div", [_c("ChatBox")], 1) : _vm._e(),
     ],
     2
   )
@@ -36574,188 +36658,111 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "w-25 end-0 fixed-btm" }, [
-    _c(
-      "div",
-      {
-        staticClass: "accordion accordion-flush",
-        attrs: { id: "accordionFlushExample" },
-      },
-      [
-        _c("div", { staticClass: "accordion-item" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "accordion-collapse",
-              attrs: {
-                id: "flush-collapseOne",
-                "aria-labelledby": "flush-headingOne",
-                "data-bs-parent": "#accordionFlushExample",
-              },
-            },
-            [
-              _c("div", { staticClass: "accordion-body position-relative" }, [
-                _c(
-                  "div",
-                  { staticClass: "p-2" },
-                  _vm._l(_vm.chats, function (chat) {
-                    return _c("div", { key: chat.id }, [
-                      chat.user_id == _vm.$store.getters.currentUser.id
-                        ? _c("div", { staticClass: "d-flex mb-2" }, [
-                            _vm._m(1, true),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "px-2 border border-1 rounded-2 rounded bg-chat",
-                              },
-                              [
-                                _c("div", { staticClass: "mt-2" }, [
-                                  _vm._v(
-                                    "\n                    " +
-                                      _vm._s(chat.message) +
-                                      "\n                  "
-                                  ),
-                                ]),
-                              ]
-                            ),
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      chat.user_id != _vm.$store.getters.currentUser.id
-                        ? _c(
-                            "div",
-                            { staticClass: "d-flex flex-row-reverse mb-2" },
-                            [
-                              _vm._m(2, true),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "ms-2 px-2 border border-1 rounded-2",
-                                },
-                                [
-                                  _c("div", { staticClass: "mt-2" }, [
-                                    _vm._v(
-                                      "\n                    " +
-                                        _vm._s(chat.message) +
-                                        "\n                  "
-                                    ),
-                                  ]),
-                                ]
-                              ),
-                            ]
-                          )
-                        : _vm._e(),
-                    ])
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "position-absolute bottom-0 w-100" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "d-flex border-1 shadow border-info border p-2 bg-white front-index position-relative",
-                    },
-                    [
-                      _c("div", {
-                        ref: "chatbox",
-                        staticClass: "me-5 w-100",
-                        attrs: { contenteditable: "true" },
-                        on: { keyup: _vm.updateFormMessage },
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "position-absolute send-btn-0" },
-                        [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-default btn-sm",
-                              on: { click: _vm.sendMessage },
-                            },
-                            [_c("i", { staticClass: "fa fa-send fa-lg" })]
-                          ),
-                        ]
-                      ),
-                    ]
-                  ),
-                ]),
-              ]),
-            ]
-          ),
-        ]),
-      ]
-    ),
-  ])
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "h2",
-      { staticClass: "accordion-header", attrs: { id: "flush-headingOne" } },
-      [
+  return _c("div", { staticClass: "w-chat end-0 fixed-btm" }, [
+    _c("div", { staticClass: "card rounded-0" }, [
+      _c("div", { staticClass: "card-title mb-0" }, [
         _c(
-          "button",
+          "div",
           {
-            staticClass: "accordion-button collapsed shadow-none",
-            attrs: {
-              type: "button",
-              "data-bs-toggle": "collapse",
-              "data-bs-target": "#flush-collapseOne",
-              "aria-expanded": "false",
-              "aria-controls": "flush-collapseOne",
-            },
+            staticClass:
+              "d-flex border-bottom p-3 bg-primary text-white pointer",
+            on: { click: _vm.toggleChatBox },
           },
           [
-            _vm._v("\n          Chat\n          "),
-            _c("span", { staticClass: "badge bg-info ms-2" }, [_vm._v("1")]),
+            _c("div", { staticClass: "text" }, [_vm._v("Message")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "ms-auto" }, [
+              _c("i", {
+                ref: "chat_angle",
+                staticClass: "fa fa-angle-down fa-lg",
+              }),
+            ]),
           ]
         ),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("img", {
-        attrs: {
-          src: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-          width: "45",
-          height: "45",
-          alt: "",
-        },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("img", {
-        attrs: {
-          src: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-          width: "45",
-          height: "45",
-          alt: "",
-        },
-      }),
-    ])
-  },
-]
+        _vm._v(" "),
+        _c("div", { ref: "chat_body" }, [
+          _c(
+            "div",
+            { staticClass: "card-body relative h-chat overflow-auto" },
+            _vm._l(_vm.chats, function (chat) {
+              return _c("div", { key: chat.id }, [
+                chat.user_id == _vm.$store.getters.currentUser.id
+                  ? _c("div", { staticClass: "d-flex gap-2 mb-2" }, [
+                      _c("img", {
+                        staticClass: "rounded-circle",
+                        attrs: {
+                          src: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y",
+                          width: "40",
+                          height: "40",
+                          alt: "",
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "border px-2 py-1 rounded" }, [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(chat.message) +
+                            "\n              "
+                        ),
+                      ]),
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                chat.user_id != _vm.$store.getters.currentUser.id
+                  ? _c(
+                      "div",
+                      { staticClass: "d-flex flex-row-reverse gap-2 mb-2" },
+                      [
+                        _c("img", {
+                          staticClass: "rounded-circle",
+                          attrs: {
+                            src: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y",
+                            width: "40",
+                            height: "40",
+                            alt: "",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "border px-2 py-1 rounded" }, [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(chat.message) +
+                              "\n              "
+                          ),
+                        ]),
+                      ]
+                    )
+                  : _vm._e(),
+              ])
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-footer bg-white" }, [
+            _c("div", { staticClass: "d-flex gap-1" }, [
+              _c("span", {
+                ref: "chatbox",
+                staticClass: "border rounded p-2 w-100",
+                attrs: { contenteditable: "true" },
+                on: { keyup: _vm.updateFormMessage },
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn text-primary",
+                  on: { click: _vm.sendMessage },
+                },
+                [_c("i", { staticClass: "fa fa-send" })]
+              ),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -36939,6 +36946,22 @@ var render = function () {
                         "router-link",
                         { staticClass: "nav-link", attrs: { to: "/store" } },
                         [_vm._v("\n              Store\n            ")]
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "nav-link",
+                          attrs: { to: "/reserve/rules" },
+                        },
+                        [_vm._v("\n              Rules\n            ")]
                       ),
                     ],
                     1
@@ -53976,7 +53999,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"Intro":1,"Login":1,"ResetPassword":1,"ResetPasswordRequest":1,"Oauth":1,"Register":1,"Store":1,"Timeline":1,"UpdateAccount":1,"PostPage":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"Intro":1,"Login":1,"ResetPassword":1,"ResetPasswordRequest":1,"Oauth":1,"Register":1,"Store":1,"Rules":1,"Timeline":1,"UpdateAccount":1,"PostPage":1,"NotFound":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			if (chunkId === "Home") return "js/Home.js";
 /******/ 			if (chunkId === "Game") return "js/Game.js";
 /******/ 			if (chunkId === "Cart") return "js/Cart.js";
