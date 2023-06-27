@@ -59,10 +59,10 @@
                       20 minutes expiration limit for reservation as long as there is still someone plays on that pc.
                     </li>
                     <li>
-                      Another reserver player can replace the other reserve player if the current player time is finish and the reserve player is not around
+                      Another reserve player can replace the other reserve player if the current player time is finish and the reserve player is not around
                     </li>
                     <li>
-                      If player wants to play while the specific station he wants
+                      If player wants to play while waiting for the specific station he wants. He's allowed to transfer to that specific station if it is vacant but no longer than 5 minutes.
                     </li>
 
                   </ul>
@@ -79,7 +79,7 @@
                   aria-expanded="false"
                   aria-controls="panelsStayOpen-collapseThree"
                 >
-                  Accordion Item #3
+                  Tournament
                 </button>
               </h2>
               <div
@@ -87,15 +87,12 @@
                 class="accordion-collapse collapse show"
               >
                 <div class="accordion-body">
-                  <strong>This is the third item's accordion body.</strong> It
-                  is hidden by default, until the collapse plugin adds the
-                  appropriate classes that we use to style each element. These
-                  classes control the overall appearance, as well as the showing
-                  and hiding via CSS transitions. You can modify any of this
-                  with custom CSS or overriding our default variables. It's also
-                  worth noting that just about any HTML can go within the
-                  <code>.accordion-body</code>, though the transition does limit
-                  overflow.
+                  <ul>
+                    <li>
+                      Loyal players only
+                    </li>
+
+                  </ul>
                 </div>
               </div>
             </div>

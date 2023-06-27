@@ -29,6 +29,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _vue_stripe_vue_stripe__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vue-stripe/vue-stripe */ "./node_modules/@vue-stripe/vue-stripe/dist/index.js");
+/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 //
 //
 //
@@ -228,8 +229,8 @@ __webpack_require__.r(__webpack_exports__);
           //   quantity: 1,
           // }
         ],
-        successURL: "http://localhost:3000" + '/payment/stripe/success',
-        cancelURL: "http://localhost:3000" + '/payment/stripe/cancel'
+        successURL: process.env.MIX_APP_URL + '/payment/stripe/success',
+        cancelURL: process.env.MIX_APP_URL + '/payment/stripe/cancel'
       }
     };
   },

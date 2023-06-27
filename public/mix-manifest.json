@@ -9,12 +9,12 @@
     "/js/Register.js": "/js/Register.js",
     "/js/Game.js": "/js/Game.js",
     "/js/Store.js": "/js/Store.js",
+    "/js/Rules.js": "/js/Rules.js",
     "/js/Timeline.js": "/js/Timeline.js",
     "/js/Cart.js": "/js/Cart.js",
     "/js/UpdateAccount.js": "/js/UpdateAccount.js",
     "/js/Save.js": "/js/Save.js",
     "/js/PostPage.js": "/js/PostPage.js",
     "/js/NotFound.js": "/js/NotFound.js",
-    "/css/app.css": "/css/app.css",
-    "/js/Rules.js": "/js/Rules.js"
+    "/css/app.css": "/css/app.css"
 }

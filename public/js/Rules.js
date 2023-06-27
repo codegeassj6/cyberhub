@@ -119,9 +119,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -336,13 +333,13 @@ var staticRenderFns = [
                           _vm._v(" "),
                           _c("li", [
                             _vm._v(
-                              "\n                    Another reserver player can replace the other reserve player if the current player time is finish and the reserve player is not around\n                  "
+                              "\n                    Another reserve player can replace the other reserve player if the current player time is finish and the reserve player is not around\n                  "
                             ),
                           ]),
                           _vm._v(" "),
                           _c("li", [
                             _vm._v(
-                              "\n                    If player wants to play while the specific station he wants\n                  "
+                              "\n                    If player wants to play while waiting for the specific station he wants. He's allowed to transfer to that specific station if it is vacant but no longer than 5 minutes.\n                  "
                             ),
                           ]),
                         ]),
@@ -365,11 +362,7 @@ var staticRenderFns = [
                           "aria-controls": "panelsStayOpen-collapseThree",
                         },
                       },
-                      [
-                        _vm._v(
-                          "\n                Accordion Item #3\n              "
-                        ),
-                      ]
+                      [_vm._v("\n                Tournament\n              ")]
                     ),
                   ]),
                   _vm._v(" "),
@@ -381,16 +374,13 @@ var staticRenderFns = [
                     },
                     [
                       _c("div", { staticClass: "accordion-body" }, [
-                        _c("strong", [
-                          _vm._v("This is the third item's accordion body."),
+                        _c("ul", [
+                          _c("li", [
+                            _vm._v(
+                              "\n                    Loyal players only\n                  "
+                            ),
+                          ]),
                         ]),
-                        _vm._v(
-                          " It\n                is hidden by default, until the collapse plugin adds the\n                appropriate classes that we use to style each element. These\n                classes control the overall appearance, as well as the showing\n                and hiding via CSS transitions. You can modify any of this\n                with custom CSS or overriding our default variables. It's also\n                worth noting that just about any HTML can go within the\n                "
-                        ),
-                        _c("code", [_vm._v(".accordion-body")]),
-                        _vm._v(
-                          ", though the transition does limit\n                overflow.\n              "
-                        ),
                       ]),
                     ]
                   ),
