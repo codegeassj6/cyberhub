@@ -20,24 +20,24 @@ Route::group(['prefix' => 'reset'], function ($router) {
 
 Route::group(['prefix' => 'post'], function ($router) {
     Route::get('/', 'App\Http\Controllers\PostController@index');
-    Route::post('/', 'App\Http\Controllers\PostController@store')->middleware('auth');
-    Route::get('/show/{id}', 'App\Http\Controllers\PostController@show')->middleware('auth');
-    Route::patch('/{id}', 'App\Http\Controllers\PostController@update')->middleware('auth');
-    Route::delete('/{id}', 'App\Http\Controllers\PostController@destroy')->middleware('auth');
+    Route::post('/', 'App\Http\Controllers\PostController@store')->middleware('auth:api');
+    Route::get('/show/{id}', 'App\Http\Controllers\PostController@show')->middleware('auth:api');
+    Route::patch('/{id}', 'App\Http\Controllers\PostController@update')->middleware('auth:api');
+    Route::delete('/{id}', 'App\Http\Controllers\PostController@destroy')->middleware('auth:api');
 
     // PostLike section
-    Route::post('/like', 'App\Http\Controllers\PostLikeController@store')->middleware('auth');
+    Route::post('/like', 'App\Http\Controllers\PostLikeController@store')->middleware('auth:api');
 });
 
 Route::group(['prefix' => 'comment'], function ($router) {
-    Route::get('/', 'App\Http\Controllers\CommentController@index')->middleware('auth');
-    Route::post('/', 'App\Http\Controllers\CommentController@store')->middleware('auth');
-    Route::patch('/{id}', 'App\Http\Controllers\CommentController@update')->middleware('auth');
-    Route::delete('/{id}', 'App\Http\Controllers\CommentController@destroy')->middleware('auth');
+    Route::get('/', 'App\Http\Controllers\CommentController@index')->middleware('auth:api');
+    Route::post('/', 'App\Http\Controllers\CommentController@store')->middleware('auth:api');
+    Route::patch('/{id}', 'App\Http\Controllers\CommentController@update')->middleware('auth:api');
+    Route::delete('/{id}', 'App\Http\Controllers\CommentController@destroy')->middleware('auth:api');
 
 
     // CommentLike section
-    Route::post('/like', 'App\Http\Controllers\CommentLikeController@store')->middleware('auth');
+    Route::post('/like', 'App\Http\Controllers\CommentLikeController@store')->middleware('auth:api');
 });
 
 Route::group(['prefix' => 'games'], function ($router) {
@@ -54,10 +54,10 @@ Route::group(['prefix' => 'product'], function ($router) {
 });
 
 Route::group(['prefix' => 'cart'], function ($router) {
-    Route::get('/', 'App\Http\Controllers\CartController@index')->middleware('auth');
-    Route::post('/', 'App\Http\Controllers\CartController@store')->middleware('auth');
-    Route::delete('/{id}', 'App\Http\Controllers\CartController@destroy')->middleware('auth');
-    Route::patch('/{id}', 'App\Http\Controllers\CartController@update')->middleware('auth');
+    Route::get('/', 'App\Http\Controllers\CartController@index')->middleware('auth:api');
+    Route::post('/', 'App\Http\Controllers\CartController@store')->middleware('auth:api');
+    Route::delete('/{id}', 'App\Http\Controllers\CartController@destroy')->middleware('auth:api');
+    Route::patch('/{id}', 'App\Http\Controllers\CartController@update')->middleware('auth:api');
 });
 
 Route::group(['prefix' => 'order'], function ($router) {
@@ -65,15 +65,15 @@ Route::group(['prefix' => 'order'], function ($router) {
 });
 
 Route::group(['prefix' => 'save'], function ($router) {
-    Route::get('/', 'App\Http\Controllers\SaveController@index')->middleware('auth');
-    Route::post('/', 'App\Http\Controllers\SaveController@store')->middleware('auth');
-    Route::get('/{id}', 'App\Http\Controllers\SaveController@show')->middleware('auth');
-    Route::delete('/{id}', 'App\Http\Controllers\SaveController@destroy')->middleware('auth');
+    Route::get('/', 'App\Http\Controllers\SaveController@index')->middleware('auth:api');
+    Route::post('/', 'App\Http\Controllers\SaveController@store')->middleware('auth:api');
+    Route::get('/{id}', 'App\Http\Controllers\SaveController@show')->middleware('auth:api');
+    Route::delete('/{id}', 'App\Http\Controllers\SaveController@destroy')->middleware('auth:api');
 });
 
 Route::group(['prefix' => 'chat'], function ($router) {
-  Route::get('/', 'App\Http\Controllers\ChatController@index')->middleware('auth');
-  Route::post('/', 'App\Http\Controllers\ChatController@store')->middleware('auth');
+  Route::get('/', 'App\Http\Controllers\ChatController@index')->middleware('auth:api');
+  Route::post('/', 'App\Http\Controllers\ChatController@store')->middleware('auth:api');
 });
 
 Route::group(['prefix' => 'oauth'], function ($router) {
@@ -86,5 +86,5 @@ Route::group(['prefix' => 'payment'], function ($router) {
 });
 
 Route::group(['prefix' => 'chat/room'], function ($router) {
-    Route::get('/show', 'App\Http\Controllers\ChatRoomController@show')->middleware('auth');
+    Route::get('/show', 'App\Http\Controllers\ChatRoomController@show')->middleware('auth:api');
 });
