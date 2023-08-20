@@ -52,40 +52,40 @@ class PostController extends Controller
     return $post;
   }
 
-  public function store(Request $request)
-  {
-    $validator = Validator::make(
-      $request->all(),
-      [
-        'message' => 'max:1000',
-        'files' => 'array|max:6|nullable',
-        'files.*' => 'file|max:20480|mimes:jpg,jpeg,png,bmp,mp4|nullable',
-      ],
-      [
-        'files.*.max' => 'File must be 20MB only',
-      ]
-    );
+  // public function store(Request $request)
+  // {
+  //   $validator = Validator::make(
+  //     $request->all(),
+  //     [
+  //       'message' => 'max:1000',
+  //       'files' => 'array|max:6|nullable',
+  //       'files.*' => 'file|max:20480|mimes:jpg,jpeg,png,bmp,mp4|nullable',
+  //     ],
+  //     [
+  //       'files.*.max' => 'File must be 20MB only',
+  //     ]
+  //   );
 
-    if ($validator->fails() || Auth::user()->role != 1) {
-      return response()->json($validator->messages()->get('*'), 500);
-    }
+  //   if ($validator->fails() || Auth::user()->role != 1) {
+  //     return response()->json($validator->messages()->get('*'), 500);
+  //   }
 
-    $post = Post::create([
-      'user_id' => Auth::user()->id,
-      'message' => trim($request->input('message')),
-    ]);
+  //   $post = Post::create([
+  //     'user_id' => Auth::user()->id,
+  //     'message' => trim($request->input('message')),
+  //   ]);
 
-    if ($request->file('files')) {
-      for ($i = 0; $i < count($request->file('files')); $i++) {
-        Storage::disk('local')->putFileAs('/public/post/file', $request->file('files')[$i], $request->file('files')[$i]->hashName());
-        PostAttachment::create([
-          'post_id' => $post->id,
-          'file_link' => $request->file('files')[$i]->hashName(),
-        ]);
-      }
-    }
-    return $this->index();
-  }
+  //   if ($request->file('files')) {
+  //     for ($i = 0; $i < count($request->file('files')); $i++) {
+  //       Storage::disk('local')->putFileAs('/public/post/file', $request->file('files')[$i], $request->file('files')[$i]->hashName());
+  //       PostAttachment::create([
+  //         'post_id' => $post->id,
+  //         'file_link' => $request->file('files')[$i]->hashName(),
+  //       ]);
+  //     }
+  //   }
+  //   return $this->index();
+  // }
 
   public function edit(Request $request)
   {

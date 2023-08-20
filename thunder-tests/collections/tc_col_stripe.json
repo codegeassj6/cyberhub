@@ -1,0 +1,23 @@
+{
+    "_id": "3bb0a74c-73a7-4d56-b6fb-f6522cabadbb",
+    "colName": "Stripe",
+    "created": "2023-04-17T18:49:59.255Z",
+    "sortNum": 20000,
+    "folders": [],
+    "requests": [
+        {
+            "_id": "18249fc3-16fc-42f3-a14f-6caf42ec7c49",
+            "colId": "3bb0a74c-73a7-4d56-b6fb-f6522cabadbb",
+            "containerId": "",
+            "name": "Checkout",
+            "url": "http://localhost:3000/stripe/",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-04-17T18:50:06.934Z",
+            "modified": "2023-04-17T18:55:51.305Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}

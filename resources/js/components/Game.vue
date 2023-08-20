@@ -4,13 +4,21 @@
       <div class="row">
         <div class="col-lg-2" v-for="(game, index) in games.data" :key="index">
           <div class="card mb-4">
-            <img
+            <!-- <img
               class="card-img-top"
               :src="'/img/game/' + game.image"
               alt="Card image"
               height="200"
               :title="game.name"
+            /> -->
+            <img
+              class="card-img-top"
+              :src="game.image"
+              alt="Card image"
+              height="200"
+              :title="game.name"
             />
+
             <div class="card-body">
               <h5 class="card-title text-truncate" :title="game.name">
                 {{ limitText(game.name, 14) }}
@@ -99,20 +107,27 @@ export default {
         })
         .catch((err) => {});
     },
+
+    getGames() {
+      axios({
+        method: "get",
+        url: `/api/games/`,
+      })
+        .then((res) => {
+          this.games = res.data;
+        })
+        .catch((err) => {
+          console.log(err.response.message);
+        });
+      },
+
   },
 
   updated() {},
 
   mounted() {
-    axios({
-      method: "get",
-      url: `/api/games/`,
-    })
-      .then((res) => {
-        this.games = res.data;
-      })
-      .catch((err) => {});
-  },
+    this.getGames();
+  }
 };
 </script>
 

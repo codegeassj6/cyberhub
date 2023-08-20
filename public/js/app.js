@@ -11625,7 +11625,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.top-0[data-v-cd268472] {\n  top: 2% !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.top-0[data-v-cd268472] {\r\n  top: 2% !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11649,7 +11649,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.fixed-btm[data-v-40a22dbc] {\n  position: fixed;\n  right: 0;\n  bottom: 0;\n  z-index: 1030;\n}\n.accordion[data-v-40a22dbc] {\n  border: 1px solid #e1e1e1;\n}\n.w-chat[data-v-40a22dbc] {\n  width: 450px !important;\n}\n.h-chat[data-v-40a22dbc] {\n  height: 450px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.fixed-btm[data-v-40a22dbc] {\r\n  position: fixed;\r\n  right: 0;\r\n  bottom: 0;\r\n  z-index: 1030;\n}\n.accordion[data-v-40a22dbc] {\r\n  border: 1px solid #e1e1e1;\n}\n.w-chat[data-v-40a22dbc] {\r\n  width: 450px !important;\n}\n.h-chat[data-v-40a22dbc] {\r\n  height: 450px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

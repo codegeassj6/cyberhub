@@ -55,6 +55,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -103,17 +111,22 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         _this3.games = res.data;
       })["catch"](function (err) {});
+    },
+    getGames: function getGames() {
+      var _this4 = this;
+      axios({
+        method: "get",
+        url: "/api/games/"
+      }).then(function (res) {
+        _this4.games = res.data;
+      })["catch"](function (err) {
+        console.log(err.response.message);
+      });
     }
   },
   updated: function updated() {},
   mounted: function mounted() {
-    var _this4 = this;
-    axios({
-      method: "get",
-      url: "/api/games/"
-    }).then(function (res) {
-      _this4.games = res.data;
-    })["catch"](function (err) {});
+    this.getGames();
   }
 });
 
@@ -643,7 +656,7 @@ var render = function () {
               _c("img", {
                 staticClass: "card-img-top",
                 attrs: {
-                  src: "/img/game/" + game.image,
+                  src: game.image,
                   alt: "Card image",
                   height: "200",
                   title: game.name,

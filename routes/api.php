@@ -20,7 +20,7 @@ Route::group(['prefix' => 'reset'], function ($router) {
 
 Route::group(['prefix' => 'post'], function ($router) {
     Route::get('/', 'App\Http\Controllers\PostController@index');
-    Route::post('/', 'App\Http\Controllers\PostController@store')->middleware('auth:api');
+    // Route::post('/', 'App\Http\Controllers\PostController@store')->middleware('auth:api');
     Route::get('/show/{id}', 'App\Http\Controllers\PostController@show')->middleware('auth:api');
     Route::patch('/{id}', 'App\Http\Controllers\PostController@update')->middleware('auth:api');
     Route::delete('/{id}', 'App\Http\Controllers\PostController@destroy')->middleware('auth:api');

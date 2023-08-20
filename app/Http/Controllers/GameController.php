@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use App\Models\Game;
+use Storage;
 
 class GameController extends Controller
 {
@@ -14,7 +15,10 @@ class GameController extends Controller
      */
     public function index()
     {
-        $games = DB::table('games')->orderBy('rating', 'desc')->paginate(18);
+        $games = Game::orderBy('rating', 'desc')->paginate(18);
+        $games->getCollection()->map(function($game) {
+          // $game->image_url = Storage::disk('s3')->url('/games'.$game->image);
+        });
 
         return $games;
     }
