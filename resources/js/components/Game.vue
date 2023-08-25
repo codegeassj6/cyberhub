@@ -4,16 +4,9 @@
       <div class="row">
         <div class="col-lg-2" v-for="(game, index) in games.data" :key="index">
           <div class="card mb-4">
-            <!-- <img
-              class="card-img-top"
-              :src="'/img/game/' + game.image"
-              alt="Card image"
-              height="200"
-              :title="game.name"
-            /> -->
             <img
               class="card-img-top"
-              :src="game.image"
+              :src="game.image_url"
               alt="Card image"
               height="200"
               :title="game.name"

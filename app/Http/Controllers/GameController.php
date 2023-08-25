@@ -17,10 +17,12 @@ class GameController extends Controller
     {
         $games = Game::orderBy('rating', 'desc')->paginate(18);
         $games->getCollection()->map(function($game) {
-          // $game->image_url = Storage::disk('s3')->url('/games'.$game->image);
+            $game->image_url = Storage::disk('s3')->temporaryUrl('games/'. $game->image, now()->addMinutes(1));
         });
 
         return $games;
+
+
     }
 
     /**

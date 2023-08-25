@@ -56,13 +56,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -656,7 +649,7 @@ var render = function () {
               _c("img", {
                 staticClass: "card-img-top",
                 attrs: {
-                  src: game.image,
+                  src: game.image_url,
                   alt: "Card image",
                   height: "200",
                   title: game.name,
